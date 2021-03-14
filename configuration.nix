@@ -114,24 +114,32 @@
       };
     };
 
-    programs.zsh.prezto = {
+    programs.zsh = {
       enable = true;
-      color = true;
-      pmodules = [
-       "environment"
-       "terminal"
-       "editor"
-       "history"
-       "directory"
-       "spectrum"
-       "utility"
-       "completion"
-       "git"
-       "syntax-highlighting"
-       "history-substring-search"
-       "prompt" 
-      ];
+
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      
+      prezto = {
+        enable = true;
+        color = true;
+        pmodules = [
+        "environment"
+        "terminal"
+        "editor"
+        "history"
+        "directory"
+        "spectrum"
+        "utility"
+        "completion"
+        "git"
+        "syntax-highlighting"
+        "history-substring-search"
+        "prompt" 
+        ];
+      };
     };
+
   };
 
   # List packages installed in system profile. To search, run:
