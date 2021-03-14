@@ -122,6 +122,11 @@
     gtkmm3
     git
     vscode
+    neofetch
+    htop
+    ghc
+    haskellPackages.haskell-language-server
+    gcc gdb cmake llvm clang-tools clang
   ];
 
   virtualisation.vmware.guest.enable = true;
