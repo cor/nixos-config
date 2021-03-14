@@ -127,6 +127,7 @@
     ghc
     haskellPackages.haskell-language-server
     gcc gdb cmake llvm clang-tools clang
+    _1password
   ];
 
   virtualisation.vmware.guest.enable = true;
