@@ -53,18 +53,26 @@
     };
 
     displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
-
-      sessionCommands = ''
-        ${pkgs.xlibs.xset}/bin/xset r rate 200 40
-      '';
+      defaultSession = "none+bspwm";
+      # sessionCommands = ''
+      #   ${pkgs.xlibs.xset}/bin/xset r rate 200 40
+      # '';
     };
 
     windowManager = {
-      i3.enable = true;
+      bspwm = {
+        enable = true;
+        configFile = "/etc/bspwmrc";
+        sxhkd.configFile = "/etc/sxhkdrc";
+      };
     };
   };
+
+  environment.etc = {
+    "bspwmrc".source = ./.config/bspwm/bspwmrc;
+    "sxhkdrc".source = ./.config/bspwm/sxhkdrc;
+  };
+
 
 
   # Enable the GNOME 3 Desktop Environment.
@@ -105,6 +113,25 @@
         env.TERM = "xterm-256color";
       };
     };
+
+    programs.zsh.prezto = {
+      enable = true;
+      color = true;
+      pmodules = [
+       "environment"
+       "terminal"
+       "editor"
+       "history"
+       "directory"
+       "spectrum"
+       "utility"
+       "completion"
+       "git"
+       "syntax-highlighting"
+       "history-substring-search"
+       "prompt" 
+      ];
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -123,12 +150,15 @@
   in 
   [
     zsh
+    zsh-prezto
     gnumake
     killall
     niv
     rxvt_unicode
     xclip
     tree
+    rofi
+    polybar
     wget vim
     firefox
     gtkmm3
