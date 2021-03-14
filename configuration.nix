@@ -43,6 +43,11 @@
     keyMap = "us";
   };
 
+  environment.etc = {
+    "bspwmrc".source = ./.config/bspwm/bspwmrc;
+    "sxhkdrc".source = ./.config/bspwm/sxhkdrc;
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -68,10 +73,7 @@
     };
   };
 
-  environment.etc = {
-    "bspwmrc".source = ./.config/bspwm/bspwmrc;
-    "sxhkdrc".source = ./.config/bspwm/sxhkdrc;
-  };
+
 
 
 
@@ -178,7 +180,8 @@
     haskellPackages.haskell-language-server
     gcc gdb cmake llvm clang-tools clang
     _1password
-    discord 
+    discord
+    scrot
   ];
 
   virtualisation.vmware.guest.enable = true;

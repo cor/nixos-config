@@ -23,12 +23,12 @@ bspc config center_pseudo_tiled  true
 #bspc config focused_border_color "#d60808"
 #bspc config presel_feedback_color "#d60808"
 
-wal -R &
-xrdb ${HOME}/dotfiles/xorg/.Xresources
+# wal -R &
+# xrdb ${HOME}/dotfiles/xorg/.Xresources
 #picom --config ${HOME}/dotfiles/others/picom.conf
 
 # source the colors.
-. "${HOME}/.cache/wal/colors.sh"
+# . "${HOME}/.cache/wal/colors.sh"
 
 # Set the border colors.
 bspc config normal_border_color   "$color15" # normal: not focused
