@@ -109,7 +109,19 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; let
+    extensions = (with pkgs.vscode-extensions; [
+      ms-python.python
+    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+      name = "nix";
+      publisher = "bbenoist";
+      version = "1.0.1";
+      sha256 = "0zd0n9f5z1f0ckzfjr38xw2zzmcxg1gjrava7yahg5cvdcw6l35b";
+  }]; vscode-with-extensions = pkgs.vscode-with-extensions.override {
+      vscodeExtensions = extensions;
+    };
+  in 
+  [
     zsh
     gnumake
     killall
@@ -121,13 +133,14 @@
     firefox
     gtkmm3
     git
-    vscode
+    vscode-with-extensions
     neofetch
     htop
     ghc
     haskellPackages.haskell-language-server
     gcc gdb cmake llvm clang-tools clang
     _1password
+    discord 
   ];
 
   virtualisation.vmware.guest.enable = true;
@@ -136,6 +149,9 @@
  
   users.defaultUserShell = pkgs.zsh;
   nixpkgs.config.allowUnfree = true;
+
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
