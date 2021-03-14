@@ -98,11 +98,19 @@
       userName = "cor";
       userEmail = "cor@pruijs.nl";
     };
+
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        env.TERM = "xterm-256color";
+      };
+    };
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    zsh
     gnumake
     killall
     niv
@@ -113,12 +121,15 @@
     firefox
     gtkmm3
     git
+    vscode
   ];
 
   virtualisation.vmware.guest.enable = true;
   virtualisation.docker.enable = true;
 
  
+  users.defaultUserShell = pkgs.zsh;
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
