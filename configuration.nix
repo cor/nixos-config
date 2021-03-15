@@ -242,6 +242,9 @@
     openssl
     binutils
     nodePackages.node2nix
+    spotify
+    spotify-tui
+    pavucontrol
   ];
 
   virtualisation.vmware.guest.enable = true;
