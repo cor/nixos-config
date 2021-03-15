@@ -136,7 +136,7 @@
       "workbench.statusBar.visible" = false;
       "update.channel" = "none";
       "[nix]"."editor.tabSize" = 2;
-      "workbench.colorTheme": "Horizon";
+      "workbench.colorTheme" = "Horizon";
     };
 
     programs.alacritty = {
@@ -274,6 +274,7 @@
     pipes
     typora
     git-lfs
+    python
   ];
 
   virtualisation.vmware.guest.enable = true;
