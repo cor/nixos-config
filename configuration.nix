@@ -231,14 +231,17 @@
     neofetch
     htop
     ghc
+    nodejs
     haskellPackages.haskell-language-server
     gcc gdb cmake llvm clang-tools clang
     _1password
     discord
+    chromium
     slack
     scrot
     openssl
     binutils
+    nodePackages.node2nix
   ];
 
   virtualisation.vmware.guest.enable = true;
@@ -270,6 +273,9 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  
+  # Fix for puppeteer (nodejs library)
+  environment.variables.PUPPETEER_EXECUTABLE_PATH = "$(which chromium)";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
