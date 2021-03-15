@@ -131,6 +131,14 @@
       userEmail = "cor@pruijs.nl";
     };
 
+    programs.vscode.userSettings = {
+      "window.menuBarVisibility" = "toggle";
+      "workbench.statusBar.visible" = false;
+      "update.channel" = "none";
+      "[nix]"."editor.tabSize" = 2;
+      "workbench.colorTheme": "Horizon";
+    };
+
     programs.alacritty = {
       enable = true;
       settings = {
@@ -201,12 +209,20 @@
   environment.systemPackages = with pkgs; let
     extensions = (with pkgs.vscode-extensions; [
       ms-python.python
-    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-      name = "nix";
-      publisher = "bbenoist";
-      version = "1.0.1";
-      sha256 = "0zd0n9f5z1f0ckzfjr38xw2zzmcxg1gjrava7yahg5cvdcw6l35b";
-  }]; vscode-with-extensions = pkgs.vscode-with-extensions.override {
+    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "nix";
+        publisher = "bbenoist";
+        version = "1.0.1";
+        sha256 = "0zd0n9f5z1f0ckzfjr38xw2zzmcxg1gjrava7yahg5cvdcw6l35b";
+      }
+      {
+        name = "horizon-theme-vscode";
+        publisher = "jolaleye";
+        version = "2.0.2";
+        sha256 = "1ch8m9h6zxn8xj92ml5294637ygabnyird3f6vbh1djzwwz5rykc";
+      }
+  ]; vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscodeExtensions = extensions;
     };
   in 
