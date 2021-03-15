@@ -245,6 +245,9 @@
     spotify
     spotify-tui
     pavucontrol
+    signal-desktop
+    teams
+    dolphin
   ];
 
   virtualisation.vmware.guest.enable = true;
