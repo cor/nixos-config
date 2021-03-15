@@ -118,7 +118,7 @@
   };
 
   home-manager.users.cor = {pkgs, ... }: {
-    home.file.".background-image".source = ./wallpapers/mountains.jpg;
+    home.file.".background-image".source = ./wallpapers/eclipse.jpg;
     gtk.enable = true;
     gtk.theme = {
       package = pkgs.theme-vertex;
@@ -255,6 +255,9 @@
     dolphin
     font-manager
     pick-colour-picker
+    pipes
+    typora
+    git-lfs
   ];
 
   virtualisation.vmware.guest.enable = true;
