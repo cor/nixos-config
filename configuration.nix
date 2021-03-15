@@ -275,6 +275,7 @@
     typora
     git-lfs
     python
+    python3
   ];
 
   virtualisation.vmware.guest.enable = true;
