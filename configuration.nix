@@ -105,6 +105,7 @@
   };
 
   home-manager.users.cor = {pkgs, ... }: {
+    home.file.".background-image".source = ./wallpapers/mountains.jpg;
     gtk.enable = true;
     gtk.theme = {
       package = pkgs.theme-vertex;
@@ -236,6 +237,8 @@
     discord
     slack
     scrot
+    openssl
+    binutils
   ];
 
   virtualisation.vmware.guest.enable = true;
