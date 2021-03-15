@@ -36,6 +36,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -110,11 +111,11 @@
       name = "Vertex-Dark";
     };
 
-    # programs.git = {
-    #   enable = true;
-    #   userName = "cor";
-    #   userEmail = "cor@pruijs.nl";
-    # };
+    programs.git = {
+      enable = true;
+      userName = "cor";
+      userEmail = "cor@pruijs.nl";
+    };
 
     programs.alacritty = {
       enable = true;
@@ -144,7 +145,7 @@
         "git"
         "syntax-highlighting"
         "history-substring-search"
-        "prompt" 
+        "prompt"
         ];
       };
     };
@@ -247,6 +248,7 @@
 
 
 
+  programs.dconf.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
