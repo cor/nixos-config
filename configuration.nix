@@ -74,7 +74,20 @@
     };
   };
 
-
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+    inconsolata
+    inconsolata-nerdfont
+    ibm-plex
+  ];
 
 
 
@@ -240,6 +253,8 @@
     signal-desktop
     teams
     dolphin
+    font-manager
+    pick-colour-picker
   ];
 
   virtualisation.vmware.guest.enable = true;
