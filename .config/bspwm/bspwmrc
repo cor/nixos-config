@@ -1,8 +1,8 @@
 #! /bin/sh
 
-bspc config border_width        5
-bspc config window_gap          30
-bspc config top_padding         5
+bspc config border_width        4
+bspc config window_gap          16
+bspc config top_padding         4
 bspc config left_padding        8
 bspc config right_padding       8
 bspc config bottom_padding      8
