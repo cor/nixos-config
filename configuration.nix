@@ -222,6 +222,24 @@
         version = "2.0.2";
         sha256 = "1ch8m9h6zxn8xj92ml5294637ygabnyird3f6vbh1djzwwz5rykc";
       }
+      {
+        name = "vsliveshare";
+        publisher = "ms-vsliveshare";
+        version = "1.0.3968";
+        sha256 = "1nmhkxrlg9blxcqh7a3hl0wc5mkk2p77mn228lvmcirpbk3acsx5";
+      }
+      {
+        name = "markdown-preview-enhanced";
+        publisher = "shd101wyy";
+        version = "0.5.16";
+        sha256 = "0w5w2np8fkxpknq76yv8id305rxd8a1p84p9k0jwwwlrsyrz31q8";
+      }
+      {
+        name = "pdf";
+        publisher = "tomoki1207";
+        version = "1.1.0";
+        sha256 = "0pcs4iy77v4f04f8m9w2rpdzfq7sqbspr7f2sm1fv7bm515qgsvb";
+      }
   ]; vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscodeExtensions = extensions;
     };
@@ -276,6 +294,7 @@
     git-lfs
     python
     python3
+    pandoc
   ];
 
   virtualisation.vmware.guest.enable = true;
