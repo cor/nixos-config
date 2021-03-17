@@ -295,6 +295,9 @@
     python
     python3
     pandoc
+    libreoffice
+    gimp
+    pinta
   ];
 
   virtualisation.vmware.guest.enable = true;
