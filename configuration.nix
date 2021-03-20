@@ -365,7 +365,7 @@ in
   # networking.firewall.enable = false;
   
   # Fix for puppeteer (nodejs library)
-  environment.variables.PUPPETEER_EXECUTABLE_PATH = "$(which chromium)";
+  environment.variables.PUPPETEER_EXECUTABLE_PATH = "${pkgs.chromium}/bin/chromium";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
