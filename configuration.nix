@@ -178,6 +178,24 @@
       theme = ./.config/rofi/theme.rafi;
     };
 
+    programs.neovim = {
+      enable = true;
+      extraConfig = builtins.readFile ./.config/nvim/init.vim;
+
+      plugins = with pkgs.vimPlugins; [
+        surround
+        emmet-vim
+        nerdtree
+        nerdcommenter
+        # vim-gitgutter
+        auto-pairs
+        vim-javascript
+        # lsp
+        vim-nix
+        # nvim-lspconfig
+      ];
+    };
+
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
