@@ -172,6 +172,12 @@
       };
     };
 
+    programs.rofi = {
+      enable = true;
+      terminal = "${pkgs.alacritty}/bin/alacritty";
+      theme = ./.config/rofi/theme.rafi;
+    };
+
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
@@ -298,6 +304,7 @@
     pandoc
     libreoffice
     gimp
+    cli-visualizer
     # toggldesktop 
   ];
 
