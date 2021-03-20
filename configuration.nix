@@ -3,7 +3,13 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  unstable = import <nixos-unstable> { 
+    config = { allowUnfree = true; }; 
+    # Fix for puppeteer (nodejs library)
+    environment.variables.PUPPETEER_EXECUTABLE_PATH = "$(which chromium)";
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -288,7 +294,8 @@
     rustup
     vscode-with-extensions
     jetbrains.clion
-    jetbrains.webstorm
+    unstable.jetbrains.webstorm
+    unstable.glibc
     neofetch
     ripgrep
     coreutils-full
