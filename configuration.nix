@@ -264,6 +264,7 @@
     rustup
     vscode-with-extensions
     jetbrains.clion
+    jetbrains.webstorm
     neofetch
     ripgrep
     coreutils-full
@@ -297,7 +298,7 @@
     pandoc
     libreoffice
     gimp
-    pinta
+    # toggldesktop 
   ];
 
   virtualisation.vmware.guest.enable = true;
