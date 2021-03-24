@@ -17,6 +17,21 @@ in
       <home-manager/nixos>
     ];
 
+  nixpkgs.overlays = [
+    (self: super: {
+      discord =
+        if self.lib.versionOlder super.discord.version "0.0.14"
+        then super.discord.overrideAttrs (old: rec {
+          version = "0.0.14";
+          src = self.fetchurl {
+            url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
+            sha256 = "1rq490fdl5pinhxk8lkfcfmfq7apj79jzf3m14yql1rc9gpilrf2";
+          };
+        })
+        else super.discord;
+    })
+  ];
+
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -58,6 +73,13 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+
+    resolutions = [
+      {
+        x = 3440;
+        y = 1440;
+      }
+    ];
 
     desktopManager = {
       xterm.enable = false;
@@ -330,6 +352,7 @@ in
     libreoffice
     gimp
     cli-visualizer
+    thunderbird
     # toggldesktop 
   ];
 
