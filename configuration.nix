@@ -198,6 +198,10 @@ in
         "prompt"
         ];
       };
+
+      shellAliases = {
+        obj = "vim ~/CURRENT_OBJECTIVE";
+      };
     };
 
     programs.rofi = {
@@ -353,7 +357,7 @@ in
     gimp
     cli-visualizer
     thunderbird
-    # toggldesktop 
+    protobuf  
   ];
 
   virtualisation.vmware.guest.enable = true;

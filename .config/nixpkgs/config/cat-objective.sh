@@ -1,0 +1,1 @@
+cat /home/cor/CURRENT_OBJECTIVE
