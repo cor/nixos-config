@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   unstable = import <nixos-unstable> { 
     config = { allowUnfree = true; }; 
@@ -74,7 +74,7 @@ in
   services.xserver = {
     enable = true;
 
-    resolutions = [
+    resolutions = lib.mkOverride 1 [
       {
         x = 3440;
         y = 1440;
@@ -263,6 +263,13 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; let
+
+    # wappDesktopItem = pkgs.makeDesktopItem { 
+    #   name = "whatsapp"; 
+    #   exec = "chromium --app=https://web.whatsapp.com"; 
+    #   desktopName = "WhatsApp"; 
+    # };
+
     extensions = (with pkgs.vscode-extensions; [
       ms-python.python
     ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -301,64 +308,81 @@ in
     };
   in 
   [
-    pywal
-    zsh
-    zsh-prezto
-    gnumake
-    killall
-    niv
-    rxvt_unicode
-    xclip
-    tree
-    rofi
-    polybar
-    wget vim
+    _1password
+    binutils
+    chromium
+    cli-visualizer
+    coreutils-full
+    discord
+    dolphin
     firefox
+    font-manager
+    gcc gdb cmake llvm clang-tools clang
+    ghc
+    gimp
+    git
+    git-lfs
+    gnumake
     google-chrome
     gtkmm3
-    git
-    rustup
-    vscode-with-extensions
-    jetbrains.clion
-    unstable.jetbrains.webstorm
-    unstable.glibc
-    neofetch
-    ripgrep
-    coreutils-full
-    neovim
-    htop
-    ghc
-    nodejs
     haskellPackages.haskell-language-server
-    gcc gdb cmake llvm clang-tools clang
-    _1password
-    discord
-    chromium
-    slack
-    scrot
-    openssl
-    binutils
+    htop
+    jetbrains.clion
+    killall
+    libreoffice
+    neofetch
+    neovim
+    niv
+    nodejs
     nodePackages.node2nix
-    spotify
-    spotify-tui
+    openssl
+    pandoc
     pavucontrol
-    signal-desktop
-    teams
-    dolphin
-    font-manager
     pick-colour-picker
     pipes
-    typora
-    git-lfs
+    polybar
+    protobuf
     python
     python3
-    pandoc
-    libreoffice
-    gimp
-    cli-visualizer
+    pywal
+    ripgrep
+    rofi
+    rustup
+    rxvt_unicode
+    scrot
+    signal-desktop
+    slack
+    spotify
+    spotify-tui
+    teams
     thunderbird
-    protobuf  
+    tree
+    typora
+    unstable.glibc
+    unstable.jetbrains.webstorm
+    unstable.nodePackages.firebase-tools
+    vscode-with-extensions
+    wget vim
+    xclip
+    zsh
+    zsh-prezto
+    gnome3.gnome-calendar
+    gnome3.gnome-control-center
+    gnome3.gnome-keyring
+    gnome-online-accounts
+    dex
+    zip
+    unzip
+    # makeDesktopItem
+    
+    (pkgs.makeDesktopItem rec { 
+      name = "whatsapp"; 
+      exec = "chromium --app=https://web.whatsapp.com"; 
+      desktopName = "WhatsApp"; 
+    })
   ];
+
+
 
   virtualisation.vmware.guest.enable = true;
   virtualisation.docker.enable = true;
@@ -366,8 +390,6 @@ in
  
   users.defaultUserShell = pkgs.zsh;
   nixpkgs.config.allowUnfree = true;
-
-
 
 
   programs.dconf.enable = true;
@@ -381,6 +403,13 @@ in
   # };
 
   # List services that you want to enable:
+  #
+  # Gnome calendar
+  services.gnome3.evolution-data-server.enable = true;
+  # optional to use google/nextcloud calendar
+  services.gnome3.gnome-online-accounts.enable = true;
+  # optional to use google/nextcloud calendar
+  services.gnome3.gnome-keyring.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
