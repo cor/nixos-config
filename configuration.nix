@@ -55,7 +55,8 @@ in
       sessionCommands = ''
         xrandr-uw
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
-      '';
+        polybar main &
+      ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
     # dpi = 220;
@@ -103,6 +104,9 @@ in
     firefox
     tree
     git
+    git-lfs
+    polybar
+    ripgrep
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
     kitty
