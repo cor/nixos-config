@@ -10,7 +10,7 @@
     programs.rofi = {
       enable = true;
       terminal = "${pkgs.kitty}/bin/kitty";
-      theme = "/etc/nixos/rofi/theme.rasi";
+      theme = "/etc/nixos/rofi/theme.rafi";
     };
     services.polybar = {
       enable = true;
@@ -26,3 +26,4 @@
   };
 
 }
+
