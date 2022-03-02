@@ -69,6 +69,21 @@ in
     };
   };
 
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+    inconsolata
+    inconsolata-nerdfont
+    ibm-plex
+  ];
+
 
   
   # Configure keymap in X11
@@ -106,6 +121,10 @@ in
     git
     git-lfs
     polybar
+    coreutils-full
+    binutils
+    gnome3.gnome-control-center
+    xclip
     ripgrep
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
