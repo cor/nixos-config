@@ -59,7 +59,7 @@ in
       ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
-    # dpi = 220;
+    dpi = 96;
     windowManager = {
       bspwm = {
         enable = true;
@@ -121,6 +121,11 @@ in
       xrandr --newmode "3440x1440_60.00"  419.50  3440 3696 4064 4688  1440 1443 1453 1493 -hsync +vsync
       xrandr --addmode Virtual-1 3440x1440_60.00
       xrandr -s 3440x1440_60.00
+    '')
+    (writeShellScriptBin "xrandr-1440" ''
+      xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
+      xrandr --addmode Virtual-1 2560x1440_60.00
+      xrandr -s 2560x1440_60.00
     '')
     (writeShellScriptBin "reload-config" ''
        sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch

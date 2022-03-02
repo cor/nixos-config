@@ -12,6 +12,10 @@
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "/etc/nixos/rofi/theme.rafi";
     };
+    programs.vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+    };
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
@@ -22,6 +26,10 @@
       script = ''
         polybar main &
       '';
+    };
+
+    xresources.properties = {
+      "Xft.dpi" = 96;
     };
   };
 
