@@ -158,11 +158,11 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   services.pcscd.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "gtk2";
-    enableSSHSupport = true;
-  };
+  # programs.gpg-agent = {
+  #   enable = true;
+  #   pinentryFlavor = "gtk2";
+  #   enableSSHSupport = true;
+  # };
 
   # List services that you want to enable:
 

@@ -21,6 +21,23 @@
         key = "06A6337C2BDD1365883C0668DB347466107E589F";
       };
     };
+    programs.gpg = {
+      enable = true;
+      settings = {
+        default-key = "06A6337C2BDD1365883C0668DB347466107E589F";
+      };
+    };
+
+    services.gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 36000;
+      maxCacheTtl = 36000;
+      defaultCacheTtlSsh = 36000;
+      maxCacheTtlSsh = 36000;
+      enableSshSupport = true;
+      pinentryFlavor = "curses";
+    };  
+
     programs.rofi = {
       enable = true;
       terminal = "${pkgs.kitty}/bin/kitty";
