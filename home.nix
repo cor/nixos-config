@@ -16,11 +16,13 @@
       enable = true;
       userName = "cor";
       userEmail = "cor@pruijs.dev";
+      lfs.enable = true;
       signing = {
         signByDefault = true;
         key = "06A6337C2BDD1365883C0668DB347466107E589F";
       };
     };
+    
     programs.gpg = {
       enable = true;
       settings = {
@@ -43,12 +45,15 @@
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "/etc/nixos/rofi/theme.rafi";
     };
+
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
+        file-icons.file-icons
       ];
+    
     };
     services.polybar = {
       enable = true;
