@@ -43,7 +43,7 @@
     programs.rofi = {
       enable = true;
       terminal = "${pkgs.kitty}/bin/kitty";
-      theme = "/etc/nixos/rofi/theme.rafi";
+      theme = /etc/nixos/rofi/theme.rafi;
     };
 
     programs.vscode = {

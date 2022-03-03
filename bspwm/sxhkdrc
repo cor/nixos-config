@@ -8,7 +8,7 @@ super + {_,shift +}Return
 
 # program launcher
 super + space
-    rofi -show run -width 1000 -font "Dejavu Sans Mono 25"
+    rofi -combi-modi run,drun -show combi -width 1000 -font "Dejavu Sans Mono 25"
     #rofi -fake-transparency -opacity 90 -show run -width 1000 -font "Dejavu Sans Mono 20"
     #dmenu_run -nb '#111111' -b -fn 'Menlo:pixelsize=12'
 
@@ -17,7 +17,8 @@ super + equal
     = -width 600
 
 super + shift + space
-    rofi -fake-transparency -opacity 90 -show
+    rofi -show window -width 1000 -font "Dejavu Sans Mono 25"
+    # rofi -fake-transparency -opacity 90 -show
 
 ctrl + alt + Escape
     scrot

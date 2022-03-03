@@ -5,6 +5,15 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  discord-chromium = pkgs.makeDesktopItem rec {
+    name = "Discord";
+    desktopName = "Discord";
+    genericName = "All-in-one cross-platform voice and text chat for gamers";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
+    icon = "discord";
+    type = "Application";
+    terminal = false;
+  };
 in
 {
   imports =
@@ -135,16 +144,7 @@ in
     kitty
     zip
     openssh
-    (pkgs.makeDesktopItem rec {
-        name = "Discord";
-        desktopName = "Discord new";
-        genericName = "All-in-one cross-platform voice and text chat for gamers";
-        exec = "${chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
-        icon = "discord";
-        type = "Application";
-        # categories = "Network;InstantMessaging;";
-        terminal = false;
-    })
+    discord-chromium
     (writeShellScriptBin "xrandr-mbp" ''
       xrandr --newmode "1512x945_60.00"  118.00  1512 1608 1760 2008  945 948 958 981 -hsync +vsync
       xrandr --addmode Virtual-1 1512x945_60.00
@@ -175,16 +175,17 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   services.pcscd.enable = true;
-  # programs.gpg-agent = {
-  #   enable = true;
-  #   pinentryFlavor = "gtk2";
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -205,7 +206,5 @@ in
  		services.openssh.passwordAuthentication = true;
  		services.openssh.permitRootLogin = "yes";
  		users.users.root.initialPassword = "root";
- 	
-
 }
 
