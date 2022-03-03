@@ -62,9 +62,12 @@ in
       defaultSession = "none+bspwm";
       lightdm.enable = true;
       sessionCommands = ''
+        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
+        export SSH_AUTH_SOCK
         xrandr-uw
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
         polybar main &
+
       ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
