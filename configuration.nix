@@ -125,7 +125,9 @@ in
     binutils
     gnome3.gnome-control-center
     xclip
+    curl
     ripgrep
+    chromium
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
     pinentry
@@ -133,6 +135,16 @@ in
     kitty
     zip
     openssh
+    (pkgs.makeDesktopItem rec {
+        name = "Discord";
+        desktopName = "Discord new";
+        genericName = "All-in-one cross-platform voice and text chat for gamers";
+        exec = "${chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
+        icon = "discord";
+        type = "Application";
+        # categories = "Network;InstantMessaging;";
+        terminal = false;
+    })
     (writeShellScriptBin "xrandr-mbp" ''
       xrandr --newmode "3024x1890_60.00"  488.50  3024 3264 3592 4160  1890 1893 1899 1958 -hsync +vsync
       xrandr --addmode Virtual-1 3024x1890_60.00
