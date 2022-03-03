@@ -146,6 +146,11 @@ in
         terminal = false;
     })
     (writeShellScriptBin "xrandr-mbp" ''
+      xrandr --newmode "1512x945_60.00"  118.00  1512 1608 1760 2008  945 948 958 981 -hsync +vsync
+      xrandr --addmode Virtual-1 1512x945_60.00
+      xrandr -s 1512x945_60.00
+    '')
+    (writeShellScriptBin "xrandr-mbp-retina" ''
       xrandr --newmode "3024x1890_60.00"  488.50  3024 3264 3592 4160  1890 1893 1899 1958 -hsync +vsync
       xrandr --addmode Virtual-1 3024x1890_60.00
       xrandr -s 3024x1890_60.00
@@ -194,7 +199,7 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixUnstable;
  		nix.extraOptions = "experimental-features = nix-command flakes";
    			services.openssh.enable = true;
  		services.openssh.passwordAuthentication = true;
