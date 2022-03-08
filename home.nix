@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home-manager.users.cor = {
@@ -52,8 +52,12 @@
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         file-icons.file-icons
+        svelte.svelte-vscode
+        bradlc.vscode-tailwindcss
+        golang.go
+        github.github-vscode-theme
       ];
-    
+      userSettings = lib.importJSON ./vscode/settings.json;
     };
     services.polybar = {
       enable = true;

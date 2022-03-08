@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "GitHub Dark",
+    "workbench.iconTheme": "file-icons",
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "tailwindCSS.includeLanguages": {
+        "svelte": "html"
+    },
+    "workbench.colorCustomizations": {
+        "GitHub Dark": {
+            "titleBar.activeBackground": "#191919cc",
+            "titleBar.activeForeground":"#ffffff"
+        }
+    },
+    "window.titleBarStyle": "custom"
+}
