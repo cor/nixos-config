@@ -75,6 +75,8 @@ in
         export SSH_AUTH_SOCK
         xrandr-mbp-retina
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
+        pamixer --set-volume 100
+        pamixer --unmute
         polybar main &
 
       ''; # somehow homemanager doesn't automatically start polybar
@@ -132,8 +134,8 @@ in
   # services.printing.enable = true;
 
   # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -144,10 +146,12 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
+  users.defaultUserShell = pkgs.zsh;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pamixer
     rofi
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget

@@ -22,6 +22,13 @@
         key = "06A6337C2BDD1365883C0668DB347466107E589F";
       };
     };
+
+    programs.zsh = {
+      enable = true;
+      prezto = {
+        enable = true;
+      };
+    };
     
     programs.gpg = {
       enable = true;
