@@ -67,6 +67,7 @@ in
   services.xserver = {
     autorun = true;
     enable = true;
+    desktopManager.wallpaper.mode = "fill";
     displayManager = {
       defaultSession = "none+bspwm";
       lightdm.enable = true;

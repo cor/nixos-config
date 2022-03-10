@@ -2,7 +2,7 @@
 
 {
   home-manager.users.cor = {
-    home.file.".background-image".source = ./wallpapers/eclipse.jpg;
+    home.file.".background-image".source = ./wallpapers/waves.png;
 
     gtk = {
       enable = true;
@@ -96,6 +96,7 @@
 
     xresources.properties = {
       "Xft.dpi" = 192;
+      
     };
   };
 
