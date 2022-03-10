@@ -23,7 +23,7 @@ in
       (import "${home-manager}/nixos")
       ./home.nix
     ];
-  hardware.video.hidpi.enable = false;
+  hardware.video.hidpi.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -54,6 +54,15 @@ in
     "sxhkdrc".source = ./bspwm/sxhkdrc;
   };
 
+  # begin retina
+  environment.variables = {
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  };
+  # end retina
+
+
   # Enable the X11 windowing system.
   services.xserver = {
     autorun = true;
@@ -64,19 +73,33 @@ in
       sessionCommands = ''
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
         export SSH_AUTH_SOCK
-        xrandr-uw
+        xrandr-mbp-retina
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
         polybar main &
 
       ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
-    dpi = 96;
+    # dpi = 96;
+    dpi = 192;
     windowManager = {
       bspwm = {
         enable = true;
         configFile = "/etc/bspwmrc";
         sxhkd.configFile = "/etc/sxhkdrc";
+      };
+    };
+    libinput = {
+      enable = true;
+
+      # disabling mouse acceleration
+      mouse = {
+        accelProfile = "flat";
+      };
+
+      # enable touchpad acceleration
+      touchpad = {
+        accelProfile = "adaptive";
       };
     };
   };
@@ -116,7 +139,7 @@ in
   # services.xserver.libinput.enable = true;
   virtualisation.vmware.guest.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with ‘passwd’.3
   users.users.cor = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
