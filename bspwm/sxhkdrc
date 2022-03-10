@@ -9,8 +9,17 @@ super + {_,shift +}Return
 # program launcher
 super + space
     rofi -combi-modi run,drun -show combi -width 1000 -font "Dejavu Sans Mono 25"
-    #rofi -fake-transparency -opacity 90 -show run -width 1000 -font "Dejavu Sans Mono 20"
+    #rofi -fake-transparency -opacity 9650 -show run -width 1000 -font "Dejavu Sans Mono 20"
     #dmenu_run -nb '#111111' -b -fn 'Menlo:pixelsize=12'
+
+# change window gaps
+super + g
+    bspc config window_gap 0 && bspc config border_width 1 && bspc config left_padding 0 && bspc config right_padding 0 && bspc config bottom_padding 0
+
+# change window gaps
+super + shift + g
+    bspc config window_gap 16 && bspc config border_width 4 && bspc config left_padding 8 && bspc config right_padding 8 && bspc config bottom_padding 8
+
 
 # calculator
 super + equal
@@ -52,8 +61,8 @@ super + y
 	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
 # swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+# super + g
+# 	bspc node -s biggest
 
 #
 # state/flags

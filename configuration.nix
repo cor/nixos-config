@@ -152,21 +152,25 @@ in
       xrandr --newmode "1512x945_60.00"  118.00  1512 1608 1760 2008  945 948 958 981 -hsync +vsync
       xrandr --addmode Virtual-1 1512x945_60.00
       xrandr -s 1512x945_60.00
+      polybar-msg cmd restart
     '')
     (writeShellScriptBin "xrandr-mbp-retina" ''
       xrandr --newmode "3024x1890_60.00"  488.50  3024 3264 3592 4160  1890 1893 1899 1958 -hsync +vsync
       xrandr --addmode Virtual-1 3024x1890_60.00
       xrandr -s 3024x1890_60.00
+      polybar-msg cmd restart
     '')
     (writeShellScriptBin "xrandr-uw" ''
       xrandr --newmode "3440x1440_60.00"  419.50  3440 3696 4064 4688  1440 1443 1453 1493 -hsync +vsync
       xrandr --addmode Virtual-1 3440x1440_60.00
       xrandr -s 3440x1440_60.00
+      polybar-msg cmd restart
     '')
     (writeShellScriptBin "xrandr-1440" ''
       xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
       xrandr --addmode Virtual-1 2560x1440_60.00
       xrandr -s 2560x1440_60.00
+      polybar-msg cmd restart
     '')
     (writeShellScriptBin "reload-config" ''
        sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch
