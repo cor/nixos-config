@@ -12,11 +12,11 @@ super + space
     #rofi -fake-transparency -opacity 9650 -show run -width 1000 -font "Dejavu Sans Mono 20"
     #dmenu_run -nb '#111111' -b -fn 'Menlo:pixelsize=12'
 
-# change window gaps
+# disable window gaps
 super + g
-    bspc config window_gap 0 && bspc config border_width 1 && bspc config left_padding 0 && bspc config right_padding 0 && bspc config bottom_padding 0
+    bspc config window_gap 0 && bspc config border_width 0 && bspc config left_padding 0 && bspc config right_padding 0 && bspc config bottom_padding 0
 
-# change window gaps
+# enable window gaps
 super + shift + g
     bspc config window_gap 16 && bspc config border_width 4 && bspc config left_padding 8 && bspc config right_padding 8 && bspc config bottom_padding 8
 

@@ -27,6 +27,20 @@
       enable = true;
       prezto = {
         enable = true;
+        pmodules = [
+          "git"
+          "environment"
+          "terminal"
+          "editor"
+          "history"
+          "directory"
+          "spectrum"
+          "utility"
+          "completion"
+          "syntax-highlighting"
+          "history-substring-search"
+          "prompt"
+        ];
       };
     };
     
@@ -66,6 +80,8 @@
       ];
       userSettings = lib.importJSON ./vscode/settings.json;
     };
+
+    programs.kitty.settings = ./kitty/kitty.conf;
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
