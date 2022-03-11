@@ -200,6 +200,13 @@ in
       xrandr -s 2560x1440_60.00
       polybar-msg cmd restart
     '')
+    (writeShellScriptBin "xrandr-5k" ''
+      xrandr --newmode "5120x2880_60.00"  1275.49  5120 5560 6128 7136  2880 2881 2884 2979  -hsync +vsync
+      xrandr --addmode Virtual-1 5120x2880_60.00
+      xrandr -s 5120x2880_60.00
+      polybar-msg cmd restart
+    '')
+    
     (writeShellScriptBin "reload-config" ''
        sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch
     '')
