@@ -67,9 +67,13 @@ in
   services.xserver = {
     autorun = true;
     enable = true;
-    desktopManager.wallpaper.mode = "fill";
+    desktopManager = {
+      xterm.enable = false;
+      xfce.enable = true;
+      wallpaper.mode = "fill";
+    };
     displayManager = {
-      defaultSession = "none+bspwm";
+      defaultSession = "xfce+bspwm";
       lightdm.enable = true;
       sessionCommands = ''
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
@@ -172,6 +176,7 @@ in
     neofetch
     pinentry
     pinentry-curses
+    pick-colour-picker
     kitty
     zip
     openssh
@@ -189,9 +194,9 @@ in
       polybar-msg cmd restart
     '')
     (writeShellScriptBin "xrandr-uw" ''
-      xrandr --newmode "3440x1440_60.00"  419.50  3440 3696 4064 4688  1440 1443 1453 1493 -hsync +vsync
-      xrandr --addmode Virtual-1 3440x1440_60.00
-      xrandr -s 3440x1440_60.00
+      xrandr --newmode "6880x2880_60.00"  1715.90  6880 7472 8240 9600  2880 2881 2884 2979  -hsync +vsync
+      xrandr --addmode Virtual-1 6880x2880_60.00
+      xrandr -s 6880x2880_60.00
       polybar-msg cmd restart
     '')
     (writeShellScriptBin "xrandr-1440" ''
