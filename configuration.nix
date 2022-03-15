@@ -14,6 +14,15 @@ let
     type = "Application";
     terminal = false;
   };
+  slack-chromium = pkgs.makeDesktopItem rec {
+    name = "Slack";
+    desktopName = "Slack";
+    genericName = "One platform for your team and your work";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.slack.com/client/T021F0XJ8BE/C02MSA16DCP\"";
+    icon = "slack";
+    type = "Application";
+    terminal = false;
+  };
 in
 {
   imports =
@@ -181,6 +190,7 @@ in
     zip
     openssh
     discord-chromium
+    slack-chromium
     (writeShellScriptBin "xrandr-mbp" ''
       xrandr --newmode "1512x945_60.00"  118.00  1512 1608 1760 2008  945 948 958 981 -hsync +vsync
       xrandr --addmode Virtual-1 1512x945_60.00
