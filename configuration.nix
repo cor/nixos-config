@@ -188,6 +188,7 @@ in
     pick-colour-picker
     kitty
     zip
+    fzf
     openssh
     discord-chromium
     slack-chromium

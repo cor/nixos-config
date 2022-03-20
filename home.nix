@@ -42,6 +42,15 @@
           "prompt"
         ];
       };
+      shellAliases = {
+        fzf-nix = "nix-env -qa | fzf";
+      };
+      initExtra = ''
+      if [ -n "''${commands[fzf-share]}" ]; then
+        source "''$(fzf-share)/key-bindings.zsh"
+        source "''$(fzf-share)/completion.zsh"
+      fi
+      '';
     };
     
     programs.gpg = {
@@ -77,8 +86,11 @@
         bradlc.vscode-tailwindcss
         golang.go
         github.github-vscode-theme
+        github.copilot
+        matklad.rust-analyzer
       ];
       userSettings = lib.importJSON ./vscode/settings.json;
+
     };
 
     programs.kitty.settings = ./kitty/kitty.conf;
