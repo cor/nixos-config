@@ -75,3 +75,16 @@ You should have a graphical functioning dev VM.
 At this point, I never use Mac terminals ever again. I clone this repository
 in my VM and I use the other Make tasks such as `make test`, `make switch`, etc.
 to make changes my VM.
+
+---
+
+## Setup within VM
+
+This config assumes that this directory is cloned at `/home/cor/nixos-config` and linked to `/etc/nixos`.
+
+1. copy over `id_ed25519` and `id_ed25519.pub` from the host's `~/.ssh/` directory to the VM's `~/.ssh/` directory
+2. `git clone git@github.com:cor/nixos-config`
+3. `sudo mv /etc/nixos /etc/nixos-pre-git-backup`
+4. `sudo ln -s /home/cor/nixos-config /etc/nixos`
+
+After that is done, rebuild the system and import your GPG keys.
