@@ -12,5 +12,6 @@
             "titleBar.activeForeground":"#ffffff"
         }
     },
-    "window.titleBarStyle": "custom"
+    "window.titleBarStyle": "custom",
+    "editor.inlineSuggest.enabled": true
 }

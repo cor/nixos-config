@@ -74,11 +74,12 @@
       enable = true;
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = /etc/nixos/rofi/theme.rafi;
+      plugins = [ pkgs.rofi-emoji ];
     };
 
     programs.vscode = {
       enable = true;
-      package = pkgs.vscodium;
+      package = pkgs.vscode;
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         file-icons.file-icons
@@ -88,6 +89,9 @@
         github.github-vscode-theme
         github.copilot
         matklad.rust-analyzer
+        eamodio.gitlens
+        bungcip.better-toml
+        ms-vsliveshare.vsliveshare
       ];
       userSettings = lib.importJSON ./vscode/settings.json;
 
