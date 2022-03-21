@@ -169,7 +169,6 @@ in
     rofi
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    firefox
     tree
     git
     git-lfs
@@ -180,7 +179,6 @@ in
     xclip
     curl
     ripgrep
-    chromium
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
     pinentry

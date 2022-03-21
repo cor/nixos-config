@@ -92,6 +92,7 @@
         eamodio.gitlens
         bungcip.better-toml
         ms-vsliveshare.vsliveshare
+        streetsidesoftware.code-spell-checker
       ];
       userSettings = lib.importJSON ./vscode/settings.json;
 
@@ -108,6 +109,19 @@
       script = ''
         polybar main &
       '';
+    };
+
+    programs.chromium = {
+      enable = true;
+      package = pkgs.chromium;
+      extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+        "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
+        "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
+        "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
+        "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
+      ];
     };
 
     xresources.properties = {
