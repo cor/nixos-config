@@ -15,6 +15,8 @@ For x86-64, I usually just download the official ISO, but I build the
 ISO from scratch for aarch64. There is a make target `iso/nixos.iso` you can use for
 building an ISO. You'll also need a `docker` running on your machine for building an ISO.
 
+NOTE: The current ISO is broken. I use an older ISO that I have stored on my external SSD and in `iCloud Drive/Documents/Setup/WORKING NIXOS ISO`
+
 ```
 $ make iso/nixos.iso
 ```
