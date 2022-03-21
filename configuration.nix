@@ -23,6 +23,15 @@ let
     type = "Application";
     terminal = false;
   };
+  clickup-chromium = pkgs.makeDesktopItem rec {
+    name = "ClickUp";
+    desktopName = "ClickUp";
+    genericName = "One app to replace them all";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.clickup.com/\"";
+    icon = "clickup";
+    type = "Application";
+    terminal = false;
+  };
 in
 {
   imports =
@@ -188,6 +197,7 @@ in
     zip
     fzf
     openssh
+    clickup-chromium
     discord-chromium
     slack-chromium
     feh
