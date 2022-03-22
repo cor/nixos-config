@@ -80,7 +80,7 @@
     programs.vscode = {
       enable = true;
       package = pkgs.vscode;
-      extensions = with pkgs.vscode-extensions; [
+      extensions = (with pkgs.vscode-extensions; [
         bbenoist.nix
         file-icons.file-icons
         svelte.svelte-vscode
@@ -93,7 +93,13 @@
         bungcip.better-toml
         ms-vsliveshare.vsliveshare
         streetsidesoftware.code-spell-checker
-      ];
+      ])
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+        name = "expand-region";
+        publisher = "letrieu";
+        version = "0.1.4";
+        sha256 = "U4AYq7ONdmP2PaLU/OapN8Ocq2ZE3ORTvhkXVwqPqZs=";
+      }];
       userSettings = lib.importJSON ./vscode/settings.json;
 
     };
