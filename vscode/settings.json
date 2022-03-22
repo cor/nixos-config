@@ -19,5 +19,6 @@
         "yaml": true,
         "plaintext": true,
         "markdown": true
-    }
+    },
+    "editor.minimap.enabled": false
 }

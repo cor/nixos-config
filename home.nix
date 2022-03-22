@@ -101,7 +101,7 @@
         sha256 = "U4AYq7ONdmP2PaLU/OapN8Ocq2ZE3ORTvhkXVwqPqZs=";
       }];
       userSettings = lib.importJSON ./vscode/settings.json;
-
+      keybindings = lib.importJSON ./vscode/keybindings.json;
     };
 
     programs.kitty.settings = ./kitty/kitty.conf;
