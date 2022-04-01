@@ -180,6 +180,7 @@ in
     wget
     tree
     git
+    scrot
     git-lfs
     polybar
     coreutils-full

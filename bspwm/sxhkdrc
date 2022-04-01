@@ -32,8 +32,6 @@ super + shift + space
     rofi -show window -width 1000 -font "Dejavu Sans Mono 25"
     # rofi -fake-transparency -opacity 90 -show
 
-ctrl + alt + Escape
-    scrot
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -166,3 +164,8 @@ super + r
 # will be stored in ~/Screenshots/ and will also be copied to the clipboard
 super + shift + @s
     scrot ~/Screenshots/%Y-%m-%d-%H%M%S.png -s --exec 'xclip -selection clipboard -target image/png -in $f'
+
+# take a screenshot of the entire screen (like cmd shift 3 on macOS)
+# will be stored in ~/Screenshots/ and will also be copied to the clipboard
+super + shift + ctrl + @s
+    scrot ~/Screenshots/%Y-%m-%d-%H%M%S.png --exec 'xclip -selection clipboard -target image/png -in $f'
