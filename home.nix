@@ -132,6 +132,7 @@
         "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
         "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
         "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
+        "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
       ];
     };
 
