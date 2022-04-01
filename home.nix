@@ -129,6 +129,9 @@
         "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
         "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
         "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
+        "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
+        "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
+        "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
       ];
     };
 
