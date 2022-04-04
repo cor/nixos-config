@@ -93,12 +93,19 @@
         bungcip.better-toml
         ms-vsliveshare.vsliveshare
         streetsidesoftware.code-spell-checker
+        kahole.magit
       ])
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
         name = "expand-region";
         publisher = "letrieu";
         version = "0.1.4";
         sha256 = "U4AYq7ONdmP2PaLU/OapN8Ocq2ZE3ORTvhkXVwqPqZs=";
+      } 
+      {
+        name = "vscode-thunder-client";
+        publisher = "rangav";
+        version = "1.14.4";
+        sha256 = "fCwSLLoVuyXOfLyd7cmBzQQ8XYXYYV1o031p9L9rR3A=";
       }];
       userSettings = lib.importJSON ./vscode/settings.json;
       keybindings = lib.importJSON ./vscode/keybindings.json;
