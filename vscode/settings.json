@@ -20,5 +20,8 @@
         "plaintext": true,
         "markdown": true
     },
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.startupEditor": "none"
 }
