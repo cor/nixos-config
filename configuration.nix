@@ -229,6 +229,14 @@ in
     (writeShellScriptBin "reload-config" ''
        sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch
     '')
+    (writeShellScriptBin "composable-code" ''
+      cd /home/cor/composable
+      nix develop ".#main" --command code .
+    '')
+    (writeShellScriptBin "nixos-config-code" ''
+      cd /home/cor/nixos-config
+      code .
+    '')
   ];
 
 
