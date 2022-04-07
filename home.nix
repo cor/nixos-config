@@ -94,6 +94,10 @@
         ms-vsliveshare.vsliveshare
         streetsidesoftware.code-spell-checker
         kahole.magit
+        formulahendry.auto-rename-tag
+        eg2.vscode-npm-script
+        davidanson.vscode-markdownlint
+        ms-azuretools.vscode-docker
       ])
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
         name = "expand-region";
