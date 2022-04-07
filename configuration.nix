@@ -233,6 +233,10 @@ in
       cd /home/cor/composable
       nix develop ".#main" --command code .
     '')
+    (writeShellScriptBin "rentiv-code" ''
+      cd /home/cor/rentiv
+      nix develop --command code .
+    '')
     (writeShellScriptBin "nixos-config-code" ''
       cd /home/cor/nixos-config
       code .
