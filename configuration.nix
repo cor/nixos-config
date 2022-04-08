@@ -219,10 +219,24 @@ in
       polybar-msg cmd restart
       feh-bg-fill
     '')
-    (writeShellScriptBin "xr-5k" ''
+    (writeShellScriptBin "xr-5120" ''
       xrandr --newmode "5120x2880_60.00"  1275.49  5120 5560 6128 7136  2880 2881 2884 2979  -hsync +vsync
       xrandr --addmode Virtual-1 5120x2880_60.00
       xrandr -s 5120x2880_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-5760" ''
+      xrandr --newmode "5760x3240_60.00"  1619.25  5760 6264 6904 8048  3240 3243 3248 3354 -hsync +vsync
+      xrandr --addmode Virtual-1 5760x3240_60.00
+      xrandr -s 5760x3240_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')    
+    (writeShellScriptBin "xr-6400" ''
+      xrandr --newmode "6400x3600_60.00"  2003.00  6400 6968 7680 8960  3600 3603 3608 3726 -hsync +vsync
+      xrandr --addmode Virtual-1 6400x3600_60.00
+      xrandr -s 6400x3600_60.00
       polybar-msg cmd restart
       feh-bg-fill
     '')
