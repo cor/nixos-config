@@ -202,6 +202,7 @@ in
     discord-chromium
     slack-chromium
     feh
+    pavucontrol # enable microphone
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
     '')
@@ -223,6 +224,13 @@ in
       xrandr --newmode "5120x2880_60.00"  1275.49  5120 5560 6128 7136  2880 2881 2884 2979  -hsync +vsync
       xrandr --addmode Virtual-1 5120x2880_60.00
       xrandr -s 5120x2880_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-3840" ''
+      xrandr --newmode "3840x2160_60.00"  712.75  3840 4160 4576 5312  2160 2163 2168 2237 -hsync +vsync
+      xrandr --addmode Virtual-1 3840x2160_60.00
+      xrandr -s 3840x2160_60.00
       polybar-msg cmd restart
       feh-bg-fill
     '')
