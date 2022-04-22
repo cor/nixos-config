@@ -96,12 +96,13 @@ in
       sessionCommands = ''
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
         export SSH_AUTH_SOCK
-        xr-5k
+        xr-5120
         ${pkgs.xorg.xset}/bin/xset r rate 200 40
         pamixer --set-volume 100
         pamixer --unmute
         polybar main &
-
+        # configure keyboard repeat rate
+        xset r rate 150 70 
       ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
