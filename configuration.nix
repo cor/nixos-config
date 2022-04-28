@@ -101,8 +101,6 @@ in
         pamixer --set-volume 100
         pamixer --unmute
         polybar main &
-        # configure keyboard repeat rate
-        xset r rate 150 70 
       ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
