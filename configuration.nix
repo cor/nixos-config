@@ -260,6 +260,10 @@ in
       cd /home/cor/rentiv
       nix develop --command code .
     '')
+    (writeShellScriptBin "rentiv-code-site" ''
+      cd /home/cor/rentiv
+      nix develop --command code ./site
+    '')
     (writeShellScriptBin "nixos-config-code" ''
       cd /home/cor/nixos-config
       code .
