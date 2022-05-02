@@ -201,6 +201,7 @@ in
     discord-chromium
     slack-chromium
     feh
+    tdesktop
     pavucontrol # enable microphone
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
