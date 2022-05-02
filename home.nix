@@ -98,6 +98,7 @@
         eg2.vscode-npm-script
         davidanson.vscode-markdownlint
         ms-azuretools.vscode-docker
+        vadimcn.vscode-lldb
       ])
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
         name = "expand-region";
