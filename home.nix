@@ -2,7 +2,7 @@
 
 {
   home-manager.users.cor = {
-    home.file.".background-image".source = ./wallpapers/waves.png;
+    home.file.".background-image".source = ./wallpapers/purple.png;
 
     gtk = {
       enable = true;
