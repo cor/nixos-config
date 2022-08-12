@@ -4,6 +4,19 @@
   # https://github.com/nix-community/home-manager/pull/2408
   # environment.pathsToLink = [ "/share/fish" ];
   
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    # liberation_ttf
+    ibm-plex
+    fira-code
+    fira-code-symbols
+    # mplus-outline-fonts
+    # dina-font
+    # proggyfonts
+  ];
+
   environment.systemPackages = with pkgs; [
     bspwm
     sxhkd
