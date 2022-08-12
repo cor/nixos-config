@@ -1,5 +1,33 @@
 { config, lib, pkgs, ... }:
-
+let
+  discord-chromium = pkgs.makeDesktopItem rec {
+    name = "Discord";
+    desktopName = "Discord";
+    genericName = "All-in-one cross-platform voice and text chat for gamers";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
+    icon = "discord";
+    type = "Application";
+    terminal = false;
+  };
+  slack-chromium = pkgs.makeDesktopItem rec {
+    name = "Slack";
+    desktopName = "Slack";
+    genericName = "One platform for your team and your work";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.slack.com/client/T021F0XJ8BE/C02MSA16DCP\"";
+    icon = "slack";
+    type = "Application";
+    terminal = false;
+  };
+  clickup-chromium = pkgs.makeDesktopItem rec {
+    name = "ClickUp";
+    desktopName = "ClickUp";
+    genericName = "One app to replace them all";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.clickup.com/\"";
+    icon = "clickup";
+    type = "Application";
+    terminal = false;
+  };
+in
 {
   xdg.enable = true;
 
@@ -40,6 +68,12 @@
     pinentry
     pinentry-curses
     pick-colour-picker
+    chromium
+    vscode
+    helix
+    discord-chromium
+    slack-chromium
+    clickup-chromium
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
     '')
@@ -220,7 +254,8 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "tty";
+    pinentryFlavor = "gnome3";
+    enableSshSupport = true;
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;

@@ -17,6 +17,10 @@
     # proggyfonts
   ];
 
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+
+
   environment.systemPackages = with pkgs; [
     bspwm
     sxhkd
