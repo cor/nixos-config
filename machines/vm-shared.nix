@@ -62,15 +62,15 @@
 
       # autoLogin.enable = true;
       # autoLogin.user = "cor";
-      # sessionCommands = ''
-      #   eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
-      #   export SSH_AUTH_SOCK
-      #   xr-5120
-      #   ${pkgs.xorg.xset}/bin/xset r rate 200 40
-      #   pamixer --set-volume 100
-      #   pamixer --unmute
-      #   polybar main &
-      # ''; # somehow homemanager doesn't automatically start polybar
+      sessionCommands = ''
+        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
+        export SSH_AUTH_SOCK
+        xr-mbp
+        ${pkgs.xorg.xset}/bin/xset r rate
+        pamixer --set-volume 100
+        pamixer --unmute
+        polybar main &
+      ''; # somehow homemanager doesn't automatically start polybar
     };
     dpi = 192;
     windowManager = {
