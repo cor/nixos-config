@@ -1,14 +1,16 @@
-{ config, pkgs, currentSystem, ... }:
+{ config, pkgs, lib, currentSystem, currentSystemName,... }:
 
 {
-  # We require 5.14+ for VMware Fusion on M1.
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
+  # Be careful updating this.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # use unstable nix so we can access flakes
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
    };
 
@@ -18,6 +20,10 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # VMware, Parallels both only support this being 0 otherwise you see
+  # "error switching console mode" on boot.
+  boot.loader.systemd-boot.consoleMode = "0";
 
   # Define your hostname.
   networking.hostName = "dev";
@@ -47,7 +53,7 @@
 
     desktopManager = {
       xterm.enable = false;
-      wallpaper.mode = "scale";
+      wallpaper.mode = "fill";
     };
 
     displayManager = {
@@ -57,8 +63,8 @@
       # AARCH64: For now, on Apple Silicon, we must manually set the
       # display resolution. This is a known issue with VMware Fusion.
       sessionCommands = ''
-        ${pkgs.xlibs.xset}/bin/xset r rate 200 40
-      '' + (if currentSystem == "aarch64-linux" then ''
+        ${pkgs.xorg.xset}/bin/xset r rate 200 40
+      '' + (if currentSystemName == "vm-aarch64" then ''
         ${pkgs.xorg.xrandr}/bin/xrandr -s '2880x1800'
       '' else "");
     };
@@ -90,6 +96,12 @@
     rxvt_unicode
     xclip
 
+    # For hypervisors that support auto-resizing, this script forces it.
+    # I've noticed not everyone listens to the udev events so this is a hack.
+    (writeShellScriptBin "xrandr-auto" ''
+      xrandr --output Virtual-1 --auto
+    '')
+  ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
     # This is needed for the vmware user tools clipboard to work.
     # You can test if you don't need this by deleting this and seeing
     # if the clipboard sill works.
@@ -132,5 +144,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 }
