@@ -93,15 +93,15 @@ in
     displayManager = {
       defaultSession = "xfce+bspwm";
       lightdm.enable = true;
-      sessionCommands = ''
-        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
-        export SSH_AUTH_SOCK
-        xr-5120
-        ${pkgs.xorg.xset}/bin/xset r rate 200 40
-        pamixer --set-volume 100
-        pamixer --unmute
-        polybar main &
-      ''; # somehow homemanager doesn't automatically start polybar
+      # sessionCommands = ''
+      #   eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
+      #   export SSH_AUTH_SOCK
+      #   xr-5120
+      #   ${pkgs.xorg.xset}/bin/xset r rate 200 40
+      #   pamixer --set-volume 100
+      #   pamixer --unmute
+      #   polybar main &
+      # ''; # somehow homemanager doesn't automatically start polybar
     };
     # windowManager.i3.enable = true; 
     # dpi = 96;
@@ -109,8 +109,8 @@ in
     windowManager = {
       bspwm = {
         enable = true;
-        configFile = "/etc/bspwmrc";
-        sxhkd.configFile = "/etc/sxhkdrc";
+        configFile = "/nix-config/bspwm/bspwmrc";
+        sxhkd.configFile = "/nix-config/bspwm/sxhkdrc";
       };
     };
     libinput = {

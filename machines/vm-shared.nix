@@ -46,31 +46,52 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # setup windowing environment
+  services.xrdp.defaultWindowManager = "bspwm";
+
   services.xserver = {
+    autorun = true;
     enable = true;
-    layout = "us";
-    dpi = 220;
-
     desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "fill";
+      # xterm.enable = false;
+      xfce.enable = true;
+      # wallpaper.mode = "fill";
     };
-
     displayManager = {
-      defaultSession = "none+i3";
+      defaultSession = "xfce+bspwm";
       lightdm.enable = true;
 
-      # AARCH64: For now, on Apple Silicon, we must manually set the
-      # display resolution. This is a known issue with VMware Fusion.
-      sessionCommands = ''
-        ${pkgs.xorg.xset}/bin/xset r rate 200 40
-      '' + (if currentSystemName == "vm-aarch64" then ''
-        ${pkgs.xorg.xrandr}/bin/xrandr -s '2880x1800'
-      '' else "");
+      # autoLogin.enable = true;
+      # autoLogin.user = "cor";
+      # sessionCommands = ''
+      #   eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
+      #   export SSH_AUTH_SOCK
+      #   xr-5120
+      #   ${pkgs.xorg.xset}/bin/xset r rate 200 40
+      #   pamixer --set-volume 100
+      #   pamixer --unmute
+      #   polybar main &
+      # ''; # somehow homemanager doesn't automatically start polybar
     };
-
+    dpi = 192;
     windowManager = {
-      i3.enable = true;
+      bspwm = {
+        enable = true;
+        configFile = "/nix-config/bspwm/bspwmrc";
+        sxhkd.configFile = "/nix-config/bspwm/sxhkdrc";
+      };
+    };
+    libinput = {
+      enable = true;
+
+      # disabling mouse acceleration
+      mouse = {
+        accelProfile = "flat";
+      };
+
+      # enable touchpad acceleration
+      touchpad = {
+        accelProfile = "adaptive";
+      };
     };
   };
 

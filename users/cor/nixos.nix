@@ -3,6 +3,11 @@
 {
   # https://github.com/nix-community/home-manager/pull/2408
   # environment.pathsToLink = [ "/share/fish" ];
+  
+  environment.systemPackages = with pkgs; [
+    bspwm
+    sxhkd
+  ];
 
   users.users.cor = {
     isNormalUser = true;
