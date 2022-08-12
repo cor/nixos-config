@@ -8,9 +8,13 @@ let
 in
 
 {
+  # meta.buildDocsInSandbox = false;
 
   options = {
+    # meta.buildDocsInSandbox = false;
+
     hardware.parallels = {
+      meta.buildDocsInSandbox = false;
 
       enable = mkOption {
         type = types.bool;

@@ -11,7 +11,7 @@
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = [
-    pkgs.bat
+    # pkgs.bat
     pkgs.fd
     pkgs.firefox
     pkgs.fzf
@@ -21,8 +21,8 @@
     pkgs.rofi
     pkgs.tree
     pkgs.watch
-    pkgs.zathura
-    pkgs._1password
+    # pkgs.zathura
+    # pkgs._1password
   ];
 
   #---------------------------------------------------------------------
@@ -112,12 +112,12 @@
     shellAliases = {
       fzf-nix = "nix-env -qa | fzf";
     };
-    initExtra = ''
-    if [ -n "''${commands[fzf-share]}" ]; then
-      source "''$(fzf-share)/key-bindings.zsh"
-      source "''$(fzf-share)/completion.zsh"
-    fi
-    '';
+    # initExtra = ''
+    # if [ -n "''${commands[fzf-share]}" ]; then
+    #   source "''$(fzf-share)/key-bindings.zsh"
+    #   source "''$(fzf-share)/completion.zsh"
+    # fi
+    # '';
   };
 
   programs.gpg = {
@@ -131,7 +131,7 @@
     enable = true;
     terminal = "${pkgs.kitty}/bin/kitty";
     # theme = /etc/nixos/rofi/theme.rafi;
-    plugins = [ pkgs.rofi-emoji ];
+    # plugins = [ pkgs.rofi-emoji ];
   };
 
   programs.kitty = {

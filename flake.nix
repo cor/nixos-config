@@ -32,18 +32,18 @@
 
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
-      inputs.neovim-nightly-overlay.overlay
+    #   inputs.neovim-nightly-overlay.overlay
 
-      (final: prev: {
-        # Zig doesn't export an overlay so we do it here
-        zig-master = inputs.zig.packages.${prev.system}.master.latest;
+    #   (final: prev: {
+    #     # Zig doesn't export an overlay so we do it here
+    #     zig-master = inputs.zig.packages.${prev.system}.master.latest;
 
-        # Go we always want the latest version
-        go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_18;
+    #     # Go we always want the latest version
+    #     go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_18;
 
-        # To get Kitty 0.24.x. Delete this once it hits release.
-        kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
-      })
+    #     # To get Kitty 0.24.x. Delete this once it hits release.
+    #     kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
+    #   })
     ];
   in {
     nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" rec {
