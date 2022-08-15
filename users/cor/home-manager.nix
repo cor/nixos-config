@@ -137,6 +137,7 @@ in
 
 
   home.file.".background-image".source = ../../wallpapers/purple.png;
+  home.file."Screenshots/.keep" = ./.keep;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
