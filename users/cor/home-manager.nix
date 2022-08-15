@@ -68,10 +68,12 @@ in
     pinentry
     pinentry-curses
     pick-colour-picker
-    chromium
     vscode
     helix
     discord-chromium
+    tdesktop
+    lazygit
+    element-desktop
     slack-chromium
     clickup-chromium
     (writeShellScriptBin "feh-bg-fill" ''
@@ -201,6 +203,23 @@ in
       # init.defaultBranch = "main";
     };
   };
+
+  programs.chromium = {
+      enable = true;
+      package = pkgs.chromium;
+      extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+        "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
+        "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
+        "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
+        "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
+        "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
+        "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
+        "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
+        "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
+      ];
+    };
 
   programs.zsh = {
     enable = true;

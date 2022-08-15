@@ -66,7 +66,7 @@
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
         export SSH_AUTH_SOCK
         xr-mbp
-        ${pkgs.xorg.xset}/bin/xset r rate
+        ${pkgs.xorg.xset}/bin/xset r rate 400 70
         pamixer --set-volume 100
         pamixer --unmute
         polybar main &
