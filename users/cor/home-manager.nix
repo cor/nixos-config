@@ -70,6 +70,7 @@ in
     pick-colour-picker
     vscode
     helix
+    bottom
     discord-chromium
     tdesktop
     lazygit
@@ -138,6 +139,7 @@ in
 
   home.file.".background-image".source = ../../wallpapers/purple.png;
   home.file."Screenshots/.keep".source = ./.keep;
+  home.file.".config/helix/config.toml".source = ./helix.toml;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
