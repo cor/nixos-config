@@ -7,6 +7,7 @@
   # use unstable nix so we can access flakes
   nix = {
     package = pkgs.nixUnstable;
+    useSandbox = "relaxed";
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
