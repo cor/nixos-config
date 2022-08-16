@@ -248,12 +248,12 @@ in
       fzf-nix = "nix-env -qa | fzf";
       icat="kitty +kitten icat";
     };
-    # initExtra = ''
-    # if [ -n "''${commands[fzf-share]}" ]; then
-    #   source "''$(fzf-share)/key-bindings.zsh"
-    #   source "''$(fzf-share)/completion.zsh"
-    # fi
-    # '';
+    initExtra = ''
+    if [ -n "''${commands[fzf-share]}" ]; then
+      source "''$(fzf-share)/key-bindings.zsh"
+      source "''$(fzf-share)/completion.zsh"
+    fi
+    '';
   };
 
   programs.gpg = {
