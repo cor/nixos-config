@@ -53,6 +53,7 @@ in
     openssh
     feh
     zip
+    rnix-lsp
     curl
     pamixer
     wget
@@ -245,6 +246,7 @@ in
     };
     shellAliases = {
       fzf-nix = "nix-env -qa | fzf";
+      icat="kitty +kitten icat";
     };
     # initExtra = ''
     # if [ -n "''${commands[fzf-share]}" ]; then
