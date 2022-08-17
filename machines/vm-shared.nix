@@ -50,6 +50,11 @@
   services.xrdp.defaultWindowManager = "bspwm";
 
   services.xserver = {
+
+    layout = "us";
+    xkbVariant = "mac";
+    # xkbModel = "macbook79"; 
+
     autorun = true;
     enable = true;
     desktopManager = {
