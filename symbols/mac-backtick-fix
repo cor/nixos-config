@@ -1,0 +1,15 @@
+xkb_symbols "mac-backtick-fix"
+{
+    include "us(mac)"
+    
+    
+    // LSGT and TLDE are swapped when compared to the original version (see comment bellow)
+
+    key <TLDE> { [   section,  plusminus,       section,        plusminus ] };
+    key <LSGT> { [     grave, asciitilde,    dead_grave,        dead_horn ] };
+
+    // key <LSGT> { [   section,  plusminus,       section,        plusminus ] };
+    // key <TLDE> { [     grave, asciitilde,    dead_grave,        dead_horn ] };
+    // source: us(mac) section from here:
+    // less $(nix-build --no-out-link '<nixpkgs>' -A xorg.xkeyboardconfig)/etc/X11/xkb/symbols/us
+};

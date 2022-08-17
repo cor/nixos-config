@@ -50,10 +50,14 @@
   services.xrdp.defaultWindowManager = "bspwm";
 
   services.xserver = {
+    
+    extraLayouts.mac-backtick-fix = {
+      description = "US(mac) layout with swapped backtick (grave) and section (paragraph) keys in order to work with Apple ISO keyboards";
+      languages = [ "eng" ];
+      symbolsFile = ../symbols/mac-backtick-fix;
+    };
 
-    layout = "us";
-    xkbVariant = "mac";
-    # xkbModel = "macbook79"; 
+    layout = "mac-backtick-fix";
 
     autorun = true;
     enable = true;
