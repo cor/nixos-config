@@ -122,7 +122,7 @@ in
       xrandr -s 5760x3240_60.00
       polybar-msg cmd restart
       feh-bg-fill
-    '')    
+    '')
     (writeShellScriptBin "xr-6400" ''
       xrandr --newmode "6400x3600_60.00"  2003.00  6400 6968 7680 8960  3600 3603 3608 3726 -hsync +vsync
       xrandr --addmode Virtual-1 6400x3600_60.00
@@ -131,7 +131,7 @@ in
       feh-bg-fill
     '')
     (writeShellScriptBin "reload-config" ''
-       sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#vm-aarch64-prl\" \
+      sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#vm-aarch64-prl\" \
     '')
     # pkgs.zathura
     # pkgs._1password
@@ -210,21 +210,21 @@ in
   };
 
   programs.chromium = {
-      enable = true;
-      package = pkgs.chromium;
-      extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-        "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-        "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
-        "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
-        "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
-        "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
-        "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
-        "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
-        "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
-      ];
-    };
+    enable = true;
+    package = pkgs.chromium;
+    extensions = [
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+      "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
+      "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
+      "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
+      "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
+      "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
+      "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
+      "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
+      "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
+    ];
+  };
 
   programs.zsh = {
     enable = true;
@@ -247,13 +247,14 @@ in
     };
     shellAliases = {
       fzf-nix = "nix-env -qa | fzf";
-      icat="kitty +kitten icat";
+      icat = "kitty +kitten icat";
+      lg = "lazygit";
     };
     initExtra = ''
-    if [ -n "''${commands[fzf-share]}" ]; then
-      source "''$(fzf-share)/key-bindings.zsh"
-      source "''$(fzf-share)/completion.zsh"
-    fi
+      if [ -n "''${commands[fzf-share]}" ]; then
+        source "''$(fzf-share)/key-bindings.zsh"
+        source "''$(fzf-share)/completion.zsh"
+      fi
     '';
   };
 
