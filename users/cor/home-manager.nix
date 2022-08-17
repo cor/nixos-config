@@ -141,6 +141,7 @@ in
   home.file.".background-image".source = ../../wallpapers/purple.png;
   home.file."Screenshots/.keep".source = ./.keep;
   home.file.".config/helix/config.toml".source = ./helix.toml;
+  home.file.".config/helix/languages.toml".source = ./languages.toml;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles

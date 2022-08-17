@@ -32,8 +32,6 @@
     # dconf
   ];
 
-  # programs.dconf.enable = true;
-
   users.users.cor = {
     isNormalUser = true;
     home = "/home/cor";
