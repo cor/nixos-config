@@ -1,10 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ../modules/vmware-guest.nix
-    # ./vm-shared.nix
+    ./vm-shared.nix
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   # Disable the default module and import our override. We have
   # customizations to make this work on aarch64.
