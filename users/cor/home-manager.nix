@@ -250,6 +250,7 @@ in
       fzf-nix = "nix-env -qa | fzf";
       icat = "kitty +kitten icat";
       lg = "lazygit";
+      pbcopy = "xclip -selection c"; # macOS' pbcopy equivalent
     };
     initExtra = ''
       if [ -n "''${commands[fzf-share]}" ]; then
