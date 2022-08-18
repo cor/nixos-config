@@ -149,13 +149,54 @@
     # my big monitor it doesn't detect the resolution either so we just
     # manualy create the resolution and switch to it with this script.
     # This script could be better but its hopefully temporary so just force it.
-    (writeShellScriptBin "xrandr-6k" ''
-      xrandr --newmode "6016x3384_60.00"  1768.50  6016 6544 7216 8416  3384 3387 3392 3503 -hsync +vsync
-      xrandr --addmode Virtual-1 6016x3384_60.00
-      xrandr -s 6016x3384_60.00
+    (writeShellScriptBin "xr-mbp" ''
+      xrandr --newmode "3024x1890_60.00"  488.50  3024 3264 3592 4160  1890 1893 1899 1958 -hsync +vsync
+      xrandr --addmode Virtual-1 3024x1890_60.00
+      xrandr -s 3024x1890_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
     '')
-    (writeShellScriptBin "xrandr-mbp" ''
-      xrandr -s 2880x1800
+    (writeShellScriptBin "xr-mbp-1.5" ''
+      xrandr --newmode "4536x2835_60.00"  1111.25  4536 4928 5424 6312  2835 2838 2848 2935 -hsync +vsync
+      xrandr --addmode Virtual-1 4536x2835_60.00
+      xrandr -s 4536x2835_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-uw" ''
+      xrandr --newmode "6600x2880_60.00"  1644.25  6600 7168 7896 9192  2880 2883 2893 2982 -hsync +vsync
+      xrandr --addmode Virtual-1 6600x2880_60.00
+      xrandr -s 6600x2880_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-5120" ''
+      xrandr --newmode "5120x2880_60.00"  1275.49  5120 5560 6128 7136  2880 2881 2884 2979  -hsync +vsync
+      xrandr --addmode Virtual-1 5120x2880_60.00
+      xrandr -s 5120x2880_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-3840" ''
+      xrandr --newmode "3840x2160_60.00"  712.75  3840 4160 4576 5312  2160 2163 2168 2237 -hsync +vsync
+      xrandr --addmode Virtual-1 3840x2160_60.00
+      xrandr -s 3840x2160_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-5760" ''
+      xrandr --newmode "5760x3240_60.00"  1619.25  5760 6264 6904 8048  3240 3243 3248 3354 -hsync +vsync
+      xrandr --addmode Virtual-1 5760x3240_60.00
+      xrandr -s 5760x3240_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-6400" ''
+      xrandr --newmode "6400x3600_60.00"  2003.00  6400 6968 7680 8960  3600 3603 3608 3726 -hsync +vsync
+      xrandr --addmode Virtual-1 6400x3600_60.00
+      xrandr -s 6400x3600_60.00
+      polybar-msg cmd restart
+      feh-bg-fill
     '')
   ];
 
