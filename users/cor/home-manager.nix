@@ -46,6 +46,7 @@ in
     htop
     jq
     ripgrep
+    ranger
     rofi
     tree
     watch

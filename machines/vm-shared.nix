@@ -41,7 +41,12 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Virtualization settings
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
+  virtualisation.podman = {
+    enable = true;
+    dockerSocket.enable = true;
+    defaultNetwork.dnsname.enable = true;
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -126,6 +131,8 @@
     niv
     rxvt_unicode
     xclip
+    docker-client
+    arion
 
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
