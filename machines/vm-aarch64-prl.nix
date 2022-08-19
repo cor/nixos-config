@@ -8,6 +8,14 @@
     ./vm-shared.nix
   ];
 
+  services.xserver.extraLayouts.mac-backtick-fix = {
+    description = "US(mac) layout with swapped backtick (grave) and section (paragraph) keys in order to work with Apple ISO keyboards";
+    languages = [ "eng" ];
+    symbolsFile = ../symbols/mac-backtick-fix;
+  };
+
+  services.xserver.layout = "mac-backtick-fix";
+
   # The official parallels guest support does not work currently.
   # https://github.com/NixOS/nixpkgs/pull/153665
   disabledModules = [ "virtualisation/parallels-guest.nix" ];

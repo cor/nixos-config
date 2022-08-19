@@ -55,14 +55,6 @@
   services.xrdp.defaultWindowManager = "bspwm";
 
   services.xserver = {
-    
-    extraLayouts.mac-backtick-fix = {
-      description = "US(mac) layout with swapped backtick (grave) and section (paragraph) keys in order to work with Apple ISO keyboards";
-      languages = [ "eng" ];
-      symbolsFile = ../symbols/mac-backtick-fix;
-    };
-
-    layout = "mac-backtick-fix";
 
     autorun = true;
     enable = true;
@@ -139,13 +131,8 @@
     (writeShellScriptBin "xrandr-auto" ''
       xrandr --output Virtual-1 --auto
     '')
-  ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
-    # This is needed for the vmware user tools clipboard to work.
-    # You can test if you don't need this by deleting this and seeing
-    # if the clipboard sill works.
-    gtkmm3
-
-    # VMware on M1 doesn't support automatic resizing yet and on
+ 
+    # Some VMs do not support automatic resizing yet and on
     # my big monitor it doesn't detect the resolution either so we just
     # manualy create the resolution and switch to it with this script.
     # This script could be better but its hopefully temporary so just force it.
@@ -198,6 +185,12 @@
       polybar-msg cmd restart
       feh-bg-fill
     '')
+    ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
+    # This is needed for the vmware user tools clipboard to work.
+    # You can test if you don't need this by deleting this and seeing
+    # if the clipboard sill works.
+    gtkmm3
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
