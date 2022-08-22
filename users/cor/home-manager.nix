@@ -39,7 +39,6 @@ in
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = with pkgs; [
-    # pkgs.bat
     fd
     firefox
     fzf
@@ -47,7 +46,6 @@ in
     jq
     ripgrep
     ranger
-    rofi
     tree
     watch
     kitty
@@ -244,8 +242,8 @@ in
   programs.rofi = {
     enable = true;
     terminal = "${pkgs.kitty}/bin/kitty";
-    # theme = /etc/nixos/rofi/theme.rafi;
-    # plugins = [ pkgs.rofi-emoji ];
+    theme = ./rofi;
+    plugins = [ pkgs.rofi-emoji ];
   };
 
   programs.kitty = {
