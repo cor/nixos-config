@@ -137,7 +137,7 @@ in
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
-    shell = "zsh";
+    shell = "${pkgs.zsh}/bin/zsh";
     secureSocket = false;
     clock24 = true;
     escapeTime = 0;
