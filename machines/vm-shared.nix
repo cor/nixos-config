@@ -185,6 +185,20 @@
       polybar-msg cmd restart
       feh-bg-fill
     '')
+    (writeShellScriptBin "xr-square" ''
+      xrandr --newmode "2880x2880_60.00"  718.25  2880 3128 3448 4016  2880 2883 2893 2982 -hsync +vsync      
+      xrandr --addmode Virtual-1 2880x2880_60.00 
+      xrandr -s 2880x2880_60.00 
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
+    (writeShellScriptBin "xr-4-3" ''
+      xrandr --newmode "3840x2880_60.00"  955.75  3840 4168 4592 5344  2880 2883 2887 2982 -hsync +vsync      
+      xrandr --addmode Virtual-1 3840x2880_60.00 
+      xrandr -s 3840x2880_60.00 
+      polybar-msg cmd restart
+      feh-bg-fill
+    '')
     ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
     # This is needed for the vmware user tools clipboard to work.
     # You can test if you don't need this by deleting this and seeing
