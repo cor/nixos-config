@@ -39,6 +39,9 @@ in
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = with pkgs; [
+    bat # cat replacement
+    exa # ls replacement
+    gping # ping with graph
     fd
     firefox
     fzf
@@ -210,6 +213,7 @@ in
       icat = "kitty +kitten icat";
       lg = "lazygit";
       pbcopy = "xclip -selection c"; # macOS' pbcopy equivalent
+      ls = "exa";
     };
     initExtra = ''
       if [ -n "''${commands[fzf-share]}" ]; then
