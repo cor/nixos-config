@@ -1,3 +1,14 @@
+theme = "monokai_pro_octagon"
+
+[editor]
+line-number = "relative"
+completion-trigger-len = 0
+scroll-lines = 1
+scrolloff = 5
+
+# [editor.whitespace]
+# render = "all"
+
 [editor.file-picker]
 hidden = false
 
