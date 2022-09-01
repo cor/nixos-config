@@ -41,12 +41,12 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Virtualization settings
-  virtualisation.docker.enable = false;
-  virtualisation.podman = {
-    enable = true;
-    dockerSocket.enable = true;
-    defaultNetwork.dnsname.enable = true;
-  };
+  virtualisation.docker.enable = true;
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerSocket.enable = true;
+  #   defaultNetwork.dnsname.enable = true;
+  # };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
