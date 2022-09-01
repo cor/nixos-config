@@ -21,10 +21,6 @@
       # We want home-manager to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Other packages
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    zig.url = "github:arqv/zig-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
