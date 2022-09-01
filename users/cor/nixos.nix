@@ -41,7 +41,7 @@
   users.users.cor = {
     isNormalUser = true;
     home = "/home/cor";
-    extraGroups = [ "docker" "wheel" "podman"];
+    extraGroups = [ "docker" "wheel"];
     shell = pkgs.zsh;
     hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";
     openssh.authorizedKeys.keys = [

@@ -57,6 +57,7 @@ in
     zip
     rnix-lsp
     curl
+    delta
     pamixer
     wget
     git
@@ -68,6 +69,7 @@ in
     xclip
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
+    nixfmt
     pinentry
     pinentry-curses
     pick-colour-picker
