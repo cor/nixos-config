@@ -124,8 +124,8 @@ in
   #   # initExtra = builtins.readFile ./bashrc;
   # };
 
-  programs.direnv = {
-    enable = true;
+  # programs.direnv = {
+  #   enable = true;
 
     # config = {
     #   whitelist = {
@@ -137,7 +137,7 @@ in
     #     exact = ["$HOME/.envrc"];
     #   };
     # };
-  };
+  # };
 
   programs.tmux = {
     enable = true;
