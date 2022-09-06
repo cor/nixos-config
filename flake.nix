@@ -21,6 +21,11 @@
       # We want home-manager to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+        
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };    
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -84,19 +89,19 @@
       };
 
       nixosConfigurations.vm-aarch64-prl = mkVM "vm-aarch64-prl" rec {
-        inherit overlays nixpkgs home-manager;
+        inherit inputs overlays nixpkgs home-manager;
         system = "aarch64-linux";
         user = "cor";
       };
 
       nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" rec {
-        inherit overlays nixpkgs home-manager;
+        inherit inputs overlays nixpkgs home-manager;
         system = "aarch64-linux";
         user = "cor";
       };
 
       nixosConfigurations.vm-intel = mkVM "vm-intel" rec {
-        inherit nixpkgs home-manager overlays;
+        inherit inputs nixpkgs home-manager overlays;
         system = "x86_64-linux";
         user = "cor";
       };

@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: { nixpkgs, home-manager, system, user, overlays }:
+name: {inputs, nixpkgs, home-manager, system, user, overlays }:
 
 nixpkgs.lib.nixosSystem rec {
   inherit system;
@@ -17,7 +17,7 @@ nixpkgs.lib.nixosSystem rec {
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = import ../users/${user}/home-manager.nix;
+      home-manager.users.${user} = (import ../users/${user}/home-manager.nix inputs);
     }
 
     # We expose some extra arguments so that our modules can parameterize

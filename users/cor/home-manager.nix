@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+inputs: {config, lib, pkgs, ... }:
 let
   discord-chromium = pkgs.makeDesktopItem rec {
     name = "Discord";
@@ -74,7 +74,6 @@ in
     pinentry-curses
     pick-colour-picker
     vscode
-    helix
     bottom
     discord-chromium
     tdesktop
@@ -90,8 +89,8 @@ in
 
   home.file.".background-image".source = ../../wallpapers/nix-space.jpg;
   home.file."Screenshots/.keep".source = ./.keep;
-  home.file.".config/helix/config.toml".source = ./helix.toml;
-  home.file.".config/helix/languages.toml".source = ./languages.toml;
+  # home.file.".config/helix/config.toml".source = ./helix.toml;
+  # home.file.".config/helix/languages.toml".source = ./languages.toml;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
@@ -172,6 +171,41 @@ in
       # push.default = "tracking";
       # init.defaultBranch = "main";
     };
+  };
+  
+  programs.helix = {
+      enable = true;
+      package = inputs.helix.packages.${pkgs.system}.default;       
+      
+      settings = {
+        theme = "catppuccin_macchiato";
+        editor = {
+          line-number = "relative";
+          completion-trigger-len = 0;
+          scroll-lines = 1;
+          scrolloff = 5;
+          cursorline = true;
+          color-modes = true;
+          indent-guides.render = true;
+          file-picker.hidden = false;
+          auto-pairs = false;
+          lsp.display-messages = true;
+        };
+      };
+      
+      languages = [
+        {
+          name = "rust";
+          config = {
+            checkOnSave.command = "clippy";
+            cargo.allFeatures = true;
+            procMacro.enable = true;
+              
+          };
+          
+        }
+          
+      ];
   };
 
   programs.chromium = {
