@@ -190,6 +190,7 @@ in
           file-picker.hidden = false;
           auto-pairs = false;
           lsp.display-messages = true;
+          bufferline = "always";
         };
       };
       
