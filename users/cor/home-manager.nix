@@ -223,6 +223,7 @@ in
       "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
       "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
       "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
+      "mopnmbcafieddcagagdcbnhejhlodfdd" # Polkadot js
     ];
   };
 
