@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + {_,shift +}Return
-    {kitty, bspc rule -a \* -o state=floating && kitty}
+    {alacritty, bspc rule -a \* -o state=floating && alacritty}
 
 # program launcher
 super + space

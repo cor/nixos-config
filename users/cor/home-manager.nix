@@ -173,6 +173,18 @@ in
     };
   };
   
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      scrolling = {
+        history = 100000;
+        multiplier = 1;
+        faux_multiplier = 1;
+        auto_scroll = false;
+      };
+    };
+  };
+  
   programs.helix = {
       enable = true;
       package = inputs.helix.packages.${pkgs.system}.default;       
@@ -270,7 +282,7 @@ in
 
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.kitty}/bin/kitty";
+    terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = ./rofi;
     plugins = [ pkgs.rofi-emoji ];
   };
