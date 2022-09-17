@@ -83,8 +83,8 @@
     windowManager = {
       bspwm = {
         enable = true;
-        configFile = "/nix-config/bspwm/bspwmrc";
-        sxhkd.configFile = "/nix-config/bspwm/sxhkdrc";
+        configFile = ../bspwm/bspwmrc;
+        sxhkd.configFile = ../bspwm/sxhkdrc;
       };
     };
     libinput = {
@@ -212,6 +212,15 @@
       xrandr -s 4296x2880_60.00
       polybar-msg cmd restart
       feh-bg-fill
+    '')
+    (writeShellScriptBin "docker-stop-all" ''
+      docker stop $(docker ps -q)
+      docker system prune -f
+    '')
+    (writeShellScriptBin "docker-prune-all" ''
+      docker-stop-all
+      docker rmi -f $(docker images -a -q)    
+      docker volume prune -f
     '')
     ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
     # This is needed for the vmware user tools clipboard to work.
