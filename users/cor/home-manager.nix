@@ -282,14 +282,23 @@ in
 
   programs.rofi = {
     enable = true;
-    terminal = "${pkgs.alacritty}/bin/alacritty";
+    terminal = "${pkgs.kitty}/bin/kitty";
     theme = ./rofi;
     plugins = [ pkgs.rofi-emoji ];
   };
 
   programs.kitty = {
     enable = true;
-    extraConfig = builtins.readFile ./kitty.conf;
+    # extraConfig = builtins.readFile ./kitty.conf;
+    settings = {
+      scrollback_lines = 1000000;
+      enable_audio_bell = false;
+      update_check_interval = 0;
+      wheel_scroll_multiplier = 1;
+      wheel_scroll_min_lines = 1;
+      touch_scroll_multiplier = 1;
+    };
+    theme = "One Half";
   };
 
 
