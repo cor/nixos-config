@@ -20,22 +20,17 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
-    # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
 
   environment.systemPackages = with pkgs; [
-    bspwm
-    sxhkd
+    # bspwm
+    # sxhkd
     helix
-    # wpgtk
-    # dconf
   ];
  
   environment.variables = {
     EDITOR = "hx";
     VISUAL = "hx";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
   
   users.users.cor = {

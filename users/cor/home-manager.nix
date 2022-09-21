@@ -1,4 +1,4 @@
-inputs: {config, lib, pkgs, ... }:
+inputs: { config, lib, pkgs, ... }:
 let
   discord-chromium = pkgs.makeDesktopItem rec {
     name = "Discord";
@@ -126,16 +126,16 @@ in
   # programs.direnv = {
   #   enable = true;
 
-    # config = {
-    #   whitelist = {
-    #     prefix= [
-    #       "$HOME/code/go/src/github.com/hashicorp"
-    #       "$HOME/code/go/src/github.com/mitchellh"
-    #     ];
+  # config = {
+  #   whitelist = {
+  #     prefix= [
+  #       "$HOME/code/go/src/github.com/hashicorp"
+  #       "$HOME/code/go/src/github.com/mitchellh"
+  #     ];
 
-    #     exact = ["$HOME/.envrc"];
-    #   };
-    # };
+  #     exact = ["$HOME/.envrc"];
+  #   };
+  # };
   # };
 
   programs.tmux = {
@@ -151,7 +151,7 @@ in
     extraConfig = ''
       set -g mouse on
     '';
-  };   
+  };
 
   programs.git = {
     enable = true;
@@ -172,7 +172,34 @@ in
       # init.defaultBranch = "main";
     };
   };
-  
+
+
+  wayland = {
+    windowManager.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+
+      config = {
+        terminal = "kitty";
+        menu = "wofi --show run";
+        bars = [{
+          fonts.size = 14.0;
+          position = "top";
+        }];
+        output = {
+          Virtual-1 = {
+            background = "${../../wallpapers/nix-space.jpg} fill";
+            resolution = "--custom 5120x2880";
+            scale = "2";
+          };
+        };
+
+      };
+
+    };
+
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -184,41 +211,41 @@ in
       };
     };
   };
-  
+
   programs.helix = {
-      enable = true;
-      package = inputs.helix.packages.${pkgs.system}.default;       
-      
-      settings = {
-        theme = "catppuccin_macchiato";
-        editor = {
-          line-number = "relative";
-          completion-trigger-len = 0;
-          scroll-lines = 1;
-          scrolloff = 5;
-          cursorline = true;
-          color-modes = true;
-          indent-guides.render = true;
-          file-picker.hidden = false;
-          auto-pairs = false;
-          lsp.display-messages = true;
-          bufferline = "always";
-        };
+    enable = true;
+    package = inputs.helix.packages.${pkgs.system}.default;
+
+    settings = {
+      theme = "catppuccin_macchiato";
+      editor = {
+        line-number = "relative";
+        completion-trigger-len = 0;
+        scroll-lines = 1;
+        scrolloff = 5;
+        cursorline = true;
+        color-modes = true;
+        indent-guides.render = true;
+        file-picker.hidden = false;
+        auto-pairs = false;
+        lsp.display-messages = true;
+        bufferline = "always";
       };
-      
-      languages = [
-        {
-          name = "rust";
-          config = {
-            checkOnSave.command = "clippy";
-            cargo.allFeatures = true;
-            procMacro.enable = true;
-              
-          };
-          
-        }
-          
-      ];
+    };
+
+    languages = [
+      {
+        name = "rust";
+        config = {
+          checkOnSave.command = "clippy";
+          cargo.allFeatures = true;
+          procMacro.enable = true;
+
+        };
+
+      }
+
+    ];
   };
 
   programs.chromium = {
