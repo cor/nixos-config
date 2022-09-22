@@ -174,32 +174,6 @@ in
   };
 
 
-  wayland = {
-    windowManager.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-
-      config = {
-        terminal = "kitty";
-        menu = "wofi --show run";
-        bars = [{
-          fonts.size = 14.0;
-          position = "top";
-        }];
-        output = {
-          Virtual-1 = {
-            background = "${../../wallpapers/nix-space.jpg} fill";
-            resolution = "--custom 5120x2880";
-            scale = "2";
-          };
-        };
-
-      };
-
-    };
-
-  };
-
   programs.alacritty = {
     enable = true;
     settings = {

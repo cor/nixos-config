@@ -1,48 +1,4 @@
 { config, pkgs, lib, currentSystem, currentSystemName, ... }:
-
-let
-
-  # bash script to let dbus know about important env variables and
-  # propogate them to relevent services run at the end of sway config
-  # see
-  # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
-  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts  
-  # some user services to make sure they have the correct environment variables
-  dbus-sway-environment = pkgs.writeTextFile {
-    name = "dbus-sway-environment";
-    destination = "/bin/dbus-sway-environment";
-    executable = true;
-
-    text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-    '';
-  };
-
-  # currently, there is some friction between sway and gtk:
-  # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
-  # the suggested way to set gtk settings is with gsettings
-  # for gsettings to work, we need to tell it where the schemas are
-  # using the XDG_DATA_DIR environment variable
-  # run at the end of sway config
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-    text =
-      let
-        schema = pkgs.gsettings-desktop-schemas;
-        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-      in
-      ''
-        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-        gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Dracula'
-      '';
-  };
-
-in
 {
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -60,10 +16,6 @@ in
 
   # We expect to run the VM on hidpi machines.
   hardware.video.hidpi.enable = true;
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -101,82 +53,52 @@ in
   # setup windowing environment
   services.xrdp.defaultWindowManager = "bspwm";
 
-  # services.xserver = {
-
-  #   autorun = true;
-  #   enable = true;
-  #   desktopManager = {
-  #     # xterm.enable = false;
-  #     xfce.enable = true;
-  #     # wallpaper.mode = "fill";
-  #   };
-  #   displayManager = {
-  #     defaultSession = "xfce+bspwm";
-  #     lightdm.enable = true;
-
-  #     # autoLogin.enable = true;
-  #     # autoLogin.user = "cor";
-  #     sessionCommands = ''
-  #       eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
-  #       export SSH_AUTH_SOCK
-  #       xr-mbp
-  #       ${pkgs.xorg.xset}/bin/xset r rate 400 70
-  #       pamixer --set-volume 100
-  #       pamixer --unmute
-  #       polybar main &
-  #     ''; # somehow homemanager doesn't automatically start polybar
-  #   };
-  #   dpi = 192;
-  #   windowManager = {
-  #     bspwm = {
-  #       enable = true;
-  #       configFile = ../bspwm/bspwmrc;
-  #       sxhkd.configFile = ../bspwm/sxhkdrc;
-  #     };
-  #   };
-  #   libinput = {
-  #     enable = true;
-
-  #     # disabling mouse acceleration
-  #     mouse = {
-  #       accelProfile = "flat";
-  #     };
-
-  #     # enable touchpad acceleration
-  #     touchpad = {
-  #       accelProfile = "adaptive";
-  #     };
-  #   };
-  # };
-
-  services.pipewire = {
+  services.xserver = {
+    autorun = true;
     enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
+    desktopManager = {
+      # xterm.enable = false;
+      xfce.enable = true;
+      # wallpaper.mode = "fill";
+    };
+    displayManager = {
+      defaultSession = "xfce+bspwm";
+      lightdm.enable = true;
+
+      # autoLogin.enable = true;
+      # autoLogin.user = "cor";
+      sessionCommands = ''
+        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
+        export SSH_AUTH_SOCK
+        xr-mbp
+        ${pkgs.xorg.xset}/bin/xset r rate 400 70
+        pamixer --set-volume 100
+        pamixer --unmute
+        polybar main &
+      ''; # somehow homemanager doesn't automatically start polybar
+    };
+    dpi = 192;
+    windowManager = {
+      bspwm = {
+        enable = true;
+        configFile = ../bspwm/bspwmrc;
+        sxhkd.configFile = ../bspwm/sxhkdrc;
+      };
+    };
+    libinput = {
+      enable = true;
+
+      # disabling mouse acceleration
+      mouse = {
+        accelProfile = "flat";
+      };
+
+      # enable touchpad acceleration
+      touchpad = {
+        accelProfile = "adaptive";
+      };
+    };
   };
-
-  # xdg-desktop-portal works by exposing a series of D-Bus interfaces
-  # known as portals under a well-known name
-  # (org.freedesktop.portal.Desktop) and object path
-  # (/org/freedesktop/portal/desktop).
-  # The portal interfaces include APIs for file access, opening URIs,
-  # printing and others.
-  services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    gtkUsePortal = true;
-  };
-
-
-  # programs.sway = {
-  #   enable = true;
-  #   wrapperFeatures.gtk = true;
-  # };
-
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -200,21 +122,6 @@ in
     rxvt_unicode
     xclip
     docker-client
-
-    alacritty # gpu accelerated terminal
-    sway
-    dbus-sway-environment
-    configure-gtk
-    wayland
-    glib # gsettings
-    dracula-theme # gtk theme
-    gnome3.adwaita-icon-theme  # default gnome cursors
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    bemenu # wayland clone of dmenu
-    mako # notification system developed by swaywm maintainer
-    
         
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.

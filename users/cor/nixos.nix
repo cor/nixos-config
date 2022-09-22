@@ -1,20 +1,13 @@
 { pkgs, ... }:
 
 {
-  # https://github.com/nix-community/home-manager/pull/2408
-  # environment.pathsToLink = [ "/share/fish" ];
-  
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-    # liberation_ttf
     ibm-plex
     fira-code
     fira-code-symbols
-    # mplus-outline-fonts
-    # dina-font
-    # proggyfonts
   ];
 
   services.gnome.gnome-keyring.enable = true;
@@ -22,15 +15,13 @@
 
 
   environment.systemPackages = with pkgs; [
-    # bspwm
-    # sxhkd
-    helix
+    bspwm
+    sxhkd
   ];
  
   environment.variables = {
     EDITOR = "hx";
     VISUAL = "hx";
-    WLR_NO_HARDWARE_CURSORS = "1";
   };
   
   users.users.cor = {

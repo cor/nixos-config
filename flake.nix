@@ -21,11 +21,11 @@
       # We want home-manager to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-        
+
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };    
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
