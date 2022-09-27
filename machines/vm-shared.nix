@@ -1,21 +1,4 @@
 { config, pkgs, lib, currentSystem, currentSystemName, ... }:
-let
-  mkXr = { name ? "", w, h, r }:
-    let
-      modeName = "${toString w}x${toString h}_${toString r}.00";
-      scriptName = if lib.stringLength name == 0 then modeName else name;
-    in
-    pkgs.writeShellScriptBin "xr-${scriptName}" ''
-      # xrandr doesn't parse the output correctly when you use $()      
-      # therefore we use eval instead
-      MODELINE=$(cvt ${toString w} ${toString h} ${toString r} | tail -n 1 | cut -d " " -f2-) 
-      eval "xrandr --newmode $MODELINE" 
-      xrandr --addmode Virtual-1 ${modeName}
-      xrandr -s ${modeName}
-      polybar-msg cmd restart
-      feh-bg-fill
-    '';
-in
 {
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -31,7 +14,6 @@ in
     '';
   };
 
-  # We expect to run the VM on hidpi machines.
   hardware.video.hidpi.enable = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -68,40 +50,43 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   # setup windowing environment
-  services.xrdp.defaultWindowManager = "bspwm";
+  services.xrdp.defaultWindowManager = "awesome";
 
   services.xserver = {
+    resolutions = [ { x = 5120; y = 2880; } ];
+    dpi = 192;
     autorun = true;
     enable = true;
     desktopManager = {
-      # xterm.enable = false;
       xfce.enable = true;
-      # wallpaper.mode = "fill";
     };
     displayManager = {
-      defaultSession = "xfce+bspwm";
-      lightdm.enable = true;
+      xserverArgs = ["-dpi 192"];
+      defaultSession = "none+awesome";
+      lightdm = {
+        enable = true;
+      };
 
-      # autoLogin.enable = true;
-      # autoLogin.user = "cor";
       sessionCommands = ''
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
         export SSH_AUTH_SOCK
-        xr-mbp
-        ${pkgs.xorg.xset}/bin/xset r rate 400 70
+        xr-5k
+        ${pkgs.xorg.xset}/bin/xset r rate 250 30
         pamixer --set-volume 100
         pamixer --unmute
-        polybar main &
-      ''; # somehow homemanager doesn't automatically start polybar
+      '';
     };
-    dpi = 192;
+
     windowManager = {
-      bspwm = {
+      awesome = {
         enable = true;
-        configFile = ../bspwm/bspwmrc;
-        sxhkd.configFile = ../bspwm/sxhkdrc;
+        luaModules = with pkgs.luaPackages; [
+          luarocks # is the package manager for Lua modules
+          luadbi-mysql # Database abstraction layer
+        ];
       };
     };
+
     libinput = {
       enable = true;
 
@@ -140,23 +125,6 @@ in
     xclip
     docker-client
 
-    # For hypervisors that support auto-resizing, this script forces it.
-    # I've noticed not everyone listens to the udev events so this is a hack.
-    (writeShellScriptBin "xr-auto" ''
-      xrandr --output Virtual-1 --auto
-      polybar-msg cmd restart
-      feh-bg-fill
-    '')
-    (mkXr { name = "mbp"; w = 3024; h = 1890; r = 60; })
-    (mkXr { name = "mbp-1.5"; w = 4536; h = 2835; r = 60; })
-    (mkXr { name = "4k"; w = 3840; h = 2160; r = 60; })
-    (mkXr { name = "5k"; w = 5120; h = 2880; r = 60; })
-    (mkXr { name = "5.5k"; w = 5760; h = 3240; r = 60; })
-    (mkXr { name = "6k"; w = 6400; h = 3600; r = 60; })
-    (mkXr { name = "square"; w = 2880; h = 2880; r = 60; })
-    (mkXr { name = "vertical-studio-display"; w = 2880; h = 5120; r = 60; })
-    (mkXr { name = "things-sidebar"; w = 4296; h = 2880; r = 60; })
-    (mkXr { name = "4-3"; w = 3840; h = 2880; r = 60; })
     (writeShellScriptBin "docker-stop-all" ''
       docker stop $(docker ps -q)
       docker system prune -f
@@ -173,6 +141,14 @@ in
     gtkmm3
 
   ];
+  
+  environment.variables = {
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";  
+    EDITOR = "hx";
+    VISUAL = "hx";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -303,7 +303,12 @@ in
     };
     theme = "One Half";
   };
-
+  
+  xsession.windowManager.awesome = {
+    enable = true;
+  };
+  
+  home.file.".config/awesome/rc.lua".source = ./rc.lua;
 
   services.gpg-agent = {
     enable = true;
@@ -326,15 +331,8 @@ in
       polybar main &
     '';
   };
-
-
-  xresources.extraConfig = builtins.readFile ./Xresources;
-
-  # Make cursor not tiny on HiDPI screens
-  home.pointerCursor = {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
-    size = 128;
-    x11.enable = true;
+  
+  xresources.properties = {
+    "Xft.dpi" = 192;
   };
 }
