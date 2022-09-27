@@ -308,7 +308,8 @@ in
     enable = true;
   };
   
-  home.file.".config/awesome/rc.lua".source = ./rc.lua;
+  home.file.".config/awesome".source = ../../awesome;
+  home.file.".config/ranger/rc.conf".source = ./ranger.conf;
 
   services.gpg-agent = {
     enable = true;
