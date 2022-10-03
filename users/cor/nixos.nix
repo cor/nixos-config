@@ -29,6 +29,8 @@ in
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   environment.systemPackages = with pkgs; [
     bspwm
