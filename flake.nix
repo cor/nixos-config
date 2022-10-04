@@ -50,7 +50,7 @@
     in
     {
       nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" rec {
-        inherit nixpkgs home-manager;
+        inherit nixpkgs home-manager inputs;
         # nixpkgs = inputs.nixpkgs-old-kernel;
         system = "aarch64-linux";
         user = "cor";
