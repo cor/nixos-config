@@ -33,13 +33,10 @@ in
   hardware.pulseaudio.enable = true;
 
   environment.systemPackages = with pkgs; [
-    bspwm
-    sxhkd
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
     (writeShellScriptBin "xr-auto" ''
       xrandr --output Virtual-1 --auto
-      polybar-msg cmd restart
       feh-bg-fill
     '')
     (mkXr { name = "mbp"; w = 3024; h = 1890; r = 60; })

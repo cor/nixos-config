@@ -320,19 +320,6 @@ in
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
-
-  services.polybar = {
-    enable = true;
-    package = pkgs.polybar.override {
-      mpdSupport = true;
-      pulseSupport = true;
-    };
-    config = ./polybar.ini;
-    script = ''
-      polybar main &
-    '';
-  };
-  
   xresources.properties = {
     "Xft.dpi" = 192;
   };
