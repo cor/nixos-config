@@ -84,7 +84,17 @@ in
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
     '')
-  ];
+  ] ++ 
+  (let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; }; in
+    [
+    # NOTE: This is an hack in order to override the sha256. Remove when nixpkgs is updated.
+    (pkgs-unstable._1password-gui.override (_: {
+      fetchurl =  _: pkgs.fetchurl {
+        url = "https://downloads.1password.com/linux/tar/stable/aarch64/1password-8.9.4.arm64.tar.gz";
+        sha256 = "sha256-SJDUfAFEwYnOR+y/6Dg2S/CkA84QogoRpMXOPP5PyrM=";
+      };
+    }))
+  ]);
 
 
   home.file.".background-image".source = ../../wallpapers/nix-space.jpg;
