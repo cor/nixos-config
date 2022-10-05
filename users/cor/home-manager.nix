@@ -45,6 +45,8 @@ in
     gping # ping with graph
     fd
     firefox
+    thunderbird
+    obsidian
     fzf
     htop
     jq
