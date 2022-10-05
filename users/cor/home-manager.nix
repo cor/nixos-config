@@ -27,6 +27,7 @@ let
     type = "Application";
     terminal = false;
   };
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
 in
 {
   xdg.enable = true;
@@ -85,7 +86,6 @@ in
       feh --bg-fill /home/cor/.background-image
     '')
   ] ++ 
-  (let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; }; in
     [
     # NOTE: This is an hack in order to override the sha256. Remove when nixpkgs is updated.
     (pkgs-unstable._1password-gui.override (_: {
@@ -94,7 +94,8 @@ in
         sha256 = "sha256-SJDUfAFEwYnOR+y/6Dg2S/CkA84QogoRpMXOPP5PyrM=";
       };
     }))
-  ]);
+    pkgs-unstable.flameshot
+  ];
 
 
   home.file.".background-image".source = ../../wallpapers/nix-space.jpg;
@@ -321,4 +322,20 @@ in
   xresources.properties = {
     "Xft.dpi" = 192;
   };
+  
+  
+  services.flameshot = {
+    enable = true;
+    package = pkgs-unstable.flameshot;
+    settings = {
+      General = {
+        savePath="/home/cor/Screenshots";
+        showStartupLaunchMessage = false;
+        filenamePattern = "%F-%H%M%S";
+        startupLaunch = true;
+        saveAfterCopy = true;
+      };
+    };
+  };
+  
 }
