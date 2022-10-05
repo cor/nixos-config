@@ -112,31 +112,19 @@ in
   xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
   # xdg.configFile."devtty/config".text = builtins.readFile ./devtty;
 
-  #---------------------------------------------------------------------
-  # Programs
-  #---------------------------------------------------------------------
-
-  # programs.bash = {
-  #   enable = true;
-  #   shellOptions = [];
-  #   historyControl = [ "ignoredups" "ignorespace" ];
-  #   # initExtra = builtins.readFile ./bashrc;
-  # };
-
-  # programs.direnv = {
-  #   enable = true;
-
-  # config = {
-  #   whitelist = {
-  #     prefix= [
-  #       "$HOME/code/go/src/github.com/hashicorp"
-  #       "$HOME/code/go/src/github.com/mitchellh"
-  #     ];
-
-  #     exact = ["$HOME/.envrc"];
-  #   };
-  # };
-  # };
+  gtk = {
+    enable = true;
+    
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+    
+    iconTheme = {
+      package = pkgs.paper-icon-theme;
+      name = "Paper";
+    };
+  };
 
   programs.tmux = {
     enable = true;

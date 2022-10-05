@@ -35,6 +35,7 @@ in
   environment.systemPackages = with pkgs; [
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
+    arc-theme
     (writeShellScriptBin "xr-auto" ''
       xrandr --output Virtual-1 --auto
       feh-bg-fill
