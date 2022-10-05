@@ -12,6 +12,8 @@
     # the TP fixes the bug.
     nixpkgs-old-kernel.url = "github:nixos/nixpkgs/bacbfd713b4781a4a82c1f390f8fe21ae3b8b95b";
 
+    flake-utils = { url = "github:numtide/flake-utils"; };
+
     # We use the unstable nixpkgs repo for some packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -28,7 +30,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let
       mkVM = import ./lib/mkvm.nix;
 
@@ -105,5 +107,14 @@
         system = "x86_64-linux";
         user = "cor";
       };
-    };
+    } // (flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; }; in
+      {
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server cmake-language-server];
+          };
+        };
+      }
+    ));
 }

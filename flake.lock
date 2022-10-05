@@ -92,6 +92,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1656928814,
         "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
         "owner": "numtide",
@@ -177,16 +192,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1664326381,
-        "narHash": "sha256-w9fbgU1Rz7tDCPe0FT3SExG4JbylR89AdaofHFkL2GA=",
+        "lastModified": 1664883812,
+        "narHash": "sha256-wqBAcVRBxls2nVaNeQaOy9SRg/bvEUiD26TQDprIg8U=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cd0b791eaac32aa7bf8e1958e180c1b2317f9d76",
+        "rev": "fe76645aaf2fac3baaa2813fd0089930689c53b5",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixpkgs-unstable",
+        "ref": "release-22.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -225,6 +240,7 @@
     },
     "root": {
       "inputs": {
+        "flake-utils": "flake-utils",
         "helix": "helix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
@@ -234,7 +250,7 @@
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "helix",
           "nixpkgs"
