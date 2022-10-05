@@ -1,4 +1,4 @@
-{ pkgs, lib,  ... }:
+{ pkgs, lib, ... }:
 let
   mkXr = { name ? "", w, h, r }:
     let
@@ -41,6 +41,7 @@ in
     '')
     (mkXr { name = "mbp"; w = 3024; h = 1890; r = 60; })
     (mkXr { name = "mbp-1.5"; w = 4536; h = 2835; r = 60; })
+    (mkXr { name = "mbp-16"; w = 3456; h = 2160; r = 60; })
     (mkXr { name = "4k"; w = 3840; h = 2160; r = 60; })
     (mkXr { name = "5k"; w = 5120; h = 2880; r = 60; })
     (mkXr { name = "5.5k"; w = 5760; h = 3240; r = 60; })
@@ -50,11 +51,11 @@ in
     (mkXr { name = "things-sidebar"; w = 4296; h = 2880; r = 60; })
     (mkXr { name = "4-3"; w = 3840; h = 2880; r = 60; })
   ];
-   
+
   users.users.cor = {
     isNormalUser = true;
     home = "/home/cor";
-    extraGroups = [ "docker" "wheel"];
+    extraGroups = [ "docker" "wheel" ];
     shell = pkgs.zsh;
     hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";
     openssh.authorizedKeys.keys = [
