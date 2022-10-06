@@ -52,6 +52,9 @@ in
     (mkXr { name = "things-sidebar"; w = 4296; h = 2880; r = 60; })
     (mkXr { name = "4-3"; w = 3840; h = 2880; r = 60; })
   ];
+  
+  # required for zsh autocomplete
+  environment.pathsToLink = [ "/share/zsh" ];
 
   users.users.cor = {
     isNormalUser = true;

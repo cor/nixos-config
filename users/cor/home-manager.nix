@@ -272,7 +272,8 @@ in
         source "''$(fzf-share)/key-bindings.zsh"
         source "''$(fzf-share)/completion.zsh"
       fi
-    '';
+      compinit
+    ''; # compinit is required for zsh autocomplete
   };
 
   programs.gpg = {
