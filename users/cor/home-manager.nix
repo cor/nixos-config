@@ -87,6 +87,12 @@ in
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
     '')
+    (writeShellScriptBin "xset-r-fast" ''
+      xset r rate 150 40
+    '')
+    (writeShellScriptBin "xset-r-slow" ''
+      xset r rate 250 30
+    '')
   ] ++ 
     [
     # NOTE: This is an hack in order to override the sha256. Remove when nixpkgs is updated.
