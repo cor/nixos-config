@@ -18,6 +18,15 @@ let
     type = "Application";
     terminal = false;
   };
+  whatsapp-chromium = pkgs.makeDesktopItem rec {
+    name = "WhatsApp";
+    desktopName = "WhatsApp";
+    genericName = "Chat app built by Meta";
+    exec = "${pkgs.chromium}/bin/chromium --app=\"https://web.whatsapp.com\"";
+    icon = "whatsapp";
+    type = "Application";
+    terminal = false;
+  };
   clickup-chromium = pkgs.makeDesktopItem rec {
     name = "ClickUp";
     desktopName = "ClickUp";
@@ -83,6 +92,7 @@ in
     lazygit
     element-desktop
     slack-chromium
+    whatsapp-chromium
     clickup-chromium
     (writeShellScriptBin "feh-bg-fill" ''
       feh --bg-fill /home/cor/.background-image
