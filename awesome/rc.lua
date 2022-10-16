@@ -90,10 +90,34 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+resolutionmenu = {
+  { "MacBook Pro 14\"", "xr-mbp" },
+  { "MacBook Pro 14\" × 1.5", "xr-mbp-1.5" },
+  { "MacBook Pro 16\"", "xr-mbp-16" },
+  { "4K", "xr-4k"},
+  { "5K", "xr-5k"},
+  { "5.5K", "xr-5.5k"},
+  { "6K", "xr-6k"},
+  { "5K Square", "xr-square"},
+  { "5K Vertical", "xr-vertical-studio-display"},
+  { "5K Sidebar", "xr-things-sidebar"},
+  { "5K 4:3", "xr-things-sidebar"},
+}
+
+repeatratemenu = {
+    { "slow", "xset-r-slow" },
+    { "fast", "xset-r-fast" },
+}
+
+
+mymainmenu = awful.menu({ 
+  items = { 
+    { "awesome", myawesomemenu, beautiful.awesome_icon },
+    { "resolution", resolutionmenu},
+    { "repeat rate", repeatratemenu},
+    { "open terminal", terminal }
+  }
+})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
