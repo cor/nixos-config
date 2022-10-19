@@ -248,6 +248,7 @@ in
       "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
       "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
       "mopnmbcafieddcagagdcbnhejhlodfdd" # Polkadot js
+      "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password
     ];
   };
 

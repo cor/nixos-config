@@ -213,13 +213,54 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+    -- it is possible to display the client class instead of the client name, dfr
+    -- https://old.reddit.com/r/awesomewm/comments/om1mzo/print_just_class_name_in_tasklist_widget/
+    -- https://tronche.com/gui/x/icccm/sec-4.html#WM_CLASS
+    s.mytasklist = awful.widget.tasklist
+        {
+        screen   = s,
+        filter   = awful.widget.tasklist.filter.currenttags,
+        buttons  = tasklist_buttons,
+        style    = {
+            shape_border_width = 1,
+            shape_border_color = '#777777',
+            shape = gears.shape.rounded_rect,
+            shape_radius = 8
+        },
+        layout   = {
+            spacing = 12,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+        -- not a widget instance.
+        widget_template = {
+            {
+                {
+                    {
+                        {
+                            id     = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 12,
+                        widget  = wibox.container.margin,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                        width = 400
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left  = 12,
+                right = 12,
+                widget = wibox.container.margin
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+        },
+    }   
 
-    -- Create the wibox
+     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
@@ -231,7 +272,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        wibox.container.margin(s.mytasklist, 64, 64, 6, 6), -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.container.margin(wibox.widget.systray(), 12, 12, 6, 6),
@@ -382,19 +423,7 @@ clientkeys = gears.table.join(
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ modkey, "Control" }, "m",
-        function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize", group = "client"})
 )
 
 -- Bind all key numbers to tags.
