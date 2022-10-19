@@ -222,10 +222,10 @@ awful.screen.connect_for_each_screen(function(s)
         filter   = awful.widget.tasklist.filter.currenttags,
         buttons  = tasklist_buttons,
         style    = {
-            shape_border_width = 1,
+            shape_border_width = 2,
             shape_border_color = '#777777',
             shape = gears.shape.rounded_rect,
-            shape_radius = 8
+            shape_radius = 12
         },
         layout   = {
             spacing = 12,
@@ -241,17 +241,22 @@ awful.screen.connect_for_each_screen(function(s)
                             id     = 'icon_role',
                             widget = wibox.widget.imagebox,
                         },
-                        margins = 12,
+                        margins = 8,
                         widget  = wibox.container.margin,
                     },
                     {
-                        id     = 'text_role',
-                        widget = wibox.widget.textbox,
-                        width = 400
+                        {
+                            id     = 'text_role',
+                            widget = wibox.widget.textbox,
+                            margins = 4
+                        },
+                        width = 240,
+                        strategy = "exact",
+                        widget = wibox.container.constraint
                     },
                     layout = wibox.layout.fixed.horizontal,
                 },
-                left  = 12,
+                left  = 0,
                 right = 12,
                 widget = wibox.container.margin
             },
