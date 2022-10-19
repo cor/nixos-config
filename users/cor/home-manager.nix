@@ -105,14 +105,9 @@ in
     '')
   ] ++ 
     [
-    # NOTE: This is an hack in order to override the sha256. Remove when nixpkgs is updated.
-    (pkgs-unstable._1password-gui.override (_: {
-      fetchurl =  _: pkgs.fetchurl {
-        url = "https://downloads.1password.com/linux/tar/stable/aarch64/1password-8.9.4.arm64.tar.gz";
-        sha256 = "sha256-SJDUfAFEwYnOR+y/6Dg2S/CkA84QogoRpMXOPP5PyrM=";
-      };
-    }))
     pkgs-unstable.flameshot
+    pkgs-unstable._1password-gui
+    pkgs-unstable.obsidian
   ];
 
 
