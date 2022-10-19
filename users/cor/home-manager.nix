@@ -55,7 +55,6 @@ in
     fd
     firefox
     thunderbird
-    obsidian
     fzf
     htop
     jq
