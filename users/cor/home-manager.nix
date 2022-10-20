@@ -53,7 +53,6 @@ in
     exa # ls replacement
     gping # ping with graph
     fd
-    firefox
     thunderbird
     fzf
     htop
