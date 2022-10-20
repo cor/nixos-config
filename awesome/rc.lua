@@ -213,9 +213,10 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    -- it is possible to display the client class instead of the client name, dfr
+    -- it is possible to display the client class instead of the client name, cfr:
     -- https://old.reddit.com/r/awesomewm/comments/om1mzo/print_just_class_name_in_tasklist_widget/
     -- https://tronche.com/gui/x/icccm/sec-4.html#WM_CLASS
+    s.currenttask = currenttask
     s.mytasklist = awful.widget.tasklist
         {
         screen   = s,
@@ -278,8 +279,16 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         wibox.container.margin(s.mytasklist, 64, 64, 6, 6), -- Middle widget
+
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            -- This line gets my most recent daily markdown note,
+            -- searches for occurences of - [ ] (open todos)
+            -- filters out the first one in the document
+            -- and shows it without the - [ ]
+            wibox.container.margin(awful.widget.watch([[
+                bash -c "cat `ls -d /home/cor/omega/Journal/*.* | tac | head -n 1` | grep --color=never -e '- \\[ \\]' | head -n 1 | cut -c 7-"
+            ]], 10), 12, 12, 6, 6),
             wibox.container.margin(wibox.widget.systray(), 12, 12, 6, 6),
             wibox.container.margin(mytextclock, 12, 24, 6, 6),
             wibox.container.margin(s.mylayoutbox, 6, 6, 6, 6),
