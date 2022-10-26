@@ -92,6 +92,7 @@ myawesomemenu = {
 
 resolutionmenu = {
   { "MacBook Pro 14\"", "xr-mbp" },
+  { "MacBook Pro 14\" 120hz", "xr-mbp-120hz" },
   { "MacBook Pro 14\" × 1.5", "xr-mbp-1.5" },
   { "MacBook Pro 16\"", "xr-mbp-16" },
   { "4K", "xr-4k"},

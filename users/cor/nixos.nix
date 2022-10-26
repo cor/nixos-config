@@ -41,6 +41,7 @@ in
       feh-bg-fill
     '')
     (mkXr { name = "mbp"; w = 3024; h = 1890; r = 60; })
+    (mkXr { name = "mbp-120hz"; w = 3024; h = 1890; r = 120; })
     (mkXr { name = "mbp-1.5"; w = 4536; h = 2835; r = 60; })
     (mkXr { name = "mbp-16"; w = 3456; h = 2160; r = 60; })
     (mkXr { name = "4k"; w = 3840; h = 2160; r = 60; })
