@@ -63,7 +63,6 @@ in
     watch
     kitty
     openssh
-    feh
     zip
     rnix-lsp
     curl
@@ -92,9 +91,6 @@ in
     slack-chromium
     whatsapp-chromium
     clickup-chromium
-    (writeShellScriptBin "feh-bg-fill" ''
-      feh --bg-fill /home/cor/.background-image
-    '')
     (writeShellScriptBin "xset-r-fast" ''
       xset r rate 150 40
     '')
@@ -108,11 +104,7 @@ in
     pkgs-unstable.obsidian
   ];
 
-
-  home.file.".background-image".source = ../../wallpapers/nix-space.jpg;
   home.file."Screenshots/.keep".source = ./.keep;
-  # home.file.".config/helix/config.toml".source = ./helix.toml;
-  # home.file.".config/helix/languages.toml".source = ./languages.toml;
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
@@ -203,7 +195,6 @@ in
     settings = {
       theme = "catppuccin_macchiato";
       editor = {
-        line-number = "relative";
         completion-trigger-len = 0;
         scroll-lines = 1;
         scrolloff = 5;

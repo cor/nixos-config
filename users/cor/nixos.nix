@@ -13,7 +13,6 @@ let
       xrandr --addmode Virtual-1 ${modeName}
       xrandr -s ${modeName}
       xrandr --dpi 192 
-      feh-bg-fill
     '';
 in
 {
@@ -38,7 +37,6 @@ in
     arc-theme
     (writeShellScriptBin "xr-auto" ''
       xrandr --output Virtual-1 --auto
-      feh-bg-fill
     '')
     (mkXr { name = "mbp"; w = 3024; h = 1890; r = 60; })
     (mkXr { name = "mbp-120hz"; w = 3024; h = 1890; r = 120; })
