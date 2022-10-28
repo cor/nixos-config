@@ -41,13 +41,6 @@ in
 {
   xdg.enable = true;
 
-  #---------------------------------------------------------------------
-  # Packages
-  #---------------------------------------------------------------------
-
-  # Packages I always want installed. Most packages I install using
-  # per-project flakes sourced with direnv and nix-shell, so this is
-  # not a huge list.
   home.packages = with pkgs; [
     bat # cat replacement
     exa # ls replacement
@@ -105,26 +98,8 @@ in
   ];
 
   home.file."Screenshots/.keep".source = ./.keep;
-
-  #---------------------------------------------------------------------
-  # Env vars and dotfiles
-  #---------------------------------------------------------------------
-
-  # home.sessionVariables = {
-  #   LANG = "en_US.UTF-8";
-  #   LC_CTYPE = "en_US.UTF-8";
-  #   LC_ALL = "en_US.UTF-8";
-  #   EDITOR = "nvim";
-  #   PAGER = "less -FirSwX";
-  #   MANPAGER = "sh -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
-  # };
-
-  # home.file.".gdbinit".source = ./gdbinit;
-  # home.file.".inputrc".source = ./inputrc;
-
-  # xdg.configFile."i3/config".text = builtins.readFile ./i3;
-  xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
-  # xdg.configFile."devtty/config".text = builtins.readFile ./devtty;
+  home.file.".config/awesome".source = ./awesome;
+  home.file.".config/ranger/rc.conf".source = ./ranger.conf;
 
   gtk = {
     enable = true;
@@ -165,16 +140,10 @@ in
       key = "06A6337C2BDD1365883C0668DB347466107E589F";
     };
     extraConfig = {
-      # branch.autosetuprebase = "always";
       color.ui = true;
-      # core.askPass = ""; # needs to be empty to use terminal for ask pass
-      # credential.helper = "store"; # want to make this more secure
       github.user = "cor";
-      # push.default = "tracking";
-      # init.defaultBranch = "main";
     };
   };
-
 
   programs.alacritty = {
     enable = true;
@@ -215,11 +184,8 @@ in
           checkOnSave.command = "clippy";
           cargo.allFeatures = true;
           procMacro.enable = true;
-
         };
-
       }
-
     ];
   };
 
@@ -284,13 +250,6 @@ in
     };
   };
 
-  programs.rofi = {
-    enable = true;
-    terminal = "${pkgs.kitty}/bin/kitty";
-    theme = ./rofi;
-    plugins = [ pkgs.rofi-emoji ];
-  };
-
   programs.kitty = {
     enable = true;
     settings = {
@@ -307,13 +266,8 @@ in
     theme = "One Half";
   };
   
-  xsession.windowManager.awesome = {
-    enable = true;
-  };
+  xsession.windowManager.awesome.enable = true;
   
-  home.file.".config/awesome".source = ../../awesome;
-  home.file.".config/ranger/rc.conf".source = ./ranger.conf;
-
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "gnome3";
@@ -326,7 +280,6 @@ in
   xresources.properties = {
     "Xft.dpi" = 192;
   };
-  
   
   services.flameshot = {
     enable = true;

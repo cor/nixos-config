@@ -2,10 +2,9 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    # Pin our primary nixpkgs repository. This is the main nixpkgs repository
-    # we'll use for our configurations. Be very careful changing this because
-    # it'll impact your entire system.
     nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
+    # We use the unstable nixpkgs repo for some packages.
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Locks nixpkgs to an older version with an older Kernel that boots
     # on VMware Fusion Tech Preview. This can be swapped to nixpkgs when
@@ -14,13 +13,8 @@
 
     flake-utils = { url = "github:numtide/flake-utils"; };
 
-    # We use the unstable nixpkgs repo for some packages.
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
-
-      # We want home-manager to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -31,83 +25,61 @@
   };
 
   outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
-    let
-      mkVM = import ./lib/mkvm.nix;
-
-      # Overlays is the list of overlays we want to apply from flake inputs.
-      overlays = [
-        #   inputs.neovim-nightly-overlay.overlay
-
-        #   (final: prev: {
-        #     # Zig doesn't export an overlay so we do it here
-        #     zig-master = inputs.zig.packages.${prev.system}.master.latest;
-
-        #     # Go we always want the latest version
-        #     go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_18;
-
-        #     # To get Kitty 0.24.x. Delete this once it hits release.
-        #     kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
-        #   })
-      ];
+    let 
+      mkVM = import ./lib/mkvm.nix; 
+      user = "cor";
+      overlays = [];
     in
     {
-      nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" rec {
-        inherit nixpkgs home-manager inputs;
-        # nixpkgs = inputs.nixpkgs-old-kernel;
-        system = "aarch64-linux";
-        user = "cor";
+      nixosConfigurations = {
+        vm-aarch64 = mkVM "vm-aarch64" {
+          inherit user inputs nixpkgs home-manager;
+          system = "aarch64-linux";
 
-        overlays = [
-          (final: prev: {
-            # TODO: drop after release following NixOS 22.05
-            open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
+          overlays = [
+            (final: prev: {
+              # TODO: drop after release following NixOS 22.05
+              open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
 
-            # We need Mesa on aarch64 to be built with "svga". The default Mesa
-            # build does not include this: https://github.com/Mesa3D/mesa/blob/49efa73ba11c4cacaed0052b984e1fb884cf7600/meson.build#L192
-            mesa = prev.callPackage "${inputs.nixpkgs-unstable}/pkgs/development/libraries/mesa" {
-              llvmPackages = final.llvmPackages_latest;
-              inherit (final.darwin.apple_sdk.frameworks) OpenGL;
-              inherit (final.darwin.apple_sdk.libs) Xplugin;
+              # We need Mesa on aarch64 to be built with "svga". The default Mesa
+              # build does not include this: https://github.com/Mesa3D/mesa/blob/49efa73ba11c4cacaed0052b984e1fb884cf7600/meson.build#L192
+              mesa = prev.callPackage "${inputs.nixpkgs-unstable}/pkgs/development/libraries/mesa" {
+                llvmPackages = final.llvmPackages_latest;
+                inherit (final.darwin.apple_sdk.frameworks) OpenGL;
+                inherit (final.darwin.apple_sdk.libs) Xplugin;
 
-              galliumDrivers = [
-                # From meson.build
-                "v3d"
-                "vc4"
-                "freedreno"
-                "etnaviv"
-                "nouveau"
-                "tegra"
-                "virgl"
-                "lima"
-                "panfrost"
-                "swrast"
+                galliumDrivers = [
+                  # From meson.build
+                  "v3d"
+                  "vc4"
+                  "freedreno"
+                  "etnaviv"
+                  "nouveau"
+                  "tegra"
+                  "virgl"
+                  "lima"
+                  "panfrost"
+                  "swrast"
 
-                # We add this so we get the vmwgfx module
-                "svga"
-              ];
-            };
-          })
-        ];
+                  # We add this so we get the vmwgfx module
+                  "svga"
+                ];
+              };
+            })
+          ];
+        };
+
+        vm-aarch64-prl = mkVM "vm-aarch64-prl" {
+          inherit user inputs overlays nixpkgs home-manager;
+          system = "aarch64-linux";
+        };
+
+        vm-intel = mkVM "vm-intel" {
+          inherit user inputs nixpkgs home-manager overlays;
+          system = "x86_64-linux";
+        };
       };
-
-      nixosConfigurations.vm-aarch64-prl = mkVM "vm-aarch64-prl" rec {
-        inherit inputs overlays nixpkgs home-manager;
-        system = "aarch64-linux";
-        user = "cor";
-      };
-
-      nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" rec {
-        inherit inputs overlays nixpkgs home-manager;
-        system = "aarch64-linux";
-        user = "cor";
-      };
-
-      nixosConfigurations.vm-intel = mkVM "vm-intel" rec {
-        inherit inputs nixpkgs home-manager overlays;
-        system = "x86_64-linux";
-        user = "cor";
-      };
-    } // (flake-utils.lib.eachDefaultSystem (system:
+    } // (flake-utils.lib.eachSystem (with flake-utils.lib; [system.x86_64-linux system.aarch64-linux ]) (system:
       let pkgs = import nixpkgs { inherit system; }; in
       {
         devShells = {
