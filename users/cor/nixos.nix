@@ -44,6 +44,7 @@ in
     (mkXr { name = "mbp-16"; w = 3456; h = 2160; r = 60; })
     (mkXr { name = "4k"; w = 3840; h = 2160; r = 60; })
     (mkXr { name = "5k"; w = 5120; h = 2880; r = 60; })
+    (mkXr { name = "5k-30hz"; w = 5120; h = 2880; r = 30; })
     (mkXr { name = "5.5k"; w = 5760; h = 3240; r = 60; })
     (mkXr { name = "6k"; w = 6400; h = 3600; r = 60; })
     (mkXr { name = "square"; w = 2880; h = 2880; r = 60; })

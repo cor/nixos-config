@@ -97,6 +97,7 @@ resolutionmenu = {
   { "MacBook Pro 16\"", "xr-mbp-16" },
   { "4K", "xr-4k"},
   { "5K", "xr-5k"},
+  { "5K 30hz", "xr-5k-30hz"},
   { "5.5K", "xr-5.5k"},
   { "6K", "xr-6k"},
   { "5K Square", "xr-square"},
