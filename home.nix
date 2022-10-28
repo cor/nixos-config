@@ -97,9 +97,15 @@ in
     pkgs-unstable.obsidian
   ];
 
-  home.file."Screenshots/.keep".source = ./.keep;
+  # Ensure that the `Screenshots/` directory exists
+  home.file."Screenshots/.keep".text = "";
   home.file.".config/awesome".source = ./awesome;
-  home.file.".config/ranger/rc.conf".source = ./ranger.conf;
+
+  # Configure ranger to user kitty's image preview
+  home.file.".config/ranger/rc.conf".text = ''
+    set preview_images true
+    set preview_images_method kitty
+  '';
 
   gtk = {
     enable = true;
