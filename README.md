@@ -24,6 +24,7 @@ Create a VMware Fusion or Parallels VM with the following settings. My configura
 are made for VMware Fusion exclusively currently and you will have issues
 on other virtualization solutions without minor changes.
 
+  * Boot Type: UEFI
   * ISO: NixOS 22.05 or later.
   * Disk: SATA 150 GB+
   * CPU/Memory: I give at least half my cores and half my RAM, as much as you can.
