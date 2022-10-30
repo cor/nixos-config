@@ -625,8 +625,9 @@ client.connect_signal("request::titlebars", function(c)
     --     layout = wibox.layout.align.horizontal
     -- }
 
+    -- ROUDNED WINDOWS
     c.shape = function(cr,w,h)
-        gears.shape.rounded_rect(cr,w,h,16)
+        gears.shape.rounded_rect(cr,w,h,18)
     end
 end)
 

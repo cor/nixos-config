@@ -274,6 +274,29 @@ in
   
   xsession.windowManager.awesome.enable = true;
   
+  services.picom = {
+    # package = pkgs-unstable.picom-jonaburg;
+    enable = true;
+    # shadow = true;
+    # shadowOffsets = [ -30 -30 ];
+    # shadowOpacity = 0.05;
+    
+    extraOptions = ''
+      shadow = true;
+      corner-radius = 18
+      shadow-radius = 30;
+      shadow-offset-x = -30;
+      shadow-offset-y = -30;
+      # shadow-opacity = 0.5;
+
+      # Exclude conditions for rounded corners.
+      rounded-corners-exclude = [
+        "window_type = 'dock'",
+        "window_type = 'desktop'"
+      ];
+    '';
+  };
+  
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "gnome3";

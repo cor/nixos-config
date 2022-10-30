@@ -27,9 +27,9 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(6)
-theme.border_width  = dpi(2)
-theme.border_normal = bg_color
+theme.useless_gap   = dpi(8)
+theme.border_width  = dpi(1)
+theme.border_normal = "#262626" -- 15% white, same as macOS
 theme.border_focus  = focus_color
 theme.border_marked = "#91231c"
 
