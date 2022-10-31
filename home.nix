@@ -168,7 +168,7 @@ in
     package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
-      theme = "catppuccin_macchiato";
+      theme = "gruvbox_dark_hard";
       editor = {
         completion-trigger-len = 0;
         scroll-lines = 1;
@@ -269,7 +269,7 @@ in
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
     };
-    theme = "One Half";
+    theme = "Gruvbox Dark Hard";
   };
   
   xsession.windowManager.awesome.enable = true;
