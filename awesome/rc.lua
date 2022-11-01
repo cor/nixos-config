@@ -70,7 +70,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
+    awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
@@ -225,10 +225,10 @@ awful.screen.connect_for_each_screen(function(s)
         filter   = awful.widget.tasklist.filter.currenttags,
         buttons  = tasklist_buttons,
         style    = {
-            shape_border_width = 2,
-            shape_border_color = '#777777',
+            shape_border_width = 1,
+            shape_border_color = beautiful.border_normal,
             shape = gears.shape.rounded_rect,
-            shape_radius = 12
+            shape_radius = 9
         },
         layout   = {
             spacing = 12,
@@ -261,7 +261,7 @@ awful.screen.connect_for_each_screen(function(s)
     }   
 
      -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "44" })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "80" })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

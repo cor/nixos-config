@@ -29,8 +29,8 @@ theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(8)
 theme.border_width  = dpi(1)
-theme.border_normal = "#262626" -- 15% white, same as macOS
-theme.border_focus  = focus_color
+theme.border_normal = "#333333" -- same as macOS
+theme.border_focus  = "#555555"
 theme.border_marked = "#91231c"
 
 theme.systray_icon_spacing = dpi(4)

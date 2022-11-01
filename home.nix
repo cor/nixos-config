@@ -281,10 +281,10 @@ in
       shadow = true;
       corner-radius = 18
 
-      shadow-radius = 30
-      shadow-offset-x = -30
-      shadow-offset-y = -30
-      shadow-opacity = 0.5;
+      shadow-radius = 50
+      shadow-offset-x = 1
+      shadow-offset-y = 9
+      shadow-opacity = 0.2
       
       # blur is disabled because it makes my VM very slow :(
 
