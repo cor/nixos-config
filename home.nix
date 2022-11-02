@@ -1,8 +1,8 @@
 inputs: { config, lib, pkgs, ... }:
 let
-  dark-ungoogled-chromium = pkgs.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
-  mkChromiumApp = import ./lib/mk-chromium-app.nix { inherit pkgs; chromium = dark-ungoogled-chromium; };
   pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
+  dark-ungoogled-chromium = pkgs-unstable.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
+  mkChromiumApp = import ./lib/mk-chromium-app.nix { inherit pkgs; chromium = dark-ungoogled-chromium; };
 in
 {
   xdg.enable = true;
@@ -182,20 +182,47 @@ in
   programs.chromium = {
     enable = true;
     package = dark-ungoogled-chromium;
-    extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-      "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
-      "bkdgflcldnnnapblkhphbgpggdiikppg" # DuckDuckGo
-      "ennpfpdlaclocpomkiablnmbppdnlhoh" # Rust Search Extension
-      "mjdepdfccjgcndkmemponafgioodelna" # DF Tube (Distraction Free for YouTube)
-      "dneaehbmnbhcippjikoajpoabadpodje" # Old reddit redirect
-      "ililagkodjpoopfjphagpamfhfbamppa" # Less distracting reddit
-      "blaaajhemilngeeffpbfkdjjoefldkok" # LeechBlock
-      "mopnmbcafieddcagagdcbnhejhlodfdd" # Polkadot js
-      "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password
-    ];
+
+    extensions =
+        let
+          createChromiumExtensionFor = browserVersion: { id, sha256, version }:
+            {
+              inherit id;
+              crxPath = builtins.fetchurl {
+                url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${browserVersion}&x=id%3D${id}%26installsource%3Dondemand%26uc";
+                name = "${id}.crx";
+                inherit sha256;
+              };
+              inherit version;
+            };
+          createChromiumExtension = createChromiumExtensionFor (lib.versions.major dark-ungoogled-chromium.version);
+        in
+        [
+          (createChromiumExtension {
+            # ublock origin
+            id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
+            sha256 = "sha256:0pv1bn42b4i2nnlpw88v8sdpj8y87zh16zic0p4pwh18chh10z5n";
+            version = "1.44.4";
+          })
+          (createChromiumExtension {
+            # vimium
+            id = "dbepggeogbaibhgnhhndojpepiihcmeb";
+            sha256 = "sha256:0sj5najixk40r1hjf9kzq2jns6klfsmipwdj8jl5z76chx9pi3hs";
+            version = "1.67.2";
+          })
+          (createChromiumExtension {
+            # 1password
+            id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
+            sha256 = "sha256:0ccvpi88s3c1psb5ipkz4cch89ib6h3g9nw8qbxzwvnzh72qg8rl";
+            version = "2.4.1";
+          })
+          (createChromiumExtension {
+            # Empty new tab
+            id = "dpjamkmjmigaoobjbekmfgabipmfilij";
+            sha256 = "sha256:1fv65lfrh1jh9rz3wq26ri4hzkv9n4j563v1arzwys1f8g015fks";
+            version = "1.2.0";
+          })
+        ];
   };
 
   programs.zsh = {
