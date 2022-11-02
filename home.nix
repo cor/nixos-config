@@ -276,6 +276,8 @@ in
       wheel_scroll_multiplier = 1;
       wheel_scroll_min_lines = 1;
       touch_scroll_multiplier = 1;
+      confirm_os_window_close = 0;
+      shell_integration = "enabled";
     };
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
