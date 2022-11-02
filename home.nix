@@ -1,41 +1,7 @@
 inputs: { config, lib, pkgs, ... }:
 let
-  discord-chromium = pkgs.makeDesktopItem rec {
-    name = "Discord";
-    desktopName = "Discord";
-    genericName = "All-in-one cross-platform voice and text chat for gamers";
-    exec = "${pkgs.chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
-    icon = "discord";
-    type = "Application";
-    terminal = false;
-  };
-  slack-chromium = pkgs.makeDesktopItem rec {
-    name = "Slack";
-    desktopName = "Slack";
-    genericName = "One platform for your team and your work";
-    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.slack.com/client/T021F0XJ8BE/C02MSA16DCP\"";
-    icon = "slack";
-    type = "Application";
-    terminal = false;
-  };
-  whatsapp-chromium = pkgs.makeDesktopItem rec {
-    name = "WhatsApp";
-    desktopName = "WhatsApp";
-    genericName = "Chat app built by Meta";
-    exec = "${pkgs.chromium}/bin/chromium --app=\"https://web.whatsapp.com\"";
-    icon = "whatsapp";
-    type = "Application";
-    terminal = false;
-  };
-  clickup-chromium = pkgs.makeDesktopItem rec {
-    name = "ClickUp";
-    desktopName = "ClickUp";
-    genericName = "One app to replace them all";
-    exec = "${pkgs.chromium}/bin/chromium --app=\"https://app.clickup.com/\"";
-    icon = "clickup";
-    type = "Application";
-    terminal = false;
-  };
+  dark-ungoogled-chromium = pkgs.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
+  mkChromiumApp = import ./lib/mk-chromium-app.nix { inherit pkgs; chromium = dark-ungoogled-chromium; };
   pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
 in
 {
@@ -77,24 +43,42 @@ in
     pick-colour-picker
     vscode
     bottom
-    discord-chromium
     tdesktop
     lazygit
     element-desktop
-    slack-chromium
-    whatsapp-chromium
-    clickup-chromium
     (writeShellScriptBin "xset-r-fast" ''
       xset r rate 150 40
     '')
     (writeShellScriptBin "xset-r-slow" ''
       xset r rate 250 30
     '')
-  ] ++ 
-    [
+  ] ++
+  [
     pkgs-unstable.flameshot
     pkgs-unstable._1password-gui
     pkgs-unstable.obsidian
+  ] ++
+  map mkChromiumApp [
+    {
+      name = "Discord";
+      genericName = "All-in-one cross-platform voice and text chat for gamers";
+      url = "https://discord.com/channels/@me";
+    }
+    {
+      name = "Slack";
+      genericName = "One platform for your team and your work";
+      url = "https://app.slack.com/client/T021F0XJ8BE/C02MSA16DCP";
+    }
+    {
+      name = "WhatsApp";
+      genericName = "Chat app built by Meta";
+      url = "https://web.whatsapp.com";
+    }
+    {
+      name = "ClickUp";
+      genericName = "One app to replace them all";
+      url = "https://app.clickup.com/";
+    }
   ];
 
   # Ensure that the `Screenshots/` directory exists
@@ -109,12 +93,12 @@ in
 
   gtk = {
     enable = true;
-    
+
     theme = {
       package = pkgs.arc-theme;
       name = "Arc-Dark";
     };
-    
+
     iconTheme = {
       package = pkgs.paper-icon-theme;
       name = "Paper";
@@ -152,7 +136,7 @@ in
   };
 
   programs.alacritty = {
-    enable = true;
+    # enable = true;
     settings = {
       scrolling = {
         history = 100000;
@@ -197,7 +181,7 @@ in
 
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium;
+    package = dark-ungoogled-chromium;
     extensions = [
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
@@ -271,12 +255,12 @@ in
     };
     theme = "Gruvbox Dark Hard";
   };
-  
+
   xsession.windowManager.awesome.enable = true;
-  
+
   services.picom = {
     enable = true;
-    
+
     extraOptions = ''
       shadow = true;
       corner-radius = 18
@@ -301,7 +285,7 @@ in
       ];
     '';
   };
-  
+
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "gnome3";
@@ -314,13 +298,13 @@ in
   xresources.properties = {
     "Xft.dpi" = 192;
   };
-  
+
   services.flameshot = {
     enable = true;
     package = pkgs-unstable.flameshot;
     settings = {
       General = {
-        savePath="/home/cor/Screenshots";
+        savePath = "/home/cor/Screenshots";
         showStartupLaunchMessage = false;
         disabledTrayIcon = true;
         filenamePattern = "%F-%H%M%S";
@@ -329,5 +313,5 @@ in
       };
     };
   };
-  
+
 }
