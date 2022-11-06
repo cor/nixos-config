@@ -88,7 +88,14 @@
       darwinConfigurations = {
         default = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ ./darwin-configuration.nix ];
+          modules = [ 
+            ./darwin-configuration.nix 
+            home-manager.darwinModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.cor = import ./home-darwin.nix;
+            }
+          ];
           inputs = { inherit darwin nixpkgs; };
         };
       };
