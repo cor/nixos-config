@@ -9,6 +9,7 @@
       touch_scroll_multiplier = 1;
       confirm_os_window_close = 0;
       shell_integration = "enabled";
+      font_size = 14;
     };
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
