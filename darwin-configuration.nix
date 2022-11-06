@@ -12,8 +12,6 @@
   environment.systemPackages =
     with pkgs; [ 
       kitty
-    	vim
-    	helix
     ];
 
   # Use a custom configuration.nix location.

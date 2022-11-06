@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ...}:
-
+{ config, pkgs, lib, inputs, ...}:
 {
   home.stateVersion = "22.05";    
   
@@ -7,4 +6,6 @@
     cachix
     lazygit
   ];
+  
+  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
 }

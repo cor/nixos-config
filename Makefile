@@ -22,7 +22,7 @@ switch:
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 	
 switch-darwin:
-	darwin-rebuild switch --flake ".#default"
+	TERM=xterm darwin-rebuild switch --flake ".#default" --show-trace
 
 test:
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild test --flake ".#$(NIXNAME)"

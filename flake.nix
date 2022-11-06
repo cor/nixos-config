@@ -94,9 +94,10 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.cor = import ./home-darwin.nix;
+    	        home-manager.extraSpecialArgs = { inherit inputs; };
             }
           ];
-          inputs = { inherit darwin nixpkgs; };
+          inputs = { inherit darwin nixpkgs inputs; };
         };
       };
       
