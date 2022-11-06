@@ -9,6 +9,7 @@
     git
     git-lfs
     exa
+    bat
   ];
   
   programs.git = import programs/git.nix;
@@ -16,4 +17,12 @@
   programs.zsh = import programs/zsh.nix;
   programs.kitty = import programs/kitty.nix;
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+     
+  # programs.ssh doesn't work well for darwin.
+  home.file.".ssh/config".text = ''
+    Host *
+      AddKeysToAgent yes
+      UseKeychain yes
+      IdentityFile ~/.ssh/id_ed25519  
+  '';
 }
