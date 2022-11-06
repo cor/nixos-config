@@ -120,23 +120,12 @@ in
     '';
   };
 
-  programs.git = {
-    enable = true;
-    userName = "cor";
-    userEmail = "cor@pruijs.dev";
-    lfs.enable = true;
-    signing = {
-      signByDefault = true;
-      key = "06A6337C2BDD1365883C0668DB347466107E589F";
-    };
-    extraConfig = {
-      color.ui = true;
-      github.user = "cor";
-    };
-  };
-
-  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+  programs.git = import porgrams/git.nix;
+  programs.gpg = import ./program/gpg.nix;
+  programs.zsh = import ./programs/zsh.nix;
   programs.kitty = import programs/kitty.nix;
+  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+
 
   programs.chromium = {
     enable = true;
@@ -183,16 +172,6 @@ in
           })
         ];
   };
-
-  programs.zsh = import ./programs/zsh.nix;
-
-  programs.gpg = {
-    enable = true;
-    settings = {
-      default-key = "06A6337C2BDD1365883C0668DB347466107E589F";
-    };
-  };
-
 
   xsession.windowManager.awesome.enable = true;
 

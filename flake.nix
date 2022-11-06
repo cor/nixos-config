@@ -91,6 +91,10 @@
           modules = [ 
             ./darwin-configuration.nix 
             home-manager.darwinModules.home-manager {
+              users.users.cor = {
+                name = "cor";
+                home = "/Users/cor";
+              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.cor = import ./home-darwin.nix;
