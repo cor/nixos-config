@@ -8,4 +8,5 @@
   ];
   
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+  programs.kitty = import programs/kitty.nix;
 }
