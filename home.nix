@@ -135,18 +135,6 @@ in
     };
   };
 
-  programs.alacritty = {
-    # enable = true;
-    settings = {
-      scrolling = {
-        history = 100000;
-        multiplier = 1;
-        faux_multiplier = 1;
-        auto_scroll = false;
-      };
-    };
-  };
-
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.kitty = import programs/kitty.nix;
 
@@ -196,40 +184,7 @@ in
         ];
   };
 
-  programs.zsh = {
-    enable = true;
-    prezto = {
-      enable = true;
-      pmodules = [
-        "git"
-        "environment"
-        "terminal"
-        "editor"
-        "history"
-        "directory"
-        "spectrum"
-        "utility"
-        "completion"
-        "syntax-highlighting"
-        "history-substring-search"
-        "prompt"
-      ];
-    };
-    shellAliases = {
-      fzf-nix = "nix-env -qa | fzf";
-      icat = "kitty +kitten icat";
-      lg = "lazygit";
-      pbcopy = "xclip -selection c"; # macOS' pbcopy equivalent
-      ls = "exa";
-    };
-    initExtra = ''
-      if [ -n "''${commands[fzf-share]}" ]; then
-        source "''$(fzf-share)/key-bindings.zsh"
-        source "''$(fzf-share)/completion.zsh"
-      fi
-      compinit
-    ''; # compinit is required for zsh autocomplete
-  };
+  programs.zsh = import ./programs/zsh.nix;
 
   programs.gpg = {
     enable = true;

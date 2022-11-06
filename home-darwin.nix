@@ -5,8 +5,10 @@
   home.packages = with pkgs; [
     cachix
     lazygit
+    fzf
   ];
   
-  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+  programs.zsh = import programs/zsh.nix;
   programs.kitty = import programs/kitty.nix;
+  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
 }
