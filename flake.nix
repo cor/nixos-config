@@ -12,6 +12,11 @@
     nixpkgs-old-kernel.url = "github:nixos/nixpkgs/bacbfd713b4781a4a82c1f390f8fe21ae3b8b95b";
 
     flake-utils = { url = "github:numtide/flake-utils"; };
+    
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
@@ -24,7 +29,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let 
       mkVM = import ./lib/mkvm.nix; 
       user = "cor";
@@ -79,6 +84,15 @@
           system = "x86_64-linux";
         };
       };
+      
+      darwinConfigurations = {
+        default = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [ ./darwin-configuration.nix ];
+          inputs = { inherit darwin nixpkgs; };
+        };
+      };
+      
     } // (flake-utils.lib.eachSystem (with flake-utils.lib; [system.x86_64-linux system.aarch64-linux ]) (system:
       let pkgs = import nixpkgs { inherit system; }; in
       {
