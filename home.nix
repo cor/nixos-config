@@ -125,6 +125,7 @@ in
   programs.zsh = import programs/zsh.nix;
   programs.kitty = import programs/kitty.nix;
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
+  programs.rofi = import programs/rofi.nix pkgs;
 
 
   programs.chromium = {
@@ -212,8 +213,9 @@ in
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
-  xresources.properties = {
-    "Xft.dpi" = 192;
+  xresources.properties = let dpi = 192; in {
+    "Xft.dpi" = dpi;
+    "*.dpi" = dpi;
   };
 
   services.flameshot = {
