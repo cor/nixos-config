@@ -54,6 +54,8 @@
 20. Enter your SSH password (stored in 1Password)
 21. Run `cd nixos-config && make switch`
 22. `reboot`
+23. Open `chromium`, go to `chrome://settings/cookies`, and disable "Clear cookies and site data when you close all windows"
+24. Go to `chrome://settings/search` and set search engine to "DuckDuckGo"
 
 You now have your VM fully set up! To make changes to the config, just edit the contenst `~/nixos-config`, and run `make switch`
 
