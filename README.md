@@ -47,6 +47,7 @@ I use NixOS inside of a Parallels VM on a M1 Mac running macOS. In addition to t
     - Advanced > Ensure "Enable 3D acceleration" is enabled.
   - Mouse & Keyboard:
     - Click "Open Shortcuts Preferences" and uncheck all shortcuts.
+    - Click "macOS System Shortcuts" in the sidebar, and change "Send macOS system shortcuts" to "always"
   - Shared Printers: uncheck "share mac printers with other linux"
   - Network: Source: Shared Network (Should be selected by default)
   - Hard Disk: Click `Advanced > Properties`. Select Size 256 GB. *(More if you can, but I currently have just 1TB of storage)*
