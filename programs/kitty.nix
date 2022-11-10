@@ -1,4 +1,4 @@
-{
+{ isDarwin }: {
     enable = true;
     settings = {
       scrollback_lines = 1000000;
@@ -9,8 +9,8 @@
       touch_scroll_multiplier = 1;
       confirm_os_window_close = 0;
       shell_integration = "enabled";
-      font_size = 14;
       macos_option_as_alt = true;
+      font_size = if isDarwin then 16 else 12; # physically equivalent
     };
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
