@@ -15,6 +15,10 @@ package: {
         auto-pairs = false;
         lsp.display-messages = true;
         bufferline = "always";
+        statusline = {
+          left = ["mode" "spinner" "file-name" ];
+          right = ["diagnostics" "position" "total-line-numbers" "file-encoding"];
+        };
       };
     };
 
