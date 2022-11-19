@@ -162,7 +162,7 @@ in
           (createChromiumExtension {
             # 1password
             id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
-            sha256 = "sha256:0ccvpi88s3c1psb5ipkz4cch89ib6h3g9nw8qbxzwvnzh72qg8rl";
+            sha256 = "sha256:0s024whdj37hbghjqq4qazn5cm77crlp0pqwgacnfm7vfqwxyq12";
             version = "2.4.1";
           })
           (createChromiumExtension {
