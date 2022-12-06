@@ -23,10 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    helix.url = "github:helix-editor/helix";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
