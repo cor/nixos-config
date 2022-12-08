@@ -164,7 +164,13 @@ in
             # 1password
             id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
             sha256 = "sha256:0ccvpi88s3c1psb5ipkz4cch89ib6h3g9nw8qbxzwvnzh72qg8rl";
-            version = "2.4.1";
+            version = "2.5.0";
+          })
+          (createChromiumExtension {
+            # Polkadot
+            id = "mopnmbcafieddcagagdcbnhejhlodfdd";
+            sha256 = "sha256:1wz50lbi6p182pkr7ysifzyb1inxn5ahvzmi6n5syx87xgrknns5";
+            version = "0.44.1";
           })
           (createChromiumExtension {
             # Empty new tab
