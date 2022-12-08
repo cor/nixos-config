@@ -23,16 +23,27 @@ package: {
     };
   };
 
+  # patch until https://github.com/helix-editor/helix/pull/5066 gets merged
   themes = {
     gruvbox_patched = {
       inherits = "gruvbox_dark_hard";
 
-      diagnostic.error = { 
-        fg = "errorfg"; bg = "errorbg"; underline.color = "red";  
+      "diagnostic.error" = { 
+        underline = { style = "curl"; color = "red0"; };
+      };
+
+      "diagnostic.warning" = { 
+        underline = { style = "curl"; color = "orange1"; };
+      };
+
+      "diagnostic.info" = { 
+        underline = { style = "curl"; color = "aqua1"; };
+      };
+
+      "diagnostic.hint" = { 
+        underline = { style = "curl"; color = "blue1"; };
       };
     };
-
-  
   };
  
   languages = [
