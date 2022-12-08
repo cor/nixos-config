@@ -41,11 +41,7 @@ in
     pinentry
     pinentry-curses
     pick-colour-picker
-    vscode
     bottom
-    tdesktop
-    lazygit
-    element-desktop
     (writeShellScriptBin "xset-r-fast" ''
       xset r rate 150 40
     '')
@@ -53,11 +49,16 @@ in
       xset r rate 250 30
     '')
   ] ++
-  [
-    pkgs-unstable.flameshot
-    pkgs-unstable._1password-gui
-    pkgs-unstable.obsidian
-  ] ++
+  (with pkgs-unstable; [
+    zellij
+    vscode
+    flameshot
+    _1password-gui
+    obsidian
+    lazygit
+    tdesktop
+    element-desktop
+  ]) ++
   map mkChromiumApp [
     {
       name = "Discord";
