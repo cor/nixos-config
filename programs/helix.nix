@@ -3,7 +3,7 @@ package: {
   inherit package;
 
   settings = {
-    theme = "gruvbox_patched";
+    theme = "gruvbox_dark_hard";
     editor = {
       auto-format = true;
       completion-trigger-len = 0;
@@ -19,29 +19,6 @@ package: {
       statusline = {
         left = [ "mode" "spinner" "file-name" ];
         right = [ "diagnostics" "position" "total-line-numbers" "file-encoding" ];
-      };
-    };
-  };
-
-  # patch until https://github.com/helix-editor/helix/pull/5066 gets merged
-  themes = {
-    gruvbox_patched = {
-      inherits = "gruvbox_dark_hard";
-
-      "diagnostic.error" = { 
-        underline = { style = "curl"; color = "red0"; };
-      };
-
-      "diagnostic.warning" = { 
-        underline = { style = "curl"; color = "orange1"; };
-      };
-
-      "diagnostic.info" = { 
-        underline = { style = "curl"; color = "aqua1"; };
-      };
-
-      "diagnostic.hint" = { 
-        underline = { style = "curl"; color = "blue1"; };
       };
     };
   };
