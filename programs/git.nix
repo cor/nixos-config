@@ -5,10 +5,11 @@
     lfs.enable = true;
     signing = {
       signByDefault = true;
-      key = "06A6337C2BDD1365883C0668DB347466107E589F";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC";
     };
     extraConfig = {
       color.ui = true;
       github.user = "cor";
+      gpg.format = "ssh";
     };
   }
