@@ -81,7 +81,6 @@
       sessionCommands = ''
         eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
         export SSH_AUTH_SOCK
-        xr-5k
         xset-r-slow
         pamixer --set-volume 100
         pamixer --unmute
