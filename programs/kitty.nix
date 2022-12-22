@@ -1,5 +1,6 @@
-{ isDarwin }: {
+{ isDarwin, package }: {
     enable = true;
+    inherit package;
     settings = {
       scrollback_lines = 1000000;
       enable_audio_bell = false;
@@ -15,5 +16,5 @@
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
     };
-    theme = "Gruvbox Dark Hard";
+    theme = "Rosé Pine";
   }

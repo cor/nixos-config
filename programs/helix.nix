@@ -3,7 +3,7 @@ package: {
   inherit package;
 
   settings = {
-    theme = "gruvbox_dark_hard";
+    theme = "rose_pine";
     editor = {
       auto-format = true;
       completion-trigger-len = 0;

@@ -21,7 +21,6 @@ in
     ranger
     tree
     watch
-    kitty
     openssh
     zip
     rnix-lsp
@@ -125,7 +124,7 @@ in
   programs.git = import programs/git.nix;
   programs.gpg = import programs/gpg.nix;
   programs.zsh = import programs/zsh.nix;
-  programs.kitty = import programs/kitty.nix { isDarwin = false; };
+  programs.kitty = import programs/kitty.nix { isDarwin = false; package = pkgs-unstable.kitty; };
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.rofi = import programs/rofi.nix pkgs;
 
@@ -184,23 +183,23 @@ in
 
   xsession.windowManager.awesome.enable = true;
 
-  services.picom = {
-    enable = true;
+  # services.picom = {
+  #   enable = true;
 
-    settings = {
-      shadow = true;
-      corner-radius = 18;
-      shadow-radius = 50;
-      shadow-offset-x = 1;
-      shadow-offset-y = 9;
-      shadow-opacity = 0.2;
-      rounded-corners-exclude = [
-        "window_type = 'dock'"
-        "window_type = 'desktop'"
-        "window_type = '_NET_WM_WINDOW_TYPE_POPUP_MENU'"
-      ];
-    };   
-  };
+  #   settings = {
+  #     shadow = true;
+  #     corner-radius = 18;
+  #     shadow-radius = 50;
+  #     shadow-offset-x = 1;
+  #     shadow-offset-y = 9;
+  #     shadow-opacity = 0.2;
+  #     rounded-corners-exclude = [
+  #       "window_type = 'dock'"
+  #       "window_type = 'desktop'"
+  #       "window_type = '_NET_WM_WINDOW_TYPE_POPUP_MENU'"
+  #     ];
+  #   };   
+  # };
 
   services.gpg-agent = {
     enable = true;
