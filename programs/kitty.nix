@@ -11,7 +11,10 @@
       confirm_os_window_close = 0;
       shell_integration = "enabled";
       macos_option_as_alt = true;
-      font_size = if isDarwin then 16 else 12; # physically equivalent
+    };
+    font = {
+      size = 14;
+      name = "JetBrains Mono";
     };
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";

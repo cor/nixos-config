@@ -23,6 +23,7 @@ in
     ibm-plex
     fira-code
     fira-code-symbols
+    jetbrains-mono
   ];
 
   services.gnome.gnome-keyring.enable = true;

@@ -115,16 +115,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
 
-  # Manage fonts. We pull these from a secret directory since most of these
-  # fonts require a purchase.
-  fonts = {
-    fontDir.enable = true;
-
-    fonts = [
-      pkgs.fira-code
-    ];
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
