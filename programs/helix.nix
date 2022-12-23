@@ -3,7 +3,7 @@ package: {
   inherit package;
 
   settings = {
-    theme = "rose_pine";
+    theme = "rose_pine_patched";
     editor = {
       auto-format = true;
       completion-trigger-len = 0;
@@ -22,6 +22,13 @@ package: {
       };
     };
   };
+
+
+  # Switch to normal rose_pine when the following PR gets merged:
+  # https://github.com/helix-editor/helix/pull/5267
+  themes = {
+    rose_pine_patched = (builtins.fromTOML (builtins.readFile ./helix-themes/rose_pine_patched.toml));
+  };  
  
   languages = [
     {
