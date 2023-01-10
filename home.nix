@@ -127,60 +127,7 @@ in
   programs.kitty = import programs/kitty.nix { isDarwin = false; package = pkgs-unstable.kitty; };
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.rofi = import programs/rofi.nix pkgs;
-
-
-  programs.chromium = {
-    enable = true;
-    package = dark-ungoogled-chromium;
-
-    extensions =
-        let
-          createChromiumExtensionFor = browserVersion: { id, sha256, version }:
-            {
-              inherit id;
-              crxPath = builtins.fetchurl {
-                url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${browserVersion}&x=id%3D${id}%26installsource%3Dondemand%26uc";
-                name = "${id}.crx";
-                inherit sha256;
-              };
-              inherit version;
-            };
-          createChromiumExtension = createChromiumExtensionFor (lib.versions.major dark-ungoogled-chromium.version);
-        in
-        [
-          (createChromiumExtension {
-            # ublock origin
-            id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-            sha256 = "sha256:0pv1bn42b4i2nnlpw88v8sdpj8y87zh16zic0p4pwh18chh10z5n";
-            version = "1.44.4";
-          })
-          (createChromiumExtension {
-            # vimium
-            id = "dbepggeogbaibhgnhhndojpepiihcmeb";
-            sha256 = "sha256:0sj5najixk40r1hjf9kzq2jns6klfsmipwdj8jl5z76chx9pi3hs";
-            version = "1.67.2";
-          })
-          (createChromiumExtension {
-            # 1password
-            id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
-            sha256 = "sha256:0ccvpi88s3c1psb5ipkz4cch89ib6h3g9nw8qbxzwvnzh72qg8rl";
-            version = "2.5.0";
-          })
-          (createChromiumExtension {
-            # Polkadot
-            id = "mopnmbcafieddcagagdcbnhejhlodfdd";
-            sha256 = "sha256:1wz50lbi6p182pkr7ysifzyb1inxn5ahvzmi6n5syx87xgrknns5";
-            version = "0.44.1";
-          })
-          (createChromiumExtension {
-            # Empty new tab
-            id = "dpjamkmjmigaoobjbekmfgabipmfilij";
-            sha256 = "sha256:1fv65lfrh1jh9rz3wq26ri4hzkv9n4j563v1arzwys1f8g015fks";
-            version = "1.2.0";
-          })
-        ];
-  };
-
+  programs.chromium = import programs/chromium.nix { package = dark-ungoogled-chromium; inherit lib; };
   xsession.windowManager.awesome.enable = true;
 
   # services.picom = {
@@ -210,6 +157,7 @@ in
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
+
   xresources.properties = let dpi = 192; in {
     "Xft.dpi" = dpi;
     "*.dpi" = dpi;
