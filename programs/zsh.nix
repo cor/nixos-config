@@ -25,6 +25,8 @@
       ls = "exa";
       hxc = "CARGO_TARGET_DIR=target/rust-analyzer /etc/profiles/per-user/cor/bin/hx"; # speed increase for rust-analyzer
       nd = "nix develop --command zsh";
+      cco = "cd /home/cor/dev/composable && nd";
+      ccoh = "cd /home/cor/dev/composable && nd && hxc";
     };
     initExtra = ''
       if [ -n "''${commands[fzf-share]}" ]; then
