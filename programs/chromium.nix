@@ -28,7 +28,7 @@
         # vimium
         id = "dbepggeogbaibhgnhhndojpepiihcmeb";
         sha256 = "sha256:00qhbs41gx71q026xaflgwzzridfw1sx3i9yah45cyawv8q7ziic";
-        version = "1.67.2";
+        version = "1.67.4";
       })
       (createChromiumExtension {
         # 1password
