@@ -21,19 +21,19 @@
       (createChromiumExtension {
         # ublock origin
         id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-        sha256 = "sha256:0pv1bn42b4i2nnlpw88v8sdpj8y87zh16zic0p4pwh18chh10z5n";
+        sha256 = "sha256:1i14y4sq9vl01wqhlgxmdv6knhjm622llc8ycbq3l2k389shj7ng";
         version = "1.44.4";
       })
       (createChromiumExtension {
         # vimium
         id = "dbepggeogbaibhgnhhndojpepiihcmeb";
-        sha256 = "sha256:0sj5najixk40r1hjf9kzq2jns6klfsmipwdj8jl5z76chx9pi3hs";
+        sha256 = "sha256:00qhbs41gx71q026xaflgwzzridfw1sx3i9yah45cyawv8q7ziic";
         version = "1.67.2";
       })
       (createChromiumExtension {
         # 1password
         id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
-        sha256 = "sha256:0ccvpi88s3c1psb5ipkz4cch89ib6h3g9nw8qbxzwvnzh72qg8rl";
+        sha256 = "sha256:1h1cq9cyaqr709ypijas5z6r8143qwpczp5awhl7xk3zrrwdq582";
         version = "2.5.1";
       })
       (createChromiumExtension {
