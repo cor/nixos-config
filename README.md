@@ -32,7 +32,7 @@ I use NixOS inside of a Parallels VM on a M1 Mac running macOS. In addition to t
 ## NixOS VM using Parallels Desktop
 
 1. Install [Parallels Desktop](parallels.com).
-2. Download a NixOS aarch64-minimal ISO [from Hydra](https://hydra.nixos.org/job/nixos/release-22.05-aarch64/nixos.iso_minimal.aarch64-linux) (Make sure to change release-22.05 to whatever the current release is).
+2. Download a minimal 64-bit ARM ISO [from the NixOS download page](https://nixos.org/download.html).
 3. In parallels: click "Install Windows or another OS from a DVD or image file"
 4. Select your `nixos-minimal-...-aarch64-linux.iso`
 5. Select "Other Linux"
