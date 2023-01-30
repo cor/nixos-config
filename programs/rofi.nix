@@ -3,7 +3,7 @@ pkgs:
 	enable = true;
 	
 	terminal = "kitty";
-	theme = "gruvbox-dark";
+	theme = "sidebar";
 
 	plugins = with pkgs; [ rofimoji rofi-calc ];
 }

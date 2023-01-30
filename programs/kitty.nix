@@ -19,5 +19,5 @@
     keybindings = {
       "kitty_mod+n" = "new_os_window_with_cwd";
     };
-    theme = "Rosé Pine";
+    theme = "Ayu Mirage";
   }

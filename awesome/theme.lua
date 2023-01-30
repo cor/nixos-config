@@ -11,10 +11,10 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-local bg_color = "#0f120f"
-local focus_color = "#353a33"
+local bg_color = "#111111"
+local focus_color = "#555555"
 
-theme.font          = "sans 10"
+theme.font          = "JetBrains Mono 10"
 
 theme.bg_normal     = bg_color
 theme.bg_focus      = focus_color
@@ -102,7 +102,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "/home/cor/nixos-config/wallpapers/rose_pine_blockwavemoon.png"
+theme.wallpaper = "/home/cor/nixos-config/wallpapers/waves.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

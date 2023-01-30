@@ -3,7 +3,7 @@ package: {
   inherit package;
 
   settings = {
-    theme = "rose_pine";
+    theme = "ayu_mirage";
     editor = {
       auto-format = true;
       completion-trigger-len = 0;

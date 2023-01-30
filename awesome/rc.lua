@@ -245,7 +245,7 @@ awful.screen.connect_for_each_screen(function(s)
                             widget = wibox.widget.textbox,
                             margins = 4
                         },
-                        width = 240,
+                        width = 400,
                         strategy = "exact",
                         widget = wibox.container.constraint
                     },
