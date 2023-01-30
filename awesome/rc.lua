@@ -227,8 +227,9 @@ awful.screen.connect_for_each_screen(function(s)
         style    = {
             shape_border_width = 1,
             shape_border_color = beautiful.border_normal,
-            shape = gears.shape.rounded_rect,
-            shape_radius = 9
+            -- uncomment for rounded windows
+            -- shape = gears.shape.rounded_rect,
+            -- shape_radius = 9
         },
         layout   = {
             spacing = 12,
@@ -261,7 +262,7 @@ awful.screen.connect_for_each_screen(function(s)
     }   
 
      -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "80" })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.border_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -622,9 +623,9 @@ client.connect_signal("request::titlebars", function(c)
     -- }
 
     -- ROUDNED WINDOWS
-    c.shape = function(cr,w,h)
-        gears.shape.rounded_rect(cr,w,h,18)
-    end
+    -- c.shape = function(cr,w,h)
+    --     gears.shape.rounded_rect(cr,w,h,18)
+    -- end
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
