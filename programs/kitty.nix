@@ -13,7 +13,7 @@
       macos_option_as_alt = true;
     };
     font = {
-      size = 14;
+      size = if isDarwin then 16 else 14; # physically equivalent
       name = "JetBrains Mono";
     };
     keybindings = {
