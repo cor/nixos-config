@@ -5,5 +5,5 @@ pkgs:
 	terminal = "kitty";
 	theme = "sidebar";
 
-	plugins = with pkgs; [ rofimoji rofi-calc ];
+	plugins = with pkgs; [ rofi-emoji rofi-calc ];
 }

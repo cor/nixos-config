@@ -362,6 +362,8 @@ globalkeys = gears.table.join(
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
+    awful.key({ modkey,           }, "y",     function () awful.tag.incmwfact(-0.05)          end,
+              {description = "decrease master width factor (cmd-h hides parallels)", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
@@ -405,8 +407,14 @@ globalkeys = gears.table.join(
     -- Use rofi instead of the built in menubar
     -- awful.key({ modkey }, "space", function() menubar.show() end,
     --           {description = "show the menubar", group = "launcher"})
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show drun -dpi 192") end,
-              {description = "show the menubar", group = "launcher"})
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show combi -combi-modes \"run,drun\" -modes combi -dpi 192") end,
+              {description = "show app starter", group = "launcher"}),
+
+    awful.key({ modkey }, "c", function() awful.spawn.with_shell("rofi -show calc -modi calc -no-show-match -no-sort -dpi 192 | pbcopy") end,
+              {description = "show calculator", group = "launcher"}),
+
+    awful.key({ modkey }, "e", function() awful.spawn.with_shell("rofi -modi emoji -show emoji -dpi 192") end,
+              {description = "show emoji picker", group = "launcher"})
 
 )
 
