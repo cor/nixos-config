@@ -13,7 +13,7 @@ nixpkgs.lib.nixosSystem rec {
 
     ../hardware/${name}.nix
     ../machines/${name}.nix
-    ../nixos.nix
+    (import ../nixos.nix inputs)
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;

@@ -12,6 +12,7 @@ in
     bat # cat replacement
     exa # ls replacement
     gping # ping with graph
+    gh
     fd
     thunderbird
     fzf

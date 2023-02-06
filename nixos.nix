@@ -1,5 +1,7 @@
-{ pkgs, lib, ... }:
-let
+inputs: { pkgs, lib, ... }: 
+let 
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
+
   mkXr = { name ? "", w, h, r }:
     let
       modeName = "${toString w}x${toString h}_${toString r}.00";
@@ -16,6 +18,29 @@ let
     '';
 in
 {
+  # use unstable nix so we can access flakes
+  nix = {
+    package = pkgs-unstable.nix;
+    settings = {
+      sandbox = "relaxed";
+      substituters = [ 
+        "https://nix-community.cachix.org/" 
+        "https://mitchellh-nixos-config.cachix.org" 
+        "https://composable-community.cachix.org/" 
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="    
+        "composable-community.cachix.org-1:GG4xJNpXJ+J97I8EyJ4qI5tRTAJ4i7h+NK2Z32I8sK8="
+      ];  
+    };
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  }; 
+
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
