@@ -10,6 +10,10 @@
     git-lfs
     exa
     bat
+    jq
+    zellij
+    tree
+    bottom
   ];
   
   programs.git = import programs/git.nix;
