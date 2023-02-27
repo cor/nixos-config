@@ -1,20 +1,21 @@
 { config, pkgs, lib, inputs, ...}:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
+in
 {
   home.stateVersion = "22.05";    
   
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     cachix
-    lazygit
     fzf
     git
     git-lfs
     exa
     bat
     jq
-    zellij
     tree
     bottom
-  ];
+  ]) ++ (with pkgs-unstable; [lazygit zellij youtube-dl]);
   
   programs.git = import programs/git.nix;
   programs.gpg = import programs/gpg.nix;

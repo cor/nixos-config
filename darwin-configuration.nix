@@ -9,7 +9,14 @@
   };
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [ gnumake coreutils cmake kitty ];
+  environment.systemPackages = with pkgs; [ 
+    gnumake 
+    coreutils 
+    cmake 
+    kitty 
+    element-desktop
+    vscodium
+  ];
   networking = let name = "CorBook"; in {
     computerName = name;
     hostName = name;
