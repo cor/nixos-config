@@ -17,7 +17,10 @@
       name = "JetBrains Mono";
     };
     keybindings = {
-      "kitty_mod+n" = "new_os_window_with_cwd";
+      "kitty_mod+n" = "new_window_with_cwd";
+      "cmd+enter" = "new_window_with_cwd";
+      "cmd+j" = "next_window";
+      "cmd+k" = "previous_window";
     };
     theme = "Ayu Mirage";
   }
