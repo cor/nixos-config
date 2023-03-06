@@ -23,6 +23,10 @@
       "cmd+shift+j" = "move_window_forward";
       "cmd+k" = "previous_window";
       "cmd+shift+k" = "move_window_backward";
+      "cmd+shift+r" = "set_tab_title";
+      "cmd+l" = "next_layout";
+      "cmd+o" = "toggle_layout stack"; # temporarily zoom on a window
+
     };
     theme = "Ayu Mirage";
   }
