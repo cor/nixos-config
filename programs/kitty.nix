@@ -20,7 +20,9 @@
       "kitty_mod+n" = "new_window_with_cwd";
       "cmd+enter" = "new_window_with_cwd";
       "cmd+j" = "next_window";
+      "cmd+shift+j" = "move_window_forward";
       "cmd+k" = "previous_window";
+      "cmd+shift+k" = "move_window_backward";
     };
     theme = "Ayu Mirage";
   }
