@@ -20,6 +20,9 @@ package: {
         left = [ "mode" "spinner" "file-name" ];
         right = [ "diagnostics" "position" "total-line-numbers" "file-encoding" ];
       };
+      soft-wrap = {
+        enable = true;
+      };
     };
   };
  
