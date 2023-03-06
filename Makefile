@@ -21,7 +21,7 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 switch:
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}" --show-trace
 	
-switch-darwin:
+darwin:
 	TERM=xterm darwin-rebuild switch --flake ".#default" --show-trace
 
 test:
