@@ -26,17 +26,17 @@
     in
     {
       nixosConfigurations = {
-        vm-aarch64 = mkVM "vm-aarch64" {
+        vm-aarch64-vmware = mkVM "vm-aarch64-vmware" {
           inherit user inputs overlays nixpkgs home-manager;
           system = "aarch64-linux";
         };
 
-        vm-aarch64-prl = mkVM "vm-aarch64-prl" {
+        vm-aarch64-parallels = mkVM "vm-aarch64-parallels" {
           inherit user inputs overlays nixpkgs home-manager;
           system = "aarch64-linux";
         };
 
-        vm-intel = mkVM "vm-intel" {
+        vm-x86_64 = mkVM "vm-intel" {
           inherit user inputs overlays nixpkgs home-manager;
           system = "x86_64-linux";
         };
@@ -46,7 +46,7 @@
         default = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [ 
-            ./darwin-configuration.nix 
+            ./darwin.nix 
             home-manager.darwinModules.home-manager {
               users.users.cor = {
                 name = "cor";
