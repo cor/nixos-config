@@ -95,38 +95,41 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    gnumake
-    killall
-    niv
-    rxvt_unicode
-    xclip
-    docker-client
 
-    (writeShellScriptBin "docker-stop-all" ''
-      docker stop $(docker ps -q)
-      docker system prune -f
-    '')
-    (writeShellScriptBin "docker-prune-all" ''
-      docker-stop-all
-      docker rmi -f $(docker images -a -q)    
-      docker volume prune -f
-    '')
-  ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
-    # This is needed for the vmware user tools clipboard to work.
-    # You can test if you don't need this by deleting this and seeing
-    # if the clipboard sill works.
-    gtkmm3
 
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      gnumake
+      killall
+      niv
+      rxvt_unicode
+      xclip
+      docker-client
+
+      (writeShellScriptBin "docker-stop-all" ''
+        docker stop $(docker ps -q)
+        docker system prune -f
+      '')
+      (writeShellScriptBin "docker-prune-all" ''
+        docker-stop-all
+        docker rmi -f $(docker images -a -q)    
+        docker volume prune -f
+      '')
+    ] ++ lib.optionals (currentSystemName == "vm-aarch64") [
+      # This is needed for the vmware user tools clipboard to work.
+      # You can test if you don't need this by deleting this and seeing
+      # if the clipboard sill works.
+      gtkmm3
+    ];
+
+    variables = import ../environment/variables.nix;
+  };
   
-  environment.variables = {
-    GDK_SCALE = "2";
-    GDK_DPI_SCALE = "0.5";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";  
-    EDITOR = "hx";
-    VISUAL = "hx";
+  
+  programs.zsh = {
+    enable = true;  # default shell on catalina
+    promptInit = "";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

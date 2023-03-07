@@ -14,13 +14,7 @@
       vscodium
     ];
 
-    variables = {
-      PS1="%d $ ";
-      PROMPT="%d $ ";
-      RPROMPT="";
-      EDITOR="hx";
-    };
-
+    variables = import ./environment/variables.nix;
     shells = [ pkgs.zsh ];
   };
 
