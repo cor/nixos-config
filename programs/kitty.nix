@@ -25,8 +25,7 @@
       "cmd+shift+k" = "move_window_backward";
       "cmd+shift+r" = "set_tab_title";
       "cmd+l" = "next_layout";
-      "cmd+o" = "toggle_layout stack"; # temporarily zoom on a window
-
+      "cmd+o" = "toggle_layout stack"; # temporarily maximize a window
     };
     theme = "Ayu Mirage";
   }

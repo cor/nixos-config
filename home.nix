@@ -56,7 +56,6 @@ in
     flameshot
     _1password-gui
     obsidian
-    lazygit
     tdesktop
     element-desktop
   ]) ++
@@ -129,6 +128,7 @@ in
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.rofi = import programs/rofi.nix pkgs;
   programs.chromium = import programs/chromium.nix { package = dark-ungoogled-chromium; inherit lib; };
+  programs.lazygit = import programs/lazygit.nix pkgs-unstable.lazygit; 
   xsession.windowManager.awesome.enable = true;
 
   # services.picom = {
