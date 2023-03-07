@@ -19,12 +19,10 @@
     watch
     openssh
     zip
-    rnix-lsp
     curl
     delta
     pamixer
     wget
-    scrot
     coreutils-full
     binutils
     gnome3.gnome-control-center
@@ -46,22 +44,14 @@
   (with pkgs-unstable; [
     zellij
     vscode
-    flameshot
     _1password-gui
     obsidian
     tdesktop
     element-desktop
   ]);
 
-  # Ensure that the `Screenshots/` directory exists
-  home.file."Screenshots/.keep".text = "";
   home.file.".config/awesome".source = ./awesome;
-
   # Configure ranger to user kitty's image preview
-  home.file.".config/ranger/rc.conf".text = ''
-    set preview_images true
-    set preview_images_method kitty
-  '';
 
   gtk = {
     enable = true;
@@ -77,12 +67,9 @@
     };
   };
   programs.rofi = import programs/rofi.nix pkgs;
-  programs.lazygit = import programs/lazygit.nix pkgs-unstable.lazygit; 
-  xsession.windowManager.awesome.enable = true;
-
-  services.flameshot = import services/flameshot.nix pkgs-unstable.flameshot;
   services.gpg-agent = import services/gpg-agent.nix;
 
+  xsession.windowManager.awesome.enable = true;
   xresources.properties = let dpi = 192; in {
     "Xft.dpi" = dpi;
     "*.dpi" = dpi;

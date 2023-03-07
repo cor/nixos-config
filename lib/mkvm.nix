@@ -23,14 +23,17 @@ nixpkgs.lib.nixosSystem rec {
         useUserPackages = true;
         users.cor = {
           imports = [
-            ../home-nixos.nix
-            ../home-modules/kitty.nix
-            ../home-modules/tmux.nix
+            ../home-modules/chromium.nix
             ../home-modules/git.nix
             ../home-modules/gpg.nix
-            ../home-modules/zsh.nix
             ../home-modules/helix.nix
-            ../home-modules/chromium.nix
+            ../home-modules/kitty.nix
+            ../home-modules/lazygit.nix
+            ../home-modules/tmux.nix
+            ../home-modules/zsh.nix
+            ../home-modules/flameshot.nix
+            ../home-modules/ranger.nix
+            ../home-nixos.nix
           ];
         };
         extraSpecialArgs = {

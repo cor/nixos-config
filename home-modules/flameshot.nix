@@ -1,6 +1,11 @@
-package: {
+{ pkgs-unstable, ...}: 
+{
+  # Ensure that the `Screenshots/` directory exists
+  home.file."Screenshots/.keep".text = "";
+
+  services.flameshot = {
     enable = true;
-    inherit package;
+    package = pkgs-unstable.flameshot;
     settings = {
       General = {
         savePath = "/home/cor/Screenshots";
@@ -11,4 +16,6 @@ package: {
         saveAfterCopy = true;
       };
     };
-  }
+  };
+}
+
