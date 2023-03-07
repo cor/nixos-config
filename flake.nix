@@ -3,15 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
-    # We use the unstable nixpkgs repo for some packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
-    # Locks nixpkgs to an older version with an older Kernel that boots
-    # on VMware Fusion Tech Preview. This can be swapped to nixpkgs when
-    # the TP fixes the bug.
-    nixpkgs-old-kernel.url = "github:nixos/nixpkgs/bacbfd713b4781a4a82c1f390f8fe21ae3b8b95b";
-
     flake-utils = { url = "github:numtide/flake-utils"; };
+    helix.url = "github:helix-editor/helix";
     
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -22,8 +16,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    helix.url = "github:helix-editor/helix";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
@@ -75,7 +67,7 @@
       {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ rnix-lsp sumneko-lua-language-server cmake-language-server];
+            buildInputs = with pkgs; [ nil sumneko-lua-language-server cmake-language-server];
           };
         };
       }
