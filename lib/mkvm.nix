@@ -13,7 +13,8 @@ nixpkgs.lib.nixosSystem rec {
 
     ../hardware/${name}.nix
     ../machines/${name}.nix
-    (import ../nixos.nix inputs)
+    ../modules/environment.nix
+    ../nixos.nix
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
@@ -26,6 +27,7 @@ nixpkgs.lib.nixosSystem rec {
       config._module.args = {
         currentSystemName = name;
         currentSystem = system;
+        pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
       };
     }
   ];

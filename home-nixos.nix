@@ -29,9 +29,7 @@ in
     delta
     pamixer
     wget
-    git
     scrot
-    git-lfs
     coreutils-full
     binutils
     gnome3.gnome-control-center
