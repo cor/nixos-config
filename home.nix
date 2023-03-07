@@ -106,21 +106,7 @@ in
     };
   };
 
-  programs.tmux = {
-    enable = true;
-    terminal = "xterm-256color";
-    shell = "${pkgs.zsh}/bin/zsh";
-    secureSocket = false;
-    clock24 = true;
-    escapeTime = 0;
-    historyLimit = 1000000;
-    baseIndex = 1;
-    plugins = with pkgs.tmuxPlugins; [ pain-control ];
-    extraConfig = ''
-      set -g mouse on
-    '';
-  };
-
+  programs.tmux = import programs/tmux.nix;
   programs.git = import programs/git.nix;
   programs.gpg = import programs/gpg.nix;
   programs.zsh = import programs/zsh.nix;
@@ -131,51 +117,12 @@ in
   programs.lazygit = import programs/lazygit.nix pkgs-unstable.lazygit; 
   xsession.windowManager.awesome.enable = true;
 
-  # services.picom = {
-  #   enable = true;
-
-  #   settings = {
-  #     shadow = true;
-  #     corner-radius = 18;
-  #     shadow-radius = 50;
-  #     shadow-offset-x = 1;
-  #     shadow-offset-y = 9;
-  #     shadow-opacity = 0.2;
-  #     rounded-corners-exclude = [
-  #       "window_type = 'dock'"
-  #       "window_type = 'desktop'"
-  #       "window_type = '_NET_WM_WINDOW_TYPE_POPUP_MENU'"
-  #     ];
-  #   };   
-  # };
-
-  services.gpg-agent = {
-    enable = true;
-    pinentryFlavor = "gnome3";
-    enableSshSupport = true;
-
-    # cache the keys forever so we don't get asked for a password
-    defaultCacheTtl = 31536000;
-    maxCacheTtl = 31536000;
-  };
+  services.flameshot = import services/flameshot.nix pkgs-unstable.flameshot;
+  services.gpg-agent = import services/gpg-agent.nix;
 
   xresources.properties = let dpi = 192; in {
     "Xft.dpi" = dpi;
     "*.dpi" = dpi;
   };
 
-  services.flameshot = {
-    enable = true;
-    package = pkgs-unstable.flameshot;
-    settings = {
-      General = {
-        savePath = "/home/cor/Screenshots";
-        showStartupLaunchMessage = false;
-        disabledTrayIcon = true;
-        filenamePattern = "%F-%H%M%S";
-        startupLaunch = true;
-        saveAfterCopy = true;
-      };
-    };
-  };
 }
