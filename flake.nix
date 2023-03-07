@@ -35,11 +35,6 @@
           inherit user inputs overlays nixpkgs home-manager;
           system = "aarch64-linux";
         };
-
-        vm-x86_64 = mkVM "vm-intel" {
-          inherit user inputs overlays nixpkgs home-manager;
-          system = "x86_64-linux";
-        };
       };
       
       darwinConfigurations = {
