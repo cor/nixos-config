@@ -20,17 +20,17 @@
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let 
-      mkVM = import ./lib/mk-vm.nix; 
+      mkNixos = import ./lib/mk-nixos.nix; 
       mkDarwin = import ./lib/mk-darwin.nix;
       user = "cor";
     in
     {
       nixosConfigurations = let system = "aarch64-linux"; in {
-        vm-aarch64-parallels = mkVM "vm-aarch64-parallels" {
+        vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
           inherit user inputs nixpkgs home-manager system;
         };
 
-        vm-aarch64-vmware = mkVM "vm-aarch64-vmware" {
+        vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
           inherit user inputs nixpkgs home-manager system;
         };
       };

@@ -27,7 +27,7 @@
       gtkmm3
     ];
 
-    variables = import ../environment/variables.nix;
+    variables = import ./environment/variables.nix;
 
     # required for zsh autocomplete
     pathsToLink = [ "/share/zsh" ];

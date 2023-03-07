@@ -13,7 +13,7 @@
       vscodium
     ];
 
-    variables = import ../environment/variables.nix;
+    variables = import ./environment/variables.nix;
     shells = [ pkgs.zsh ];
   };
 
