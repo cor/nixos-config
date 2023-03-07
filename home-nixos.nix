@@ -1,8 +1,4 @@
 { config, lib, pkgs, pkgs-unstable, inputs, ... }:
-let
-  dark-ungoogled-chromium = pkgs-unstable.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
-  mkChromiumApp = import ./lib/mk-chromium-app.nix { inherit pkgs; chromium = dark-ungoogled-chromium; };
-in
 {
   xdg.enable = true;
   home.stateVersion = "23.05";
@@ -55,29 +51,7 @@ in
     obsidian
     tdesktop
     element-desktop
-  ]) ++
-  map mkChromiumApp [
-    {
-      name = "Discord";
-      genericName = "All-in-one cross-platform voice and text chat for gamers";
-      url = "https://discord.com/channels/@me";
-    }
-    {
-      name = "Slack";
-      genericName = "One platform for your team and your work";
-      url = "https://app.slack.com/client/T021F0XJ8BE/C02MSA16DCP";
-    }
-    {
-      name = "WhatsApp";
-      genericName = "Chat app built by Meta";
-      url = "https://web.whatsapp.com";
-    }
-    {
-      name = "ClickUp";
-      genericName = "One app to replace them all";
-      url = "https://app.clickup.com/";
-    }
-  ];
+  ]);
 
   # Ensure that the `Screenshots/` directory exists
   home.file."Screenshots/.keep".text = "";
@@ -102,14 +76,7 @@ in
       name = "Paper";
     };
   };
-
-  programs.tmux = import programs/tmux.nix;
-  programs.git = import programs/git.nix;
-  programs.gpg = import programs/gpg.nix;
-  programs.zsh = import programs/zsh.nix;
-  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.rofi = import programs/rofi.nix pkgs;
-  programs.chromium = import programs/chromium.nix { package = dark-ungoogled-chromium; inherit lib; };
   programs.lazygit = import programs/lazygit.nix pkgs-unstable.lazygit; 
   xsession.windowManager.awesome.enable = true;
 

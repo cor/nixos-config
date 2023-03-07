@@ -1,4 +1,6 @@
-{
+{ ... }:
+{  
+  programs.git = {
     enable = true;
     userName = "cor";
     userEmail = "cor@pruijs.dev";
@@ -12,4 +14,5 @@
       github.user = "cor";
       gpg.format = "ssh";
     };
-  }
+  };
+}

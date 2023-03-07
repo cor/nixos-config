@@ -25,6 +25,12 @@ nixpkgs.lib.nixosSystem rec {
           imports = [
             ../home-nixos.nix
             ../home-modules/kitty.nix
+            ../home-modules/tmux.nix
+            ../home-modules/git.nix
+            ../home-modules/gpg.nix
+            ../home-modules/zsh.nix
+            ../home-modules/helix.nix
+            ../home-modules/chromium.nix
           ];
         };
         extraSpecialArgs = {
