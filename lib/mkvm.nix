@@ -18,9 +18,23 @@ nixpkgs.lib.nixosSystem rec {
     ../modules/xserver.nix
     ../modules/openssh.nix
     home-manager.nixosModules.home-manager {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.cor = (import ../home-nixos.nix inputs);
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.cor = {
+          imports = [
+            ../home-nixos.nix
+            ../home-modules/kitty.nix
+          ];
+        };
+        extraSpecialArgs = {
+          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+          currentSystemName = name;
+          currentSystem = system;
+          isDarwin = (system == "aarch64-darwin" || system == "x86_64-darwin");
+          inherit inputs;
+        };
+      };
     }
 
     # We expose some extra arguments so that our modules can parameterize

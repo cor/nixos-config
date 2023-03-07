@@ -1,6 +1,5 @@
-inputs: { config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
 let
-  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
   dark-ungoogled-chromium = pkgs-unstable.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
   mkChromiumApp = import ./lib/mk-chromium-app.nix { inherit pkgs; chromium = dark-ungoogled-chromium; };
 in
@@ -108,7 +107,6 @@ in
   programs.git = import programs/git.nix;
   programs.gpg = import programs/gpg.nix;
   programs.zsh = import programs/zsh.nix;
-  programs.kitty = import programs/kitty.nix { isDarwin = false; package = pkgs-unstable.kitty; };
   programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
   programs.rofi = import programs/rofi.nix pkgs;
   programs.chromium = import programs/chromium.nix { package = dark-ungoogled-chromium; inherit lib; };
