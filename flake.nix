@@ -24,15 +24,13 @@
       user = "cor";
     in
     {
-      nixosConfigurations = {
-        vm-aarch64-vmware = mkVM "vm-aarch64-vmware" {
-          inherit user inputs nixpkgs home-manager;
-          system = "aarch64-linux";
+      nixosConfigurations = let system = "aarch64-linux"; in {
+        vm-aarch64-parallels = mkVM "vm-aarch64-parallels" {
+          inherit user inputs nixpkgs home-manager system;
         };
 
-        vm-aarch64-parallels = mkVM "vm-aarch64-parallels" {
-          inherit user inputs nixpkgs home-manager;
-          system = "aarch64-linux";
+        vm-aarch64-vmware = mkVM "vm-aarch64-vmware" {
+          inherit user inputs nixpkgs home-manager system;
         };
       };
       
