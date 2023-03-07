@@ -19,10 +19,20 @@ NIXNAME ?= vm-aarch64-parallels
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 switch:
+ifeq ($(UNAME), Darwin)
+	nix build ".#darwinConfigurations.default.system"
+	./result/sw/bin/darwin-rebuild switch --flake ".#default"
+else
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
+endif
+
+switch-show-trace:
+ifeq ($(UNAME), Darwin)
+	nix build ".#darwinConfigurations.default.system"
+	./result/sw/bin/darwin-rebuild switch --flake ".#default" --show-trace
+else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}" --show-trace
-	
-darwin:
-	TERM=xterm darwin-rebuild switch --flake ".#default" --show-trace
+endif
 
 test:
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild test --flake ".#$(NIXNAME)"
