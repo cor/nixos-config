@@ -20,7 +20,8 @@
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let 
-      mkVM = import ./lib/mkvm.nix; 
+      mkVM = import ./lib/mk-vm.nix; 
+      mkDarwin = import ./lib/mk-darwin.nix;
       user = "cor";
     in
     {
@@ -34,23 +35,9 @@
         };
       };
       
-      darwinConfigurations = {
-        default = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [ 
-            ./darwin.nix 
-            home-manager.darwinModules.home-manager {
-              users.users.cor = {
-                name = "cor";
-                home = "/Users/cor";
-              };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.cor = import ./home-darwin.nix;
-    	        home-manager.extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-          inputs = { inherit darwin nixpkgs inputs; };
+      darwinConfigurations = let system = "aarch64-darwin"; in {
+        default = mkDarwin "vm-aarch64-vmware" {
+          inherit user inputs nixpkgs home-manager system darwin;
         };
       };
       

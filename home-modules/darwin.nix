@@ -17,12 +17,6 @@ in
     bottom
   ]) ++ (with pkgs-unstable; [zellij youtube-dl]);
   
-  programs.git = import programs/git.nix;
-  programs.gpg = import programs/gpg.nix;
-  programs.zsh = import programs/zsh.nix;
-  programs.kitty = import programs/kitty.nix { isDarwin = true; package = pkgs.kitty; };
-  programs.helix = import programs/helix.nix inputs.helix.packages.${pkgs.system}.default;
-  programs.lazygit = import programs/lazygit.nix pkgs-unstable.lazygit;
   
   # Hide "last login" message on new terminal.
   home.file.".hushlogin".text = "";
