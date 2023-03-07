@@ -22,17 +22,16 @@
     let 
       mkVM = import ./lib/mkvm.nix; 
       user = "cor";
-      overlays = [];
     in
     {
       nixosConfigurations = {
         vm-aarch64-vmware = mkVM "vm-aarch64-vmware" {
-          inherit user inputs overlays nixpkgs home-manager;
+          inherit user inputs nixpkgs home-manager;
           system = "aarch64-linux";
         };
 
         vm-aarch64-parallels = mkVM "vm-aarch64-parallels" {
-          inherit user inputs overlays nixpkgs home-manager;
+          inherit user inputs nixpkgs home-manager;
           system = "aarch64-linux";
         };
       };
