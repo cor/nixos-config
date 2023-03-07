@@ -16,24 +16,34 @@ nixpkgs.lib.nixosSystem rec {
     ../modules/nix.nix
     ../modules/users.nix
     ../modules/xserver.nix
+    ../modules/xrandr.nix
     ../modules/openssh.nix
     home-manager.nixosModules.home-manager {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         users.cor = {
+          home.stateVersion = "23.05";
+          xdg.enable = true;
+          xresources.properties = let dpi = 192; in {
+            "Xft.dpi" = dpi;
+            "*.dpi" = dpi;
+          };
           imports = [
+            ../home-modules/awesome.nix
             ../home-modules/chromium.nix
+            ../home-modules/flameshot.nix
             ../home-modules/git.nix
             ../home-modules/gpg.nix
             ../home-modules/helix.nix
             ../home-modules/kitty.nix
             ../home-modules/lazygit.nix
+            ../home-modules/ranger.nix
+            ../home-modules/rofi.nix
             ../home-modules/tmux.nix
             ../home-modules/zsh.nix
-            ../home-modules/flameshot.nix
-            ../home-modules/ranger.nix
-            ../home-nixos.nix
+            ../home-modules/gtk.nix
+            ../home-modules/packages.nix
           ];
         };
         extraSpecialArgs = {

@@ -1,8 +1,5 @@
 { config, lib, pkgs, pkgs-unstable, inputs, ... }:
 {
-  xdg.enable = true;
-  home.stateVersion = "23.05";
-
   home.packages = with pkgs; [
     bat # cat replacement
     exa # ls replacement
@@ -49,30 +46,4 @@
     tdesktop
     element-desktop
   ]);
-
-  home.file.".config/awesome".source = ./awesome;
-  # Configure ranger to user kitty's image preview
-
-  gtk = {
-    enable = true;
-
-    theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
-    };
-
-    iconTheme = {
-      package = pkgs.paper-icon-theme;
-      name = "Paper";
-    };
-  };
-  programs.rofi = import programs/rofi.nix pkgs;
-  services.gpg-agent = import services/gpg-agent.nix;
-
-  xsession.windowManager.awesome.enable = true;
-  xresources.properties = let dpi = 192; in {
-    "Xft.dpi" = dpi;
-    "*.dpi" = dpi;
-  };
-
 }
