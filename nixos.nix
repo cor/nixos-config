@@ -20,7 +20,7 @@ in
 {
   nix = import ./nix.nix pkgs-unstable.nix;
 
-  fonts.fonts = with pkgs; [
+  fonts.fonts = with pkgs-unstable; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
@@ -30,74 +30,36 @@ in
     jetbrains-mono
   ];
 
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
-  networking.hostName = "dev";
-  networking.firewall.enable = false;
+  networking = {
+    nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
+    hostName = "CorBook-NixOS";
+    firewall.enable = false;
+    useDHCP = false;    
+  };
+
+  hardware = {
+    pulseaudio.enable = true;
+    video.hidpi.enable = true;
+  };
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.video.hidpi.enable = true;
-  networking.useDHCP = false;
-  security.sudo.wheelNeedsPassword = false;
+  security = {
+    sudo.wheelNeedsPassword = false;
+    pam.services.lightdm.enableGnomeKeyring = true;
+  };
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
 
   virtualisation.docker.enable = true;
 
-
-  services.xrdp.defaultWindowManager = "awesome";
-
-  services.xserver = {
-    resolutions = [ { x = 5120; y = 2880; } ];
-    dpi = 192;
-    autorun = true;
-    enable = true;
-    desktopManager = {
-      xfce.enable = true;
-    };
-    displayManager = {
-      xserverArgs = ["-dpi 192"];
-      defaultSession = "none+awesome";
-      lightdm = {
-        enable = true;
-      };
-
-      sessionCommands = ''
-        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize) 
-        export SSH_AUTH_SOCK
-        xset-r-slow
-        pamixer --set-volume 100
-        pamixer --unmute
-      '';
-    };
-
-    windowManager = {
-      awesome = {
-        enable = true;
-        luaModules = with pkgs.luaPackages; [
-          luarocks # is the package manager for Lua modules
-          luadbi-mysql # Database abstraction layer
-        ];
-      };
-    };
-
-    libinput = {
-      enable = true;
-
-      # disabling mouse acceleration
-      mouse = {
-        accelProfile = "flat";
-      };
-
-      # enable touchpad acceleration
-      touchpad = {
-        accelProfile = "adaptive";
-      };
-    };
+  services = {
+    xrdp.defaultWindowManager = "awesome";
+    gnome.gnome-keyring.enable = true;
+    xserver = import ./services/xserver.nix pkgs;
+    openssh = import ./services/openssh.nix;    
   };
+
 
   users.mutableUsers = false;
 
@@ -145,19 +107,15 @@ in
     ];
 
     variables = import ./environment/variables.nix;
-  };
- 
-  services.openssh = import ./services/openssh.nix;
 
+    # required for zsh autocomplete
+    pathsToLink = [ "/share/zsh" ];
+  };
   
   programs.zsh = {
     enable = true;  # default shell on catalina
     promptInit = "";
   };
-
-  
-  # required for zsh autocomplete
-  environment.pathsToLink = [ "/share/zsh" ];
 
   users.users.cor = {
     isNormalUser = true;
