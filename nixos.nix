@@ -5,6 +5,7 @@ name: {inputs, nixpkgs, home-manager, system, user  }:
 nixpkgs.lib.nixosSystem rec {
   inherit system;
 
+  # NixOS level modules
   modules = [
     ./hardware/${name}.nix
     ./machines/${name}.nix
@@ -18,11 +19,14 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/xserver.nix
     ./modules/xrandr.nix
     ./modules/openssh.nix
+
+    # The home-manager NixOS module
     home-manager.nixosModules.home-manager {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         users.cor = {
+          # Home-manager level modules
           imports = [
             ./home-modules/nixos-misc.nix
             ./home-modules/awesome.nix
@@ -41,6 +45,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/packages.nix
           ];
         };
+        # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
           currentSystemName = name;
@@ -51,8 +56,7 @@ nixpkgs.lib.nixosSystem rec {
       };
     }
 
-    # We expose some extra arguments so that our modules can parameterize
-    # better based on these values.
+    # Arguments that are exposed to every `module`.
     {
       config._module.args = {
         currentSystemName = name;
@@ -61,4 +65,4 @@ nixpkgs.lib.nixosSystem rec {
       };
     }
   ];
-}
+}`

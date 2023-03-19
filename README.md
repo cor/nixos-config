@@ -1,11 +1,31 @@
 # nixos-config
 
-I use NixOS inside of a Parallels VM on a M1 Mac running macOS. In addition to this, I use Nix to configure macOS with `nix-darwin`.
+My [NixOS](https://nixos.org), [nix-darwin](http://daiderd.com/nix-darwin/) and [Home Manager](https://github.com/nix-community/home-manager) configurations.
 
 ## Structure
 
+I use NixOS inside of a Parallels VM on a M1 Mac running macOS. In addition to this, I use nix-darwin to configure macOS with `nix-darwin`. Both of these setups also use Home Manager. These configurations share the same `modules/` and `home-modules/`.
+
+### Modules
+
+There are two kinds of modules:
+
+1. `modules/`, which define **NixOS** or **nix-darwin** level options.
+2. `home-modules/`, which define **Home Manager** options on both NixOS and macOS.
+
+### Configuration generating functions
+
+The modules mentioned above are imported inside of two configuration generation functions:
+
+1. `./nixos.nix`, this function generates a `nixosConfiguration`
+2. `./darwin.nix`, this function generates a `darwinConfiguration`
+
+These fucntions are used in `./flake.nix`'s `nixosConfigurations` and `darwinConfigurations` 
+
 
 ## How to fork this configuration for your own usage
+
+_NOTE: These instructions are out of date_
 
 1. Do a project-wide search of my username, `cor` and replace it with `your_username`. Be careful not to replace things that are not my username, such as "core".
 2. In `./nixos.nix`, replace the value of `hashedPassword` with one you've generated with `mkpasswd -m sha-512` [See here for more info](https://search.nixos.org/options?channel=22.05&show=users.users.%3Cname%3E.hashedPassword&from=0&size=50&sort=relevance&type=packages&query=users.users.%3Cname%3E.hash).
