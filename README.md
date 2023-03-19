@@ -2,6 +2,9 @@
 
 I use NixOS inside of a Parallels VM on a M1 Mac running macOS. In addition to this, I use Nix to configure macOS with `nix-darwin`.
 
+## Structure
+
+
 ## How to fork this configuration for your own usage
 
 1. Do a project-wide search of my username, `cor` and replace it with `your_username`. Be careful not to replace things that are not my username, such as "core".

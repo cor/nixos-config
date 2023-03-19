@@ -20,8 +20,8 @@
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let 
-      mkNixos = import ./lib/mk-nixos.nix; 
-      mkDarwin = import ./lib/mk-darwin.nix;
+      mkNixos = import ./nixos.nix; 
+      mkDarwin = import ./darwin.nix;
       user = "cor";
     in
     {
