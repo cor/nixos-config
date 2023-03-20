@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/xserver.nix
     ./modules/xrandr.nix
     ./modules/openssh.nix
+    ./modules/zsh.nix
 
     # The home-manager NixOS module
     home-manager.nixosModules.home-manager {

@@ -20,9 +20,4 @@
     xrdp.defaultWindowManager = "awesome";
     gnome.gnome-keyring.enable = true;
   };
-
-  programs.zsh = {
-    enable = true;  # default shell on catalina
-    promptInit = "";
-  };
 }

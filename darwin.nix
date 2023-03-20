@@ -8,6 +8,7 @@ darwin.lib.darwinSystem {
   # nix-darwin level modules
   modules = [ 
     ./modules/nix.nix
+    ./modules/zsh.nix
     ./modules/darwin.nix 
 
     # The home-manager nix-darwin module
