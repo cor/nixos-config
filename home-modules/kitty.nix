@@ -4,6 +4,7 @@
     enable = true;
     package = pkgs-unstable.kitty;
     settings = {
+      enabled_layouts = "fat:bias=70;,tall,splits,stack";
       scrollback_lines = 1000000;
       enable_audio_bell = false;
       update_check_interval = 0;
@@ -52,6 +53,7 @@
       "alt+p" = "next_layout";
       "alt+shift+p" = "last_used_layout";
       "alt+o" = "toggle_layout stack"; # temporarily maximize a window
+      "alt+." = "layout_action bias 50 62 70 80";
     });
     theme = "Ayu Mirage";
   };
