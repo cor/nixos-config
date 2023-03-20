@@ -65,4 +65,4 @@ nixpkgs.lib.nixosSystem rec {
       };
     }
   ];
-}`
+}
