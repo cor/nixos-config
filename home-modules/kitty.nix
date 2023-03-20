@@ -35,6 +35,7 @@
       "cmd+shift+k" = "move_window_backward";
       "cmd+shift+r" = "set_tab_title";
       "cmd+p" = "next_layout";
+      "cmd+shift+p" = "last_used_layout";
       "cmd+o" = "toggle_layout stack"; # temporarily maximize a window
     } else {
       "super+shift+enter" = "new_os_window_with_cwd";
@@ -49,6 +50,7 @@
       "alt+r" = "start_resizing_window";
       "alt+shift+r" = "set_tab_title";
       "alt+p" = "next_layout";
+      "alt+shift+p" = "last_used_layout";
       "alt+o" = "toggle_layout stack"; # temporarily maximize a window
     });
     theme = "Ayu Mirage";
