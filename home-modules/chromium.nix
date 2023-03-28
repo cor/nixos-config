@@ -1,7 +1,9 @@
-{ pkgs, pkgs-unstable, lib, ... }: 
+{ pkgs, pkgs-unstable, lib, theme, ... }: 
      let
-      package = pkgs-unstable.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; };
-     
+      package = if theme == "dark" then 
+        pkgs-unstable.ungoogled-chromium.override { commandLineArgs = "--force-dark-mode --enable-features=WebUIDarkMode"; } 
+      else pkgs-unstable.ungoogled-chromium;
+
       mkChromiumApp = { name, genericName, url }:  
         pkgs.makeDesktopItem rec {
           inherit name;

@@ -44,6 +44,5 @@
     _1password-gui
     obsidian
     tdesktop
-    element-desktop
   ]);
 }

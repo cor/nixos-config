@@ -3,6 +3,7 @@
   environment = {
     systemPackages = with pkgs; [
       git
+      element-desktop
       git-lfs
       gnumake
       killall

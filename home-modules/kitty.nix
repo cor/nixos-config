@@ -1,4 +1,4 @@
-{ isDarwin, pkgs-unstable, ... }: 
+{ isDarwin, pkgs-unstable, theme, ... }: 
 {
   programs.kitty = {
     enable = true;
@@ -55,6 +55,6 @@
       "alt+o" = "toggle_layout stack"; # temporarily maximize a window
       "alt+." = "layout_action bias 50 62 70 80";
     });
-    theme = "Ayu Mirage";
+    theme = if theme == "dark" then "Ayu Mirage" else "Rosé Pine Dawn";
   };
 }

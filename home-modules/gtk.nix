@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 {
   gtk = {
     enable = true;
 
     theme = {
       package = pkgs.arc-theme;
-      name = "Arc-Dark";
+      name = if theme == "dark" then "Arc-Dark" else "Arc";
     };
 
     iconTheme = {

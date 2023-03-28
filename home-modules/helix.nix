@@ -1,11 +1,11 @@
-{ inputs, pkgs, ...}: 
+{ inputs, pkgs, theme, ...}: 
 {
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
-      theme = "ayu_mirage";
+      theme = if theme == "dark" then "ayu_mirage" else "rose_pine_dawn";
       editor = {
         auto-format = true;
         completion-trigger-len = 0;
