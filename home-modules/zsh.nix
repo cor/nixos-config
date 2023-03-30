@@ -1,4 +1,4 @@
-{...}:
+{ isDarwin, ...}:
 {
   programs.zsh = { 
     enable = true;
@@ -14,7 +14,9 @@
       hxt = "CARGO_TARGET_DIR=target/rust-analyzer nix run github:pinelang/helix-tree-explorer/tree_explore"; # Helix PR with tree explorer
       nd = "nix develop --command zsh";
       gs = "git status";
-    };
+    } // (if isDarwin then {} else {
+      open = "xdg-open";
+    });
   };
 }
 
