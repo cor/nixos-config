@@ -35,7 +35,7 @@
       xset r rate 150 40
     '')
     (writeShellScriptBin "xset-r-slow" ''
-      xset r rate 250 30
+      xset r rate 350 20
     '')
   ] ++
   (with pkgs-unstable; [
