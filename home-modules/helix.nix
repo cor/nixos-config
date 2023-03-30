@@ -16,11 +16,16 @@
         indent-guides.render = true;
         file-picker.hidden = false;
         auto-pairs = false;
-        lsp.display-messages = true;
+        lsp = {
+          enable = true;
+          display-messages = true;
+          display-inlay-hints = true;
+        };
         bufferline = "always";
         statusline = {
           left = [ "mode" "spinner" "file-name" ];
           right = [ "diagnostics" "position" "total-line-numbers" "file-encoding" ];
+          center = [ "version-control" ];
         };
         soft-wrap = {
           enable = true;
