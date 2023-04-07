@@ -32,6 +32,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/nixos-misc.nix
             ./home-modules/awesome.nix
             ./home-modules/chromium.nix
+            ./home-modules/direnv.nix
             ./home-modules/flameshot.nix
             ./home-modules/git.nix
             ./home-modules/gpg.nix
