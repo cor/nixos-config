@@ -8,5 +8,8 @@
     fira-code
     fira-code-symbols
     jetbrains-mono
+    (pkgs-unstable.nerdfonts.override {
+      fonts = [ "JetBrainsMono" ];
+    })
   ];
 }
