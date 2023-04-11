@@ -11,7 +11,7 @@
     pam.services.lightdm.enableGnomeKeyring = true;
   };
 
-  time.timeZone = null;
+  time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
 
   virtualisation.docker.enable = true;
