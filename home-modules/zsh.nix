@@ -14,6 +14,7 @@
       hxt = "CARGO_TARGET_DIR=target/rust-analyzer nix run github:pinelang/helix-tree-explorer/tree_explore"; # Helix PR with tree explorer
       nd = "nix develop --command zsh";
       gs = "git status";
+      update-time = "sudo date -s \"$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z\"";
     } // (if isDarwin then {} else {
       open = "xdg-open";
     });
