@@ -29,6 +29,7 @@ nixpkgs.lib.nixosSystem rec {
         users.cor = {
           # Home-manager level modules
           imports = [
+            ./home-modules/bat.nix
             ./home-modules/nixos-misc.nix
             ./home-modules/awesome.nix
             ./home-modules/chromium.nix
@@ -52,7 +53,7 @@ nixpkgs.lib.nixosSystem rec {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
           currentSystemName = name;
           currentSystem = system;
-          theme = "light"; # "dark" or "light"
+          theme = "dark"; # "dark" or "light"
           isDarwin = false;
           inherit inputs;
         };
