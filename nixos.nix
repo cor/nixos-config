@@ -9,16 +9,16 @@ nixpkgs.lib.nixosSystem rec {
   modules = [
     ./hardware/${name}.nix
     ./machines/${name}.nix
-    ./modules/nixpkgs.nix
-    ./modules/misc.nix
     ./modules/environment.nix
     ./modules/fonts.nix
+    ./modules/misc.nix
     ./modules/networking.nix
     ./modules/nix.nix
-    ./modules/users.nix
-    ./modules/xserver.nix
-    ./modules/xrandr.nix
+    ./modules/nixpkgs.nix
     ./modules/openssh.nix
+    ./modules/users.nix
+    ./modules/xrandr.nix
+    ./modules/xserver.nix
     ./modules/zsh.nix
 
     # The home-manager NixOS module
@@ -29,23 +29,24 @@ nixpkgs.lib.nixosSystem rec {
         users.cor = {
           # Home-manager level modules
           imports = [
-            ./home-modules/bat.nix
-            ./home-modules/nixos-misc.nix
             ./home-modules/awesome.nix
+            ./home-modules/bat.nix
             ./home-modules/chromium.nix
             ./home-modules/direnv.nix
             ./home-modules/flameshot.nix
             ./home-modules/git.nix
             ./home-modules/gpg.nix
+            ./home-modules/gtk.nix
             ./home-modules/helix.nix
             ./home-modules/kitty.nix
             ./home-modules/lazygit.nix
+            ./home-modules/nixos-misc.nix
+            ./home-modules/nushell.nix
+            ./home-modules/packages.nix
             ./home-modules/ranger.nix
             ./home-modules/rofi.nix
             ./home-modules/tmux.nix
             ./home-modules/zsh.nix
-            ./home-modules/gtk.nix
-            ./home-modules/packages.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
