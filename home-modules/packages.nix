@@ -27,6 +27,7 @@
     gtkmm3 # needed for the vmware user tools clipboard
     neofetch
     nixfmt
+    neovim
     pinentry
     pinentry-curses
     pick-colour-picker
