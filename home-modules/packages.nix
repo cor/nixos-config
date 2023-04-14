@@ -42,7 +42,7 @@
   (with pkgs-unstable; [
     zellij
     vscode
-    _1password-gui
+    (_1password-gui.override ({ polkitPolicyOwners = ["cor"]; }))    
     obsidian
     tdesktop
   ]);
