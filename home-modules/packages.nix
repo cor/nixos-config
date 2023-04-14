@@ -12,6 +12,8 @@
     jq
     ripgrep
     ranger
+    gimp
+    krita
     tree
     watch
     openssh
