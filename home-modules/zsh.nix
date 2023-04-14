@@ -15,6 +15,7 @@
       nd = "nix develop --command zsh";
       gs = "git status";
       update-time = "sudo date -s \"$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z\"";
+      nixbuild-shell = "ssh eu.nixbuild.net shell";
     } // (if isDarwin then {} else {
       open = "xdg-open";
     });
