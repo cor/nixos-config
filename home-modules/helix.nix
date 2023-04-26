@@ -31,6 +31,10 @@
           enable = true;
         };
       };
+
+      keys.normal.space = {
+        "h" = ":toggle-option lsp.display-inlay-hints";
+      };
     };
  
     languages = [
