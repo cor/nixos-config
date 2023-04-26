@@ -7,6 +7,7 @@
       git-lfs
       gnumake
       killall
+      unzip
       niv
       rxvt_unicode
       xclip
