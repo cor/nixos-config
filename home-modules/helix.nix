@@ -34,6 +34,7 @@
 
       keys.normal.space = {
         "h" = ":toggle-option lsp.display-inlay-hints";
+        "c" = [":write-all" ":run-shell-command treefmt" ":reload-all"];
       };
     };
  
