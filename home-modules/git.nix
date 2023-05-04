@@ -13,6 +13,7 @@
       color.ui = true;
       github.user = "cor";
       gpg.format = "ssh";
+      init.defaultBranch = "main";
 
       # Fix go private dependency fetching by using SSH instead of HTTPS
       "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";
