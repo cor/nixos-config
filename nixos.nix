@@ -16,11 +16,11 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/nix.nix
     ./modules/nixpkgs.nix
     ./modules/openssh.nix
+    ./modules/thunar.nix
     ./modules/users.nix
     ./modules/xrandr.nix
     ./modules/xserver.nix
     ./modules/zsh.nix
-
     # The home-manager NixOS module
     home-manager.nixosModules.home-manager {
       home-manager = {
