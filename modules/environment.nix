@@ -5,6 +5,7 @@
       git
       element-desktop
       git-lfs
+      file
       gnumake
       killall
       unzip
