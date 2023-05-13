@@ -25,6 +25,24 @@
       user = "cor";
     in
     {
+      packages.aarch64-linux.set-theme = let 
+        pkgs = import nixpkgs { system = "aarch64-linux";}; 
+        in pkgs.writeShellApplication {
+          name = "switch-theme";
+          runtimeInputs = with pkgs; [ coreutils nixos-rebuild ];
+          text = ''
+            if [ "$1" != "light" ] && [ "$1" != "dark" ]; then
+              echo "Error: Theme must be 'light' or 'dark'"
+              exit 1
+            fi
+            
+            echo "$1"
+            cd /home/cor/nixos-config
+            printf '%s' "$1" > THEME.txt
+            sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#vm-aarch64-parallels"
+          '';
+      };
+    
       nixosConfigurations = let system = "aarch64-linux"; in {
         vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
           inherit user inputs nixpkgs home-manager system;

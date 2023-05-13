@@ -54,7 +54,7 @@ nixpkgs.lib.nixosSystem rec {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
           currentSystemName = name;
           currentSystem = system;
-          theme = "dark"; # "dark" or "light"
+          theme = builtins.readFile ./THEME.txt; # "dark" or "light"
           isDarwin = false;
           inherit inputs;
         };

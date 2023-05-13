@@ -111,12 +111,18 @@ repeatratemenu = {
     { "fast", "xset-r-fast" },
 }
 
+thememenu = {
+    { "light", "nix run /home/cor/nixos-config\\#set-theme light" },
+    { "dark", "nix run /home/cor/nixos-config\\#set-theme dark" },
+}
+
 
 mymainmenu = awful.menu({ 
   items = { 
     { "awesome", myawesomemenu, beautiful.awesome_icon },
-    { "resolution", resolutionmenu},
-    { "repeat rate", repeatratemenu},
+    { "theme", thememenu },
+    { "resolution", resolutionmenu },
+    { "repeat rate", repeatratemenu },
     { "open terminal", terminal }
   }
 })
