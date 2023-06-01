@@ -11,6 +11,7 @@
       kitty 
       element-desktop
       vscodium
+      gh
     ];
 
     variables = import ./environment/variables.nix;
