@@ -31,32 +31,24 @@
     };
     keybindings = {
       "kitty_mod+n" = "new_window_with_cwd";
-    } // (if isDarwin then {
       "alt+enter" = "new_window_with_cwd";
       "alt+j" = "next_window";
-      "alt+shift+j" = "move_window_forward";
       "alt+k" = "previous_window";
+      "alt+shift+j" = "move_window_forward";
       "alt+shift+k" = "move_window_backward";
-      "alt+shift+r" = "set_tab_title";
-      "alt+p" = "next_layout";
-      "alt+shift+p" = "last_used_layout";
+      "alt+r" = "start_resizing_window";
       "alt+o" = "toggle_layout stack"; # temporarily maximize a window
+      "alt+p" = "next_layout";
+      "alt+w" = "close_window";
+      "alt+shift+p" = "last_used_layout";
+      "alt+shift+r" = "set_tab_title";
+      "alt+." = "layout_action bias 50 62 70 80";
+    } // (if isDarwin then {
     } else {
       "super+shift+enter" = "new_os_window_with_cwd";
-      "alt+enter" = "new_window_with_cwd";
-      "alt+w" = "close_window";
-      "alt+j" = "next_window";
       "alt+t" = "new_tab";
       "alt+]" = "next_tab";
       "alt+[" = "previous_tab";
-      "alt+k" = "previous_window";
-      "alt+shift+k" = "move_window_backward";
-      "alt+r" = "start_resizing_window";
-      "alt+shift+r" = "set_tab_title";
-      "alt+p" = "next_layout";
-      "alt+shift+p" = "last_used_layout";
-      "alt+o" = "toggle_layout stack"; # temporarily maximize a window
-      "alt+." = "layout_action bias 50 62 70 80";
     });
     theme = if theme == "dark" then "Ayu Mirage" else "Rosé Pine Dawn";
   };
