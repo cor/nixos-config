@@ -24,6 +24,7 @@ darwin.lib.darwinSystem {
           # Home-manager level modules
           imports = [
             ./home-modules/darwin.nix
+            ./home-modules/direnv.nix
             ./home-modules/git.nix
             ./home-modules/gpg.nix
             ./home-modules/zsh.nix
