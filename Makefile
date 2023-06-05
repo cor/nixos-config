@@ -31,7 +31,7 @@ ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.default.system"
 	./result/sw/bin/darwin-rebuild switch --flake ".#default" --show-trace
 else
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}" --show-trace
+	sudo GIT_LFS_SKIP_SMUDGE=1 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}" --show-trace
 endif
 
 test:
