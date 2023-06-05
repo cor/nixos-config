@@ -21,6 +21,9 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/xrandr.nix
     ./modules/xserver.nix
     ./modules/zsh.nix
+    inputs.union.nixosModules.unionvisor
+    ./modules/unionvisor.nix
+
     # The home-manager NixOS module
     home-manager.nixosModules.home-manager {
       home-manager = {
@@ -67,6 +70,8 @@ nixpkgs.lib.nixosSystem rec {
         currentSystemName = name;
         currentSystem = system;
         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+        # inherit system;
+        # inherit inputs;
       };
     }
   ];

@@ -20,4 +20,6 @@
     xrdp.defaultWindowManager = "awesome";
     gnome.gnome-keyring.enable = true;
   };
+
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];  
 }
