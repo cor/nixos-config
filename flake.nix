@@ -16,7 +16,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    union.url = "git+ssh://git@github.com/unionfi/union?ref=21-add-a-nix-module-for-unionvisor";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:

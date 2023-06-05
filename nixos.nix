@@ -21,8 +21,6 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/xrandr.nix
     ./modules/xserver.nix
     ./modules/zsh.nix
-    inputs.union.nixosModules.unionvisor
-    ./modules/unionvisor.nix
 
     # The home-manager NixOS module
     home-manager.nixosModules.home-manager {
