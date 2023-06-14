@@ -38,7 +38,7 @@
       };
     };
  
-    languages = [
+    languages.language = [
       {
         name = "rust";
         config = {

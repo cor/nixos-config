@@ -2,7 +2,6 @@
 {
   hardware = {
     pulseaudio.enable = true;
-    video.hidpi.enable = true;
   };
 
   sound.enable = true;

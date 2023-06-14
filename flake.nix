@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils = { url = "github:numtide/flake-utils"; };
     helix.url = "github:helix-editor/helix";
