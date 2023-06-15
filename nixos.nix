@@ -48,6 +48,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/rofi.nix
             ./home-modules/tmux.nix
             ./home-modules/zsh.nix
+            ./home-modules/wezterm.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
