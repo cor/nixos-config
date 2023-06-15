@@ -297,6 +297,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kitty": {
+      "locked": {
+        "lastModified": 1681450683,
+        "narHash": "sha256-wRyZfMMR6LlmWuv2VWPxnVZSGw+wRuOn1ZIELGV9Cxk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "65702964b39bcf6d5c6b5b898b7d73e08b94b13f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "65702964b39bcf6d5c6b5b898b7d73e08b94b13f",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -409,6 +425,7 @@
         "helix": "helix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-kitty": "nixpkgs-kitty",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },

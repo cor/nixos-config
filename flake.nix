@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # The SSH kitten broke with the latest kitty release.
+    # will use this rev until fixed
+    nixpkgs-kitty.url = "github:nixos/nixpkgs/65702964b39bcf6d5c6b5b898b7d73e08b94b13f";
     flake-utils = { url = "github:numtide/flake-utils"; };
     helix.url = "github:helix-editor/helix";
     

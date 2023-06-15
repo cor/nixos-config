@@ -54,6 +54,7 @@ nixpkgs.lib.nixosSystem rec {
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+          pkgs-kitty = import inputs.nixpkgs-kitty { inherit system; config.allowUnfree = true; };
           currentSystemName = name;
           currentSystem = system;
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"

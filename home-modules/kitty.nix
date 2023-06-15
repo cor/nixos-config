@@ -1,8 +1,8 @@
-{ isDarwin, pkgs, theme, ... }: 
+{ isDarwin, pkgs-kitty, theme, ... }: 
 {
   programs.kitty = {
-    enable = false;
-    package = pkgs.kitty;
+    enable = true;
+    package = pkgs-kitty.kitty;
     settings = {
       enabled_layouts = "fat:bias=70;,tall,splits,stack";
       scrollback_lines = 1000000;
