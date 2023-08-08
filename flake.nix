@@ -7,7 +7,7 @@
     # The SSH kitten broke with the latest kitty release.
     # will use this rev until fixed
     nixpkgs-kitty.url = "github:nixos/nixpkgs/65702964b39bcf6d5c6b5b898b7d73e08b94b13f";
-    flake-utils = { url = "github:numtide/flake-utils"; };
+    flake-utils.url = "github:numtide/flake-utils";
     helix.url = "github:helix-editor/helix";
     
     darwin = {
@@ -16,7 +16,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+    url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
