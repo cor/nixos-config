@@ -27,10 +27,10 @@
     enable = true;
     package = with pkgs; (config.boot.kernelPackages.prl-tools.overrideAttrs (old:
       let
-        version = "18.3.2-53621";
+        version = "19.0.0-54570";
         src = fetchurl {
           url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
-          sha256 = "sha256-mPETZiCI/i6xJ3+ououDKaVwrAxK5cr6L6A16oEgIqk=";
+          sha256 = "sha256-y7UC+E5i2cxkOJ9nVI6aQAFJ5kTXv9uaZoMO4/SCS6k=";
         };
         patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
           # ./prl-tools-6.0.patch
