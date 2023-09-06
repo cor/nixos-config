@@ -12,7 +12,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 local bg_color = "#111111"
-local focus_color = "#85a8bf"
+local focus_color = "#85a8ff"
 
 theme.font          = "JetBrains Mono 10"
 
@@ -27,8 +27,8 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
+theme.useless_gap   = dpi(8)
+theme.border_width  = dpi(2)
 theme.border_normal = "#222222"
 theme.border_focus  = focus_color
 theme.border_marked = "#91231c"
