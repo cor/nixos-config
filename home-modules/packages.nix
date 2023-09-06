@@ -2,38 +2,38 @@
 {
   home.packages = with pkgs; [
     bat # cat replacement
-    exa # ls replacement
-    gping # ping with graph
-    gh
-    fd
-    thunderbird
-    fzf
-    htop
-    jq
-    ripgrep
-    ranger
-    gimp
-    krita
-    tree
-    watch
-    openssh
-    zip
+    binutils
+    bottom
+    coreutils-full
     curl
     delta
-    pamixer
-    wget
-    coreutils-full
-    binutils
+    du-dust
+    exa # ls replacement
+    fd
+    fzf
+    gh
+    gimp
     gnome3.gnome-control-center
-    xclip
+    gping # ping with graph
     gtkmm3 # needed for the vmware user tools clipboard
+    htop
+    jq
+    krita
     neofetch
-    nixfmt
     neovim
+    nixfmt
+    openssh
+    pamixer
+    pick-colour-picker
     pinentry
     pinentry-curses
-    pick-colour-picker
-    bottom
+    ranger
+    ripgrep
+    tree
+    watch
+    wget
+    xclip
+    zip
     (writeShellScriptBin "xset-r-fast" ''
       xset r rate 150 40
     '')
@@ -47,5 +47,7 @@
     (_1password-gui.override ({ polkitPolicyOwners = ["cor"]; }))    
     obsidian
     tdesktop
+    gomuks
+    thunderbird
   ]);
 }
