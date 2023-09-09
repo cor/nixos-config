@@ -1,9 +1,8 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ custom-packages, config, lib, pkgs, pkgs-unstable, inputs, ... }:
 {
   home.packages = with pkgs; [
     bat # cat replacement
     binutils
-    bottom
     coreutils-full
     curl
     delta
@@ -19,8 +18,6 @@
     htop
     jq
     krita
-    neofetch
-    neovim
     nixfmt
     openssh
     pamixer
@@ -35,6 +32,7 @@
     xclip
     zip
     speedtest-cli # speedtest.net 
+    custom-packages.current-task
     (writeShellScriptBin "xset-r-fast" ''
       xset r rate 150 40
     '')
@@ -45,8 +43,11 @@
   (with pkgs-unstable; [
     zellij
     vscode
+    bottom
+    neofetch
     (_1password-gui.override ({ polkitPolicyOwners = ["cor"]; }))    
     obsidian
+    marksman
     tdesktop
     gomuks
     thunderbird

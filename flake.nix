@@ -26,11 +26,11 @@
       mkNixos = import ./nixos.nix; 
       mkDarwin = import ./darwin.nix;
       user = "cor";
-    in
+    in rec 
     {
-      packages.aarch64-linux.set-theme = let 
-        pkgs = import nixpkgs { system = "aarch64-linux";}; 
-        in pkgs.writeShellApplication {
+      packages.aarch64-linux = let  pkgs = import nixpkgs { system = "aarch64-linux";};  in  {
+      
+        set-theme = pkgs.writeShellApplication {
           name = "switch-theme";
           runtimeInputs = with pkgs; [ coreutils nixos-rebuild ];
           text = ''
@@ -38,17 +38,28 @@
               echo "Error: Theme must be 'light' or 'dark'"
               exit 1
             fi
-            
+    
             echo "$1"
             cd /home/cor/nixos-config
             printf '%s' "$1" > THEME.txt
             sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#vm-aarch64-parallels"
           '';
-      };
+        };      
+        current-task = pkgs.writeShellApplication {
+          name = "current-task";
+          text = ''
+            NEWEST_ENTRY=$(find /home/cor/omega/Journal/*.* | tac | head -n 1)
+           	CURRENT_TASK=$(grep --color=never -e '- \[ \]' < "$NEWEST_ENTRY" | head -n 1 | awk '{$1=$1};1' | cut -c 7-)
+              echo "$CURRENT_TASK"
+            '';
+          };            
+        };
+
     
       nixosConfigurations = let system = "aarch64-linux"; in {
         vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
           inherit user inputs nixpkgs home-manager system;
+          custom-packages = packages.aarch64-linux;
         };
 
         vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
