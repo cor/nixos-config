@@ -50,6 +50,6 @@
       "alt+]" = "next_tab";
       "alt+[" = "previous_tab";
     });
-    theme = if theme == "dark" then "Ayu Mirage" else "Rosé Pine Dawn";
+    theme = if theme == "dark" then "Catppuccin-Frappe" else "Rosé Pine Dawn";
   };
 }

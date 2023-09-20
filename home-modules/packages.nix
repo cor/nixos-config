@@ -41,7 +41,6 @@
     '')
   ] ++
   (with pkgs-unstable; [
-    zellij
     vscode
     bottom
     neofetch

@@ -23,19 +23,5 @@
       open = "xdg-open";
     });
   };
-
-  # Needed to let Zellij find SSH_AUTH_SOCK after re-attaching to session
-  # cfr: https://github.com/zellij-org/zellij/issues/862#issuecomment-973881560
-  # ---------------------------------------------------
-  programs.zsh.initExtra = (if isDarwin then "" else ''
-    export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
-  '');
-
-  home.file.".ssh/rc".text = ''
-    if test "$SSH_AUTH_SOCK"; then
-      ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-    fi
-  '';
-  # ---------------------------------------------------
 }
 

@@ -7,6 +7,7 @@ nixpkgs.lib.nixosSystem rec {
 
   # NixOS level modules
   modules = [
+    # inputs.union.nixosModules.hubble
     ./hardware/${name}.nix
     ./machines/${name}.nix
     ./modules/environment.nix
@@ -21,6 +22,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/xrandr.nix
     ./modules/xserver.nix
     ./modules/zsh.nix
+    # ./modules/hubble.nix
 
     # The home-manager NixOS module
     home-manager.nixosModules.home-manager {
@@ -49,6 +51,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/tmux.nix
             ./home-modules/zsh.nix
             ./home-modules/wezterm.nix
+            ./home-modules/zellij.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
