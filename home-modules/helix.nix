@@ -35,6 +35,9 @@
       keys.normal.space = {
         "h" = ":toggle-option lsp.display-inlay-hints";
         "c" = [":write-all"];
+        # f and F are swapped, as picking in cwd is much more common for me.
+        "f" = "file_picker_in_current_directory";
+        "F" = "file_picker";
       };
     };
  
