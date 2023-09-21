@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-unstable, lib, currentSystemName, ... }: 
+{ inputs, pkgs, pkgs-unstable, lib, currentSystemName, ... }:
 {
   hardware = {
     pulseaudio.enable = true;
@@ -20,5 +20,5 @@
     gnome.gnome-keyring.enable = true;
   };
 
-  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];  
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 }

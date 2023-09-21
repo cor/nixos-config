@@ -1,7 +1,7 @@
-{ ... }: 
+{ ... }:
 {
   programs.zsh = {
-    enable = true;  # default shell on catalina
+    enable = true; # default shell on catalina
     promptInit = ''
       if [ -n "''${commands[fzf-share]}" ]; then
         source "''$(fzf-share)/key-bindings.zsh"

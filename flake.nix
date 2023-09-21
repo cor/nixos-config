@@ -9,14 +9,14 @@
     nixpkgs-kitty.url = "github:nixos/nixpkgs/65702964b39bcf6d5c6b5b898b7d73e08b94b13f";
     flake-utils.url = "github:numtide/flake-utils";
     helix.url = "github:helix-editor/helix";
-    
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-    url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -24,14 +24,15 @@
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
-    let 
-      mkNixos = import ./nixos.nix; 
+    let
+      mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
       user = "cor";
-    in rec 
+    in
+    rec
     {
-      packages.aarch64-linux = let  pkgs = import nixpkgs { system = "aarch64-linux";};  in  {
-      
+      packages.aarch64-linux = let pkgs = import nixpkgs { system = "aarch64-linux"; }; in {
+
         set-theme = pkgs.writeShellApplication {
           name = "switch-theme";
           runtimeInputs = with pkgs; [ coreutils nixos-rebuild ];
@@ -46,18 +47,18 @@
             printf '%s' "$1" > THEME.txt
             sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#vm-aarch64-parallels"
           '';
-        };      
+        };
         current-task = pkgs.writeShellApplication {
           name = "current-task";
           text = ''
-            NEWEST_ENTRY=$(find /home/cor/omega/Journal/*.* | tac | head -n 1)
-           	CURRENT_TASK=$(grep --color=never -e '- \[ \]' < "$NEWEST_ENTRY" | head -n 1 | awk '{$1=$1};1' | cut -c 7-)
-              echo "$CURRENT_TASK"
-            '';
-          };            
+             NEWEST_ENTRY=$(find /home/cor/omega/Journal/*.* | tac | head -n 1)
+            	CURRENT_TASK=$(grep --color=never -e '- \[ \]' < "$NEWEST_ENTRY" | head -n 1 | awk '{$1=$1};1' | cut -c 7-)
+               echo "$CURRENT_TASK"
+          '';
         };
+      };
 
-    
+
       nixosConfigurations = let system = "aarch64-linux"; in {
         vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
           inherit user inputs nixpkgs home-manager system;
@@ -68,19 +69,21 @@
           inherit user inputs nixpkgs home-manager system;
         };
       };
-      
+
       darwinConfigurations = let system = "aarch64-darwin"; in {
         default = mkDarwin "vm-aarch64-vmware" {
           inherit user inputs nixpkgs home-manager system darwin;
         };
       };
-      
+
     } // (flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; }; in
       {
+        formatter = pkgs.nixpkgs-fmt;
+
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ nil sumneko-lua-language-server cmake-language-server];
+            buildInputs = with pkgs; [ nil sumneko-lua-language-server cmake-language-server ];
           };
         };
       }

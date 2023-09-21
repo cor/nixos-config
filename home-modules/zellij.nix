@@ -1,4 +1,4 @@
-{ pkgs-unstable, isDarwin, ...}: 
+{ pkgs-unstable, isDarwin, ... }:
 {
   programs.zellij = {
     enable = true;

@@ -1,4 +1,4 @@
-{ pkgs-unstable, ...}:
+{ pkgs-unstable, ... }:
 {
   fonts.fonts = with pkgs-unstable; [
     noto-fonts

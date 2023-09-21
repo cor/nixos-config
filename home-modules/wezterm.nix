@@ -1,4 +1,4 @@
-{ isDarwin, pkgs, theme, ... }: 
+{ isDarwin, pkgs, theme, ... }:
 {
   programs.wezterm = {
     enable = true;

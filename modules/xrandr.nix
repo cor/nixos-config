@@ -1,19 +1,19 @@
-{ pkgs, lib, ... }: 
+{ pkgs, lib, ... }:
 let
-mkXr = { name ? "", w, h, r }:
-  let
-    modeName = "${toString w}x${toString h}_${toString r}.00";
-    scriptName = if lib.stringLength name == 0 then modeName else name;
-  in
-  pkgs.writeShellScriptBin "xr-${scriptName}" ''
-    # xrandr doesn't parse the output correctly when you use $()      
-    # therefore we use eval instead
-    MODELINE=$(cvt ${toString w} ${toString h} ${toString r} | tail -n 1 | cut -d " " -f2-) 
-    eval "xrandr --newmode $MODELINE" 
-    xrandr --addmode Virtual-1 ${modeName}
-    xrandr -s ${modeName}
-    xrandr --dpi 192 
-  '';
+  mkXr = { name ? "", w, h, r }:
+    let
+      modeName = "${toString w}x${toString h}_${toString r}.00";
+      scriptName = if lib.stringLength name == 0 then modeName else name;
+    in
+    pkgs.writeShellScriptBin "xr-${scriptName}" ''
+      # xrandr doesn't parse the output correctly when you use $()      
+      # therefore we use eval instead
+      MODELINE=$(cvt ${toString w} ${toString h} ${toString r} | tail -n 1 | cut -d " " -f2-) 
+      eval "xrandr --newmode $MODELINE" 
+      xrandr --addmode Virtual-1 ${modeName}
+      xrandr -s ${modeName}
+      xrandr --dpi 192 
+    '';
 in
 {
   environment.systemPackages = [
@@ -33,6 +33,6 @@ in
     { name = "square"; w = 2880; h = 2880; r = 60; }
     { name = "vertical-studio-display"; w = 2880; h = 5120; r = 60; }
     { name = "things-sidebar"; w = 4296; h = 2880; r = 60; }
-    { name = "4-3"; w = 3840; h = 2880; r = 60; } 
+    { name = "4-3"; w = 3840; h = 2880; r = 60; }
   ];
 }

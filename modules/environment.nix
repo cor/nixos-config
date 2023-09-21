@@ -1,5 +1,5 @@
-{ pkgs, lib, currentSystemName, ... }: 
-{  
+{ pkgs, lib, currentSystemName, ... }:
+{
   environment = {
     systemPackages = with pkgs; [
       git

@@ -1,7 +1,7 @@
-{ inputs, pkgs,... }: 
+{ inputs, pkgs, ... }:
 {
-	programs.thunar.plugins = with pkgs.xfce; [
-	  thunar-archive-plugin
-	  thunar-volman 
-	];
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
 }

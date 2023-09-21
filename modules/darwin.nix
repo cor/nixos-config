@@ -4,11 +4,11 @@
   services.nix-daemon.enable = true;
 
   environment = {
-    systemPackages = with pkgs; [ 
-      gnumake 
-      coreutils 
-      cmake 
-      kitty 
+    systemPackages = with pkgs; [
+      gnumake
+      coreutils
+      cmake
+      kitty
       element-desktop
       vscodium
       gh

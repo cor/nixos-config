@@ -2,7 +2,7 @@
 {
   boot = {
     # Be careful updating this.
-    kernelPackages = pkgs.linuxPackages_latest;  
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       systemd-boot = {
         enable = true;

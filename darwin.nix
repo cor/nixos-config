@@ -6,13 +6,14 @@ darwin.lib.darwinSystem {
   system = "aarch64-darwin";
 
   # nix-darwin level modules
-  modules = [ 
+  modules = [
     ./modules/nix.nix
     ./modules/zsh.nix
-    ./modules/darwin.nix 
+    ./modules/darwin.nix
 
     # The home-manager nix-darwin module
-    home-manager.darwinModules.home-manager {
+    home-manager.darwinModules.home-manager
+    {
       users.users.cor = {
         name = "cor";
         home = "/Users/cor";
@@ -54,7 +55,7 @@ darwin.lib.darwinSystem {
         currentSystem = system;
         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
       };
-    }    
+    }
   ];
   inputs = { inherit darwin nixpkgs inputs; };
 }

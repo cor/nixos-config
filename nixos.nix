@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: {custom-packages, inputs, nixpkgs, home-manager, system, user  }:
+name: { custom-packages, inputs, nixpkgs, home-manager, system, user }:
 
 nixpkgs.lib.nixosSystem rec {
   inherit system;
@@ -25,7 +25,8 @@ nixpkgs.lib.nixosSystem rec {
     # ./modules/hubble.nix
 
     # The home-manager NixOS module
-    home-manager.nixosModules.home-manager {
+    home-manager.nixosModules.home-manager
+    {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -58,7 +59,7 @@ nixpkgs.lib.nixosSystem rec {
         extraSpecialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
           pkgs-kitty = import inputs.nixpkgs-kitty { inherit system; config.allowUnfree = true; };
-          inherit custom-packages; 
+          inherit custom-packages;
           currentSystemName = name;
           currentSystem = system;
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"

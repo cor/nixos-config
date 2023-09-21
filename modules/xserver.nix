@@ -1,7 +1,7 @@
-{ pkgs, ...}: 
+{ pkgs, ... }:
 {
   services.xserver = {
-    resolutions = [ { x = 5120; y = 2880; } ];
+    resolutions = [{ x = 5120; y = 2880; }];
     dpi = 192;
     autorun = true;
     enable = true;
@@ -9,7 +9,7 @@
       xfce.enable = true;
     };
     displayManager = {
-      xserverArgs = ["-dpi 192"];
+      xserverArgs = [ "-dpi 192" ];
       defaultSession = "none+awesome";
       lightdm = {
         enable = true;

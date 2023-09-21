@@ -1,4 +1,4 @@
-{ isDarwin, pkgs-kitty, theme, ... }: 
+{ isDarwin, pkgs-kitty, theme, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -43,8 +43,7 @@
       # "alt+shift+p" = "last_used_layout";
       # "alt+shift+r" = "set_tab_title";
       # "alt+." = "layout_action bias 50 62 70 80";
-    } // (if isDarwin then {
-    } else {
+    } // (if isDarwin then { } else {
       # "super+shift+enter" = "new_os_window_with_cwd";
       # "alt+t" = "new_tab";
       # "alt+]" = "next_tab";

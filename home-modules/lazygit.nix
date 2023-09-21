@@ -1,4 +1,4 @@
-{ pkgs-unstable, ...}: 
+{ pkgs-unstable, ... }:
 {
   programs.lazygit = {
     enable = true;

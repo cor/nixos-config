@@ -1,9 +1,9 @@
-{ config, pkgs, lib, inputs, ...}:
+{ config, pkgs, lib, inputs, ... }:
 let
   pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
 in
 {
-  home.stateVersion = "22.05";    
+  home.stateVersion = "22.05";
 
   home.packages = (with pkgs; [
     cachix
@@ -15,12 +15,12 @@ in
     jq
     tree
     bottom
-  ]) ++ (with pkgs-unstable; [zellij youtube-dl]);
-  
-  
+  ]) ++ (with pkgs-unstable; [ zellij youtube-dl ]);
+
+
   # Hide "last login" message on new terminal.
   home.file.".hushlogin".text = "";
-     
+
   # programs.ssh doesn't work well for darwin.
   home.file.".ssh/config".text = ''
     Host *

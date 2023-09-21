@@ -1,9 +1,9 @@
-{ isDarwin, ...}:
+{ isDarwin, ... }:
 {
-  programs.zsh = { 
+  programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;    
+    enableSyntaxHighlighting = true;
     shellAliases = {
       fzf-nix = "nix-env -qa | fzf";
       icat = "kitty +kitten icat";

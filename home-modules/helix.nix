@@ -1,4 +1,4 @@
-{ inputs, pkgs, theme, ...}: 
+{ inputs, pkgs, theme, ... }:
 {
   programs.helix = {
     enable = true;
@@ -34,28 +34,28 @@
 
       keys.normal.space = {
         "h" = ":toggle-option lsp.display-inlay-hints";
-        "c" = [":write-all"];
+        "c" = [ ":write-all" ];
         # f and F are swapped, as picking in cwd is much more common for me.
         "f" = "file_picker_in_current_directory";
         "F" = "file_picker";
       };
     };
- 
+
     languages = {
       language = [
         {
           name = "svelte";
-          formatter = { command = "prettier"; args = ["--parser" "svelte"]; };
+          formatter = { command = "prettier"; args = [ "--parser" "svelte" ]; };
           auto-format = true;
         }
         {
           name = "typescript";
-          formatter = { command = "prettier"; args = ["--parser" "typescript"]; };
+          formatter = { command = "prettier"; args = [ "--parser" "typescript" ]; };
           auto-format = true;
         }
         {
           name = "json";
-          formatter = { command = "prettier"; args = ["--parser" "json"]; };
+          formatter = { command = "prettier"; args = [ "--parser" "json" ]; };
           auto-format = true;
         }
         {

@@ -44,7 +44,7 @@
     vscode
     bottom
     neofetch
-    (_1password-gui.override ({ polkitPolicyOwners = ["cor"]; }))    
+    (_1password-gui.override ({ polkitPolicyOwners = [ "cor" ]; }))
     obsidian
     marksman
     tdesktop
