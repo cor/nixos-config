@@ -3,17 +3,16 @@
   environment = {
     systemPackages = with pkgs; [
       git
-      element-desktop
       git-lfs
       file
       gnumake
       killall
       unzip
-      niv
       rxvt_unicode
       xclip
       docker-client
       arc-theme
+      nnn
       (writeShellScriptBin "docker-stop-all" ''
         docker stop $(docker ps -q)
         docker system prune -f
@@ -30,7 +29,20 @@
       gtkmm3
     ];
 
-    variables = import ./environment/variables.nix;
+    variables = {
+      PS1 = "%d $ ";
+      PROMPT = "%d $ ";
+      RPROMPT = "";
+      EDITOR = "hx";
+      VISUAL = "hx";
+      NNN_TRASH = "1"; # let nnn trash instead of rm
+
+      # 2x ("retina"') scaling on Linux
+      GDK_SCALE = "2";
+      GDK_DPI_SCALE = "0.5";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    };
 
     # required for zsh autocomplete
     pathsToLink = [ "/share/zsh" ];
