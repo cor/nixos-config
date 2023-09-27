@@ -59,24 +59,20 @@ nixpkgs.lib.nixosSystem rec {
         extraSpecialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
           pkgs-kitty = import inputs.nixpkgs-kitty { inherit system; config.allowUnfree = true; };
-          inherit custom-packages;
+          inherit inputs custom-packages;
           currentSystemName = name;
           currentSystem = system;
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
           isDarwin = false;
-          inherit inputs;
         };
       };
     }
 
-    # Arguments that are exposed to every `module`.
     {
       config._module.args = {
         currentSystemName = name;
         currentSystem = system;
         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-        # inherit system;
-        # inherit inputs;
       };
     }
   ];

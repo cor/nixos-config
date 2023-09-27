@@ -83,7 +83,7 @@
 
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ nil sumneko-lua-language-server cmake-language-server ];
+            buildInputs = with pkgs; [ nil nixpkgs-fmt sumneko-lua-language-server cmake-language-server ];
           };
         };
       }
