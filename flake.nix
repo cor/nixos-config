@@ -56,6 +56,14 @@
                echo "$CURRENT_TASK"
           '';
         };
+
+        xset-r-fast = pkgs.writeShellScriptBin "xset-r-fast" ''
+          xset r rate 150 40
+        '';
+
+        xset-r-slow = pkgs.writeShellScriptBin "xset-r-slow" ''
+          xset r rate 350 20
+        '';
       };
 
 

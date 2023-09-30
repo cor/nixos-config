@@ -10,45 +10,38 @@
     exa # ls replacement
     fd
     fzf
-    gh
-    gimp
     gnome3.gnome-control-center
     gping # ping with graph
     gtkmm3 # needed for the vmware user tools clipboard
     htop
-    jq
     krita
-    nixfmt
-    openssh
+    nnn
     pamixer
     pick-colour-picker
     pinentry
     pinentry-curses
-    ranger
     ripgrep
     tree
     watch
     wget
     xclip
     zip
-    speedtest-cli # speedtest.net 
-    custom-packages.current-task
-    (writeShellScriptBin "xset-r-fast" ''
-      xset r rate 150 40
-    '')
-    (writeShellScriptBin "xset-r-slow" ''
-      xset r rate 350 20
-    '')
   ] ++
   (with pkgs-unstable; [
-    vscode
+    openssh
+    gh
+    jq
     bottom
-    neofetch
-    (_1password-gui.override ({ polkitPolicyOwners = [ "cor" ]; }))
-    obsidian
     marksman
-    tdesktop
-    gomuks
-    thunderbird
+    neofetch
+    obsidian
+    vscode
+  ])
+  ++
+  (with custom-packages; [
+    current-task
+    xset-r-fast
+    xset-r-slow
+    set-theme
   ]);
 }
