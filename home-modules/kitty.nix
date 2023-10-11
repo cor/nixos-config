@@ -17,7 +17,7 @@
       macos_option_as_alt = true;
       # tab_bar_min_tabs = 1;
       tab_title_template = "{title}";
-      active_tab_title_template = "{title} - {num_windows} {layout_name}";
+      # active_tab_title_template = "{title} - {num_windows} {layout_name}";
       # tab_bar_edge = "top";
       # tab_bar_style = "slant";
       # tab_bar_align = "center";

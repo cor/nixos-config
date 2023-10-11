@@ -14,7 +14,15 @@
       gh
     ];
 
-    variables = import ./environment/variables.nix;
+    variables = {
+      PS1 = "%d $ ";
+      PROMPT = "%d $ ";
+      RPROMPT = "";
+      EDITOR = "hx";
+      VISUAL = "hx";
+      NNN_TRASH = "1"; # let nnn trash instead of rm
+    };
+
     shells = [ pkgs.zsh ];
   };
 

@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
+    nixpkgs.url = "github:nixos/nixpkgs/release-23.05"; # pinned version of 23.05 because parallels can't handle the newer kernel
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # The SSH kitten broke with the latest kitty release.
     # will use this rev until fixed
