@@ -52,6 +52,21 @@ _NOTE: These instructions are out of date_
 13. Open Settings.app, Go to `Desktop & Dock > Show recent applications in Dock` and disable it
 14. Remove all apps from dock, turn hide dock on
 
+
+## NixOS VM using UTM
+1. Install UTM from the Mac App Store
+2. Download a minimal 64-bit ARM ISO [from the NixOS download page](https://nixos.org/download.html).
+3. Open UTM, Create a new Linux VM, Use Apple Virutalization & Enable Rosetta
+4. Select your `nixos-minimal-...-aarch64-linux.iso`
+5. Hardware:
+  - CPU: 8 cores
+  - RAM: 22528 MB
+6. configure login
+  - `sudo su`
+  - `passwd` (set to `root`)
+7. get machine ip: `ip -brief address`
+  
+
 ## NixOS VM using Parallels Desktop
 
 1. Install [Parallels Desktop](parallels.com).

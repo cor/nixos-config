@@ -73,6 +73,11 @@
           custom-packages = packages.aarch64-linux;
         };
 
+        vm-aarch64-utm = mkNixos "vm-aarch64-utm" {
+          inherit user inputs nixpkgs home-manager system;
+          custom-packages = packages.aarch64-linux;
+        };
+
         vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
           inherit user inputs nixpkgs home-manager system;
         };
