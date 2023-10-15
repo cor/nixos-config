@@ -2,8 +2,10 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-23.05"; # pinned version of 23.05 because parallels can't handle the newer kernel
+
+    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-parallels.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
     # The SSH kitten broke with the latest kitty release.
     # will use this rev until fixed
     nixpkgs-kitty.url = "github:nixos/nixpkgs/65702964b39bcf6d5c6b5b898b7d73e08b94b13f";
@@ -69,7 +71,8 @@
 
       nixosConfigurations = let system = "aarch64-linux"; in {
         vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
-          inherit user inputs nixpkgs home-manager system;
+          inherit user inputs home-manager system;
+          nixpkgs = inputs.nixpkgs-parallels;
           custom-packages = packages.aarch64-linux;
         };
 
