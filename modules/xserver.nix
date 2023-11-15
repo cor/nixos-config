@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   services.xserver = {
-    resolutions = [{ x = 5120; y = 2880; }];
     dpi = 192;
     autorun = true;
     enable = true;

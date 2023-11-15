@@ -21,8 +21,6 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    union.url = "github:unionlabs/union/682-hubble-nixos-module-1";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:

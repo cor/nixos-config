@@ -5,4 +5,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  virtualisation.rosetta.enable = true;
+  services.spice-vdagentd.enable = true; # copy and paste with Virtualization.framework
 }

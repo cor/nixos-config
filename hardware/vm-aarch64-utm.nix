@@ -26,6 +26,5 @@
   swapDevices = [ ];
 
   networking.useDHCP = true;
-  networking.interfaces.enp0s10.useDHCP = true;
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

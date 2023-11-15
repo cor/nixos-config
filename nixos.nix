@@ -37,7 +37,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/bat.nix
             ./home-modules/chromium.nix
             ./home-modules/direnv.nix
-            ./home-modules/flameshot.nix
+            # ./home-modules/flameshot.nix
             ./home-modules/git.nix
             ./home-modules/gpg.nix
             ./home-modules/gtk.nix
