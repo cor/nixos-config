@@ -33,6 +33,7 @@ darwin.lib.darwinSystem {
             ./home-modules/helix.nix
             ./home-modules/lazygit.nix
             ./home-modules/wezterm.nix
+            ./home-modules/zellij.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
