@@ -13,8 +13,9 @@ NIXNAME ?= vm-aarch64-parallels
 # reused a lot so we just store them up here.
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
+
 switch:
-ifeq ($(UNAME), Darwin)
+ifeq ($(shell uname -s), Darwin)
 	nix build ".#darwinConfigurations.default.system"
 	./result/sw/bin/darwin-rebuild switch --flake ".#default"
 else
@@ -22,7 +23,7 @@ else
 endif
 
 switch-show-trace:
-ifeq ($(UNAME), Darwin)
+ifeq ($(shell uname -s), Darwin)
 	nix build ".#darwinConfigurations.default.system"
 	./result/sw/bin/darwin-rebuild switch --flake ".#default" --show-trace
 else
