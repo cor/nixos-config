@@ -17,9 +17,9 @@
 
         # Fix go private dependency fetching by using SSH instead of HTTPS
         "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";
+        commit.gpgsign = true;
       } // (if isDarwin then {
         user.signingkey = sshSigningKey;
-        commit.gpgsign = true;
         gpg."ssh".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         gpg.format = "ssh";
       } else {
