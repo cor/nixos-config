@@ -101,6 +101,7 @@
                     { home.stateVersion = "23.05"; }
                     ./home-modules/zsh.nix
                     ./home-modules/lazygit.nix
+                    ./home-modules/git.nix
                   ];
                 };
 
