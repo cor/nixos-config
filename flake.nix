@@ -82,6 +82,12 @@
         vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
           inherit user inputs nixpkgs home-manager system;
         };
+        vm-orb = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./orb/configuration.nix
+          ];
+        };
       };
 
       darwinConfigurations = let system = "aarch64-darwin"; in {
