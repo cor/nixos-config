@@ -89,6 +89,7 @@
             ./modules/users.nix
             ./modules/zsh.nix
             ./modules/nix.nix
+            ./modules/environment.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -99,6 +100,7 @@
                   imports = [
                     { home.stateVersion = "23.05"; }
                     ./home-modules/zsh.nix
+                    ./home-modules/lazygit.nix
                   ];
                 };
 
