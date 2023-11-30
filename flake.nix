@@ -102,6 +102,7 @@
                     ./home-modules/zsh.nix
                     ./home-modules/lazygit.nix
                     ./home-modules/git.nix
+                    ./home-modules/zellij.nix
                   ];
                 };
 
