@@ -86,6 +86,36 @@
           inherit system;
           modules = [
             ./orb/configuration.nix
+            ./modules/users.nix
+            ./modules/zsh.nix
+            ./modules/nix.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.cor = {
+                  # Home-manager level modules
+                  imports = [
+                    { home.stateVersion = "23.05"; }
+                    ./home-modules/zsh.nix
+                  ];
+                };
+
+                extraSpecialArgs = {
+                  theme = builtins.readFile ./THEME.txt; # "dark" or "light"
+                  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+                  isDarwin = false;
+                };
+              };
+            }
+            {
+              config._module.args = {
+                currentSystemName = "vm-orb";
+                currentSystem = system;
+                pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+              };
+            }
           ];
         };
       };
