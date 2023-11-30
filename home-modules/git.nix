@@ -23,6 +23,7 @@
         gpg."ssh".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         gpg.format = "ssh";
       } else {
+        user.signingkey = sshSigningKey;
         signing = {
           signByDefault = true;
           key = sshSigningKey;
