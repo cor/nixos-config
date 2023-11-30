@@ -7,17 +7,6 @@
 with lib;
 
 {
-  # sudoers
-  security.sudo.extraRules= [
-    { users = [ "cor" ];
-      commands = [
-        { command = "ALL";
-          options= [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
   # add OrbStack CLI tools to PATH
   environment.shellInit = ''
     . /opt/orbstack-guest/etc/profile-early
