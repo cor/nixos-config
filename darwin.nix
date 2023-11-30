@@ -39,7 +39,6 @@ darwin.lib.darwinSystem {
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-          pkgs-kitty = import inputs.nixpkgs-kitty { inherit system; config.allowUnfree = true; };
           theme = "dark";
           currentSystemName = name;
           currentSystem = system;
