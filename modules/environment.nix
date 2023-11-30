@@ -30,8 +30,8 @@
     ];
 
     variables = {
-      PS1 = "%d $ ";
-      PROMPT = "%d $ ";
+      PS1 = "%m %d $ ";
+      PROMPT = "%m %d $ ";
       RPROMPT = "";
       EDITOR = "hx";
       VISUAL = "hx";
