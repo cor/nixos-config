@@ -7,7 +7,6 @@
     curl
     delta
     du-dust
-    exa # ls replacement
     fd
     fzf
     gnome3.gnome-control-center

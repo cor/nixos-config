@@ -71,7 +71,6 @@ with lib;
     fzf
     wget
     zellij
-    exa
     gnumake
     git
     gh
