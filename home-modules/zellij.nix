@@ -1,13 +1,12 @@
-{ pkgs-unstable, isDarwin, ... }:
+{ pkgs-unstable, ... }:
 {
   programs.zellij = {
     enable = true;
     package = pkgs-unstable.zellij;
-    settings = {
-      pane_frames = false;
-      theme = "catppuccin-frappe";
-    };
   };
+
+  # Nix does not translate nicely to KDL so we use a KDL file instead.
+  home.file.".config/zellij/config.kdl".source = ./zellij-config.kdl;
 
   # Needed to let Zellij find SSH_AUTH_SOCK after re-attaching to session
   # cfr: https://github.com/zellij-org/zellij/issues/862#issuecomment-973881560
