@@ -27,6 +27,8 @@ with lib;
     noipv6
   '';
 
+  virtualisation.docker.enable = true;
+
   # disable sshd
   services.openssh.enable = false;
 
