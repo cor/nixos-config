@@ -10,7 +10,6 @@ in
     fzf
     git
     git-lfs
-    exa
     bat
     jq
     tree
