@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -133,13 +133,13 @@
       };
 
     } // (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; }; in
+      let pkgs-unstable = import nixpkgs-unstable { inherit system; }; in
       {
-        formatter = pkgs.nixpkgs-fmt;
+        formatter = pkgs-unstable.nixpkgs-fmt;
 
         devShells = {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [ nil nixpkgs-fmt sumneko-lua-language-server cmake-language-server ];
+          default = pkgs-unstable.mkShell {
+            buildInputs = with pkgs-unstable; [ nil nixpkgs-fmt sumneko-lua-language-server cmake-language-server ];
           };
         };
       }

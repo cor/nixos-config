@@ -9,8 +9,6 @@
       coreutils
       cmake
       kitty
-      element-desktop
-      vscodium
       gh
     ];
 
