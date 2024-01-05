@@ -45,7 +45,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/kitty.nix
             ./home-modules/lazygit.nix
             ./home-modules/nixos-misc.nix
-            ./home-modules/nushell.nix
+            ./home-modules/nushell/nushell.nix
             ./home-modules/packages.nix
             ./home-modules/ranger.nix
             ./home-modules/rofi.nix
