@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ modulesPath, config, pkgs, lib, ... }:
+{ modulesPath, ghostty, config, pkgs, lib, ... }:
 
 with lib;
 
@@ -76,7 +76,8 @@ with lib;
     git
     gh
     bottom
-  ];
+    neofetch
+  ] ++ [ ghostty ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
