@@ -1,6 +1,7 @@
 pane_frames false
 theme "catppuccin-frappe"
 
+session_serialization false
 
 keybinds {
 	unbind "Ctrl o"
