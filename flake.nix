@@ -119,6 +119,7 @@
               config._module.args = {
                 currentSystemName = "vm-orb";
                 currentSystem = system;
+                isDarwin = system == "aarch64-darwin";
                 pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
                 ghostty = ghostty.packages.${system}.default;
               };

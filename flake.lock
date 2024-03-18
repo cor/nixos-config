@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710281379,
-        "narHash": "sha256-uFo9hxt982L3nFJeweW4Gip2esiGrIQlbvEGrNTh4AY=",
+        "lastModified": 1710717205,
+        "narHash": "sha256-Wf3gHh5uV6W1TV/A8X8QJf99a5ypDSugY4sNtdJDe0A=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "d9ea313bc4851670dc99c5cc979cb79750e7d670",
+        "rev": "bcc8afd06e237df060c85bad6af7128e05fd61a3",
         "type": "github"
       },
       "original": {
@@ -167,11 +167,11 @@
         "zls": "zls"
       },
       "locked": {
-        "lastModified": 1710363419,
-        "narHash": "sha256-gIoYTa4rrAnB1SZvsHzBu5AiXU/9LdVvzlD1+2YqdJ0=",
+        "lastModified": 1710719139,
+        "narHash": "sha256-/0leF3ysUelZcDkgurbzpSzbYp0RXt2B4LJPgkOCmLo=",
         "ref": "refs/heads/main",
-        "rev": "776ba9c9b2f812658bba3f6d90dbde4ae7492108",
-        "revCount": 5252,
+        "rev": "5dc7384d5731898b9ae5810b1a88d16865be53bf",
+        "revCount": 5258,
         "type": "git",
         "url": "ssh://git@github.com/mitchellh/ghostty"
       },
@@ -210,11 +210,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1710393236,
-        "narHash": "sha256-3XUAUU170gvD8FZ5VnAYKzYLeC6PQHG2aBVW2d4BmHk=",
+        "lastModified": 1710764050,
+        "narHash": "sha256-MShFz1lc6eAEcJx4jk9TC571pDNHFJGkkUmmmaXmVtQ=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "6c4d986c1b1ac4e350dced513b6608ba4464cde3",
+        "rev": "2e4653ea312dcb69d2453eccaa7c0f873cce6aa5",
         "type": "github"
       },
       "original": {
@@ -322,11 +322,11 @@
     },
     "nixpkgs-unstable_2": {
       "locked": {
-        "lastModified": 1710346304,
-        "narHash": "sha256-vwoyBoCovK7+vdbCYqL9MssoFQjaXtZN8sElcjUdbx8=",
+        "lastModified": 1710734606,
+        "narHash": "sha256-rFJl+WXfksu2NkWJWKGd5Km17ZGEjFg9hOQNwstsoU8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a0906f14161a5c5792e9883117b9471f5bf6df72",
+        "rev": "79bb4155141a5e68f2bdee2bf6af35b1d27d3a1d",
         "type": "github"
       },
       "original": {
@@ -354,11 +354,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1710399145,
-        "narHash": "sha256-yhGlmdqxfstngEs3qikYyqU93iqi39GLOiJ7XDWFdPQ=",
+        "lastModified": 1710756982,
+        "narHash": "sha256-7ZfXBLkc7Ir4pEejJLZXHyxcZ4fTJAucA2vySaxlOJA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d3eeab67779382692725ac423b023edecbd8547e",
+        "rev": "ff46bec688ef39f207b955adea7367b82c406762",
         "type": "github"
       },
       "original": {

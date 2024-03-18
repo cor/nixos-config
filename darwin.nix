@@ -34,6 +34,7 @@ darwin.lib.darwinSystem {
             ./home-modules/lazygit.nix
             ./home-modules/wezterm.nix
             ./home-modules/zellij.nix
+            ./home-modules/ghostty.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
