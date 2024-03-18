@@ -1,4 +1,4 @@
-{ ... }:
+{ isDarwin, ... }:
 {
   programs.zsh = {
     enable = true; # default shell on catalina
@@ -8,7 +8,9 @@
         source "''$(fzf-share)/key-bindings.zsh"
         source "''$(fzf-share)/completion.zsh"
       fi
-      compinit    
-    '';
+
+    ''
+    +
+    (if isDarwin then "" else ''compinit'');
   };
 }

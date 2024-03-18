@@ -53,6 +53,7 @@ darwin.lib.darwinSystem {
       config._module.args = {
         currentSystemName = name;
         currentSystem = system;
+        isDarwin = system == "aarch64-darwin";
         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
       };
     }
