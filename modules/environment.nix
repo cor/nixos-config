@@ -13,6 +13,7 @@
       docker-client
       arc-theme
       nnn
+      trash-cli
       (writeShellScriptBin "docker-stop-all" ''
         docker stop $(docker ps -q)
         docker system prune -f
