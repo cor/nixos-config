@@ -2,12 +2,14 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
     nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-parallels.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
     flake-utils.url = "github:numtide/flake-utils";
+
+    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
     helix.url = "github:helix-editor/helix";
+    yazi.url = "github:sxyazi/yazi";
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -103,6 +105,7 @@
                     ./home-modules/zellij.nix
                     ./home-modules/direnv.nix
                     ./home-modules/helix.nix
+                    ./home-modules/yazi.nix
                     ./home-modules/nushell/nushell.nix
                   ];
                 };
