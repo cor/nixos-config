@@ -4,6 +4,17 @@
     enable = true;
     package = if isDarwin then pkgs-unstable.yazi else inputs.yazi.packages.${pkgs-unstable.system}.default;
     enableZshIntegration = true;
+
+    settings = {
+      log = {
+        enabled = false;
+      };
+      manager = {
+        ratio = [ 2 8 0 ];
+        show_hidden = true;
+        sort_dir_first = true;
+      };
+    };
     keymap = {
       manager.prepend_keymap = [{
         on = [ "l" ];

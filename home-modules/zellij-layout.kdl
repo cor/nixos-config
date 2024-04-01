@@ -9,11 +9,14 @@ layout {
         }
     }
 	tab name="Console"
-	tab name="Helix" focus=true {
-		pane command="hx"
+	tab name="Editor" focus=true {
+		pane split_direction="vertical" {
+			pane size="20%" command="yazi"
+			pane size="80%" command="hx"
+		}
 	}
 	tab name="Server"
-	tab name="LazyGit" {
+	tab name="Git" {
 		pane command="lazygit"
 	}
 }
