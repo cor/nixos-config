@@ -8,6 +8,7 @@
       enable = true;
       userName = "cor";
       userEmail = "cor@pruijs.dev";
+      delta.enable = true;
       lfs.enable = true;
       extraConfig = {
         color.ui = true;
