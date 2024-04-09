@@ -9,6 +9,7 @@
         colorArg = "always";
         pager = "delta --dark --paging=never";
       };
+      os.copyToClipboardCmd = "printf {{text}} | pbcopy";
     };
   };
 }
