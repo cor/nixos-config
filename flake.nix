@@ -107,6 +107,7 @@
                     ./home-modules/helix.nix
                     ./home-modules/yazi.nix
                     ./home-modules/nushell/nushell.nix
+                    ./home-modules/zoxide.nix
                   ];
                 };
 
