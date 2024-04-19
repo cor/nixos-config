@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ modulesPath, ghostty, config, pkgs, lib, ... }:
+{ modulesPath, ghostty, to-case, config, pkgs, lib, ... }:
 
 with lib;
 
@@ -78,7 +78,7 @@ with lib;
     bottom
     neofetch
     libxml2
-  ] ++ [ ghostty ];
+  ] ++ [ ghostty to-case ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

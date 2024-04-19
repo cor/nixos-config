@@ -1,4 +1,4 @@
-{ pkgs, lib, currentSystemName, ... }:
+{ inputs, pkgs, lib, currentSystemName, ... }:
 {
   environment = {
     systemPackages = with pkgs; [

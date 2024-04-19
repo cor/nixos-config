@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-parallels.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
     flake-utils.url = "github:numtide/flake-utils";
+    to-case.url = "github:cor/ToCase";
 
     ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
     helix.url = "github:helix-editor/helix";
@@ -22,7 +23,7 @@
     };
   };
 
-  outputs = { self, ghostty, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, ghostty, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -126,6 +127,7 @@
                 isDarwin = system == "aarch64-darwin";
                 pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
                 ghostty = ghostty.packages.${system}.default;
+                to-case = to-case.packages.${system}.default;
               };
             }
           ];
