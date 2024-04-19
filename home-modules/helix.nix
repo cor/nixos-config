@@ -63,6 +63,14 @@
           formatter = { command = "nixpkgs-fmt"; };
           auto-format = true;
         }
+        {
+          name = "xml";
+          formatter = {
+            command = "xmllint";
+            auto-format = true;
+            args = [ "--format" "-" ];
+          };
+        }
       ];
 
       language-server = {
