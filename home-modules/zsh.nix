@@ -4,6 +4,10 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    history = {
+      save = 10000000;
+      size = 10000000;
+    };
     shellAliases = {
       fzf-nix = "nix-env -qa | fzf";
       icat = "kitty +kitten icat";
