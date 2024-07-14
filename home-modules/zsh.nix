@@ -25,6 +25,13 @@
     } else {
       open = "xdg-open";
     });
+    initExtra = ''
+      # Check if SSH_AUTH_SOCK is set and points to the default macOS agent
+      if [[ -z "$SSH_AUTH_SOCK" || "$SSH_AUTH_SOCK" == /private/tmp/com.apple.launchd.* ]]; then
+        # No forwarded agent, use 1Password agent
+        export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      fi
+    '';
   };
 }
 

@@ -23,7 +23,8 @@ in
   # programs.ssh doesn't work well for darwin.
   home.file.".ssh/config".text = ''
     Host *
+      ForwardAgent yes
       AddKeysToAgent yes
-      IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      IdentityAgent $SSH_AUTH_SOCK
   '';
 }
