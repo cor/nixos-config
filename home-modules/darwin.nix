@@ -14,7 +14,7 @@ in
     jq
     tree
     bottom
-  ]) ++ (with pkgs-unstable; [ zellij youtube-dl ]);
+  ]) ++ (with pkgs-unstable; [ zellij ]);
 
 
   # Hide "last login" message on new terminal.
