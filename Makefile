@@ -16,11 +16,11 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 
 switch:
 ifeq ($(shell uname -s), Darwin)
-	echo "moving default macOS config files if they exist"
-	[ ! -f /etc/zshenv ] || sudo mv /etc/zshenv /etc/zshenv.bak
-	[ ! -f /etc/zshrc ] || sudo mv /etc/zshrc /etc/zshrc.bak
-	[ ! -f /etc/bashrc ] || sudo mv /etc/bashrc /etc/bashrc.bak
 	nix build ".#darwinConfigurations.default.system"
+	# echo "moving default macOS config files if they exist"
+	# [ ! -f /etc/zshenv ] || sudo mv /etc/zshenv /etc/zshenv.bak
+	# [ ! -f /etc/zshrc ] || sudo mv /etc/zshrc /etc/zshrc.bak
+	# [ ! -f /etc/bashrc ] || sudo mv /etc/bashrc /etc/bashrc.bak
 	./result/sw/bin/darwin-rebuild switch --flake ".#default"
 else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
