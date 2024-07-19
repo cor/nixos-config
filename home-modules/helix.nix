@@ -2,7 +2,7 @@
 {
   programs.helix = {
     enable = true;
-    package = if isDarwin then pkgs.helix else inputs.helix.packages.${pkgs.system}.default;
+    package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
       theme = if theme == "dark" then "catppuccin_frappe" else "rose_pine_dawn";
@@ -16,6 +16,10 @@
         indent-guides.render = true;
         file-picker.hidden = false;
         auto-pairs = false;
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "error";
+        };
         lsp = {
           enable = true;
           display-messages = true;
