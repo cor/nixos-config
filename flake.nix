@@ -1,6 +1,8 @@
 {
   description = "NixOS systems and tools by cor";
 
+  nixConfig = { };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -10,6 +12,8 @@
 
     ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
     helix.url = "github:helix-editor/helix";
+    raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
+
     yazi.url = "github:sxyazi/yazi";
 
     darwin = {
@@ -23,7 +27,7 @@
     };
   };
 
-  outputs = { self, ghostty, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, ghostty, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -82,6 +86,31 @@
         vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
           inherit user inputs nixpkgs home-manager system;
         };
+
+        raspberry-pi = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            raspberry-pi-nix.nixosModules.raspberry-pi
+            ./modules/users.nix
+            ./modules/zsh.nix
+            ./modules/nix.nix
+            ./modules/environment.nix
+            ./modules/openssh.nix
+            ./machines/raspberry-pi.nix
+            {
+              config._module.args = {
+                currentSystemName = "raspberry-pi";
+                currentSystem = system;
+                isDarwin = false;
+                pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+                ghostty = ghostty.packages.${system}.default;
+                to-case = to-case.packages.${system}.default;
+              };
+            }
+          ];
+        };
+
+
         vm-orb = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
