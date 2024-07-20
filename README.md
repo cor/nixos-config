@@ -20,6 +20,8 @@ The modules mentioned above are imported inside of two configuration generation 
 1. `./nixos.nix`, this function generates a `nixosConfiguration`
 2. `./darwin.nix`, this function generates a `darwinConfiguration`
 
+
+
 These fucntions are used in `./flake.nix`'s `nixosConfigurations` and `darwinConfigurations` 
 
 
@@ -107,6 +109,25 @@ _NOTE: These instructions are out of date_
 24. Go to `chrome://settings/search` and set search engine to "DuckDuckGo"
 
 You now have your VM fully set up! To make changes to the config, just edit the contenst `~/nixos-config`, and run `make switch`
+
+## Raspberry Pi setup
+
+To bootstrap the SD card:
+
+1. Enter orbstack
+2. `nix build '.#nixosConfigurations.raspberry-pi.config.system.build.sdImage'`
+3. `cp ./result/sd-image/nixos-...-linux.img.zst /Users/cor/Desktop`
+4. On macOS, download [rpi-imager](https://www.raspberrypi.com/software/)
+5. Insert SD card into MacBook
+6. Flash the `.img.zst` from your Desktop to the rPi's sd card. 
+7. Insert sd card into raspberry pi and click the power button
+
+Your Raspberry Pi should now be bootstrapped and you should be able to SSH into it.
+
+To udpate the pi from the pi itself
+
+1. clone this repo on the pi
+2. `sudo nixos-rebuild switch --flake .#raspberry-pi`
 
 --- 
 
