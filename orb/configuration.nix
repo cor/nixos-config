@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ modulesPath, ghostty, to-case, config, pkgs, lib, ... }:
+{ modulesPath, ghostty, to-case, pkgs, lib, ... }:
 
 with lib;
 
@@ -64,21 +64,6 @@ with lib;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    tree
-    helix
-    curl
-    zsh
-    fzf
-    wget
-    zellij
-    gnumake
-    git
-    gh
-    bottom
-    neofetch
-    libxml2
-  ] ++ [ ghostty to-case ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
