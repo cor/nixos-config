@@ -97,6 +97,7 @@
             ./modules/environment.nix
             ./modules/openssh.nix
             ./modules/system-packages.nix
+            ./modules/tailscale.nix
             ./machines/raspberry-pi.nix
             {
               config._module.args = {
