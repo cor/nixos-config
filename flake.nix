@@ -96,6 +96,7 @@
             ./modules/nix.nix
             ./modules/environment.nix
             ./modules/openssh.nix
+            ./modules/system-packages.nix
             ./machines/raspberry-pi.nix
             {
               config._module.args = {
@@ -105,6 +106,36 @@
                 pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
                 ghostty = ghostty.packages.${system}.default;
                 to-case = to-case.packages.${system}.default;
+              };
+            }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.cor = {
+                  # Home-manager level modules
+                  imports = [
+                    { home.stateVersion = "23.11"; }
+                    ./home-modules/zsh.nix
+                    ./home-modules/lazygit.nix
+                    ./home-modules/git.nix
+                    ./home-modules/zellij.nix
+                    ./home-modules/direnv.nix
+                    ./home-modules/helix.nix
+                    ./home-modules/yazi.nix
+                    ./home-modules/nushell/nushell.nix
+                    ./home-modules/zoxide.nix
+                    ./home-modules/tmux.nix
+                  ];
+                };
+
+                extraSpecialArgs = {
+                  theme = builtins.readFile ./THEME.txt; # "dark" or "light"
+                  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+                  isDarwin = false;
+                  inherit inputs;
+                };
               };
             }
           ];
@@ -119,6 +150,7 @@
             ./modules/zsh.nix
             ./modules/nix.nix
             ./modules/environment.nix
+            ./modules/system-packages.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
