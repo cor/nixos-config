@@ -3,6 +3,11 @@
     hostName = currentSystemName;
     useDHCP = false;
     interfaces = { eth0.useDHCP = true; };
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    firewall = {
+      allowedTCPPorts = [ 443 80 26656 22 ];
+      allowPing = true;
+    };
   };
   environment.systemPackages = with pkgs; [ bluez bluez-tools ];
   hardware = {
