@@ -12,7 +12,9 @@ layout {
 	tab name="Editor" focus=true {
 		pane split_direction="vertical" {
 			pane size="20%" command="yazi"
-			pane size="80%" command="nix develop -c hx"
+			pane size="80%" command="nix" { 
+				args "develop" "-c" "hx"
+			}
 		}
 	}
 	tab name="Server"
