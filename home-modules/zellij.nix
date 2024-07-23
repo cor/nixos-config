@@ -1,4 +1,4 @@
-{ pkgs-unstable, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   programs.zellij = {
     enable = true;
@@ -23,4 +23,20 @@
   #   fi
   # '';
   # ---------------------------------------------------
+
+  home.packages = [
+    # Open tmux for current project.
+    (pkgs.writeShellApplication {
+      name = "pij";
+      runtimeInputs = [ pkgs-unstable.zellij ];
+      text = ''
+        PRJ="''$(zoxide query -i)"
+        echo "Launching zellij for ''$PRJ"
+        set -x
+        cd "''$PRJ" && \
+          exec zellij -s "$(basename "''$PRJ")"
+      '';
+    })
+  ];
+
 }
