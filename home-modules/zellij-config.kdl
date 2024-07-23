@@ -3,6 +3,13 @@ theme "catppuccin-frappe"
 
 session_serialization false
 
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+
 keybinds {
 	unbind "Ctrl o"
 
