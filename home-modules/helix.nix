@@ -74,6 +74,8 @@
           name = "nix";
           formatter = { command = "nixpkgs-fmt"; };
           auto-format = true;
+          language-servers = [ "nil" ];
+          # language-servers = [ "nixd" "nil" ];
         }
         {
           name = "xml";
@@ -86,6 +88,9 @@
       ];
 
       language-server = {
+        # nixd = {
+        #   command = "nixd";
+        # };
         rust-analyzer = {
           config = {
             checkOnSave.command = "clippy";
