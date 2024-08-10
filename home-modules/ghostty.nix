@@ -7,5 +7,6 @@
     font-family = JetBrains Mono
     background-opacity = 0.85
     background-blur-radius = 20
+    window-padding-color = extend
   '';
 }
