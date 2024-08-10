@@ -11,7 +11,7 @@
         completion-trigger-len = 0;
         scroll-lines = 1;
         scrolloff = 5;
-        cursorline = true;
+        cursorline = false;
         color-modes = true;
         indent-guides.render = true;
         file-picker.hidden = false;
