@@ -18,7 +18,6 @@
         auto-pairs = false;
         inline-diagnostics = {
           cursor-line = "hint";
-          other-lines = "error";
         };
         lsp = {
           enable = true;
