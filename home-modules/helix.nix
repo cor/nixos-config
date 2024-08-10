@@ -5,7 +5,7 @@
     package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
-      theme = if theme == "dark" then "catppuccin_frappe" else "rose_pine_dawn";
+      theme = if theme == "dark" then "transparent_catppuccin_frappe" else "rose_pine_dawn";
       editor = {
         auto-format = true;
         completion-trigger-len = 0;
@@ -41,6 +41,15 @@
         # f and F are swapped, as picking in cwd is much more common for me.
         "f" = "file_picker_in_current_directory";
         "F" = "file_picker";
+      };
+    };
+
+    themes = {
+      transparent_catppuccin_frappe = {
+        inherits = "catppuccin_frappe";
+        "ui.background" = {
+          fg = "foreground";
+        };
       };
     };
 
