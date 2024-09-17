@@ -9,7 +9,6 @@ in
     cachix
     fzf
     git
-    git-lfs
     bat
     jq
     tree

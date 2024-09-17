@@ -8,7 +8,7 @@
       gnumake
       coreutils
       cmake
-      kitty
+      # kitty
       gh
     ];
 
