@@ -10,11 +10,11 @@
     flake-utils.url = "github:numtide/flake-utils";
     to-case.url = "github:cor/ToCase";
 
-    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
-    helix.url = "github:helix-editor/helix";
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
 
+    helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
+    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -87,10 +87,17 @@
           inherit user inputs nixpkgs home-manager system;
         };
 
+        vm-orb = mkNixos "vm-orb" {
+          inherit user inputs nixpkgs home-manager system;
+          isHeadless = true;
+          custom-packages = packages.aarch64-linux;
+        };
+
         raspberry-pi = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             raspberry-pi-nix.nixosModules.raspberry-pi
+            ./machines/raspberry-pi.nix
             ./modules/users.nix
             ./modules/zsh.nix
             ./modules/nix.nix
@@ -98,7 +105,6 @@
             ./modules/openssh.nix
             ./modules/system-packages.nix
             ./modules/tailscale.nix
-            ./machines/raspberry-pi.nix
             {
               config._module.args = {
                 currentSystemName = "raspberry-pi";
@@ -137,60 +143,6 @@
                   isDarwin = false;
                   inherit inputs;
                 };
-              };
-            }
-          ];
-        };
-
-
-        vm-orb = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./orb/configuration.nix
-            ./modules/users.nix
-            ./modules/zsh.nix
-            ./modules/nix.nix
-            ./modules/environment.nix
-            ./modules/system-packages.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.cor = {
-                  # Home-manager level modules
-                  imports = [
-                    { home.stateVersion = "23.05"; }
-                    # ./home-modules/kitty.nix
-                    ./home-modules/zsh.nix
-                    ./home-modules/lazygit.nix
-                    ./home-modules/git.nix
-                    ./home-modules/zellij.nix
-                    ./home-modules/direnv.nix
-                    ./home-modules/helix.nix
-                    ./home-modules/yazi.nix
-                    ./home-modules/nushell/nushell.nix
-                    ./home-modules/zoxide.nix
-                    ./home-modules/tmux.nix
-                  ];
-                };
-
-                extraSpecialArgs = {
-                  theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-                  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-                  isDarwin = false;
-                  inherit inputs;
-                };
-              };
-            }
-            {
-              config._module.args = {
-                currentSystemName = "vm-orb";
-                currentSystem = system;
-                isDarwin = system == "aarch64-darwin";
-                pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-                ghostty = ghostty.packages.${system}.default;
-                to-case = to-case.packages.${system}.default;
               };
             }
           ];
