@@ -10,11 +10,11 @@
     flake-utils.url = "github:numtide/flake-utils";
     to-case.url = "github:cor/ToCase";
 
-    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
-    helix.url = "github:helix-editor/helix";
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
 
+    helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
+    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -160,7 +160,7 @@
                 users.cor = {
                   # Home-manager level modules
                   imports = [
-                    { home.stateVersion = "23.05"; }
+                    { home.stateVersion = "24.05"; }
                     # ./home-modules/kitty.nix
                     ./home-modules/zsh.nix
                     ./home-modules/lazygit.nix
