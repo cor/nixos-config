@@ -23,7 +23,8 @@
     } // (if isDarwin then {
       snos = "kitty +kitten ssh -A -p 2200 localhost";
     } else {
-      open = "xdg-open";
+      # comment out because orbstack provides an "open" binary
+      # open = "xdg-open";
     });
     initExtra =
       if isDarwin then ''
