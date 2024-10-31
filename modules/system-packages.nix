@@ -14,5 +14,6 @@
     bottom
     neofetch
     libxml2
+    ripgrep
   ] ++ [ ghostty to-case ];
 }
