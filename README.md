@@ -4,7 +4,7 @@ My [NixOS](https://nixos.org), [nix-darwin](http://daiderd.com/nix-darwin/) and 
 
 ## Structure
 
-I use NixOS inside of a OrbStack on a M3 Mac running macOS. In addition to this, I use nix-darwin to configure macOS with `nix-darwin`. Both of these setups also use Home Manager. These configurations share the same `modules/` and `home-modules/`.
+I use NixOS inside of a OrbStack on a M3 Mac running macOS. In addition to this, I use nix-darwin to configure macOS with `nix-darwin`. Both of these setups also use Home Manager. These configurations share the same `modules/` and `home-modules/`. The `nixosConfigurations` call into the `mkNixos` function defined in `nixos.nix`. The `darwinConfigurations` call into the `mkDarwin` function defined in `darwin.nix`.
 
 ### Modules
 
