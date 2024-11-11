@@ -23,5 +23,6 @@ in
   home.file.".ssh/config".text = ''
     Host *
       AddKeysToAgent yes
+    Include ~/.orbstack/ssh/config
   '';
 }
