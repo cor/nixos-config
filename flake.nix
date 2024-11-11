@@ -7,6 +7,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-parallels.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-utils.url = "github:numtide/flake-utils";
     to-case.url = "github:cor/ToCase";
 

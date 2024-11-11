@@ -44,6 +44,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/direnv.nix
             ./home-modules/git.nix
             ./home-modules/helix.nix
+            ./home-modules/emacs.nix
             ./home-modules/lazygit.nix
             ./home-modules/nushell/nushell.nix
             ./home-modules/tmux.nix

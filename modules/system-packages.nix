@@ -15,5 +15,8 @@
     neofetch
     libxml2
     ripgrep
+    fd
+    emacsPackages.vterm
+    libvterm
   ] ++ [ ghostty to-case ];
 }
