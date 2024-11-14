@@ -314,22 +314,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-parallels": {
-      "locked": {
-        "lastModified": 1693142236,
-        "narHash": "sha256-ooBPuu7YbHNuNJPVaeUoFSLXPWGujRK0CIV3LLF9tgU=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1730963269,
@@ -510,7 +494,6 @@
         "helix": "helix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-parallels": "nixpkgs-parallels",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "to-case": "to-case",
