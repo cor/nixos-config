@@ -4,8 +4,7 @@ My [NixOS](https://nixos.org), [nix-darwin](http://daiderd.com/nix-darwin/) and 
 
 ## Structure
 
-I use NixOS inside of a OrbStack on a M3 Mac running macOS. In addition to this, I use nix-darwin to configure macOS with `nix-darwin`. Both of these setups also use Home Manager. These configurations share the same `modules/` and `home-modules/`. The `nixosConfigurations` call into the `mkNixos` function defined in `nixos.nix`. The `darwinConfigurations` call into the `mkDarwin` function defined in `darwin.nix`.
-
+I use NixOS inside of a OrbStack on a M3 Mac running macOS. In addition to this, I use nix-darwin to configure macOS with `nix-darwin`. Both of these setups also use Home Manager. 
 
 ### Modules
 
@@ -21,10 +20,7 @@ The modules mentioned above are imported inside of two configuration generation 
 1. `./nixos.nix`, this function generates a `nixosConfiguration`
 2. `./darwin.nix`, this function generates a `darwinConfiguration`
 
-
-
 These fucntions are used in `./flake.nix`'s `nixosConfigurations` and `darwinConfigurations` 
-
 
 ## How to fork this configuration for your own usage
 
@@ -34,9 +30,18 @@ _NOTE: These instructions are out of date_
 2. In `./nixos.nix`, replace the value of `hashedPassword` with one you've generated with `mkpasswd -m sha-512` [See here for more info](https://search.nixos.org/options?channel=22.05&show=users.users.%3Cname%3E.hashedPassword&from=0&size=50&sort=relevance&type=packages&query=users.users.%3Cname%3E.hash).
 3. In `./programs/git.nix`, change `userName` and `extraConfig.github.user` to your GitHub username. Also change `signing.key` to the public GPG key you use for your GitHub account.
 
+## OrbStack NixOS config
+
+1. Download [OrbStack](https://orbstack.dev/)
+2. Click Machines > New Machine
+3. Select NixOS 24.05, CPU type Apple
+4. Click create
+5. Download this repo into `/home/cor/nixos-config`
+6. Run `make`
+
 ## macOS Nix config with `nix-darwin`
 
-*NOTE: macOS Nix config is not required for setting up the NixOS VM. For instructions on this, check the next section*
+*NOTE: macOS Nix config is not required for setting up the NixOS VM. For instructions on this, check the previous section*
 
 *Make sure not to install **Homebrew** or **Xcode Command Line Tools**!*
 
@@ -84,20 +89,19 @@ _NOTE: These instructions are out of date_
 - Lasso
 
 
-### macOS config
+### Settings to change
 
 1. Change Screenshots folder and file format
 2. Disable "automatically re-arrange spaces"
 3. Disable auto brightness and true tone
 4. Set capslock to control
-5. disable recent apps in dock
-6. add screenshots folder to dock
-7. sign in to email accounts
-8. set safari search engine to duck duck go
-9. enable safari develop menu
-10. disable autocorrect everywhere
-11. enable downloading full photos library in photos app
-
+5. Disable "recent apps" in Dock
+6. Add screenshots folder to Dock
+7. Sign in to email accounts
+8. Set Safari search engine to DuckDuckGo
+9. Enable Safari develop menu
+10. Disable autocorrect everywhere
+11. Enable "download full photos library" in Photos
 
 ## Raspberry Pi setup
 
