@@ -1,7 +1,9 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
 name: { custom-packages, inputs, nixpkgs, home-manager, system, user, isHeadless }:
-
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+in
 nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -72,8 +74,7 @@ nixpkgs.lib.nixosSystem rec {
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-          inherit inputs custom-packages;
+          inherit pkgs-unstable inputs custom-packages;
           currentSystemName = name;
           currentSystem = system;
           isDarwin = false;
@@ -86,7 +87,7 @@ nixpkgs.lib.nixosSystem rec {
         currentSystemName = name;
         currentSystem = system;
         isDarwin = system == "aarch64-linux";
-        pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+        inherit pkgs-unstable;
         ghostty = inputs.ghostty.packages.${system}.default;
         to-case = inputs.to-case.packages.${system}.default;
       };

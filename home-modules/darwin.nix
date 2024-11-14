@@ -1,18 +1,14 @@
-{ config, pkgs, lib, inputs, ... }:
-let
-  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.system; config.allowUnfree = true; };
-in
+{ config, pkgs, pkgs-unstable, lib, inputs, ... }:
 {
   home.stateVersion = "22.05";
 
   home.packages = (with pkgs; [
-    cachix
     fzf
     git
-    bat
     jq
     tree
     bottom
+    fd
   ]) ++ (with pkgs-unstable; [ zellij ]);
 
 

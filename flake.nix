@@ -6,17 +6,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-parallels.url = "github:nixos/nixpkgs?rev=b80cef7eb8a9bc5b4f94172ebf4749c8ee3d770c"; # pinned version of 23.05 because parallels can't handle the newer kernel
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-utils.url = "github:numtide/flake-utils";
     to-case.url = "github:cor/ToCase";
-
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
-
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
     ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
-
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,66 +31,15 @@
       mkDarwin = import ./darwin.nix;
       user = "cor";
     in
-    rec
     {
-      packages.aarch64-linux = let pkgs = import nixpkgs { system = "aarch64-linux"; }; in {
-
-        set-theme = pkgs.writeShellApplication {
-          name = "switch-theme";
-          runtimeInputs = with pkgs; [ coreutils nixos-rebuild ];
-          text = ''
-            if [ "$1" != "light" ] && [ "$1" != "dark" ]; then
-              echo "Error: Theme must be 'light' or 'dark'"
-              exit 1
-            fi
-    
-            echo "$1"
-            cd /home/cor/nixos-config
-            printf '%s' "$1" > THEME.txt
-            sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#vm-aarch64-parallels"
-          '';
-        };
-        current-task = pkgs.writeShellApplication {
-          name = "current-task";
-          text = ''
-             NEWEST_ENTRY=$(find /home/cor/omega/Journal/*.* | tac | head -n 1)
-            	CURRENT_TASK=$(grep --color=never -e '- \[ \]' < "$NEWEST_ENTRY" | head -n 1 | awk '{$1=$1};1' | cut -c 7-)
-               echo "$CURRENT_TASK"
-          '';
-        };
-
-        xset-r-fast = pkgs.writeShellScriptBin "xset-r-fast" ''
-          xset r rate 150 40
-        '';
-
-        xset-r-slow = pkgs.writeShellScriptBin "xset-r-slow" ''
-          xset r rate 350 20
-        '';
-      };
-
-
       nixosConfigurations = let system = "aarch64-linux"; in {
-        vm-aarch64-parallels = mkNixos "vm-aarch64-parallels" {
-          inherit user inputs home-manager system;
-          nixpkgs = inputs.nixpkgs-parallels;
-          custom-packages = packages.aarch64-linux;
-        };
-
-        vm-aarch64-utm = mkNixos "vm-aarch64-utm" {
-          inherit user inputs nixpkgs home-manager system;
-          custom-packages = packages.aarch64-linux;
-        };
-
-        vm-aarch64-vmware = mkNixos "vm-aarch64-vmware" {
-          inherit user inputs nixpkgs home-manager system;
-        };
-
         vm-orb = mkNixos "vm-orb" {
           inherit user inputs nixpkgs home-manager system;
           isHeadless = true;
-          custom-packages = packages.aarch64-linux;
+          custom-packages = {};
         };
 
+        # TODO: Unify with mkNixos
         raspberry-pi = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -151,7 +97,7 @@
       };
 
       darwinConfigurations = let system = "aarch64-darwin"; in {
-        default = mkDarwin "vm-aarch64-vmware" {
+        default = mkDarwin "CorBook-Darwin" {
           inherit user inputs nixpkgs home-manager system darwin;
         };
       };

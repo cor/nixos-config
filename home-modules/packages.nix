@@ -6,13 +6,13 @@
     coreutils-full
     curl
     delta
-    du-dust
+    # du-dust
     fd
     fzf
-    gnome3.gnome-control-center
+    # gnome3.gnome-control-center
     gping # ping with graph
     gtkmm3 # needed for the vmware user tools clipboard
-    htop
+    # htop
     krita
     nnn
     pamixer
@@ -31,16 +31,9 @@
     gh
     jq
     bottom
-    marksman
-    neofetch
-    obsidian
-    vscode
-  ])
-  ++
-  (with custom-packages; [
-    current-task
-    xset-r-fast
-    xset-r-slow
-    set-theme
+    # marksman
+    # neofetch
+    # obsidian
+    # vscode
   ]);
 }
