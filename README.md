@@ -99,61 +99,6 @@ _NOTE: These instructions are out of date_
 11. enable downloading full photos library in photos app
 
 
-## NixOS VM using UTM
-1. Install UTM from the Mac App Store
-2. Download a minimal 64-bit ARM ISO [from the NixOS download page](https://nixos.org/download.html).
-3. Open UTM, Create a new Linux VM, Use Apple Virutalization & Enable Rosetta
-4. Select your `nixos-minimal-...-aarch64-linux.iso`
-5. Hardware:
-  - CPU: 8 cores
-  - RAM: 22528 MB
-6. configure login
-  - `sudo su`
-  - `passwd` (set to `root`)
-7. get machine ip: `ip -brief address`
-  
-
-## NixOS VM using Parallels Desktop
-
-1. Install [Parallels Desktop](parallels.com).
-2. Download a minimal 64-bit ARM ISO [from the NixOS download page](https://nixos.org/download.html).
-3. In parallels: click "Install Windows or another OS from a DVD or image file"
-4. Select your `nixos-minimal-...-aarch64-linux.iso`
-5. Select "Other Linux"
-6. In Name, type "NixOS"
-7. Click "Customize settings before installation"
-8. Go to "Hardware"
-  - CPU & Memory: 
-    - Processors: `N - 2` cores where `N` is your core count *(I have 10, so I pick 8)*
-    - Memory `N - 8` GB where `N` is your GB count *(I have 32, so I pick 24)*
-  - Graphics:
-    - Resolution: More Space
-    - Advanced > Ensure "Enable 3D acceleration" is enabled.
-  - Mouse & Keyboard:
-    - Click "Open Shortcuts Preferences" and uncheck all shortcuts.
-    - Click "macOS System Shortcuts" in the sidebar, and change "Send macOS system shortcuts" to "always"
-  - Shared Printers: uncheck "share mac printers with other linux"
-  - Network: Source: Shared Network (Should be selected by default)
-  - Hard Disk: Click `Advanced > Properties`. Select Size 256 GB. *(More if you can, but I currently have just 1TB of storage)*
-9. Boot the VM, you may have to re-attach the ISO by clicking the CD icon and rebooting.
-10. In the VM, type `sudo su`, then `passwd`, and type `root` twice.
-11. In the VM, type `ip -brief address` in order to see your VM's IP.
-12. On your Mac in this repository, type `export NIXADDR=10.211.55.3` (replace the IP with the IP you found in step 11).
-13. On your Mac, in the same shell, type `make vm/bootstrap0` When prompted for the root password, type `root`
-14. Your VM will reboot automtaically by this
-15. On your Mac, in the same shell, type `make vm/bootstrap`. *(note that there's no 0 at the end this time)*
-16. On your Mac, in the same shell, type `make vm/secrets`. 
-17. Reboot your VM by typing `reboot`.
-18. Log into your VM
-19. In `~`, run `git clone git@github.com:cor/nixos-config`
-20. Enter your SSH password (stored in 1Password)
-21. Run `cd nixos-config && make switch`
-22. `reboot`
-23. Open `chromium`, go to `chrome://settings/cookies`, and disable "Clear cookies and site data when you close all windows"
-24. Go to `chrome://settings/search` and set search engine to "DuckDuckGo"
-
-You now have your VM fully set up! To make changes to the config, just edit the contenst `~/nixos-config`, and run `make switch`
-
 ## Raspberry Pi setup
 
 To bootstrap the SD card:
