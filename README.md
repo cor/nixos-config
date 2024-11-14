@@ -51,9 +51,52 @@ _NOTE: These instructions are out of date_
 9. From 1Password, download SSH keys: `id_ed25519` and `id_ed25519.pub`. Move them to `~/.ssh~`
 10. From 1Password, download GPG keys: `secret-key-backup.asc`. Import them with: `gpg --import ./secret-key-backup.asc`. Afterwards, run `rm ./secret-key-backup.asc`
 11. From 1Password, download GPG `trust-db-backup.txt`. Import them with: `gpg --import-ownertrust < ./trustdb-backup.txt`, Afterwards, run `rm ./trustdb-backup.txt`
-12. Open Safari, go to `Settings > Search > Search Engine`. Select **DuckDuckGo**. Go to `Settings > Advanced > Smart Search Field`, click "Show full ewbsite address". Go to `Settings > Advanced`, at the bottom click "Show Develop menu in menu bar"
-13. Open Settings.app, Go to `Desktop & Dock > Show recent applications in Dock` and disable it
-14. Remove all apps from dock, turn hide dock on
+
+### Native apps to install
+
+- OrbStack
+- Ghostty
+- Tailscale
+- 1Password
+
+- Brave
+- Firefox
+
+- Signal
+- Telegram
+- ElementX
+
+- Portal
+- reMarkable
+- World Clock
+
+- Balance Lock
+- Vivid
+- Hidden Bar
+- Advanced Screen Share
+
+- Gifski
+- Photomator
+- Pixelmator
+- Final Cut Pro
+
+- AeroSpace
+- Lasso
+
+
+### macOS config
+
+1. Change Screenshots folder and file format
+2. Disable "automatically re-arrange spaces"
+3. Disable auto brightness and true tone
+4. Set capslock to control
+5. disable recent apps in dock
+6. add screenshots folder to dock
+7. sign in to email accounts
+8. set safari search engine to duck duck go
+9. enable safari develop menu
+10. disable autocorrect everywhere
+11. enable downloading full photos library in photos app
 
 
 ## NixOS VM using UTM
