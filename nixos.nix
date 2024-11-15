@@ -37,6 +37,7 @@ nixpkgs.lib.nixosSystem rec {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
+        backupFileExtension = "backup";
         users.cor = {
           # Home-manager level modules
           imports = [

@@ -13,7 +13,7 @@
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
-    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
+    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
