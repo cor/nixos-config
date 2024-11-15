@@ -1,6 +1,6 @@
 { pkgs-unstable, ... }:
 {
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
   xdg.enable = true;
   xresources.properties = let dpi = 192; in {
     "Xft.dpi" = dpi;

@@ -13,7 +13,7 @@
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
-    ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
+    # ghostty.url = "git+ssh://git@github.com/mitchellh/ghostty";
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +25,7 @@
     };
   };
 
-  outputs = { self, ghostty, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -58,7 +58,6 @@
                 currentSystem = system;
                 isDarwin = false;
                 pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-                ghostty = ghostty.packages.${system}.default;
                 to-case = to-case.packages.${system}.default;
               };
             }

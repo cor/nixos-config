@@ -28,7 +28,7 @@ darwin.lib.darwinSystem {
           imports = [
             ./home-modules/darwin.nix
             ./home-modules/direnv.nix
-            ./home-modules/ghostty.nix
+            # ./home-modules/ghostty.nix
             ./home-modules/git.nix
             ./home-modules/gpg.nix
             ./home-modules/zsh.nix

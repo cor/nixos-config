@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ modulesPath, ghostty, to-case, pkgs, lib, ... }:
+{ modulesPath, to-case, pkgs, lib, ... }:
 
 with lib;
 
