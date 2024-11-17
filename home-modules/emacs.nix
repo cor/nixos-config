@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, theme, isDarwin, ... }:
+{ inputs, pkgs, pkgs-unstable, config, theme, isDarwin, ... }:
 {
   # start the emacs daemon
   services.emacs = 
@@ -19,7 +19,7 @@
   # the emacs package that will be used by the emacs daemon
   programs.emacs = {
     enable = true;
-    package = inputs.emacs-overlay.packages.${pkgs.system}.emacs-unstable;
+    package = pkgs-unstable.emacs;
     extraPackages = epkgs: [ epkgs.vterm ];
   };
 }
