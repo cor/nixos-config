@@ -18,6 +18,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/nix.nix
     ./modules/environment.nix
     ./modules/system-packages.nix
+    ./modules/docker.nix
     # ./modules/nixpkgs.nix
 
 
