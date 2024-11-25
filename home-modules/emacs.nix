@@ -19,7 +19,7 @@
   # the emacs package that will be used by the emacs daemon
   programs.emacs = {
     enable = true;
-    package = pkgs-unstable.emacs;
+    package = inputs.emacs-overlay.packages.${pkgs.system}.emacs-unstable;
     extraPackages = epkgs: [ epkgs.vterm ];
   };
 }
