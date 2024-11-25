@@ -92,6 +92,7 @@ nixpkgs.lib.nixosSystem rec {
         inherit pkgs-unstable;
         ghostty = inputs.ghostty.packages.${system}.default;
         to-case = inputs.to-case.packages.${system}.default;
+        ucode = inputs.union-tools.packages.${system}.ucode;
       };
     }
   ];

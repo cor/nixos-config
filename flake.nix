@@ -4,6 +4,7 @@
   nixConfig = { };
 
   inputs = {
+    union-tools.url = "github:unionlabs/tools";
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -25,7 +26,7 @@
     };
   };
 
-  outputs = { self, ghostty, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, ghostty, union-tools, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -36,7 +37,7 @@
         vm-orb = mkNixos "vm-orb" {
           inherit user inputs nixpkgs home-manager system;
           isHeadless = true;
-          custom-packages = {};
+          custom-packages = { };
         };
 
         # TODO: Unify with mkNixos
