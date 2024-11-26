@@ -19,7 +19,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/environment.nix
     ./modules/system-packages.nix
     ./modules/docker.nix
-    ./modules/openvscode-server.nix
+    ./modules/code-server.nix
     # ./modules/nixpkgs.nix
 
 
