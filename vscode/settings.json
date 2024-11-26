@@ -1,0 +1,56 @@
+{
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<space>"],
+          "commands": ["vspacecode.space"]
+        },
+        {
+          "before": [","],
+          "commands": [
+            "vspacecode.space",
+            {
+              "command": "whichkey.triggerKey",
+              "args": "m"
+            }
+          ]
+        }
+      ],
+      "vim.visualModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<space>"],
+          "commands": ["vspacecode.space"]
+        },
+        {
+          "before": [","],
+          "commands": [
+            "vspacecode.space",
+            {
+              "command": "whichkey.triggerKey",
+              "args": "m"
+            }
+          ]
+        },
+        {
+          "before": [">"],
+          "commands": ["editor.action.indentLines"]
+        },
+        {
+          "before": ["<"],
+          "commands": ["editor.action.outdentLines"]
+        }
+      ],
+      "workbench.activityBar.location": "top",
+      "projectManager.git.baseFolders": ["/home/cor/dev/"],
+    "workbench.colorTheme": "Two Monokai Flat",
+    "breadcrumbs.enabled": false,
+    "terminal.integrated.fontSize": 14,
+    "magit.forge-enabled": true,
+    "magit.code-path": "/home/cor/nixos-config/result/bin/remote-cli/openvscode-server",
+    "editor.minimap.enabled": false,
+    "projectManager.showParentFolderInfoOnDuplicates": true,
+    "projectManager.sortList": "Path",
+    "projectManager.filterOnFullPath": true,
+    "workbench.editor.showTabs": "none",
+    "workbench.statusBar.visible": false,
+    "window.commandCenter": false,
+}
