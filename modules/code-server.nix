@@ -3,6 +3,7 @@
   services.code-server = let baseDir = "/home/cor/.code-server-nix/"; in {
     enable = true;
     port = 42042;
+    host = "0.0.0.0";
     disableTelemetry = true;
     user = "cor";
     extraEnvironment = {

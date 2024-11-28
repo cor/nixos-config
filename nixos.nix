@@ -20,6 +20,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/system-packages.nix
     ./modules/docker.nix
     ./modules/code-server.nix
+    ./modules/tailscale.nix
     # ./modules/nixpkgs.nix
 
 

@@ -34,7 +34,7 @@
     in
     {
       nixosConfigurations = let system = "aarch64-linux"; in {
-        vm-orb = mkNixos "vm-orb" {
+        corbookpro-nixos = mkNixos "corbookpro-nixos" {
           inherit user inputs nixpkgs home-manager system;
           isHeadless = true;
           custom-packages = { };

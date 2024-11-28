@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ modulesPath, ... }:
+{ currentSystemName, modulesPath, ... }:
 {
   imports =
     [
@@ -13,7 +13,7 @@
     ];
 
   # contents of lxd.nix
-  networking.hostName = "CorBook-NixOS";
+  networking.hostName = currentSystemName;
 
   # networking.hostName = mkForce "nixos"; # Overwrite the hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
