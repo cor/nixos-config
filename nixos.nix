@@ -1,17 +1,19 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: { custom-packages, inputs, nixpkgs, home-manager, system, user, isHeadless }:
+{ inputs, nixpkgs, home-manager, user, machine }:
 let
-  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = machine.system; config.allowUnfree = true; };
+  pkgs-caddy = import inputs.nixpkgs-caddy { system = machine.system; };
 in
 nixpkgs.lib.nixosSystem rec {
-  inherit system;
+  system = machine.system;
 
   # NixOS level modules
   modules = [
     # inputs.union.nixosModules.hubble
-    ./hardware/${name}.nix
-    ./machines/${name}.nix
+    # inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+    ./hardware/${machine.name}.nix
+    ./machines/${machine.name}.nix
 
     ./modules/users.nix
     ./modules/zsh.nix
@@ -21,14 +23,12 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/docker.nix
     ./modules/code-server.nix
     ./modules/tailscale.nix
-    # ./modules/nginx.nix
-    ./modules/caddy.nix
+    # ./modules/caddy.nix
 
 
     # if not headless
     # ./modules/fonts.nix
     # ./modules/misc.nix
-    # ./modules/networking.nix
     # ./modules/openssh.nix
     # ./modules/thunar.nix
     # ./modules/xrandr.nix
@@ -42,61 +42,42 @@ nixpkgs.lib.nixosSystem rec {
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "backup";
-        users.cor = {
+        users.${user.name} = {
           # Home-manager level modules
           imports = [
-            { home.stateVersion = "24.05"; }
-            # ./home-modules/kitty.nix
+            { home.stateVersion = machine.homeStateVersion; }
             ./home-modules/bat.nix
             ./home-modules/direnv.nix
             ./home-modules/git.nix
             ./home-modules/helix.nix
-            ./home-modules/emacs.nix
             ./home-modules/lazygit.nix
-            ./home-modules/nushell/nushell.nix
             ./home-modules/tmux.nix
             ./home-modules/yazi.nix
             ./home-modules/zellij.nix
             ./home-modules/zoxide.nix
             ./home-modules/zsh.nix
+            # ./home-modules/emacs.nix
+            # ./home-modules/nushell/nushell.nix
 
 
             # if not headless
             # ./home-modules/awesome.nix
             # ./home-modules/chromium.nix
             # ./home-modules/flameshot.nix
-            # ./home-modules/nixos-misc.nix
             # ./home-modules/rofi.nix
-
-            # unused
-            # ./home-modules/wezterm.nix
-            # ./home-modules/packages.nix
-            # ./home-modules/gpg.nix
-            # ./home-modules/kitty.nix
-            # ./home-modules/ranger.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit pkgs-unstable inputs custom-packages;
-          currentSystemName = name;
-          currentSystem = system;
-          isDarwin = false;
+          inherit pkgs-unstable inputs user machine;
         };
       };
     }
 
     {
       config._module.args = {
-        currentSystemName = name;
-        currentSystem = system;
-        isDarwin = system == "aarch64-linux";
-        inherit pkgs-unstable;
-        pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-        ghostty = inputs.ghostty.packages.${system}.default;
-        to-case = inputs.to-case.packages.${system}.default;
-        ucode = inputs.union-tools.packages.${system}.ucode;
+        inherit pkgs-unstable user machine pkgs-caddy;
       };
     }
   ];

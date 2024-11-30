@@ -1,4 +1,4 @@
-{ inputs, pkgs, theme, isDarwin, ... }:
+{ inputs, pkgs, theme, ... }:
 {
   programs.helix = {
     enable = true;

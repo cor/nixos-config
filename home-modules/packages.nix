@@ -1,4 +1,4 @@
-{ custom-packages, config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
 {
   home.packages = with pkgs; [
     bat # cat replacement

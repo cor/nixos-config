@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ currentSystemName, modulesPath, ... }:
+{ machine, modulesPath, ... }:
 {
   imports =
     [
@@ -13,7 +13,7 @@
     ];
 
   # contents of lxd.nix
-  networking.hostName = currentSystemName;
+  networking.hostName = machine.name;
 
   # networking.hostName = mkForce "nixos"; # Overwrite the hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -52,7 +52,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = machine.stateVersion; # Did you read the comment?
 
   # As this is intended as a stadalone image, undo some of the minimal profile stuff
   documentation.enable = true;
