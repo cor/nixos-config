@@ -1,4 +1,4 @@
-{ isDarwin, ... }:
+{ user, isDarwin, ... }:
 {
   programs.git =
     let
@@ -6,13 +6,13 @@
     in
     {
       enable = true;
-      userName = "cor";
-      userEmail = "cor@pruijs.dev";
+      userName = user.githubName;
+      userEmail = user.email;
       delta.enable = true;
       lfs.enable = true;
       extraConfig = {
         color.ui = true;
-        github.user = "cor";
+        github.user = user.githubName;
         gpg.format = "ssh";
         init.defaultBranch = "main";
 

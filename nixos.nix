@@ -29,7 +29,6 @@ nixpkgs.lib.nixosSystem rec {
     # if not headless
     # ./modules/fonts.nix
     # ./modules/misc.nix
-    # ./modules/networking.nix
     # ./modules/openssh.nix
     # ./modules/thunar.nix
     # ./modules/xrandr.nix
@@ -43,7 +42,7 @@ nixpkgs.lib.nixosSystem rec {
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "backup";
-        users.cor = {
+        users.${user.name} = {
           # Home-manager level modules
           imports = [
             { home.stateVersion = "24.05"; }
@@ -73,7 +72,7 @@ nixpkgs.lib.nixosSystem rec {
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit pkgs-unstable inputs;
+          inherit pkgs-unstable inputs user;
           currentSystemName = name;
           currentSystem = system;
           isDarwin = false;
@@ -86,7 +85,7 @@ nixpkgs.lib.nixosSystem rec {
         currentSystemName = name;
         currentSystem = system;
         isDarwin = system == "aarch64-linux";
-        inherit pkgs-unstable;
+        inherit pkgs-unstable user;
         pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
         # ghostty = inputs.ghostty.packages.${system}.default;
         ucode = inputs.union-tools.packages.${system}.ucode;

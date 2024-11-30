@@ -32,17 +32,21 @@
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
-      user = "cor";
+      user = {
+        name = "cor";
+        githubName = "cor";
+        email = "cor@pruijs.dev";
+      };
     in
     {
       nixosConfigurations = let system = "aarch64-linux"; in {
         corbookpro-nixos = mkNixos "corbookpro-nixos" {
-          inherit user inputs nixpkgs home-manager system;
+          inherit inputs nixpkgs home-manager system user;
           isHeadless = true;
         };
 
         raspberry-pi = mkNixos "raspberry-pi" {
-          inherit user inputs nixpkgs home-manager system;
+          inherit inputs nixpkgs home-manager system user;
           isHeadless = true;
         };
 

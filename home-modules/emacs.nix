@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgs-unstable, config, theme, isDarwin, ... }:
+{ user, inputs, pkgs, pkgs-unstable, config, theme, isDarwin, ... }:
 {
   # start the emacs daemon
   services.emacs = 
@@ -7,7 +7,7 @@
     # to fix the SSH_AUTH_SOCK issue. See home-modules/zsh.nix line 37
     emacsWithEnv = pkgs.writeShellScriptBin "emacs" ''
       #!/bin/sh
-      export SSH_AUTH_SOCK=/home/cor/.ssh/ssh_auth_sock
+      export SSH_AUTH_SOCK=/home/${user.name}/.ssh/ssh_auth_sock
       exec ${config.programs.emacs.finalPackage}/bin/emacs "$@"
     '';
   in

@@ -1,10 +1,10 @@
-{ pkgs-unstable, ... }:
+{ user, pkgs-unstable, ... }:
 {
   users = {
     mutableUsers = false;
-    users.cor = {
+    users.${user.name} = {
       isNormalUser = true;
-      home = "/home/cor";
+      home = "/home/${user.name}";
       extraGroups = [ "docker" "wheel" ];
       shell = pkgs-unstable.zsh;
       hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";

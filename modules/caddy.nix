@@ -1,4 +1,4 @@
-{ pkgs-caddy, ... }:
+{ user, pkgs-caddy, ... }:
 {
   services.caddy = {
     enable = true;
@@ -12,7 +12,7 @@
       ];
       vendorHash = "sha256-YRsPu+rTu9HEQQlj4dK2BH8DNGHo//VL5zhoU0hz7DI=";
     };
-    email = "cor@pruijs.dev";
+    email = user.email;
     configFile = ./caddy_config;
   };
 }
