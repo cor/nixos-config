@@ -1,4 +1,5 @@
-{ pkgs, currentSystemName, ... }: {
+{ pkgs, inputs, currentSystemName, ... }: {
+
   networking = {
     hostName = currentSystemName;
     useDHCP = false;
@@ -10,19 +11,18 @@
     };
   };
   environment.systemPackages = with pkgs; [ bluez bluez-tools ];
+
+  raspberry-pi-nix.board = "bcm2712"; # pi5, cfr: https://www.raspberrypi.com/documentation/computers/linux_kernel.html#native-build-configuration
+  
   hardware = {
     bluetooth.enable = true;
-    raspberry-pi = {
-      config = {
-        all = {
-          base-dt-params = {
-            # enable autoprobing of bluetooth driver
-            # https://github.com/raspberrypi/linux/blob/c8c99191e1419062ac8b668956d19e788865912a/arch/arm/boot/dts/overlays/README#L222-L224
-            krnbt = {
-              enable = true;
-              value = "on";
-            };
-          };
+    raspberry-pi.config.all = {
+      base-dt-params = {
+        # enable autoprobing of bluetooth driver
+        # https://github.com/raspberrypi/linux/blob/c8c99191e1419062ac8b668956d19e788865912a/arch/arm/boot/dts/overlays/README#L222-L224
+        krnbt = {
+          enable = true;
+          value = "on";
         };
       };
     };

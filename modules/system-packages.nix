@@ -1,4 +1,4 @@
-{ ghostty, ucode, to-case, pkgs, ... }:
+{ ghostty, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     tree
@@ -18,5 +18,7 @@
     fd
     emacsPackages.vterm
     libvterm
-  ] ++ [ ghostty ucode to-case ];
+  ] ++ [ 
+  # ghostty 
+  ];
 }

@@ -13,23 +13,22 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-utils.url = "github:numtide/flake-utils";
-    to-case.url = "github:cor/ToCase";
-    raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
+    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
-    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
+    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty?rev=e20b27de848afaa167c70d838a2f98f28c6ac0b5";
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
+   home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, ghostty, union-tools, to-case, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, ghostty, union-tools, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
@@ -40,65 +39,68 @@
         corbookpro-nixos = mkNixos "corbookpro-nixos" {
           inherit user inputs nixpkgs home-manager system;
           isHeadless = true;
-          custom-packages = { };
+        };
+
+        raspberry-pi = mkNixos "raspberry-pi" {
+          inherit user inputs nixpkgs home-manager system;
+          isHeadless = true;
         };
 
         # TODO: Unify with mkNixos
-        raspberry-pi = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            raspberry-pi-nix.nixosModules.raspberry-pi
-            ./machines/raspberry-pi.nix
-            ./modules/users.nix
-            ./modules/zsh.nix
-            ./modules/nix.nix
-            ./modules/environment.nix
-            ./modules/openssh.nix
-            ./modules/system-packages.nix
-            ./modules/tailscale.nix
-            ./modules/caddy.nix
-            {
-              config._module.args = {
-                currentSystemName = "raspberry-pi";
-                currentSystem = system;
-                isDarwin = false;
-                pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-                ghostty = ghostty.packages.${system}.default;
-                to-case = to-case.packages.${system}.default;
-              };
-            }
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.cor = {
-                  # Home-manager level modules
-                  imports = [
-                    { home.stateVersion = "23.11"; }
-                    ./home-modules/zsh.nix
-                    ./home-modules/lazygit.nix
-                    ./home-modules/git.nix
-                    ./home-modules/zellij.nix
-                    ./home-modules/direnv.nix
-                    ./home-modules/helix.nix
-                    ./home-modules/yazi.nix
-                    ./home-modules/nushell/nushell.nix
-                    ./home-modules/zoxide.nix
-                    ./home-modules/tmux.nix
-                  ];
-                };
+        # raspberry-pi = nixpkgs.lib.nixosSystem {
+        #   inherit system;
+        #   modules = [
+        #     raspberry-pi-nix.nixosModules.raspberry-pi
+        #     ./machines/raspberry-pi.nix
+        #     ./modules/users.nix
+        #     ./modules/zsh.nix
+        #     ./modules/nix.nix
+        #     ./modules/environment.nix
+        #     ./modules/openssh.nix
+        #     ./modules/system-packages.nix
+        #     ./modules/tailscale.nix
+        #     {
+        #       config._module.args = {
+        #         currentSystemName = "raspberry-pi";
+        #         currentSystem = system;
+        #         isDarwin = false;
+        #         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+        #         ghostty = ghostty.packages.${system}.default;
+        #         to-case = to-case.packages.${system}.default;
+        #       };
+        #     }
+        #     home-manager.nixosModules.home-manager
+        #     {
+        #       home-manager = {
+        #         useGlobalPkgs = true;
+        #         useUserPackages = true;
+        #         users.cor = {
+        #           # Home-manager level modules
+        #           imports = [
+        #             { home.stateVersion = "23.11"; }
+        #             ./home-modules/zsh.nix
+        #             ./home-modules/lazygit.nix
+        #             ./home-modules/git.nix
+        #             ./home-modules/zellij.nix
+        #             ./home-modules/direnv.nix
+        #             ./home-modules/helix.nix
+        #             ./home-modules/yazi.nix
+        #             ./home-modules/nushell/nushell.nix
+        #             ./home-modules/zoxide.nix
+        #             ./home-modules/tmux.nix
+        #           ];
+        #         };
 
-                extraSpecialArgs = {
-                  theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-                  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-                  isDarwin = false;
-                  inherit inputs;
-                };
-              };
-            }
-          ];
-        };
+        #         extraSpecialArgs = {
+        #           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
+        #           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+        #           isDarwin = false;
+        #           inherit inputs;
+        #         };
+        #       };
+        #     }
+        #   ];
+        # };
       };
 
       darwinConfigurations = let system = "aarch64-darwin"; in {

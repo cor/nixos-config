@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: { custom-packages, inputs, nixpkgs, home-manager, system, user, isHeadless }:
+name: {  inputs, nixpkgs, home-manager, system, user, isHeadless }:
 let
   pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
 in
@@ -10,6 +10,7 @@ nixpkgs.lib.nixosSystem rec {
   # NixOS level modules
   modules = [
     # inputs.union.nixosModules.hubble
+    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
     ./hardware/${name}.nix
     ./machines/${name}.nix
 
@@ -22,7 +23,7 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/code-server.nix
     ./modules/tailscale.nix
     # ./modules/nginx.nix
-    ./modules/caddy.nix
+    # ./modules/caddy.nix
 
 
     # if not headless
@@ -51,9 +52,9 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/direnv.nix
             ./home-modules/git.nix
             ./home-modules/helix.nix
-            ./home-modules/emacs.nix
+            # ./home-modules/emacs.nix
             ./home-modules/lazygit.nix
-            ./home-modules/nushell/nushell.nix
+            # ./home-modules/nushell/nushell.nix
             ./home-modules/tmux.nix
             ./home-modules/yazi.nix
             ./home-modules/zellij.nix
@@ -67,19 +68,12 @@ nixpkgs.lib.nixosSystem rec {
             # ./home-modules/flameshot.nix
             # ./home-modules/nixos-misc.nix
             # ./home-modules/rofi.nix
-
-            # unused
-            # ./home-modules/wezterm.nix
-            # ./home-modules/packages.nix
-            # ./home-modules/gpg.nix
-            # ./home-modules/kitty.nix
-            # ./home-modules/ranger.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit pkgs-unstable inputs custom-packages;
+          inherit pkgs-unstable inputs;
           currentSystemName = name;
           currentSystem = system;
           isDarwin = false;
@@ -94,8 +88,7 @@ nixpkgs.lib.nixosSystem rec {
         isDarwin = system == "aarch64-linux";
         inherit pkgs-unstable;
         pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-        ghostty = inputs.ghostty.packages.${system}.default;
-        to-case = inputs.to-case.packages.${system}.default;
+        # ghostty = inputs.ghostty.packages.${system}.default;
         ucode = inputs.union-tools.packages.${system}.ucode;
       };
     }
