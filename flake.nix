@@ -13,7 +13,7 @@
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty?rev=e20b27de848afaa167c70d838a2f98f28c6ac0b5";
+    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
 
     flake-utils.url = "github:numtide/flake-utils";
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
@@ -80,61 +80,6 @@
           };
         };
 
-        # TODO: Unify with mkNixos
-        # raspberry-pi = nixpkgs.lib.nixosSystem {
-        #   inherit system;
-        #   modules = [
-        #     raspberry-pi-nix.nixosModules.raspberry-pi
-        #     ./machines/raspberry-pi.nix
-        #     ./modules/users.nix
-        #     ./modules/zsh.nix
-        #     ./modules/nix.nix
-        #     ./modules/environment.nix
-        #     ./modules/openssh.nix
-        #     ./modules/system-packages.nix
-        #     ./modules/tailscale.nix
-        #     {
-        #       config._module.args = {
-        #         currentSystemName = "raspberry-pi";
-        #         currentSystem = system;
-        #         isDarwin = false;
-        #         pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-        #         ghostty = ghostty.packages.${system}.default;
-        #         to-case = to-case.packages.${system}.default;
-        #       };
-        #     }
-        #     home-manager.nixosModules.home-manager
-        #     {
-        #       home-manager = {
-        #         useGlobalPkgs = true;
-        #         useUserPackages = true;
-        #         users.cor = {
-        #           # Home-manager level modules
-        #           imports = [
-        #             { home.stateVersion = "23.11"; }
-        #             ./home-modules/zsh.nix
-        #             ./home-modules/lazygit.nix
-        #             ./home-modules/git.nix
-        #             ./home-modules/zellij.nix
-        #             ./home-modules/direnv.nix
-        #             ./home-modules/helix.nix
-        #             ./home-modules/yazi.nix
-        #             ./home-modules/nushell/nushell.nix
-        #             ./home-modules/zoxide.nix
-        #             ./home-modules/tmux.nix
-        #           ];
-        #         };
-
-        #         extraSpecialArgs = {
-        #           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-        #           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
-        #           isDarwin = false;
-        #           inherit inputs;
-        #         };
-        #       };
-        #     }
-        #   ];
-        # };
       };
 
       darwinConfigurations = let system = "aarch64-darwin"; in {

@@ -17,7 +17,7 @@
     fd
     emacsPackages.vterm
     libvterm
-  ] ++ [ 
-  # ghostty 
+  ] ++ [
+    # ghostty 
   ];
 }

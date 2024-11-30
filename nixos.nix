@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-{  inputs, nixpkgs, home-manager, user, machine }:
+{ inputs, nixpkgs, home-manager, user, machine }:
 let
   pkgs-unstable = import inputs.nixpkgs-unstable { system = machine.system; config.allowUnfree = true; };
   pkgs-caddy = import inputs.nixpkgs-caddy { system = machine.system; };

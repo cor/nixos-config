@@ -13,7 +13,7 @@
   environment.systemPackages = with pkgs; [ bluez bluez-tools ];
 
   raspberry-pi-nix.board = "bcm2712"; # pi5, cfr: https://www.raspberrypi.com/documentation/computers/linux_kernel.html#native-build-configuration
-  
+
   hardware = {
     bluetooth.enable = true;
     raspberry-pi.config.all = {
