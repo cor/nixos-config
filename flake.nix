@@ -37,13 +37,13 @@
         githubName = "cor";
         email = "cor@pruijs.dev";
         hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";
-        sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC"
+        sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC";
       };
     in
     {
       nixosConfigurations = {
-        corbookpro-nixos = mkNixos "corbookpro-nixos" {
-          inherit inputs nixpkgs home-manager system user;
+        corbookpro-nixos = mkNixos {
+          inherit inputs nixpkgs home-manager user;
           machine = {
             name = "corbookpro-nixos";
             system = "aarch64-linux";
@@ -54,8 +54,8 @@
           };
         };
 
-        raspberry-pi = mkNixos "raspberry-pi" {
-          inherit inputs nixpkgs home-manager system user;
+        raspberry-pi = mkNixos {
+          inherit inputs nixpkgs home-manager user;
           machine = {
             name = "raspberry-pi";
             system = "aarch64-linux";

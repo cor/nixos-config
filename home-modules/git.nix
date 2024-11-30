@@ -1,4 +1,4 @@
-{ user, isDarwin, ... }:
+{ machine, user, ... }:
 {
   programs.git =
     let
@@ -19,7 +19,7 @@
         # Fix go private dependency fetching by using SSH instead of HTTPS
         "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";
         commit.gpgsign = true;
-      } // (if isDarwin then {
+      } // (if machine.darwin then {
         user.signingkey = sshSigningKey;
         gpg."ssh".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         gpg.format = "ssh";

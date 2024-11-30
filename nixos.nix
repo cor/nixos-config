@@ -2,7 +2,8 @@
 # particular architecture.
 {  inputs, nixpkgs, home-manager, user, machine }:
 let
-  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = machine.system; config.allowUnfree = true; };
+  pkgs-caddy = import inputs.nixpkgs-caddy { system = machine.system; };
 in
 nixpkgs.lib.nixosSystem rec {
   system = machine.system;
@@ -11,8 +12,8 @@ nixpkgs.lib.nixosSystem rec {
   modules = [
     # inputs.union.nixosModules.hubble
     inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-    ./hardware/${name}.nix
-    ./machines/${name}.nix
+    ./hardware/${machine.name}.nix
+    ./machines/${machine.name}.nix
 
     ./modules/users.nix
     ./modules/zsh.nix
@@ -71,22 +72,13 @@ nixpkgs.lib.nixosSystem rec {
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
           inherit pkgs-unstable inputs user machine;
-          # currentSystemName = name;
-          # currentSystem = system;
-          # isDarwin = false;
         };
       };
     }
 
     {
       config._module.args = {
-        # currentSystemName = name;
-        # currentSystem = system;
-        # isDarwin = system == "aarch64-linux";
-        inherit pkgs-unstable user machine;
-        pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-        # ghostty = inputs.ghostty.packages.${system}.default;
-        # ucode = inputs.union-tools.packages.${system}.ucode;
+        inherit pkgs-unstable user machine pkgs-caddy;
       };
     }
   ];
