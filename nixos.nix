@@ -21,7 +21,8 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/docker.nix
     ./modules/code-server.nix
     ./modules/tailscale.nix
-    # ./modules/nixpkgs.nix
+    # ./modules/nginx.nix
+    ./modules/caddy.nix
 
 
     # if not headless
@@ -92,6 +93,7 @@ nixpkgs.lib.nixosSystem rec {
         currentSystem = system;
         isDarwin = system == "aarch64-linux";
         inherit pkgs-unstable;
+        pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
         ghostty = inputs.ghostty.packages.${system}.default;
         to-case = inputs.to-case.packages.${system}.default;
         ucode = inputs.union-tools.packages.${system}.ucode;

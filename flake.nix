@@ -8,6 +8,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    # Used for caddy plugins
+    nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     flake-utils.url = "github:numtide/flake-utils";
     to-case.url = "github:cor/ToCase";
@@ -53,6 +56,7 @@
             ./modules/openssh.nix
             ./modules/system-packages.nix
             ./modules/tailscale.nix
+            ./modules/caddy.nix
             {
               config._module.args = {
                 currentSystemName = "raspberry-pi";

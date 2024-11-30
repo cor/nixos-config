@@ -7,8 +7,7 @@
     disableTelemetry = true;
     user = "cor";
     extraEnvironment = {
-      # TODO: make non-orbstack specific
-      SSH_AUTH_SOCK = "/opt/orbstack-guest/run/host-ssh-agent.sock";
+      SSH_AUTH_SOCK = "/home/cor/.ssh/ssh_auth_sock";
     };
     extensionsDir = "${baseDir}extensions";
     userDataDir = "${baseDir}user-data";
