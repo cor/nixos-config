@@ -1,28 +1,29 @@
 {
   description = "NixOS systems and tools by cor";
 
-  nixConfig = { };
-
   inputs = {
-    union-tools.url = "github:unionlabs/tools";
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    union-tools.url = "github:unionlabs/tools";
 
     # Used for caddy plugins
     nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    flake-utils.url = "github:numtide/flake-utils";
-    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty?rev=e20b27de848afaa167c70d838a2f98f28c6ac0b5";
+
+    flake-utils.url = "github:numtide/flake-utils";
+    raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-   home-manager = {
+    home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -37,6 +38,7 @@
         githubName = "cor";
         email = "cor@pruijs.dev";
         hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";
+        codeHashedPassword = "$argon2i$v=19$m=4096,t=3,p=1$EhoOotFaUezZdQ+6Nfaz6w$ba74RTp6245H0K0URZmDsV1GBmVSHwzF5BT42FA9Y3I";
         sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC";
       };
     in
@@ -46,6 +48,18 @@
           inherit inputs nixpkgs home-manager user;
           machine = {
             name = "corbookpro-nixos";
+            system = "aarch64-linux";
+            darwin = false;
+            headless = true;
+            stateVersion = "24.05";
+            homeStateVersion = "24.05";
+          };
+        };
+
+        corbookair-nixos = mkNixos {
+          inherit inputs nixpkgs home-manager user;
+          machine = {
+            name = "corbookair-nixos";
             system = "aarch64-linux";
             darwin = false;
             headless = true;

@@ -2,7 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     tree
-    helix
     curl
     zsh
     fzf

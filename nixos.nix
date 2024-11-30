@@ -11,7 +11,7 @@ nixpkgs.lib.nixosSystem rec {
   # NixOS level modules
   modules = [
     # inputs.union.nixosModules.hubble
-    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+    # inputs.raspberry-pi-nix.nixosModules.raspberry-pi
     ./hardware/${machine.name}.nix
     ./machines/${machine.name}.nix
 
@@ -23,7 +23,6 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/docker.nix
     ./modules/code-server.nix
     ./modules/tailscale.nix
-    # ./modules/nginx.nix
     # ./modules/caddy.nix
 
 
@@ -51,14 +50,14 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/direnv.nix
             ./home-modules/git.nix
             ./home-modules/helix.nix
-            # ./home-modules/emacs.nix
             ./home-modules/lazygit.nix
-            # ./home-modules/nushell/nushell.nix
             ./home-modules/tmux.nix
             ./home-modules/yazi.nix
             ./home-modules/zellij.nix
             ./home-modules/zoxide.nix
             ./home-modules/zsh.nix
+            # ./home-modules/emacs.nix
+            # ./home-modules/nushell/nushell.nix
 
 
             # if not headless
