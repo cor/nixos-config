@@ -36,18 +36,34 @@
         name = "cor";
         githubName = "cor";
         email = "cor@pruijs.dev";
+        hashedPassword = "$6$sb3eB/EbsWnfAqzy$szu0h/hbX9/23n5RKE0dwzV8lmq.1Yj2NzI/jYQxJZIbzmY8dpIYRdhUVZgCMnR0CeqrQfgzs6FtPoGUiCqDR0";
+        sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC"
       };
     in
     {
-      nixosConfigurations = let system = "aarch64-linux"; in {
+      nixosConfigurations = {
         corbookpro-nixos = mkNixos "corbookpro-nixos" {
           inherit inputs nixpkgs home-manager system user;
-          isHeadless = true;
+          machine = {
+            name = "corbookpro-nixos";
+            system = "aarch64-linux";
+            darwin = false;
+            headless = true;
+            stateVersion = "24.05";
+            homeStateVersion = "24.05";
+          };
         };
 
         raspberry-pi = mkNixos "raspberry-pi" {
           inherit inputs nixpkgs home-manager system user;
-          isHeadless = true;
+          machine = {
+            name = "raspberry-pi";
+            system = "aarch64-linux";
+            darwin = false;
+            headless = true;
+            stateVersion = "23.11";
+            homeStateVersion = "24.05";
+          };
         };
 
         # TODO: Unify with mkNixos

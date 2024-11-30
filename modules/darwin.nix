@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, machine, ... }:
 
 {
   services.nix-daemon.enable = true;
@@ -8,7 +8,6 @@
       gnumake
       coreutils
       cmake
-      # kitty
       gh
     ];
 

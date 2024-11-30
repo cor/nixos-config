@@ -1,7 +1,7 @@
-{ pkgs, inputs, currentSystemName, ... }: {
+{ pkgs, inputs, machine, ... }: {
 
   networking = {
-    hostName = currentSystemName;
+    hostName = machine.name;
     useDHCP = false;
     interfaces = { eth0.useDHCP = true; };
     nameservers = [ "1.1.1.1" "1.0.0.1" ];

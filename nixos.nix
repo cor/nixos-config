@@ -1,11 +1,11 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: {  inputs, nixpkgs, home-manager, system, user, isHeadless }:
+{  inputs, nixpkgs, home-manager, user, machine }:
 let
   pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; config.allowUnfree = true; };
 in
 nixpkgs.lib.nixosSystem rec {
-  inherit system;
+  system = machine.system;
 
   # NixOS level modules
   modules = [
@@ -45,8 +45,7 @@ nixpkgs.lib.nixosSystem rec {
         users.${user.name} = {
           # Home-manager level modules
           imports = [
-            { home.stateVersion = "24.05"; }
-            # ./home-modules/kitty.nix
+            { home.stateVersion = machine.homeStateVersion; }
             ./home-modules/bat.nix
             ./home-modules/direnv.nix
             ./home-modules/git.nix
@@ -65,30 +64,29 @@ nixpkgs.lib.nixosSystem rec {
             # ./home-modules/awesome.nix
             # ./home-modules/chromium.nix
             # ./home-modules/flameshot.nix
-            # ./home-modules/nixos-misc.nix
             # ./home-modules/rofi.nix
           ];
         };
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit pkgs-unstable inputs user;
-          currentSystemName = name;
-          currentSystem = system;
-          isDarwin = false;
+          inherit pkgs-unstable inputs user machine;
+          # currentSystemName = name;
+          # currentSystem = system;
+          # isDarwin = false;
         };
       };
     }
 
     {
       config._module.args = {
-        currentSystemName = name;
-        currentSystem = system;
-        isDarwin = system == "aarch64-linux";
-        inherit pkgs-unstable user;
+        # currentSystemName = name;
+        # currentSystem = system;
+        # isDarwin = system == "aarch64-linux";
+        inherit pkgs-unstable user machine;
         pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
         # ghostty = inputs.ghostty.packages.${system}.default;
-        ucode = inputs.union-tools.packages.${system}.ucode;
+        # ucode = inputs.union-tools.packages.${system}.ucode;
       };
     }
   ];

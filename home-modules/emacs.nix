@@ -1,4 +1,4 @@
-{ user, inputs, pkgs, pkgs-unstable, config, theme, isDarwin, ... }:
+{ user, inputs, pkgs, pkgs-unstable, config, theme,  ... }:
 {
   # start the emacs daemon
   services.emacs = 

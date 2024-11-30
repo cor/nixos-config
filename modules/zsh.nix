@@ -1,4 +1,4 @@
-{ isDarwin, ... }:
+{ machine, ... }:
 {
   programs.zsh = {
     enable = true; # default shell on catalina
@@ -11,6 +11,6 @@
 
     ''
     +
-    (if isDarwin then "" else ''compinit'');
+    (if machine.darwin then "" else ''compinit'');
   };
 }

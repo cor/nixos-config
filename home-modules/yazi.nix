@@ -1,8 +1,8 @@
-{ inputs, pkgs-unstable, theme, isDarwin, ... }:
+{ inputs, pkgs-unstable, theme, machine, ... }:
 {
   programs.yazi = {
     enable = true;
-    package = if isDarwin then pkgs-unstable.yazi else inputs.yazi.packages.${pkgs-unstable.system}.default;
+    package = if machine.darwin then pkgs-unstable.yazi else inputs.yazi.packages.${pkgs-unstable.system}.default;
     enableZshIntegration = true;
 
     settings = {
