@@ -15,9 +15,10 @@
     libxml2
     ripgrep
     fd
-    emacsPackages.vterm
-    libvterm
-  ] ++ [
+    # emacsPackages.vterm
+    # libvterm
+    wakeonlan
+  ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
     inputs.ghostty.packages.${machine.system}.ghostty
-  ];
+  ]);
 }
