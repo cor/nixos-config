@@ -1,4 +1,4 @@
-{ ghostty, pkgs, ... }:
+{ inputs, machine, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     tree
@@ -18,6 +18,6 @@
     emacsPackages.vterm
     libvterm
   ] ++ [
-    # ghostty 
+    inputs.ghostty.packages.${machine.system}.ghostty
   ];
 }
