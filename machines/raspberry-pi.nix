@@ -10,6 +10,10 @@
       allowPing = true;
     };
   };
+
+  # You cannot enter the pi without openssh enabled!
+  services.openssh.enable = true;
+
   environment.systemPackages = with pkgs; [ bluez bluez-tools ];
 
   raspberry-pi-nix.board = "bcm2712"; # pi5, cfr: https://www.raspberrypi.com/documentation/computers/linux_kernel.html#native-build-configuration
@@ -17,12 +21,21 @@
   hardware = {
     bluetooth.enable = true;
     raspberry-pi.config.all = {
+      # as per exaple: https://github.com/nix-community/raspberry-pi-nix/blob/aaec735faf81ff05356d65c7408136d2c1522d34/example/default.nix#L17C11-L32C13
       base-dt-params = {
-        # enable autoprobing of bluetooth driver
-        # https://github.com/raspberrypi/linux/blob/c8c99191e1419062ac8b668956d19e788865912a/arch/arm/boot/dts/overlays/README#L222-L224
-        krnbt = {
+        BOOT_UART = {
+          value = 1;
           enable = true;
-          value = "on";
+        };
+        uart_2ndstage = {
+          value = 1;
+          enable = true;
+        };
+      };
+      dt-overlays = {
+        disable-bt = {
+          enable = true;
+          params = { };
         };
       };
     };
@@ -34,7 +47,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = machine.stateVersion; # Did you read the comment?
 
   # As this is intended as a stadalone image, undo some of the minimal profile stuff
   documentation.enable = true;

@@ -11,8 +11,8 @@ nixpkgs.lib.nixosSystem rec {
   # NixOS level modules
   modules = [
     # inputs.union.nixosModules.hubble
-    # inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-    ./hardware/${machine.name}.nix
+    # ./hardware/${machine.name}.nix
+    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
     ./machines/${machine.name}.nix
 
     ./modules/users.nix
@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem rec {
     # if not headless
     # ./modules/fonts.nix
     # ./modules/misc.nix
-    # ./modules/openssh.nix
+    # ./modules/opensshix
     # ./modules/thunar.nix
     # ./modules/xrandr.nix
     # ./modules/xserver.nix
@@ -70,14 +70,14 @@ nixpkgs.lib.nixosSystem rec {
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
           theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit pkgs-unstable inputs user machine;
+          inherit inputs pkgs-unstable user machine;
         };
       };
     }
 
     {
       config._module.args = {
-        inherit pkgs-unstable user machine pkgs-caddy;
+        inherit inputs pkgs-unstable user machine pkgs-caddy;
       };
     }
   ];
