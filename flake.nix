@@ -47,6 +47,7 @@
         corbookpro-nixos = mkNixos {
           inherit inputs nixpkgs home-manager user;
           machine = {
+            domain = "corbookpro-nixos.cor.systems";
             name = "corbookpro-nixos";
             system = "aarch64-linux";
             darwin = false;
@@ -59,6 +60,7 @@
         corbookair-nixos = mkNixos {
           inherit inputs nixpkgs home-manager user;
           machine = {
+            domain = "corbookair-nixos.cor.systems";
             name = "corbookair-nixos";
             system = "aarch64-linux";
             darwin = false;
@@ -71,6 +73,7 @@
         raspberry-pi = mkNixos {
           inherit inputs nixpkgs home-manager user;
           machine = {
+            domain = "raspberry-pi.cor.systems";
             name = "raspberry-pi";
             system = "aarch64-linux";
             darwin = false;

@@ -10,11 +10,8 @@ nixpkgs.lib.nixosSystem rec {
 
   # NixOS level modules
   modules = [
-    # inputs.union.nixosModules.hubble
-    # ./hardware/${machine.name}.nix
-    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+    ./hardware/${machine.name}.nix
     ./machines/${machine.name}.nix
-
     ./modules/users.nix
     ./modules/zsh.nix
     ./modules/nix.nix
@@ -23,19 +20,8 @@ nixpkgs.lib.nixosSystem rec {
     ./modules/docker.nix
     ./modules/code-server.nix
     ./modules/tailscale.nix
-    # ./modules/caddy.nix
+    ./modules/caddy.nix
 
-
-    # if not headless
-    # ./modules/fonts.nix
-    # ./modules/misc.nix
-    # ./modules/opensshix
-    # ./modules/thunar.nix
-    # ./modules/xrandr.nix
-    # ./modules/xserver.nix
-    # 
-
-    # The home-manager NixOS module
     home-manager.nixosModules.home-manager
     {
       home-manager = {
@@ -58,14 +44,7 @@ nixpkgs.lib.nixosSystem rec {
             ./home-modules/zsh.nix
             # ./home-modules/emacs.nix
             # ./home-modules/nushell/nushell.nix
-
-
-            # if not headless
-            # ./home-modules/awesome.nix
-            # ./home-modules/chromium.nix
-            # ./home-modules/flameshot.nix
-            # ./home-modules/rofi.nix
-          ];
+         ];
         };
         # Arguments that are exposed to every `home-module`.
         extraSpecialArgs = {
@@ -74,11 +53,12 @@ nixpkgs.lib.nixosSystem rec {
         };
       };
     }
-
     {
       config._module.args = {
         inherit inputs pkgs-unstable user machine pkgs-caddy;
       };
     }
-  ];
+  ] ++ nixpkgs.lib.optionals (machine.name == "raspberry-pi") [
+    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+  ]; 
 }
