@@ -1,56 +1,467 @@
 {
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-          "before": ["<space>"],
-          "commands": ["vspacecode.space"]
-        },
-        {
-          "before": [","],
-          "commands": [
-            "vspacecode.space",
-            {
-              "command": "whichkey.triggerKey",
-              "args": "m"
-            }
-          ]
-        }
-      ],
-      "vim.visualModeKeyBindingsNonRecursive": [
-        {
-          "before": ["<space>"],
-          "commands": ["vspacecode.space"]
-        },
-        {
-          "before": [","],
-          "commands": [
-            "vspacecode.space",
-            {
-              "command": "whichkey.triggerKey",
-              "args": "m"
-            }
-          ]
-        },
-        {
-          "before": [">"],
-          "commands": ["editor.action.indentLines"]
-        },
-        {
-          "before": ["<"],
-          "commands": ["editor.action.outdentLines"]
-        }
-      ],
-      "workbench.activityBar.location": "top",
-      "projectManager.git.baseFolders": ["/home/cor/dev/"],
-    "workbench.colorTheme": "Two Monokai Flat",
-    "breadcrumbs.enabled": false,
-    "terminal.integrated.fontSize": 14,
-    "magit.forge-enabled": true,
-    "magit.code-path": "/home/cor/nixos-config/result/bin/remote-cli/openvscode-server",
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "projectManager.git.baseFolders": [
+        "/home/cor/dev/"
+    ],
+    "workbench.activityBar.location": "top",
     "editor.minimap.enabled": false,
-    "projectManager.showParentFolderInfoOnDuplicates": true,
-    "projectManager.sortList": "Path",
-    "projectManager.filterOnFullPath": true,
-    "workbench.editor.showTabs": "none",
-    "workbench.statusBar.visible": false,
+    "breadcrumbs.enabled": false,
+
+    // source: https://github.com/imawizard/dotfiles/blob/2578262bc5a661d2d58b21856282ecb728ba69e9/scoop/persist/vscode/data/user-data/User/settings.json#L220-L221
+    // Dance ...............................................................{{{1
+
+    // NOTE: Setting the selectionBehavior to `character` renders selections
+    // being off for some commands. There are keybindings that try to mitigate
+    // that and thus probably won't work with `caret`, examples are:
+    // - w, b, e in select-mode with a reversed selection
+    // - l in normal-mode with a reversed selection
+    // - m m/s/r/d
+    "dance.modes": {
+        "normal": {
+            "lineNumbers": "inherit",
+            "cursorStyle": "block",
+            "selectionBehavior": "character",
+        },
+        "insert": {
+            "lineNumbers": "inherit",
+            "cursorStyle": "underline",
+            "selectionBehavior": "character",
+        },
+        "input": {
+            "inheritFrom": "insert",
+        },
+        "select": {
+            "inheritFrom": "normal",
+            "onLeaveMode": [
+                [
+                    ".selections.save",
+                    {
+                        "register": " ^",
+                        "style": {
+                            "borderColor": "$editor.selectionBackground",
+                            "borderStyle": "solid",
+                            "borderWidth": "2px",
+                            "borderRadius": "1px"
+                        },
+                        "until": [
+                            ["mode-did-change", { "include": ["normal", "select"] }],
+                            ["selections-did-change"]
+                        ]
+                    }
+                ]
+            ],
+        },
+    },
+
+    "dance.menus": {
+        "goto-hx": {
+            "title": "Goto",
+            "items": {
+                "g": { "text": "line number <n> else file start", "command": "dance.run", "args": [{ "code": [
+                    "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend'",
+                    "await vscode.commands.executeCommand('dance.select.lineStart', { count: Math.max(count, 1), shift })",
+                ] }] },
+                "e": { "text": "last line",               "command": "dance.select.lineStart", "args": [{ "count": 2147483647 }] },
+                "f": { "text": "files in selection",      "command": "editor.action.openLink"                                    },
+                "h": { "text": "line start",              "command": "dance.select.lineStart"                                    },
+                "l": { "text": "line end",                "command": "dance.select.lineEnd"                                      },
+                "s": { "text": "first non-blank in line", "command": "dance.select.lineStart", "args": [{ "skipBlank": true }]   },
+                "d": { "text": "definition",              "command": "editor.action.revealDefinition"                            },
+                "y": { "text": "type definition",         "command": "editor.action.goToTypeDefinition"                          },
+                "r": { "text": "references",              "command": "editor.action.goToReferences"                              },
+                "i": { "text": "implementation",          "command": "editor.action.goToImplementation"                          },
+                "t": { "text": "window top",              "command": "dance.select.firstVisibleLine"                             },
+                "c": { "text": "window center",           "command": "dance.select.middleVisibleLine"                            },
+                "b": { "text": "window bottom",           "command": "dance.select.lastVisibleLine"                              },
+                "a": { "text": "last accessed file",      "command": "workbench.action.previousEditorInGroup"                    },
+                "m": { "text": "last modified file",      "command": "???"                                                       },
+                "p": { "text": "previous buffer",         "command": "workbench.action.previousEditor"                           },
+            }
+        },
+
+        "match-hx": {
+            "title": "Match",
+            "items": {
+                "m": { "text": "Goto matching bracket", "command": "dance.run", "args": [{ "code": [
+                    "let shift = Context.current.mode.name !== 'select' ? 'jump' : 'extend';",
+                    "await vscode.commands.executeCommand('dance.seek.enclosing.backward', { shift });",
+                    "if (shift === 'jump') {",
+                        "await vscode.commands.executeCommand('dance.selections.reduce');",
+                    "} else {",
+                        "Selections.updateWithFallbackByIndex((i, sel) => new vscode.Selection(",
+                            "Positions.at(sel.anchor.line, sel.anchor.character + sel.isReversed),",
+                            "sel.active,",
+                        "));",
+                    "}",
+                ] }] },
+                "s": { "text": "Surround add", "command": "dance.run", "args": [{ "code": [
+                    "let pairs = ['()', '{}', '[]', '<>'];",
+                    "let x = vscode.commands.executeCommand;",
+                    "let c = await keypress(Context.current);",
+                    "let p = pairs.find((p) => p.includes(c));",
+                    "await x('dance.selections.save');",
+                    "Selections.updateWithFallbackByIndex((i, sel) => new vscode.Selection(",
+                        "sel.anchor,",
+                        "Positions.at(sel.active.line, sel.active.character + !sel.isReversed),",
+                    "));",
+                    "await x('editor.action.insertSnippet', { snippet: (p?.at(0) || c) + '${TM_SELECTED_TEXT}' + (p?.at(1) || c) });",
+                    "await x('dance.selections.restore');",
+                ] }] },
+                "r": { "text": "Surround replace", "command": "dance.run", "args": [{ "code": [
+                    "let pairs = ['()', '{}', '[]', '<>'];",
+                    "let x = vscode.commands.executeCommand;",
+                    "let c = await keypress(Context.current);",
+                    "let p = pairs.find((p) => p.includes(c));",
+                    "let o = Selections.mapByIndex((_i, sel) => sel);",
+                    "await x('dance.selections.save');",
+                    "Selections.updateWithFallbackByIndex((_i, sel) => new vscode.Selection(",
+                        "sel.anchor,",
+                        "Positions.at(sel.active.line, sel.active.character - !sel.isReversed),",
+                    "));",
+                    "let item = findMenu('object-hx').items[p || c]",
+                    "let args = item.args.reduce((a, v) => a = Object.assign(a, v), {});",
+                    "await x(item.command, args);",
+                    "let s = Selections.mapByIndex((i, sel) => !o[i].isReversed ? sel : Selections.backward(sel));",
+                    "await x('dance.selections.save', { register: 'surround' });",
+                    "await x('dance.selections.reduce.edges');",
+                    "c = await keypress(Context.current);",
+                    "p = pairs.find((p) => p.includes(c));",
+                    "await x('dance.edit.delete');",
+                    "await x('dance.selections.restore', { register: 'surround' });",
+                    "await x('dance.select.right.extend');",
+                    "await x('editor.action.insertSnippet', { snippet: (p?.at(0) || c) + '${TM_SELECTED_TEXT}' + (p?.at(1) || c) });",
+                    "await x('dance.selections.restore');",
+                    "Selections.updateWithFallbackByIndex((i, sel) => o[i]);",
+                ] }] },
+                "d": { "text": "Surround delete", "command": "dance.run", "args": [{ "code": [
+                    "let pairs = ['()', '{}', '[]', '<>'];",
+                    "let x = vscode.commands.executeCommand;",
+                    "let c = await keypress(Context.current);",
+                    "let p = pairs.find((p) => p.includes(c));",
+                    "let o = Selections.mapByIndex((_i, sel) => sel);",
+                    "await x('dance.selections.save');",
+                    "Selections.updateWithFallbackByIndex((i, sel) => new vscode.Selection(",
+                        "sel.anchor,",
+                        "Positions.at(sel.active.line, sel.active.character - !sel.isReversed),",
+                    "));",
+                    "let item = findMenu('object-hx').items[p || c]",
+                    "let args = item.args.reduce((a, v) => a = Object.assign(a, v), {});",
+                    "await x(item.command, args);",
+                    "let s = Selections.mapByIndex((i, sel) => !o[i].isReversed ? sel : Selections.backward(sel));",
+                    "await x('dance.selections.reduce.edges');",
+                    "await x('dance.edit.delete');",
+                    "await x('dance.selections.restore');",
+                    "Selections.updateWithFallbackByIndex((i, sel) => new vscode.Selection(",
+                        "Positions.at(o[i].anchor.line, o[i].anchor.character - 1 + o[i].anchor.isEqual(s[i].anchor) * (sel.isReversed ? -1 : 1)),",
+                        "Positions.at(o[i].active.line, o[i].active.character - 1 - o[i].active.isEqual(s[i].active) * (sel.isReversed ? -1 : 1)),",
+                    "));",
+                ] }] },
+                "a": { "text": "Select around object", "command": "dance.openMenu", "args": [{ "menu": "object-hx", "title": "Match around"                                             }] },
+                "i": { "text": "Select inside object", "command": "dance.openMenu", "args": [{ "menu": "object-hx", "title": "Match inside", "pass": [{ "inner": true, "open": false }] }] },
+                // Not in helix yet: https://github.com/helix-editor/helix/issues/1810
+                " ": { "text": "Select by indentation", "command": "dance.seek.object", "args": [{ "input": "(?#predefined=indent)" }] },
+            },
+        },
+
+        "object-hx": {
+            "items": {
+                "w":  { "text": "Word",                               "command": "dance.seek.object", "args": [{ "input": "[\\p{L}_\\d]+(?<after>[^\\S\\n]+)"     }] },
+                "W":  { "text": "WORD",                               "command": "dance.seek.object", "args": [{ "input": "[\\S]+(?<after>[^\\S\\n]+)"            }] },
+                "p":  { "text": "Paragraph",                          "command": "dance.seek.object", "args": [{ "input": "(?#predefined=paragraph)"              }] },
+                "t":  { "text": "Type definition",                    "command": "dance.seek.object", "args": [{ "input": "(?#textobject=class)"                  }] },
+                "f":  { "text": "Function",                           "command": "dance.seek.object", "args": [{ "input": "(?#textobject=function)"               }] },
+                "a":  { "text": "Argument/parameter",                 "command": "dance.run", "args": [{ "code": [
+                    "let x = vscode.commands.executeCommand;",
+                    "let _ = Context.current;",
+                    "let ts = _.extension.treeSitter;",
+                    "await x('dance.seek.object', { input: ts?.determineLanguage(_.document) ? '(?#textobject=parameter)' : '(?#predefined=argument)' });",
+                ] }] },
+                "c":  { "text": "Comment",                            "command": "dance.seek.object", "args": [{ "input": "(?#textobject=comment)"                }] },
+                "T":  { "text": "Test",                               "command": "dance.seek.object", "args": [{ "input": "(?#textobject=test)"                   }] },
+                "m":  { "text": "Closest surrounding pair to cursor", "command": "dance.seek.enclosing"                                                              },
+                "()": { "text": "Parentheses",                        "command": "dance.seek.object", "args": [{ "input": "\\((?#inner)\\)"                       }] },
+                "{}": { "text": "Braces",                             "command": "dance.seek.object", "args": [{ "input": "\\{(?#inner)\\}"                       }] },
+                "[]": { "text": "Brackets",                           "command": "dance.seek.object", "args": [{ "input": "\\[(?#inner)\\]"                       }] },
+                "<>": { "text": "Angle brackets",                     "command": "dance.seek.object", "args": [{ "input": "<(?#inner)>"                           }] },
+                "\"": { "text": "Double quotes",                      "command": "dance.seek.object", "args": [{ "input": "(?#noescape)\"(?#inner)(?#noescape)\"" }] },
+                "'":  { "text": "Single quotes",                      "command": "dance.seek.object", "args": [{ "input": "(?#noescape)'(?#inner)(?#noescape)'"   }] },
+                "`":  { "text": "Grave quotes",                       "command": "dance.seek.object", "args": [{ "input": "(?#noescape)`(?#inner)(?#noescape)`"   }] },
+                " ":  { "text": "Whitespace",                         "command": "dance.seek.object", "args": [{ "input": "[ \t](?#inner)[ \t]"                   }] },
+            },
+        },
+
+        "view-hx": {
+            "title": "View",
+            "items": {
+                "cz": { "text": "Align view center", "command": "dance.view.line", "args": [{ "at": "center" }]                                },
+                "t":  { "text": "Align view top",    "command": "dance.view.line", "args": [{ "at": "top"    }]                                },
+                "b":  { "text": "Align view bottom", "command": "dance.view.line", "args": [{ "at": "bottom" }]                                },
+                "m":  { "text": "Align view middle", "command": "???"                                                                          },
+                "k":  { "text": "Scroll view up",    "command": "editorScroll", "args": [{ "by": "line", "revealCursor": true, "to": "up"   }] },
+                "j":  { "text": "Scroll view down",  "command": "editorScroll", "args": [{ "by": "line", "revealCursor": true, "to": "down" }] },
+                /*
+                "C-b": { "text": "Move page up",        "command": "dance.select.vertically", "args": [{ "direction": -1, "by": "page"     }] },
+                "C-f": { "text": "Move page down",      "command": "dance.select.vertically", "args": [{ "direction":  1, "by": "page"     }] },
+                "C-u": { "text": "Move half page up",   "command": "dance.select.vertically", "args": [{ "direction": -1, "by": "halfPage" }] },
+                "C-d": { "text": "Move half page down", "command": "dance.select.vertically", "args": [{ "direction":  1, "by": "halfPage" }] },
+                */
+                "/": { "text": "Search for regex pattern",         "command": "dance.search"          },
+                "?": { "text": "Reverse search for regex pattern", "command": "dance.search.backward" },
+                "n": { "text": "Select next search match",         "command": "dance.search.next"     },
+                "N": { "text": "Select previous search match",     "command": "dance.search.previous" },
+            },
+        },
+
+        "window-hx": {
+            "title": "View",
+            "items": {
+                "w": { "text": "Goto next window",                              "command": "workbench.action.focusNextGroup"                       },
+                "s": { "text": "Horizontal bottom split",                       "command": "workbench.action.splitEditorDown"                      },
+                "v": { "text": "Vertical right split",                          "command": "workbench.action.splitEditorRight"                     },
+                "t": { "text": "Transpose splits",                              "command": "workbench.action.toggleEditorGroupLayout"              },
+                "f": { "text": "Goto files in selection (hsplit)",              "command": "???"                                                   },
+                "F": { "text": "Goto files in selection (vsplit)",              "command": "???"                                                   },
+                "q": { "text": "Close window",                                  "command": "workbench.action.closeEditorsAndGroup"                 },
+                "o": { "text": "Close all other windows (Current window only)", "command": "dance.run", "args": [{ "commands": ["workbench.action.focusActiveEditorGroup", "workbench.action.closeEditorsInOtherGroups"] }] },
+                "h": { "text": "Jump to the split on the left",                 "command": "workbench.action.focusLeftGroup"                       },
+                "j": { "text": "Jump to the split below",                       "command": "workbench.action.focusBelowGroup"                      },
+                "k": { "text": "Jump to the split above",                       "command": "workbench.action.focusAboveGroup"                      },
+                "l": { "text": "Jump to the split to the right",                "command": "workbench.action.focusRightGroup"                      },
+                "L": { "text": "Swap with the split to the right",              "command": "workbench.action.moveActiveEditorGroupRight"           },
+                "K": { "text": "Swap with the split above",                     "command": "workbench.action.moveActiveEditorGroupUp"              },
+                "H": { "text": "Swap with the split to the left",               "command": "workbench.action.moveActiveEditorGroupLeft"            },
+                "J": { "text": "Swap with the split below",                     "command": "workbench.action.moveActiveEditorGroupDown"            },
+                "n": { "text": "New split scratch buffer",                      "command": "dance.openMenu", "args": [{ "menu": "new-window-hx" }] },
+            },
+        },
+
+        "new-window-hx": {
+            "title": "New split scratch buffer",
+            "items": {
+                "s": { "text": "Horizontal bottom split scratch buffer", "command": "dance.run", "args": [{ "commands": ["workbench.action.splitEditorDown", "workbench.action.files.newUntitledFile" ] }] },
+                "v": { "text": "Vertical right split scratch buffer",    "command": "dance.run", "args": [{ "commands": ["workbench.action.splitEditorRight", "workbench.action.files.newUntitledFile"] }] },
+            },
+        },
+
+        "left-bracket-hx": {
+            "title": "Left bracket",
+            "items": {
+                "d": { "text": "Goto previous diagnostic",      "command": "editor.action.marker.prevInFiles"       },
+                "D": { "text": "Goto first diagnostic",         "command": "???"                                    },
+                "g": { "text": "Goto previous change",          "command": "workbench.action.editor.previousChange" },
+                "G": { "text": "Goto first change",             "command": "???"                                    },
+                "f": { "text": "Goto previous function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusUp", "list.select"] }] },
+                "t": { "text": "Goto previous type definition", "command": "???"                                    },
+                "a": { "text": "Goto previous parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+                "c": { "text": "Goto previous comment",         "command": "???"                                    },
+                "T": { "text": "Goto previous test",            "command": "???"                                    },
+                "p": { "text": "Goto previous paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.start(Positions.previous(sel.active)));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+                " ": { "text": "Add newline above",             "command": "dance.edit.newLine.above"               },
+            },
+        },
+
+        "right-bracket-hx": {
+            "title": "Right bracket",
+            "items": {
+                "d": { "text": "Goto next diagnostic",      "command": "editor.action.marker.nextInFiles"   },
+                "D": { "text": "Goto last diagnostic",      "command": "???"                                },
+                "g": { "text": "Goto next change",          "command": "workbench.action.editor.nextChange" },
+                "G": { "text": "Goto last change",          "command": "???"                                },
+                "f": { "text": "Goto next function",        "command": "dance.run", "args": [{ "commands": ["breadcrumbs.focusAndSelect", "list.focusDown", "list.select"] }] },
+                "t": { "text": "Goto next type definition", "command": "???"                                },
+                "a": { "text": "Goto next parameter",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.argument.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+                "c": { "text": "Goto next comment",         "command": "???"                                },
+                "T": { "text": "Goto next test",            "command": "???"                                },
+                "p": { "text": "Goto next paragraph",       "command": "dance.run", "args": [{ "code": ["let pos = Selections.mapByIndex((_i, sel, document) => Objects.paragraph.end(sel.active));", "if (Context.current.mode.name !== 'select') {", "await vscode.commands.executeCommand('dance.selections.reduce');", "}", "Selections.updateWithFallbackByIndex((i, sel, document) => new vscode.Selection(sel.anchor, pos[i], undefined, document));"] }] },
+                " ": { "text": "Add newline below",         "command": "dance.edit.newLine.below"           },
+            },
+        },
+
+        "leader-hx": {
+            "title": "Space",
+            "items": {
+                "f": { "text": "Open file picker",                              "command": "workbench.action.quickOpen"                                               },
+                "F": { "text": "Open file picker at current working directory", "command": "???"                                                                      },
+                "b": { "text": "Open buffer picker",                            "command": "workbench.action.showAllEditors"                                          },
+                "j": { "text": "Open jumplist picker",                          "command": "???"                                                                      },
+                "s": { "text": "Open symbol picker",                            "command": "workbench.action.gotoSymbol"                                              },
+                "S": { "text": "Open workspace symbol picker",                  "command": "workbench.action.showAllSymbols"                                          },
+                "d": { "text": "Open diagnostic picker",                        "command": "workbench.actions.view.problems"                                          },
+                "D": { "text": "Open workspace diagnostic picker",              "command": "???"                                                                      },
+                "a": { "text": "Perform code action",                           "command": "editor.action.quickFix"                                                   },
+                "'": { "text": "Open last picker",                              "command": "???"                                                                      },
+                "g": { "text": "Debug",                                         "command": "dance.openMenu", "args": [{ "menu": "debug-hx", "locked": true }]         },
+                "w": { "text": "Window",                                        "command": "dance.openMenu", "args": [{ "menu": "window-hx" }]                        },
+                "y": { "text": "Join and yank selections to clipboard",         "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
+                "Y": { "text": "Yank main selection to clipboard",              "command": "dance.run", "args": [{ "commands": [["dance.selections.saveText", { "register": "dquote" }], ".modes.set.normal"] }] },
+                "p": { "text": "Paste clipboard after selections",              "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "end"   }] },
+                "P": { "text": "Paste clipboard before selections",             "command": "dance.edit.insert", "args": [{ "handleNewLine": true, "where": "start" }] },
+                "R": { "text": "Replace selections by clipboard content",       "command": "dance.edit.insert", "args": [{ "register": "dquote" }]                    },
+                "/": { "text": "Global search in workspace folder",             "command": "search.action.openEditor"                                                 },
+                "k": { "text": "Show docs for item under cursor",               "command": "editor.action.showHover", "args": [{ "focus": true }]                     },
+                "r": { "text": "Rename symbol",                                 "command": "editor.action.rename"                                                     },
+                "h": { "text": "Select symbol references",                      "command": "dance.run", "args": [{ "commands": ["editor.action.selectHighlights", ".select.left.extend"] }] },
+                "?": { "text": "Open command palette",                          "command": "workbench.action.showCommands"                                            },
+            }
+        },
+
+        "debug-hx": {
+            "title": "Debug",
+            "items": {
+                "l": { "text": "Launch debug target",        "command": "workbench.action.debug.start"         },
+                "r": { "text": "Restart debug session",      "command": "workbench.action.debug.restart"       },
+                "b": { "text": "Toggle breakpoint",          "command": "editor.debug.action.toggleBreakpoint" },
+                "c": { "text": "Continue program execution", "command": "workbench.action.debug.continue"      },
+                "h": { "text": "Pause program execution",    "command": "workbench.action.debug.pause"         },
+                "i": { "text": "Step in",                    "command": "workbench.action.debug.stepInto"      },
+                "o": { "text": "Step out",                   "command": "workbench.action.debug.stepOut"       },
+                "n": { "text": "Step to next",               "command": "workbench.action.debug.stepOver"      },
+                "v": { "text": "List variables",             "command": "???"                                  },
+                "t": { "text": "End debug session",          "command": "workbench.action.debug.stop"          },
+                /*
+                "C-c": { "text": "Edit breakpoint condition on current line",   "command": "???" },
+                "C-l": { "text": "Edit breakpoint log message on current line", "command": "???" },
+                */
+                "s": { "text": "Switch",                        "command": "dance.openMenu", "args": [{ "menu": "debug-switch-hx" }] },
+                "e": { "text": "Enable exception breakpoints",  "command": "???"                                                     },
+                "E": { "text": "Disable exception breakpoints", "command": "???"                                                     },
+            },
+        },
+
+        "debug-switch-hx": {
+            "title": "Switch",
+            "items": {
+                "t": { "text": "current thread", "command": "???" },
+                "f": { "text": "stack frame",    "command": "???" },
+            },
+        },
+
+        "file-explorer": {
+            "items": {
+                "c": { "text": "Copy",     "command": "filesExplorer.copy"                                         },
+                "d": { "text": "Delete",   "command": "moveFileToTrash"                                            },
+                "n": { "text": "New ...",  "command": "dance.openMenu", "args": [{ "menu": "file-explorer-new"  }] },
+                "o": { "text": "Open ...", "command": "dance.openMenu", "args": [{ "menu": "file-explorer-open" }] },
+                "p": { "text": "Paste",    "command": "filesExplorer.paste"                                        },
+                "r": { "text": "Rename",   "command": "renameFile"                                                 },
+                "x": { "text": "Cut",      "command": "filesExplorer.cut"                                          },
+                "y": { "text": "Yank ...", "command": "dance.openMenu", "args": [{ "menu": "file-explorer-yank" }] },
+            },
+        },
+
+        "file-explorer-new": {
+            "items": {
+                "f": { "text": "File",      "command": "explorer.newFile"   },
+                "d": { "text": "Directory", "command": "explorer.newFolder" },
+            },
+        },
+
+        "file-explorer-open": {
+            "items": {
+                "o": { "text": "Open with ...",           "command": "explorer.openWith" },
+                "r": { "text": "Reveal in file explorer", "command": "revealFileInOS"    },
+            },
+        },
+
+        "file-explorer-yank": {
+            "items": {
+                "f": { "text": "File path",          "command": "copyFilePath"         },
+                "r": { "text": "Relative file path", "command": "copyRelativeFilePath" },
+            },
+        },
+
+        "command-hx": {
+            "title": "Command mode",
+            "items": {
+                ":": { "text": "Open command palette",  "command": "workbench.action.showCommands"                                       },
+                "f": { "text": ":fmt",                  "command": "dance.openMenu",                "args": [{ "menu": "command-f-hx" }] },
+                "q": { "text": ":q :qa",                "command": "dance.openMenu",                "args": [{ "menu": "command-q-hx" }] },
+                "x": { "text": ":x :xa",                "command": "dance.openMenu",                "args": [{ "menu": "command-x-hx" }] },
+                "w": { "text": ":w :wa :wq",            "command": "dance.openMenu",                "args": [{ "menu": "command-w-hx" }] },
+            },
+        },
+
+        "command-q-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Close the current view", "command": "workbench.action.closeEditorsAndGroup"                            },
+                "a":    { "text": ":qa",                    "command": "dance.openMenu",              "args": [{ "menu": "command-qa-hx" }] },
+            },
+        },
+
+        "command-qa-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Close all views","command": "workbench.action.closeWindow" },
+            },
+        },
+
+        "command-x-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Write changes to disk and close the current view", "command": "dance.run",      "args": [{ "commands": ["workbench.action.files.save", "workbench.action.closeEditorsAndGroup"] }] },
+                "a":    { "text": ":xa",                                              "command": "dance.openMenu", "args": [{ "menu": "command-xa-hx" }]                                                              },
+            },
+        },
+
+        "command-xa-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Write changes to disk and close all views", "command": "dance.run", "args": [{ "commands": ["workbench.action.files.save", "workbench.action.closeWindow"] }] },
+            },
+        },
+
+        "command-w-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Write changes to disk","command": "workbench.action.files.save"                                        },
+                "a":    { "text": ":wa",                  "command": "dance.openMenu",              "args": [{ "menu": "command-wa-hx" }] },
+                "q":    { "text": ":wq",                  "command": "dance.openMenu",              "args": [{ "menu": "command-wq-hx" }] },
+            },
+        },
+
+        "command-wa-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Write changes from all buffers to disk", "command": "workbench.action.files.save" },
+            },
+        },
+
+        "command-wq-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Write changes to disk and close the current view", "command": "dance.run", "args": [{ "commands": ["workbench.action.files.save", "workbench.action.closeEditorsAndGroup"] }] },
+            },
+        },
+
+        "command-f-hx": {
+            "title": "Command mode",
+            "items": {
+                "m": { "text": ":fmt", "command": "dance.openMenu", "args": [{ "menu": "command-fm-hx" }] },
+            },
+        },
+
+        "command-fm-hx": {
+            "title": "Command mode",
+            "items": {
+                "t": { "text": ":fmt", "command": "dance.openMenu", "args": [{ "menu": "command-fmt-hx" }] },
+            },
+        },
+
+        "command-fmt-hx": {
+            "title": "Command mode",
+            "items": {
+                "<CR>": { "text": "Format the file", "command": "editor.action.formatDocument" },
+            },
+        },
+    },
+    "window.density.editorTabHeight": "compact",
     "window.commandCenter": false,
+    "editor.stickyScroll.enabled": false,
+    "workbench.editor.showTabs": "none",
+    "editor.lightbulb.enabled": "off",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "workbench.startupEditor": "none",
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}${separator}${remoteName}",
+    "diffEditor.maxComputationTime": 0,
 }
