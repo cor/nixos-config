@@ -315,9 +315,9 @@
     { "key": "w",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.word.extend');", "Selections.updateWithFallbackByIndex((i, sel) => sel.isReversed && oldAnchor[i].character >= sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character+1), sel.active) : sel);"] },          "when": "editorTextFocus && dance.mode == 'select'" },
     { "key": "b",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.word.extend.backward');", "Selections.updateWithFallbackByIndex((i, sel) => !sel.isReversed && oldAnchor[i].character < sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character-1), sel.active) : sel);"] }, "when": "editorTextFocus && dance.mode == 'select'" },
     { "key": "e",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.wordEnd.extend');", "Selections.updateWithFallbackByIndex((i, sel) => sel.isReversed && oldAnchor[i].character >= sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character+1), sel.active) : sel);"] },       "when": "editorTextFocus && dance.mode == 'select'" },
-    { "key": "shift+w", "command": "dance.seek.word",          "when": "editorTextFocus && dance.mode == 'select'" },
-    { "key": "shift+b", "command": "dance.seek.word.ws.backward", "when": "editorTextFocus && dance.mode == 'select'" },
-    { "key": "shift+e", "command": "dance.seek.wordEnd.ws",       "when": "editorTextFocus && dance.mode == 'select'" },
+    { "key": "shift+w",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.word.extend');", "Selections.updateWithFallbackByIndex((i, sel) => sel.isReversed && oldAnchor[i].character >= sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character+1), sel.active) : sel);"] },          "when": "editorTextFocus && dance.mode == 'select'" },
+    { "key": "shift+b",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.word.ws.extend.backward');", "Selections.updateWithFallbackByIndex((i, sel) => !sel.isReversed && oldAnchor[i].character < sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character-1), sel.active) : sel);"] }, "when": "editorTextFocus && dance.mode == 'select'" },
+    { "key": "shift+e",       "command": "dance.run", "args": { "code": ["const oldAnchor = Selections.mapByIndex((_i, sel) => sel.anchor);", "await vscode.commands.executeCommand('dance.seek.wordEnd.ws.extend');", "Selections.updateWithFallbackByIndex((i, sel) => sel.isReversed && oldAnchor[i].character >= sel.anchor.character ? new vscode.Selection(Positions.at(sel.anchor.line, sel.anchor.character+1), sel.active) : sel);"] },       "when": "editorTextFocus && dance.mode == 'select'" },
 
     { "key": "/",       "command": "dance.search.extend",          "when": "editorTextFocus && dance.mode == 'select'" },
     { "key": "shift+/", "command": "dance.search.backward.extend", "when": "editorTextFocus && dance.mode == 'select'" },
@@ -398,7 +398,7 @@
     //
     // Other
     //
-
+    
     { "key": "tab",       "command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetVisible" },
     { "key": "ctrl+n",    "command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetVisible" },
     { "key": "shift+tab", "command": "selectPrevSuggestion", "when": "editorTextFocus && suggestWidgetVisible" },
