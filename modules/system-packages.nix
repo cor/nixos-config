@@ -18,6 +18,7 @@
     # emacsPackages.vterm
     # libvterm
     wakeonlan
+    nix-output-monitor
   ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
     inputs.ghostty.packages.${machine.system}.ghostty
   ]);
