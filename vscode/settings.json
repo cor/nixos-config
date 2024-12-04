@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Tokyo Night Storm",
+    "workbench.colorTheme": "Catppuccin Macchiato",
     "projectManager.git.baseFolders": [
         "/home/cor/dev/"
     ],
@@ -464,4 +464,6 @@
     "workbench.startupEditor": "none",
     "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}${separator}${remoteName}",
     "diffEditor.maxComputationTime": 0,
+    "nix.enableLanguageServer": true,
+    "editor.formatOnSave": true,
 }
