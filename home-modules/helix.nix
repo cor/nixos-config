@@ -41,6 +41,8 @@
         # f and F are swapped, as picking in cwd is much more common for me.
         "f" = "file_picker_in_current_directory";
         "F" = "file_picker";
+        "e" = "file_browser_in_current_directory";
+        "E" = "file_browser";
       };
     };
 
