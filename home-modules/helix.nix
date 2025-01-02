@@ -5,7 +5,7 @@
     package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
-      theme = if theme == "dark" then "transparent_catppuccin_frappe" else "rose_pine_dawn";
+      theme = if theme == "dark" then "gruvbox_dark_soft" else "rose_pine_dawn";
       editor = {
         auto-format = true;
         completion-trigger-len = 0;
