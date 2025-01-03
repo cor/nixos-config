@@ -19,6 +19,8 @@
     # libvterm
     wakeonlan
     nix-output-monitor
+  ] ++ [
+    inputs.open-project.packages.${machine.system}.default
   ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
     inputs.ghostty.packages.${machine.system}.ghostty
   ]);
