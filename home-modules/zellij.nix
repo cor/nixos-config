@@ -7,8 +7,8 @@
 
   # Nix does not translate nicely to KDL so we use a KDL file instead.
   xdg.configFile."zellij/config.kdl".source = ./zellij-config.kdl;
-  xdg.configFile."zellij/layouts/split.kdl".source = ./zellij-layout.kdl;
-  xdg.configFile."zellij/layouts/default.kdl".source = ./zellij-layout-combined.kdl;
+  # xdg.configFile."zellij/layouts/split.kdl".source = ./zellij-layout.kdl;
+  # xdg.configFile."zellij/layouts/default.kdl".source = ./zellij-layout-combined.kdl;
 
 
   # Needed to let Zellij find SSH_AUTH_SOCK after re-attaching to session

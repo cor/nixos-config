@@ -1,22 +1,5 @@
-pane_frames false
-theme "catppuccin-frappe"
+// pane_frames false
+theme "gruvbox-dark"
+simplified_ui true
 
 session_serialization false
-
-ui {
-    pane_frames {
-        rounded_corners true
-    }
-}
-
-
-keybinds {
-	unbind "Ctrl o"
-
-    shared_except "session" "locked" {
-        bind "Ctrl k" { SwitchToMode "Session"; }
-    }
-	session {
-		bind "Ctrl k" { SwitchToMode "Normal"; }
-	}
-}
