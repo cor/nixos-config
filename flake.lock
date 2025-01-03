@@ -766,11 +766,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1735915770,
-        "narHash": "sha256-R7CtOblDo3S2xMalr2/FzolVVfjE77D/YLFQoor6rvY=",
+        "lastModified": 1735917659,
+        "narHash": "sha256-t4JmErwzGzv0K9cCbXK7k3ob1swxSjb9LHUUXX9zv9g=",
         "owner": "cor",
         "repo": "open-project",
-        "rev": "acb1c0629d95ca4c22398a70a5540e73291feb6a",
+        "rev": "5419a125215f818d5c874df817a816e46f9ad7db",
         "type": "github"
       },
       "original": {
