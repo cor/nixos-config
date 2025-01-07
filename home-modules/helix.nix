@@ -22,6 +22,7 @@
         lsp = {
           enable = true;
           display-messages = true;
+          display-progress-messages = true;
           display-inlay-hints = true;
         };
         bufferline = "always";
