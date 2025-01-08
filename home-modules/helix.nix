@@ -45,6 +45,10 @@
         "e" = "file_browser_in_current_buffer_directory";
         "E" = "file_browser";
       };
+      keys.normal.space."4" = {
+        "b" = ":sh git blame %{filename:rel}";
+        "y" = ":sh gh-permalink %{filename:repo_rel} %{linenumber} --lines '%{selection}' --lang %{lang} | pbcopy";
+      };
     };
 
     themes = {

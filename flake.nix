@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     open-project.url = "github:cor/open-project";
+    gh-permalink.url = "github:cor/gh-permalink";
 
     union-tools.url = "github:unionlabs/tools";
 
