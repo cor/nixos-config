@@ -356,11 +356,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1736369986,
-        "narHash": "sha256-ghrf9NZ9ZteihSYffitPqjHPO+/s0VAbOj02Momge60=",
+        "lastModified": 1738758034,
+        "narHash": "sha256-NXTB4uosluCpZusRajGePelRWaSBYJBgPwsKOt/ksmQ=",
         "owner": "cor",
         "repo": "gh-permalink",
-        "rev": "ce9e70f6a83f526ac5b1ff61ba62006a195339db",
+        "rev": "c71c3a9ef264795e61c3596e42814f606bd7353e",
         "type": "github"
       },
       "original": {
@@ -452,16 +452,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1736293373,
-        "narHash": "sha256-iQttD5lvV4Q/Lt4e0hZA5OP7/uJrF4yaVtNt56ksCHI=",
-        "owner": "cor",
+        "lastModified": 1738462545,
+        "narHash": "sha256-tVDNtuIAeFDLwdNgPglq/ymAKicHGKzpcZoP05aFPHQ=",
+        "owner": "helix-editor",
         "repo": "helix",
-        "rev": "bd6f126ef654cbbaedf23fda6d66d9e88f9d5ebe",
+        "rev": "8d1580bea0779aa24fb87a4c32e8c22430043c6b",
         "type": "github"
       },
       "original": {
-        "owner": "cor",
-        "ref": "patchy",
+        "owner": "helix-editor",
+        "ref": "command-line",
         "repo": "helix",
         "type": "github"
       }

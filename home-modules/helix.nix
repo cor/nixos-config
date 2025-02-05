@@ -42,12 +42,15 @@
         # f and F are swapped, as picking in cwd is much more common for me.
         "f" = "file_picker_in_current_directory";
         "F" = "file_picker";
-        "e" = "file_browser_in_current_buffer_directory";
-        "E" = "file_browser";
+        "e" = "file_explorer_in_current_buffer_directory";
+        "E" = "file_explorer";
       };
       keys.normal.space."4" = {
-        "b" = ":sh git blame %{filename:rel}";
-        "y" = ":sh gh-permalink %{filename:repo_rel} %{linenumber} --lines '%{selection}' --lang %{lang} | pbcopy";
+        "b" = ":sh git blame %{buffer_name}";
+        "y" = ":pipe-to gh-permalink %{buffer_name} %{cursor_line} | pbcopy";
+      };
+      keys.select.space."4" = {
+        "y" = ":pipe-to gh-permalink %{buffer_name} %{cursor_line} | pbcopy";
       };
     };
 
