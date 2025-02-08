@@ -1,4 +1,4 @@
-{ machine, user, ... }:
+{ pkgs, machine, user, ... }:
 {
   programs.git =
     let
@@ -15,6 +15,9 @@
         github.user = user.githubName;
         gpg.format = "ssh";
         init.defaultBranch = "main";
+        core.excludesFile = toString (pkgs.writeText "global-gitignore" ''
+          .aider*
+        '');
 
         # Fix go private dependency fetching by using SSH instead of HTTPS
         "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";

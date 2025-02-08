@@ -1,4 +1,4 @@
-{ inputs, machine, pkgs, ... }:
+{ inputs, machine, pkgs, pkgs-unstable, ... }:
 {
   environment.systemPackages = with pkgs; [
     tree
@@ -19,7 +19,11 @@
     # libvterm
     wakeonlan
     nix-output-monitor
-  ] ++ [
+  ]
+  ++ (with pkgs-unstable; [
+    aider-chat
+  ])
+  ++ [
     inputs.open-project.packages.${machine.system}.default
     inputs.gh-permalink.packages.${machine.system}.default
   ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
