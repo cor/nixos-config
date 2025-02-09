@@ -95,9 +95,51 @@
       };
 
     } // (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs-unstable = import nixpkgs-unstable { inherit system; }; in
+      let
+        pkgs-unstable = import nixpkgs-unstable { inherit system; };
+        basePackages = {
+          formatter = pkgs-unstable.nixpkgs-fmt;
+        };
+        darwinPackages = pkgs-unstable.lib.optionalAttrs (system == "aarch64-darwin") {
+          move-default = pkgs-unstable.writeShellApplication {
+            name = "move-default";
+            text = ''
+              echo "moving default macOS config files if they exist"
+              [ ! -f /etc/zshenv ] || sudo mv /etc/zshenv /etc/zshenv.bak
+              [ ! -f /etc/zshrc ] || sudo mv /etc/zshrc /etc/zshrc.bak
+              [ ! -f /etc/bashrc ] || sudo mv /etc/bashrc /etc/bashrc.bak
+            '';
+          };
+          switch = pkgs-unstable.writeShellApplication {
+            name = "switch";
+            runtimeInputs = [
+              pkgs-unstable.nix
+              inputs.darwin.packages.${system}.darwin-rebuild
+            ];
+            text = ''
+              darwin-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}"
+            '';
+          };
+        };
+        linuxPackages = pkgs-unstable.lib.optionalAttrs (system == "aarch64-linux" || system == "x86_64-linux") {
+          switch = pkgs-unstable.writeShellApplication {
+            name = "switch";
+            runtimeInputs = [ pkgs-unstable.nix ];
+            text = ''
+              sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}"
+            '';
+          };
+          switch-show-trace = pkgs-unstable.writeShellApplication {
+            name = "switch-show-trace";
+            runtimeInputs = [ pkgs-unstable.nix ];
+            text = ''
+              sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}" --show-trace
+            '';
+          };
+        };
+      in
       {
-        formatter = pkgs-unstable.nixpkgs-fmt;
+        packages = basePackages // darwinPackages // linuxPackages;
 
         devShells = {
           default = pkgs-unstable.mkShell {
