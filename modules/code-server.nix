@@ -1,7 +1,7 @@
 { user, pkgs, ... }:
 {
   services.code-server = let baseDir = "/home/${user.name}/.code-server-nix/"; in {
-    enable = true;
+    enable = false;
     port = 42042;
     host = "0.0.0.0";
     disableTelemetry = true;

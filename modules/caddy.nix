@@ -5,7 +5,7 @@ let
 in
 {
   services.caddy = {
-    enable = true;
+    enable = false;
     package = pkgs-caddy.caddy.override {
       externalPlugins = [
         {
