@@ -17,6 +17,7 @@
         init.defaultBranch = "main";
         core.excludesFile = toString (pkgs.writeText "global-gitignore" ''
           .aider*
+          .DS_Store
         '');
 
         # Fix go private dependency fetching by using SSH instead of HTTPS

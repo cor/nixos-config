@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "aider-chat": {
+      "locked": {
+        "lastModified": 1739063775,
+        "narHash": "sha256-3x8OEvtnyuZH6cagU1d2oeoXkHahlboSY9JWTDw0rn0=",
+        "owner": "cor",
+        "repo": "nixpkgs",
+        "rev": "aa2fb254dfb0da9ce519fdaa6360bceef5ef955c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cor",
+        "ref": "update-aider-chat",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -861,6 +877,7 @@
     },
     "root": {
       "inputs": {
+        "aider-chat": "aider-chat",
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
