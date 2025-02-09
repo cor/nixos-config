@@ -21,18 +21,38 @@
       s = "kitty +kitten ssh -A";
     };
     initExtra =
-      if machine.darwin then ''
-        # Check if SSH_AUTH_SOCK is set and points to the default macOS agent
-        if [[ -z "$SSH_AUTH_SOCK" || "$SSH_AUTH_SOCK" == /private/tmp/com.apple.launchd.* ]]; then
-          # No forwarded agent, use 1Password agent
-          export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-        fi
-      '' else ''
-        # set the symlink that code-server/emacs uses to the most recently logged in $SSH_AUTH_SOCK
-        if [ ! -h "$SSH_AUTH_SOCK" ]; then 
-          ln -sfv "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock; 
-        fi
-      '';
+      let
+        darwinInit = ''
+          # Check if SSH_AUTH_SOCK is set and points to the default macOS agent
+          if [[ -z "$SSH_AUTH_SOCK" || "$SSH_AUTH_SOCK" == /private/tmp/com.apple.launchd.* ]]; then
+            # No forwarded agent, use 1Password agent
+            export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+          fi
+        '';
+        linuxInit = ''
+          # set the symlink that code-server/emacs uses to the most recently logged in $SSH_AUTH_SOCK
+          if [ ! -h "$SSH_AUTH_SOCK" ]; then 
+            ln -sfv "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock; 
+          fi
+        '';
+        sharedInit = ''
+          # Edit command line widget
+          edit-command-line() {
+            local tmpfile="$(mktemp)"
+            echo "$BUFFER" > "$tmpfile"
+            ${"$"}EDITOR "$tmpfile"
+            BUFFER="$(<$tmpfile)"
+            rm -f "$tmpfile"
+            zle redisplay
+          }
+          zle -N edit-command-line
+          bindkey '\ee' edit-command-line
+        '';
+      in
+      if machine.darwin then
+        darwinInit + sharedInit
+      else
+        linuxInit + sharedInit;
   };
 }
 
