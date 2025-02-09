@@ -143,7 +143,15 @@
 
         devShells = {
           default = pkgs-unstable.mkShell {
-            buildInputs = with pkgs-unstable; [ nixd nil nixpkgs-fmt sumneko-lua-language-server cmake-language-server ];
+            buildInputs = with pkgs-unstable; [ 
+              nixd 
+              nil 
+              nixpkgs-fmt 
+              sumneko-lua-language-server 
+              cmake-language-server
+              self.packages.${system}.switch
+              self.packages.${system}.switch-show-trace
+            ];
           };
         };
       }
