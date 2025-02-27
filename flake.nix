@@ -121,7 +121,8 @@
             '';
           };
         };
-        linuxPackages = pkgs-unstable.lib.optionalAttrs (system == "aarch64-linux" || system == "x86_64-linux") {
+        linuxPackages = pkgs-unstable.lib.optionalAttrs (system == "aarch64-linux" || system == "x86_64-linux") rec {
+          default = switch;
           switch = pkgs-unstable.writeShellApplication {
             name = "switch";
             runtimeInputs = [ pkgs-unstable.nix ];
@@ -143,11 +144,11 @@
 
         devShells = {
           default = pkgs-unstable.mkShell {
-            buildInputs = with pkgs-unstable; [ 
-              nixd 
-              nil 
-              nixpkgs-fmt 
-              sumneko-lua-language-server 
+            buildInputs = with pkgs-unstable; [
+              nixd
+              nil
+              nixpkgs-fmt
+              sumneko-lua-language-server
               cmake-language-server
               self.packages.${system}.switch
               self.packages.${system}.switch-show-trace
