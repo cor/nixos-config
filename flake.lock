@@ -2,16 +2,16 @@
   "nodes": {
     "aider-chat": {
       "locked": {
-        "lastModified": 1739063775,
-        "narHash": "sha256-3x8OEvtnyuZH6cagU1d2oeoXkHahlboSY9JWTDw0rn0=",
+        "lastModified": 1740746987,
+        "narHash": "sha256-lPHiU+4mhZjoJEux10aAc7zB7BtbpJ3v7TkyC4nK6eQ=",
         "owner": "cor",
         "repo": "nixpkgs",
-        "rev": "aa2fb254dfb0da9ce519fdaa6360bceef5ef955c",
+        "rev": "207c7f55a0034ca15ba5f21150a02e19e3f8cd21",
         "type": "github"
       },
       "original": {
         "owner": "cor",
-        "ref": "update-aider-chat",
+        "ref": "update-aider-chat-to-75",
         "repo": "nixpkgs",
         "type": "github"
       }
