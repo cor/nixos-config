@@ -44,6 +44,7 @@
         "F" = "file_picker";
         "e" = "file_explorer_in_current_buffer_directory";
         "E" = "file_explorer";
+        "0" = [ ":rla" ":lsp-restart" ];
       };
       keys.normal.space."4" = {
         "b" = ":sh git blame %{buffer_name}";
