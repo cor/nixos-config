@@ -3,6 +3,7 @@
   nix = {
     package = pkgs-unstable.nix;
     settings = {
+      trusted-users = [ "root" "cor" ];
       sandbox = "relaxed";
       substituters = [
         "https://cache.garnix.io"
