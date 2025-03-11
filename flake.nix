@@ -16,7 +16,6 @@
     yazi.url = "github:sxyazi/yazi";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
-    aider-chat.url = "github:cor/nixpkgs/update-aider-chat-to-75";
 
     flake-utils.url = "github:numtide/flake-utils";
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
@@ -32,7 +31,7 @@
     };
   };
 
-  outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, aider-chat, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;

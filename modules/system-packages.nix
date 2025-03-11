@@ -15,14 +15,12 @@
     libxml2
     ripgrep
     fd
-    # emacsPackages.vterm
-    # libvterm
     wakeonlan
     nix-output-monitor
   ]
-  ++ [
-    inputs.aider-chat.legacyPackages.${machine.system}.aider-chat
-  ]
+  ++ (with pkgs-unstable; [
+    aider-chat
+  ])
   ++ [
     inputs.open-project.packages.${machine.system}.default
     inputs.gh-permalink.packages.${machine.system}.default
