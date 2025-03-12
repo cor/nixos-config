@@ -50,10 +50,14 @@
         "9" = [
           ":sh zellij action focus-next-pane"
           ":sh sleep 0.2 && zellij action write-chars \"/read %{buffer_name}\""
+          ":sh sleep 0.2 && zellij action write 9"
+          ":sh sleep 0.2 && zellij action write 13"
         ];
         "0" = [
           ":sh zellij action focus-next-pane"
           ":sh sleep 0.2 && zellij action write-chars \"/add %{buffer_name}\""
+          ":sh sleep 0.2 && zellij action write 9"
+          ":sh sleep 0.2 && zellij action write 13"
         ];
       };
       keys.normal.space."4" = {
