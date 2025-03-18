@@ -12,7 +12,7 @@
     # Used for caddy plugins
     nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
 
-    helix.url = "github:helix-editor/helix/command-line";
+    helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
