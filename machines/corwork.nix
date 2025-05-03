@@ -12,6 +12,13 @@
   # use newer kernel for framework 13 drivers
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  
+  # Enable fingerprint reader support
+  services.fprintd.enable = true;
+
+  # Enable firmware updates
+  services.fwupd.enable = true;
+
   boot.initrd.luks.devices."luks-2369b304-611c-4725-9626-c8d57dac9611".device = "/dev/disk/by-uuid/2369b304-611c-4725-9626-c8d57dac9611";
   networking.hostName = machine.name; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
