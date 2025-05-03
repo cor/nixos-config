@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     open-project.url = "github:cor/open-project";
     gh-permalink.url = "github:cor/gh-permalink";
@@ -15,7 +15,7 @@
     helix.url = "github:helix-editor/helix";
     yazi.url = "github:sxyazi/yazi";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    ghostty.url = "git+ssh://git@github.com/ghostty-org/ghostty";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     flake-utils.url = "github:numtide/flake-utils";
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
@@ -26,7 +26,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -46,6 +46,19 @@
     in
     {
       nixosConfigurations = {
+        corwork = mkNixos {
+          inherit inputs nixpkgs home-manager user;
+          machine = {
+            domain = "corwork.cor.systems";
+            name = "corwork";
+            system = "x86_64-linux";
+            darwin = false;
+            headless = false;
+            stateVersion = "24.11";
+            homeStateVersion = "24.11";
+          };
+        };
+      
         corbookpro-nixos = mkNixos {
           inherit inputs nixpkgs home-manager user;
           machine = {

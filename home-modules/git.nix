@@ -1,4 +1,4 @@
-{ pkgs, machine, user, ... }:
+{ pkgs, lib, machine, user, ... }:
 {
   programs.git =
     let
@@ -27,12 +27,16 @@
         user.signingkey = sshSigningKey;
         gpg."ssh".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
         gpg.format = "ssh";
-      } else {
+      } else if machine.headless then {
         user.signingkey = sshSigningKey;
         signing = {
           signByDefault = true;
           key = sshSigningKey;
         };
+      } else {
+        user.signingkey = sshSigningKey;
+        gpg."ssh".program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+        gpg.format = "ssh";
       });
     };
 }

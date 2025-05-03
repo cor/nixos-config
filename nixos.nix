@@ -9,56 +9,58 @@ nixpkgs.lib.nixosSystem rec {
   system = machine.system;
 
   # NixOS level modules
-  modules = [
-    ./hardware/${machine.name}.nix
-    ./machines/${machine.name}.nix
-    ./modules/users.nix
-    ./modules/zsh.nix
-    ./modules/nix.nix
-    ./modules/environment.nix
-    ./modules/system-packages.nix
-    ./modules/docker.nix
-    ./modules/code-server.nix
-    ./modules/tailscale.nix
-    ./modules/caddy.nix
+  modules =
+    (if machine.headless then [
+      ./modules/users.nix
+    ] else [ ]) ++
+    [
+      ./hardware/${machine.name}.nix
+      ./machines/${machine.name}.nix
+      ./modules/zsh.nix
+      ./modules/nix.nix
+      ./modules/environment.nix
+      ./modules/system-packages.nix
+      ./modules/docker.nix
+      # ./modules/code-server.nix
+      # ./modules/tailscale.nix
+      # ./modules/caddy.nix
 
-    home-manager.nixosModules.home-manager
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        backupFileExtension = "backup";
-        users.${user.name} = {
-          # Home-manager level modules
-          imports = [
-            { home.stateVersion = machine.homeStateVersion; }
-            ./home-modules/bat.nix
-            ./home-modules/direnv.nix
-            ./home-modules/git.nix
-            ./home-modules/helix.nix
-            ./home-modules/lazygit.nix
-            ./home-modules/tmux.nix
-            ./home-modules/yazi.nix
-            ./home-modules/zellij.nix
-            ./home-modules/zoxide.nix
-            ./home-modules/zsh.nix
-            # ./home-modules/emacs.nix
-            # ./home-modules/nushell/nushell.nix
-         ];
+      home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "backup";
+          users.${user.name} = {
+            # Home-manager level modules
+            imports = [
+              { home.stateVersion = machine.homeStateVersion; }
+              ./home-modules/direnv.nix
+              ./home-modules/git.nix
+              ./home-modules/helix.nix
+              ./home-modules/lazygit.nix
+              ./home-modules/tmux.nix
+              ./home-modules/yazi.nix
+              ./home-modules/zellij.nix
+              ./home-modules/zoxide.nix
+              ./home-modules/zsh.nix
+              # ./home-modules/emacs.nix
+              # ./home-modules/nushell/nushell.nix
+            ];
+          };
+          # Arguments that are exposed to every `home-module`.
+          extraSpecialArgs = {
+            theme = builtins.readFile ./THEME.txt; # "dark" or "light"
+            inherit inputs pkgs-unstable user machine;
+          };
         };
-        # Arguments that are exposed to every `home-module`.
-        extraSpecialArgs = {
-          theme = builtins.readFile ./THEME.txt; # "dark" or "light"
-          inherit inputs pkgs-unstable user machine;
+      }
+      {
+        config._module.args = {
+          inherit inputs pkgs-unstable user machine pkgs-caddy;
         };
-      };
-    }
-    {
-      config._module.args = {
-        inherit inputs pkgs-unstable user machine pkgs-caddy;
-      };
-    }
-  ] ++ nixpkgs.lib.optionals (machine.name == "raspberry-pi") [
-    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-  ]; 
+      }
+    ] ++ nixpkgs.lib.optionals (machine.name == "raspberry-pi") [
+      inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+    ];
 }
