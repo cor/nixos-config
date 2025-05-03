@@ -1,4 +1,4 @@
-{ pkgs, lib, machine, user, ... }:
+{ pkgs, pkgs-unstable, lib, machine, user, ... }:
 {
   programs.git =
     let
@@ -35,7 +35,7 @@
         };
       } else {
         user.signingkey = sshSigningKey;
-        gpg."ssh".program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+        gpg."ssh".program = "${lib.getExe' pkgs-unstable._1password-gui "op-ssh-sign"}";
         gpg.format = "ssh";
       });
     };
