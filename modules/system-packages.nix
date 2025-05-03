@@ -30,9 +30,10 @@
       ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
         inputs.ghostty.packages.${machine.system}.ghostty
       ]);
-      gui = [
-        pkgs-unstable._1password-gui
-        pkgs-unstable.brave
+      gui = with pkgs-unstable; [
+        _1password-gui
+        brave
+        signal-desktop
       ];
     in
     if machine.headless then common else common ++ gui;
