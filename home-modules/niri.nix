@@ -6,13 +6,17 @@ let
 in
 {
   programs.niri.settings = {
-    window-rules = [{
-      matches = [{
-        app-id = "1Password";
-      }];
-      # open-floating = true;
-      # shadow.enable = false;
-    }];
+    window-rules = [
+      {
+        # rule for hiding sensitive data in screenshares
+        matches = [
+          { app-id = "1Password"; }
+          { app-id = "org.telegram.desktop"; }
+          { app-id = "Element"; }
+        ];
+        block-out-from = "screen-capture";
+      }
+    ];
     input.touchpad = {
       natural-scroll = true;
       accel-speed = 0.02;
