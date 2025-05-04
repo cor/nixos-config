@@ -40,6 +40,7 @@
         element-desktop
         fuzzel
         xwayland-satellite
+        ungoogled-chromium
       ];
     in
     if machine.headless then common else common ++ gui;
