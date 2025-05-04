@@ -86,8 +86,8 @@ in
 
   home.packages = [ pkgs.wl-clipboard ];
 
-  xresources.properties = {
-    "Xft.dpi" = 192;
-  };
+  # xresources.properties = {
+  #   "Xft.dpi" = 192;
+  # };
 
 }
