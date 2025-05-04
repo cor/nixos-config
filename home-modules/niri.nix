@@ -48,7 +48,8 @@ in
 
     binds = with config.lib.niri.actions; {
       "Mod+T" = { action.spawn = "ghostty"; };
-      "Mod+D" = { action.spawn = "fuzzel"; };
+      "Mod+Space" = { action.spawn = "fuzzel"; };
+      "Mod+Tab" = { action = toggle-overview; };
 
       # change focus -- window
       "Mod+H" = { action = focus-column-left; };
