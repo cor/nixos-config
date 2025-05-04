@@ -34,6 +34,7 @@
         _1password-gui
         brave
         signal-desktop
+        fuzzel
       ];
     in
     if machine.headless then common else common ++ gui;
