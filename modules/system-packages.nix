@@ -31,9 +31,13 @@
         inputs.ghostty.packages.${machine.system}.ghostty
       ]);
       gui = with pkgs-unstable; [
+        wl-clipboard
+        wayland-utils
+        libsecret
         _1password-gui
         brave
         signal-desktop
+        element-desktop
         fuzzel
       ];
     in

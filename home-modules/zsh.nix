@@ -31,9 +31,9 @@
         '';
         linuxInit = ''
           # set the symlink that code-server/emacs uses to the most recently logged in $SSH_AUTH_SOCK
-          if [ ! -h "$SSH_AUTH_SOCK" ]; then 
-            ln -sfv "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock; 
-          fi
+          # if [ ! -h "$SSH_AUTH_SOCK" ]; then 
+          #   ln -sfv "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock; 
+          # fi
         '';
         sharedInit = ''
           # Edit command line widget

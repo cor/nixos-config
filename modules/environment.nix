@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }:
+{ machine, inputs, pkgs, lib, ... }:
 {
   environment = {
     systemPackages = with pkgs; [
@@ -38,7 +38,10 @@
       #   GDK_DPI_SCALE = "0.5";
       #   QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       #   _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    };
+    } // (if machine.headless then { } else {
+      # NIXOS_OZONE_WL = "1";
+      # ELECTRON_OZONE_PLATFORM_HINT = "auto"; # let electron programs use Wayland. suggested in the niri matrix
+    });
 
     # required for zsh autocomplete
     pathsToLink = [ "/share/zsh" ];

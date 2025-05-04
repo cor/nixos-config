@@ -1,6 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.niri.settings = {
+    window-rules = [{
+      matches = [{
+        app-id = "1Password";
+      }];
+      open-floating = true;
+      shadow.enable = false;
+    }];
     input.touchpad = {
       natural-scroll = true;
       accel-speed = 0.02;
@@ -10,20 +17,39 @@
 
     input.keyboard = {
       xkb = {
-        options = "altwin:swap_alt_win,ctrl:nocaps";
+        options = "ctrl:nocaps";
       };
+    };
 
+    layout = {
+      gaps = 16;
     };
 
     outputs."eDP-1".scale = 2.0;
 
-    binds = {
+    binds = with config.lib.niri.actions; {
       "Mod+T" = { action.spawn = "ghostty"; };
       "Mod+D" = { action.spawn = "fuzzel"; };
-      "Mod+H" = { action.spawn = "focus-column-left"; };
-      "Mod+J" = { action.spawn = "focus-window-down"; };
-      "Mod+K" = { action.spawn = "focus-window-up"; };
-      "Mod+L" = { action.spawn = "focus-column-right"; };
+
+      # change focus
+      "Mod+H" = { action = focus-column-left; };
+      "Mod+J" = { action = focus-window-down; };
+      "Mod+K" = { action = focus-window-up; };
+      "Mod+L" = { action = focus-column-right; };
+
+      # move windows
+      "Mod+Ctrl+H" = { action = move-column-left; };
+      "Mod+Ctrl+J" = { action = move-window-down; };
+      "Mod+Ctrl+K" = { action = move-window-up; };
+      "Mod+Ctrl+L" = { action = move-column-right; };
+
+      "Mod+F" = { action = maximize-column; };
+      "Mod+Shift+F" = { action = fullscreen-window; };
+
+      "Mod+Q" = { action = close-window; };
+
+      # "Mod+Shift+3" = { action = screenshot-screen; };
+      "Mod+Shift+4" = { action = screenshot; };
     };
   };
 }
