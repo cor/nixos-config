@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     open-project.url = "github:cor/open-project";
     gh-permalink.url = "github:cor/gh-permalink";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     union-tools.url = "github:unionlabs/tools";
 
@@ -32,7 +33,7 @@
     };
   };
 
-  outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
     let
       mkNixos = import ./nixos.nix;
       mkDarwin = import ./darwin.nix;
