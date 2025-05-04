@@ -20,7 +20,7 @@ in
       tap = false;
     };
     spawn-at-startup = [
-      (makeCommand "wayland-satalite")
+      (makeCommand "xwayland-satellite")
       (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
     ];
 
