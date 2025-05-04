@@ -12,8 +12,13 @@ nixpkgs.lib.nixosSystem rec {
   modules =
     (if machine.headless then [
     ] else [
-      { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
-      inputs.niri.nixosModules.niri
+      {
+        nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+        imports = [
+          inputs.niri.nixosModules.niri
+        ];
+      }
+      ./modules/niri.nix
     ]) ++
     [
       ./hardware/${machine.name}.nix
@@ -50,8 +55,9 @@ nixpkgs.lib.nixosSystem rec {
               # ./home-modules/emacs.nix
               # ./home-modules/nushell/nushell.nix
             ] ++ (if machine.headless then [
+            ] else [
               ./home-modules/niri.nix
-            ] else [ ]);
+            ]);
           };
           # Arguments that are exposed to every `home-module`.
           extraSpecialArgs = {
