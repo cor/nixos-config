@@ -1,4 +1,9 @@
 { config, pkgs, ... }:
+let
+  makeCommand = command: {
+    command = [ command ];
+  };
+in
 {
   programs.niri.settings = {
     window-rules = [{
@@ -14,6 +19,15 @@
       scroll-factor = 0.3;
       tap = false;
     };
+    spawn-at-startup = [
+      (makeCommand "wayland-satalite")
+      (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
+    ];
+
+    environment = {
+      DISPLAY = ":0";
+    };
+
 
     input.keyboard = {
       xkb = {
@@ -52,4 +66,7 @@
       "Mod+Shift+4" = { action = screenshot; };
     };
   };
+
+  home.packages = [ pkgs.wl-clipboard ];
+
 }

@@ -2,6 +2,7 @@
 {
   programs.niri = {
     enable = true;
+    package = pkgs.niri-unstable;
   };
   # programs.gnome-keyring.enable = true;
   services.dbus.enable = true;

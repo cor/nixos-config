@@ -39,6 +39,7 @@
         signal-desktop
         element-desktop
         fuzzel
+        xwayland-satellite
       ];
     in
     if machine.headless then common else common ++ gui;
