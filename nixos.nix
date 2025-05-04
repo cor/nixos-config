@@ -11,11 +11,14 @@ nixpkgs.lib.nixosSystem rec {
   # NixOS level modules
   modules =
     (if machine.headless then [
-      ./modules/users.nix
-    ] else [ ]) ++
+    ] else [
+      { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+      inputs.niri.nixosModules.niri
+    ]) ++
     [
       ./hardware/${machine.name}.nix
       ./machines/${machine.name}.nix
+      ./modules/users.nix
       ./modules/zsh.nix
       ./modules/nix.nix
       ./modules/environment.nix
@@ -46,7 +49,9 @@ nixpkgs.lib.nixosSystem rec {
               ./home-modules/zsh.nix
               # ./home-modules/emacs.nix
               # ./home-modules/nushell/nushell.nix
-            ];
+            ] ++ (if machine.headless then [
+              ./home-modules/niri.nix
+            ] else [ ]);
           };
           # Arguments that are exposed to every `home-module`.
           extraSpecialArgs = {

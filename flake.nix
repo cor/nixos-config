@@ -19,6 +19,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix/v0.4.1";
+    niri.url = "github:sodiboo/niri-flake";
 
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -43,11 +44,16 @@
         codeHashedPassword = "$argon2i$v=19$m=4096,t=3,p=1$EhoOotFaUezZdQ+6Nfaz6w$ba74RTp6245H0K0URZmDsV1GBmVSHwzF5BT42FA9Y3I";
         sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAN0JRbnTsz4eEUeL6My/ew+rX3Qojawn+Y1B3buPuyC";
       };
+
+      corworkUser = user // {
+        hashedPassword = "$6$8w3GvquMlrc0rbZX$85TiiuiouAgD5jbU9qtnI7HUy7GfOJ.aKm3/Jyne0QrvEPB7FUXXhe.J6rqAzIWcuxMu3uJUV1VbzTlTJxjUx1";
+      };
     in
     {
       nixosConfigurations = {
         corwork = mkNixos {
-          inherit inputs nixpkgs home-manager user;
+          inherit inputs nixpkgs home-manager;
+          user = corworkUser;
           machine = {
             domain = "corwork.cor.systems";
             name = "corwork";
@@ -58,7 +64,7 @@
             homeStateVersion = "24.11";
           };
         };
-      
+
         corbookpro-nixos = mkNixos {
           inherit inputs nixpkgs home-manager user;
           machine = {
