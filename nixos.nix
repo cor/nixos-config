@@ -21,7 +21,7 @@ nixpkgs.lib.nixosSystem rec {
       ./modules/niri.nix
 
       # todo: make generic over hardware
-      inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+      # inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
     ]) ++
     [
       ./hardware/${machine.name}.nix
