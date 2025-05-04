@@ -45,11 +45,15 @@ in
       "Mod+T" = { action.spawn = "ghostty"; };
       "Mod+D" = { action.spawn = "fuzzel"; };
 
-      # change focus
+      # change focus -- window
       "Mod+H" = { action = focus-column-left; };
       "Mod+J" = { action = focus-window-down; };
       "Mod+K" = { action = focus-window-up; };
       "Mod+L" = { action = focus-column-right; };
+
+      # change focus -- workspace
+      "Mod+U" = { action = focus-workspace-down; };
+      "Mod+I" = { action = focus-workspace-up; };
 
       # move windows
       "Mod+Ctrl+H" = { action = move-column-left; };
@@ -57,8 +61,20 @@ in
       "Mod+Ctrl+K" = { action = move-window-up; };
       "Mod+Ctrl+L" = { action = move-column-right; };
 
+      # move columns -- workspace
+      "Mod+Ctrl+U" = { action = move-column-to-workspace-down; };
+      "Mod+Ctrl+I" = { action = move-column-to-workspace-up; };
+
+      # move workspaces
+      "Mod+Shift+U" = { action = move-workspace-down; };
+      "Mod+Shift+I" = { action = move-workspace-up; };
+
+
+
       "Mod+F" = { action = maximize-column; };
       "Mod+Shift+F" = { action = fullscreen-window; };
+
+      "Mod+V" = { action = toggle-window-floating; };
 
       "Mod+Q" = { action = close-window; };
 
@@ -68,5 +84,9 @@ in
   };
 
   home.packages = [ pkgs.wl-clipboard ];
+
+  xresources.properties = {
+    "Xft.dpi" = 192;
+  };
 
 }
