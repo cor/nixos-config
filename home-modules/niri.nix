@@ -10,8 +10,8 @@ in
       matches = [{
         app-id = "1Password";
       }];
-      open-floating = true;
-      shadow.enable = false;
+      # open-floating = true;
+      # shadow.enable = false;
     }];
     input.touchpad = {
       natural-scroll = true;
@@ -70,6 +70,8 @@ in
       "Mod+Shift+U" = { action = move-workspace-down; };
       "Mod+Shift+I" = { action = move-workspace-up; };
 
+
+      "Mod+R" = { action = switch-preset-column-width; };
 
 
       "Mod+F" = { action = maximize-column; };

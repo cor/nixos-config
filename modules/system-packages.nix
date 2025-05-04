@@ -30,18 +30,19 @@
       ] ++ (pkgs.lib.optionals (machine.name != "raspberry-pi") [
         inputs.ghostty.packages.${machine.system}.ghostty
       ]);
-      gui = with pkgs-unstable; [
+      gui = (with pkgs; [
         wl-clipboard
         wayland-utils
         libsecret
-        _1password-gui
         brave
         signal-desktop
         element-desktop
+        telegram-desktop
         fuzzel
         xwayland-satellite
-        ungoogled-chromium
-      ];
+      ]) ++ (with pkgs-unstable; [
+        _1password-gui
+      ]);
     in
     if machine.headless then common else common ++ gui;
 }
