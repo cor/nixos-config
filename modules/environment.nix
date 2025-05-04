@@ -34,11 +34,12 @@
       NNN_TRASH = "1"; # let nnn trash instead of rm
 
       #   # 2x ("retina"') scaling on Linux
-      #   GDK_SCALE = "2";
-      #   GDK_DPI_SCALE = "0.5";
-      #   QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      #   _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
     } // (if machine.headless then { } else {
+      GDK_SCALE = "2";
+      GDK_DPI_SCALE = "0.5";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_SCALE_FACTOR = "2";
+      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
       # NIXOS_OZONE_WL = "1";
       # ELECTRON_OZONE_PLATFORM_HINT = "auto"; # let electron programs use Wayland. suggested in the niri matrix
     });
