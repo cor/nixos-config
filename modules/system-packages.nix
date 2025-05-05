@@ -40,6 +40,9 @@
         telegram-desktop
         fuzzel
         xwayland-satellite
+        guvcview
+        easyeffects
+        pavucontrol
       ]) ++ (with pkgs-unstable; [
         _1password-gui
       ]);

@@ -12,12 +12,15 @@
   # use newer kernel for framework 13 drivers
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  
+
   # Enable fingerprint reader support
   services.fprintd.enable = true;
 
   # Enable firmware updates
   services.fwupd.enable = true;
+
+  # Enable iOS USB connection
+  services.usbmuxd.enable = true;
 
   boot.initrd.luks.devices."luks-2369b304-611c-4725-9626-c8d57dac9611".device = "/dev/disk/by-uuid/2369b304-611c-4725-9626-c8d57dac9611";
   networking.hostName = machine.name; # Define your hostname.
@@ -66,6 +69,10 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
