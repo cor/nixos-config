@@ -10,6 +10,7 @@
       window-decoration = "none";
       window-padding-color = "extend-always";
       theme = "Ayu Mirage";
+      font-size = 12;
     };
   };
 }

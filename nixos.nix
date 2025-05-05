@@ -63,6 +63,7 @@ nixpkgs.lib.nixosSystem rec {
             ] else [
               ./home-modules/waybar.nix
               ./home-modules/niri.nix
+              ./home-modules/fuzzel.nix
             ]);
           };
           # Arguments that are exposed to every `home-module`.
