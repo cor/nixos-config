@@ -9,6 +9,7 @@
     settings = {
       window-decoration = "none";
       window-padding-color = "extend-always";
+      theme = "Ayu Mirage";
     };
   };
 }

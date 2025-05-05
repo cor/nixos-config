@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # xdg.configFile."ghostty/config".text = ''
   #   macos-option-as-alt = true
@@ -40,6 +40,20 @@
       };
       systemd.enable = true;
     };
+
+    style = ''
+      ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
+
+      * {
+        font-family: "JetBrainsMono Nerd Font";
+      }
+
+      window#waybar {
+        border-bottom: none;
+      }
+    '';
   };
+
+
 }
 

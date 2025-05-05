@@ -53,7 +53,7 @@ in
     layout = {
       gaps = 16;
       focus-ring = {
-        active = { color = "rgb(75, 33, 117)"; };
+        active = { color = "rgb(166, 112, 219)"; };
         width = 3;
       };
     };
