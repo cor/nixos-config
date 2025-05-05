@@ -6,26 +6,87 @@ let
 in
 {
   programs.niri.settings = {
-    window-rules = [
-      {
-        # rule for hiding sensitive data in screenshares
-        matches = [
-          { app-id = "1Password"; }
-          { app-id = "org.telegram.desktop"; }
-          { app-id = "Element"; }
-        ];
-        block-out-from = "screen-capture";
-      }
-      {
-        geometry-corner-radius = let radius = 10.0; in {
-          bottom-left = radius;
-          bottom-right = radius;
-          top-left = radius;
-          top-right = radius;
-        };
-        clip-to-geometry = true;
-      }
-    ];
+
+
+    workspaces = {
+      "01-system" = {
+        name = "system";
+      };
+      "02-chat" = {
+        name = "chat";
+      };
+    };
+
+    window-rules =
+      let
+        gather = "brave-pbjccpkpjiopbageefcniicfbjibmmaj-Default";
+        element = "Element";
+        telegram = "org.telegram.desktop";
+        mail = "geary";
+        discord = "brave-magkoliahgffibhgfkmoealggombgknl-Default";
+        linear = "brave-bgdbmehlmdmddlgneophbcddadgknlpm-Default";
+        slack = "brave-polomiencpcgedklffamlbmdolindfpb-Default";
+
+        apple-music = "brave-blgdilankhbcpipclgpdndahbehalgkh-Default";
+        spotify = "brave-pjibgclleladliembfgfagdaldikeohf-Default";
+
+        _1pw = "1Password";
+        volume-control = "org.pulseaudio.pavucontrol";
+        audio-effects = "com.github.wwmm.easyeffects";
+
+        camera-preview = "guvcview";
+        camera-preview-preview = ".guvcview-wrapped";
+
+        matchApp = app: { app-id = app; };
+        matchApps = builtins.map matchApp;
+      in
+      [
+        {
+          # rule for hiding sensitive data in screenshares
+          matches = matchApps [
+            _1pw
+            telegram
+            element
+            mail
+            spotify
+            apple-music
+          ];
+          block-out-from = "screen-capture";
+        }
+        {
+          geometry-corner-radius = let radius = 10.0; in {
+            bottom-left = radius;
+            bottom-right = radius;
+            top-left = radius;
+            top-right = radius;
+          };
+          clip-to-geometry = true;
+        }
+        {
+          matches = matchApps [
+            gather
+            element
+            telegram
+            mail
+            linear
+            discord
+            slack
+          ];
+          open-on-workspace = "chat";
+        }
+        {
+          matches = matchApps [
+            _1pw
+            volume-control
+            audio-effects
+            spotify
+            apple-music
+            camera-preview
+            camera-preview-preview
+          ];
+          open-on-workspace = "system";
+        }
+      ];
     input.touchpad = {
       natural-scroll = true;
       accel-speed = 0.02;
