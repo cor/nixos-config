@@ -16,6 +16,15 @@ in
         ];
         block-out-from = "screen-capture";
       }
+      {
+        geometry-corner-radius = let radius = 10.0; in {
+          bottom-left = radius;
+          bottom-right = radius;
+          top-left = radius;
+          top-right = radius;
+        };
+        clip-to-geometry = true;
+      }
     ];
     input.touchpad = {
       natural-scroll = true;
@@ -26,6 +35,7 @@ in
     spawn-at-startup = [
       (makeCommand "xwayland-satellite")
       (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
+      (makeCommand "systemctl --user reset-failed waybar.service") # waybar does 5 retries before niri gets to start up
     ];
 
     environment = {
@@ -42,6 +52,10 @@ in
 
     layout = {
       gaps = 16;
+      focus-ring = {
+        active = { color = "rgb(75, 33, 117)"; };
+        width = 3;
+      };
     };
 
     outputs."eDP-1".scale = 2.0;

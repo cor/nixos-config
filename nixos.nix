@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem rec {
         ];
       }
       ./modules/niri.nix
+      ./modules/fonts.nix
 
       # todo: make generic over hardware
       # inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
@@ -55,10 +56,12 @@ nixpkgs.lib.nixosSystem rec {
               ./home-modules/zellij.nix
               ./home-modules/zoxide.nix
               ./home-modules/zsh.nix
+              ./home-modules/ghostty.nix
               # ./home-modules/emacs.nix
               # ./home-modules/nushell/nushell.nix
             ] ++ (if machine.headless then [
             ] else [
+              ./home-modules/waybar.nix
               ./home-modules/niri.nix
             ]);
           };
