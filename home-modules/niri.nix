@@ -163,6 +163,8 @@ in
 
       "Mod+Q" = { action = close-window; };
 
+      "Mod+Alt+P".action.spawn = "swaylock";
+
       # "Mod+Shift+3" = { action = screenshot-screen; };
       "Mod+Shift+4" = { action = screenshot; };
 
