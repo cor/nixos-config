@@ -109,6 +109,8 @@ in
       xkb = {
         options = "ctrl:nocaps";
       };
+      repeat-rate = 40;
+      repeat-delay = 250;
     };
 
     layout = {
