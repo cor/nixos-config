@@ -43,8 +43,10 @@
         guvcview
         easyeffects
         pavucontrol
+        nvtopPackages.amd
       ]) ++ (with pkgs-unstable; [
         _1password-gui
+        obsidian
       ]);
     in
     if machine.headless then common else common ++ gui;

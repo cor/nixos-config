@@ -31,6 +31,8 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
   outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:

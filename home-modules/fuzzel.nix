@@ -13,16 +13,16 @@ in
         horizontal-pad = 16;
         dpi-aware = "yes";
       };
-      colors = {
-        background = "24283BFF";
-        text = "C0CAF5FF";
-        match = "FF9E64FF";
-        placeholder = "9ECE6AFF";
-        selection = accent;
-        selection-text = "1A1B26FF";
-        selection-match = "1A1B26FF";
-        border = accent;
-      };
+      # colors = {
+      #   background = "24283BFF";
+      #   text = "C0CAF5FF";
+      #   match = "FF9E64FF";
+      #   placeholder = "9ECE6AFF";
+      #   selection = accent;
+      #   selection-text = "1A1B26FF";
+      #   selection-match = "1A1B26FF";
+      #   border = accent;
+      # };
 
       border = {
         width = 6;

@@ -16,10 +16,12 @@ nixpkgs.lib.nixosSystem rec {
         nixpkgs.overlays = [ inputs.niri.overlays.niri ];
         imports = [
           inputs.niri.nixosModules.niri
+          inputs.stylix.nixosModules.stylix
         ];
       }
       ./modules/niri.nix
       ./modules/fonts.nix
+      ./modules/stylix.nix
 
       # todo: make generic over hardware
       # inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series

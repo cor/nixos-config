@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   makeCommand = command: {
     command = [ command ];
@@ -12,8 +12,14 @@ in
       "01-system" = {
         name = "system";
       };
-      "02-chat" = {
+      "02-audio" = {
+        name = "audio";
+      };
+      "03-chat" = {
         name = "chat";
+      };
+      "04-notes" = {
+        name = "notes";
       };
     };
 
@@ -37,21 +43,28 @@ in
         camera-preview = "guvcview";
         camera-preview-preview = ".guvcview-wrapped";
 
+        epiphany = "org.gnome.Epiphany";
+        obsidian = "obsidian";
+
+
         matchApp = app: { app-id = app; };
         matchApps = builtins.map matchApp;
       in
       [
         {
-          # rule for hiding sensitive data in screenshares
+          block-out-from = "screen-capture";
           matches = matchApps [
             _1pw
             telegram
             element
+            slack
+            discord
             mail
             spotify
             apple-music
+            epiphany
+            obsidian
           ];
-          block-out-from = "screen-capture";
         }
         {
           geometry-corner-radius = let radius = 10.0; in {
@@ -63,6 +76,7 @@ in
           clip-to-geometry = true;
         }
         {
+          open-on-workspace = "chat";
           matches = matchApps [
             gather
             element
@@ -72,9 +86,9 @@ in
             discord
             slack
           ];
-          open-on-workspace = "chat";
         }
         {
+          open-on-workspace = "system";
           matches = matchApps [
             _1pw
             volume-control
@@ -84,7 +98,24 @@ in
             camera-preview
             camera-preview-preview
           ];
-          open-on-workspace = "system";
+        }
+        {
+          open-on-workspace = "audio";
+          matches = matchApps [
+            volume-control
+            audio-effects
+            spotify
+            apple-music
+            camera-preview
+            camera-preview-preview
+          ];
+        }
+        {
+          open-on-workspace = "notes";
+          matches = matchApps [
+            epiphany
+            obsidian
+          ];
         }
       ];
     input.touchpad = {
@@ -181,8 +212,17 @@ in
 
   home.packages = [ pkgs.wl-clipboard ];
 
-  # xresources.properties = {
-  #   "Xft.dpi" = 192;
-  # };
+  systemd.user.services."swaybg" = {
+    Unit = {
+      Description = "wallpapers! brought to you by stylix!";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      ExecStart = "${lib.getExe pkgs.swaybg} -m fill -i ${config.stylix.image}";
+      Restart = "on-failure";
+    };
+  };
 
 }

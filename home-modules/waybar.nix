@@ -38,22 +38,23 @@
           "on-click-right" = "ghostty -e nmtui";
         };
       };
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+      };
+
+      style = ''
+        ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
+
+        * {
+          font-family: "JetBrainsMono Nerd Font";
+        }
+
+        window#waybar {
+          border-bottom: none;
+        }
+      '';
     };
 
-    style = ''
-      ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
 
-      * {
-        font-family: "JetBrainsMono Nerd Font";
-      }
-
-      window#waybar {
-        border-bottom: none;
-      }
-    '';
-  };
-
-
-}
+  }
 
