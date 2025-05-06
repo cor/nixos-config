@@ -42,19 +42,18 @@
         enable = true;
       };
 
-      style = ''
-        ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
+      # style = ''
+      #   ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
 
-        * {
-          font-family: "JetBrainsMono Nerd Font";
-        }
+      #   * {
+      #     font-family: "JetBrainsMono Nerd Font";
+      #   }
 
-        window#waybar {
-          border-bottom: none;
-        }
-      '';
+      #   window#waybar {
+      #     border-bottom: none;
+      #   }
+      # '';
     };
-
-
-  }
+  };
+}
 
