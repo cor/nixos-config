@@ -10,7 +10,7 @@
       mainBar = {
         layer = "top";
         modules-left = [ "niri/workspaces" ];
-        modules-right = [ "network" "battery" "clock" ];
+        modules-right = [ "power-profiles-daemon" "network" "battery" "clock" ];
         battery = {
           format = "{capacity}%";
         };
@@ -36,6 +36,18 @@
             "󰤨"
           ];
           "on-click-right" = "ghostty -e nmtui";
+        };
+
+        "power-profiles-daemon" = {
+          "format" = "{icon}";
+          "tooltip-format" = "Power profile: {profile}\nDriver: {driver}";
+          "tooltip" = true;
+          "format-icons" = {
+            "default" = "";
+            "performance" = "";
+            "balanced" = "";
+            "power-saver" = "";
+          };
         };
       };
       systemd = {
