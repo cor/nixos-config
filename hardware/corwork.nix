@@ -48,4 +48,9 @@
     # driSupport = true;
     # driSupport32Bit = true;
   };
+
+  ## sleep support maybe
+  # https://discourse.nixos.org/t/hibernate-doesnt-work-anymore/24673/13
+  security.protectKernelImage = false;
+
 }
