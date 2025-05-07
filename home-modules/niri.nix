@@ -32,6 +32,8 @@ in
         discord = "brave-magkoliahgffibhgfkmoealggombgknl-Default";
         linear = "brave-bgdbmehlmdmddlgneophbcddadgknlpm-Default";
         slack = "brave-polomiencpcgedklffamlbmdolindfpb-Default";
+        x-twitter = "brave-lodlkdfmihgonocnmddehnfgiljnadcf-Default";
+        signal = "signal";
 
         apple-music = "brave-blgdilankhbcpipclgpdndahbehalgkh-Default";
         spotify = "brave-pjibgclleladliembfgfagdaldikeohf-Default";
@@ -49,22 +51,28 @@ in
 
         matchApp = app: { app-id = app; };
         matchApps = builtins.map matchApp;
+
+        chatApps = [
+          gather
+          element
+          telegram
+          mail
+          discord
+          slack
+          signal
+          x-twitter
+        ];
       in
       [
         {
           block-out-from = "screen-capture";
-          matches = matchApps [
+          matches = matchApps ([
             _1pw
-            telegram
-            element
-            slack
-            discord
-            mail
             spotify
             apple-music
             epiphany
             obsidian
-          ];
+          ] ++ chatApps);
         }
         {
           geometry-corner-radius = let radius = 10.0; in {
@@ -77,24 +85,12 @@ in
         }
         {
           open-on-workspace = "chat";
-          matches = matchApps [
-            gather
-            element
-            telegram
-            mail
-            linear
-            discord
-            slack
-          ];
+          matches = matchApps chatApps;
         }
         {
           open-on-workspace = "system";
           matches = matchApps [
             _1pw
-            volume-control
-            audio-effects
-            spotify
-            apple-music
             camera-preview
             camera-preview-preview
           ];
@@ -106,15 +102,14 @@ in
             audio-effects
             spotify
             apple-music
-            camera-preview
-            camera-preview-preview
           ];
         }
         {
           open-on-workspace = "notes";
           matches = matchApps [
-            epiphany
+            linear
             obsidian
+            epiphany
           ];
         }
       ];
@@ -195,6 +190,8 @@ in
       "Mod+Q" = { action = close-window; };
 
       "Mod+Alt+P".action.spawn = "swaylock";
+
+      "Mod+C" = { action = center-column; };
 
       # "Mod+Shift+3" = { action = screenshot-screen; };
       "Mod+Shift+4" = { action = screenshot; };
