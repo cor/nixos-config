@@ -67,6 +67,7 @@ nixpkgs.lib.nixosSystem rec {
               ./home-modules/niri.nix
               ./home-modules/fuzzel.nix
               ./home-modules/swaylock.nix
+              ./home-modules/zed.nix
             ]);
           };
           # Arguments that are exposed to every `home-module`.
