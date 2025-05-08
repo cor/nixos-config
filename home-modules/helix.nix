@@ -43,7 +43,17 @@
           # f and F are swapped, as picking in cwd is much more common for me.
           "f" = "file_picker_in_current_directory";
           "F" = "file_picker";
-          "e" = "file_explorer_in_current_buffer_directory";
+          # https://github.com/sxyazi/yazi/pull/2461#issuecomment-2849445737
+          "e" = [
+            '':sh rm -f /tmp/unique-file''
+            '':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file''
+            '':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty''
+            '':open %sh{cat /tmp/unique-file}''
+            '':redraw''
+            # https://github.com/helix-editor/helix/wiki/Recipes#advanced-file-explorer-with-yazi
+            '':set mouse false''
+            '':set mouse true''
+          ];
           "E" = "file_explorer";
         };
         ret = "goto_word";
