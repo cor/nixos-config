@@ -10,7 +10,7 @@
       mainBar = {
         layer = "top";
         modules-left = [ "niri/workspaces" ];
-        modules-right = [ "power-profiles-daemon" "network" "battery" "clock" ];
+        modules-right = [ "network" "battery" "power-profiles-daemon" "clock" ];
         battery = {
           format = "{capacity}%";
         };
@@ -19,7 +19,7 @@
         };
         network = {
           "format" = "{ifname}";
-          "format-wifi" = "{icon}";
+          "format-wifi" = "{icon} ";
           "format-ethernet" = "󰌘";
           "format-disconnected" = "󰌙";
           "tooltip-format" = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
@@ -39,7 +39,7 @@
         };
 
         "power-profiles-daemon" = {
-          "format" = "{icon}";
+          "format" = "{icon} ";
           "tooltip-format" = "Power profile: {profile}\nDriver: {driver}";
           "tooltip" = true;
           "format-icons" = {
