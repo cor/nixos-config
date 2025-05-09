@@ -44,6 +44,7 @@
         easyeffects
         pavucontrol
         nvtopPackages.amd
+        brightnessctl
       ]) ++ (with pkgs-unstable; [
         _1password-gui
         obsidian

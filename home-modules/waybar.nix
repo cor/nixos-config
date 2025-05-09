@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   # xdg.configFile."ghostty/config".text = ''
   #   macos-option-as-alt = true
@@ -10,7 +10,7 @@
       mainBar = {
         layer = "top";
         modules-left = [ "niri/workspaces" ];
-        modules-right = [ "network" "battery" "power-profiles-daemon" "clock" ];
+        modules-right = [ "network" "battery" "backlight" "power-profiles-daemon" "clock" ];
         battery = {
           format = "{capacity}%";
         };
