@@ -9,7 +9,7 @@
     settings = {
       window-decoration = "none";
       window-padding-color = "extend-always";
-      # theme = "Ayu Mirage";
+      gtk-single-instance = true; # faster window opening
       font-size = 12;
     };
   };
