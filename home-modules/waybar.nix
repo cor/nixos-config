@@ -10,7 +10,7 @@
       mainBar = {
         layer = "top";
         modules-left = [ "niri/workspaces" ];
-        modules-right = [ "network" "battery" "backlight" "power-profiles-daemon" "clock" ];
+        modules-right = [ "network" "power-profiles-daemon" "battery" "backlight" "wireplumber" "clock" ];
         battery = {
           format = "{capacity}%";
         };

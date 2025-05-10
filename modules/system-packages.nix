@@ -45,7 +45,9 @@
         pavucontrol
         nvtopPackages.amd
         brightnessctl
+        playerctl
       ]) ++ (with pkgs-unstable; [
+        # jetbrains.datagrip
         _1password-gui
         obsidian
       ]);
