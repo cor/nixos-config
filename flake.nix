@@ -151,6 +151,14 @@
               sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}"
             '';
           };
+          switch-networking = pkgs-unstable.writeShellApplication {
+            name = "switch";
+            runtimeInputs = [ pkgs-unstable.nix ];
+            text = ''
+              sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}"
+              sudo systemctl restart NetworkManager
+            '';
+          };
           switch-show-trace = pkgs-unstable.writeShellApplication {
             name = "switch-show-trace";
             runtimeInputs = [ pkgs-unstable.nix ];

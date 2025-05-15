@@ -142,8 +142,8 @@ in
     layout = {
       gaps = 16;
       focus-ring = {
-        active = { color = "rgb(166, 112, 219)"; };
-        width = 3;
+        # active = { color = "rgb(166, 112, 219)"; };
+        width = 2;
       };
     };
 

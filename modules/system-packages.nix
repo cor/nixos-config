@@ -46,6 +46,7 @@
         nvtopPackages.amd
         brightnessctl
         playerctl
+        blanket
       ]) ++ (with pkgs-unstable; [
         # jetbrains.datagrip
         _1password-gui

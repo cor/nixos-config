@@ -22,6 +22,7 @@ nixpkgs.lib.nixosSystem rec {
       ./modules/niri.nix
       ./modules/fonts.nix
       ./modules/stylix.nix
+      ./modules/networking.nix
 
       # todo: make generic over hardware
       # inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
@@ -35,8 +36,8 @@ nixpkgs.lib.nixosSystem rec {
       ./modules/environment.nix
       ./modules/system-packages.nix
       ./modules/docker.nix
+      ./modules/tailscale.nix
       # ./modules/code-server.nix
-      # ./modules/tailscale.nix
       # ./modules/caddy.nix
 
       home-manager.nixosModules.home-manager
