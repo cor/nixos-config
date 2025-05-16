@@ -23,6 +23,7 @@ nixpkgs.lib.nixosSystem rec {
       ./modules/fonts.nix
       ./modules/stylix.nix
       ./modules/networking.nix
+      ./modules/wireplumber.nix
 
       # todo: make generic over hardware
       # inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
