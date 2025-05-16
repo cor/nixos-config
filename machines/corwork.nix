@@ -20,7 +20,10 @@
   services.fwupd.enable = true;
 
   # Enable iOS USB connection
-  services.usbmuxd.enable = true;
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
 
   boot.initrd.luks.devices."luks-2369b304-611c-4725-9626-c8d57dac9611".device = "/dev/disk/by-uuid/2369b304-611c-4725-9626-c8d57dac9611";
   networking.hostName = machine.name; # Define your hostname.
