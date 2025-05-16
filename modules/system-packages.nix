@@ -47,6 +47,24 @@
         brightnessctl
         playerctl
         blanket
+        dig
+
+        # Enable iOS USB connection
+        libimobiledevice
+
+        # screenshotting, see niri keybind
+        (pkgs.writeShellApplication {
+          name = "cor-screenshot";
+          runtimeInputs = [
+            grim
+            satty
+            slurp
+          ];
+          text = ''
+            grim -g "$(slurp -c '#ff0000ff')" -t ppm - | satty --filename - --fullscreen --output-filename "$HOME/Pictures/Screenshots/screenshot-$(date '+%Y-%m-%dT%H:%M:%S').png" --save-after-copy --copy-command wl-copy --early-exit 
+          '';
+        })
+
       ]) ++ (with pkgs-unstable; [
         # jetbrains.datagrip
         _1password-gui

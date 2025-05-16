@@ -194,7 +194,7 @@ in
       "Mod+C" = { action = center-column; };
 
       # "Mod+Shift+3" = { action = screenshot-screen; };
-      "Mod+Shift+4" = { action = screenshot; };
+      "Mod+Shift+4" = { action.spawn = "cor-screenshot"; };
 
 
       # volume control
