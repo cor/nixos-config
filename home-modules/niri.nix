@@ -122,7 +122,6 @@ in
     spawn-at-startup = [
       (makeCommand "xwayland-satellite")
       (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
-      (makeCommand "systemctl --user reset-failed waybar.service") # waybar does 5 retries before niri gets to start up
     ];
 
     environment = {

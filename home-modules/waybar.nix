@@ -50,10 +50,6 @@
           };
         };
       };
-      systemd = {
-        enable = true;
-      };
-
       # style = ''
       #   ${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
 
@@ -65,6 +61,11 @@
       #     border-bottom: none;
       #   }
       # '';
+    };
+
+    systemd = {
+      enable = true;
+      target = "niri.service";
     };
   };
 }
