@@ -166,10 +166,35 @@
               sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}" --show-trace
             '';
           };
+          dark-mode = pkgs-unstable.writeShellApplication {
+            name = "dark-mode";
+            runtimeInputs = [ pkgs-unstable.nix ];
+            text = ''
+              sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork
+            '';
+          };
+          light-mode = pkgs-unstable.writeShellApplication {
+            name = "light-mode";
+            runtimeInputs = [ pkgs-unstable.nix ];
+            text = ''
+              sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork --specialisation light
+            '';
+          };
         };
       in
       {
         packages = basePackages // darwinPackages // linuxPackages;
+
+        apps = pkgs-unstable.lib.optionalAttrs (system == "aarch64-linux" || system == "x86_64-linux") {
+          dark-mode = {
+            type = "app";
+            program = "${self.packages.${system}.dark-mode}/bin/dark-mode";
+          };
+          light-mode = {
+            type = "app";
+            program = "${self.packages.${system}.light-mode}/bin/light-mode";
+          };
+        };
 
         devShells = {
           default = pkgs-unstable.mkShell {
@@ -181,6 +206,8 @@
               cmake-language-server
               self.packages.${system}.switch
               self.packages.${system}.switch-show-trace
+              self.packages.${system}.dark-mode
+              self.packages.${system}.light-mode
             ];
           };
         };

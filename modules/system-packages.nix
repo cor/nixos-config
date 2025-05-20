@@ -23,6 +23,11 @@
       ]
       ++ (with pkgs-unstable; [
         aider-chat
+        claude-code
+      ])
+      ++ (with inputs.self.packages.${machine.system}; [
+        dark-mode
+        light-mode
       ])
       ++ [
         inputs.open-project.packages.${machine.system}.default
