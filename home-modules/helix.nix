@@ -5,7 +5,7 @@
     package = inputs.helix.packages.${pkgs.system}.default;
 
     settings = {
-      theme = if config.stylix.polarity == "dark" then "penumbra+" else "yo_light";
+      theme = if config.stylix.polarity == "dark" then "yo" else "yo_light";
       editor = {
         auto-format = true;
         completion-trigger-len = 0;

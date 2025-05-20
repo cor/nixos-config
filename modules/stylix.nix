@@ -29,7 +29,7 @@
 
   specialisation.light.configuration = {
     stylix = {
-      image = lib.mkForce ../wallpapers/waves.png;
+      image = lib.mkForce ../wallpapers/tiger.jpg;
       polarity = lib.mkForce "light";
       base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/nord-light.yaml";
     };
