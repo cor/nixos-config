@@ -82,6 +82,7 @@ in
             top-right = radius;
           };
           clip-to-geometry = true;
+          border.width = lib.mkForce 2;
         }
         {
           open-on-workspace = "chat";
@@ -113,12 +114,43 @@ in
           ];
         }
       ];
-    input.touchpad = {
-      natural-scroll = true;
-      accel-speed = 0.02;
-      scroll-factor = 0.3;
-      tap = false;
+
+    input = {
+      touchpad = {
+        natural-scroll = true;
+        accel-speed = 0.02;
+        scroll-factor = 0.3;
+        tap = false;
+      };
+      keyboard = {
+        xkb = {
+          options = "ctrl:nocaps";
+        };
+        repeat-rate = 40;
+        repeat-delay = 250;
+      };
     };
+
+    outputs = {
+      "Apple Computer Inc ProDisplayXDR 0x2E121A08" = {
+        position = {
+          x = 1440;
+          y = 0;
+        };
+      };
+      # Framework built in display
+      "BOE NE135A1M-NY1 Unknown" = {
+        position = {
+          x = 0;
+          y = 366;
+        };
+      };
+    };
+
+    overview = {
+      zoom = 0.3;
+    };
+
     spawn-at-startup = [
       (makeCommand "xwayland-satellite")
       (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
@@ -129,21 +161,18 @@ in
       NIXOS_OZONE_WL = "1";
     };
 
-
-    input.keyboard = {
-      xkb = {
-        options = "ctrl:nocaps";
-      };
-      repeat-rate = 40;
-      repeat-delay = 250;
-    };
-
     layout = {
       gaps = 16;
       focus-ring = {
         # active = { color = "rgb(166, 112, 219)"; };
-        width = 2;
+        width = lib.mkForce 1;
       };
+      preset-column-widths = [
+        { proportion = 1. / 4.; }
+        { proportion = 1. / 3.; }
+        { proportion = 1. / 2.; }
+        { proportion = 2. / 3.; }
+      ];
     };
 
     outputs."eDP-1".scale = 2.0;
