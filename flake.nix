@@ -166,18 +166,33 @@
               sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#''${NIXNAME:-$(hostname)}" --show-trace
             '';
           };
-          dark-mode = pkgs-unstable.writeShellApplication {
-            name = "dark-mode";
-            runtimeInputs = [ pkgs-unstable.nix ];
+          theme-switch = pkgs-unstable.writeShellApplication {
+            name = "theme-switch";
+            runtimeInputs = [ ];
             text = ''
-              sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork
-            '';
-          };
-          light-mode = pkgs-unstable.writeShellApplication {
-            name = "light-mode";
-            runtimeInputs = [ pkgs-unstable.nix ];
-            text = ''
-              sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork --specialisation light
+              if [ "$#" -ne 1 ]; then
+                echo "Usage: theme-switch [light|dark]"
+                exit 1
+              fi
+
+              MODE="$1"
+              
+              if [ "$MODE" = "dark" ]; then
+                sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork
+                systemctl --user restart swaybg.service
+                systemctl --user restart waybar.service
+                echo "Switched to dark mode and restarted swaybg and waybar."
+                echo "To reload Ghostty configuration, press Ctrl+Shift+, in each Ghostty window"
+              elif [ "$MODE" = "light" ]; then
+                sudo nixos-rebuild switch --flake /home/cor/dev/cor/nixos-config#corwork --specialisation light
+                systemctl --user restart swaybg.service
+                systemctl --user restart waybar.service
+                echo "Switched to light mode and restarted swaybg and waybar."
+                echo "To reload Ghostty configuration, press Ctrl+Shift+, in each Ghostty window"
+              else
+                echo "Error: Invalid mode. Use 'light' or 'dark'."
+                exit 1
+              fi
             '';
           };
         };
@@ -186,13 +201,9 @@
         packages = basePackages // darwinPackages // linuxPackages;
 
         apps = pkgs-unstable.lib.optionalAttrs (system == "aarch64-linux" || system == "x86_64-linux") {
-          dark-mode = {
+          theme-switch = {
             type = "app";
-            program = "${self.packages.${system}.dark-mode}/bin/dark-mode";
-          };
-          light-mode = {
-            type = "app";
-            program = "${self.packages.${system}.light-mode}/bin/light-mode";
+            program = "${self.packages.${system}.theme-switch}/bin/theme-switch";
           };
         };
 
@@ -206,8 +217,7 @@
               cmake-language-server
               self.packages.${system}.switch
               self.packages.${system}.switch-show-trace
-              self.packages.${system}.dark-mode
-              self.packages.${system}.light-mode
+              self.packages.${system}.theme-switch
             ];
           };
         };

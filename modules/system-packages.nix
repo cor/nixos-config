@@ -26,8 +26,7 @@
         claude-code
       ])
       ++ (with inputs.self.packages.${machine.system}; [
-        dark-mode
-        light-mode
+        theme-switch
       ])
       ++ [
         inputs.open-project.packages.${machine.system}.default
