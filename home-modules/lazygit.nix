@@ -1,4 +1,4 @@
-{ ... }:
+{ machine, ... }:
 {
   programs.lazygit = {
     enable = true;
@@ -10,7 +10,8 @@
       #   colorArg = "always";
       #   pager = "delta --dark --paging=never";
       # };
+    } // (if machine.headless then {
       os.copyToClipboardCmd = "printf {{text}} | pbcopy";
-    };
+    } else { });
   };
 }
