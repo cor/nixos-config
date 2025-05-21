@@ -16,7 +16,11 @@
         name = "JetBrainsMonoNerdFont";
       };
     };
-
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+    };
   };
 
   # idk man
@@ -25,7 +29,11 @@
     rm /home/color/.gtkrc-2.0 -f
   '';
 
-
+  # Fix for inconsistent cursor size and theme in X11/Xwayland apps
+  environment.variables = {
+    XCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+  };
 
   specialisation.light.configuration = {
     stylix = {
@@ -35,5 +43,3 @@
     };
   };
 }
-
-

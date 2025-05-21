@@ -159,6 +159,8 @@ in
     environment = {
       DISPLAY = ":0";
       NIXOS_OZONE_WL = "1";
+      XCURSOR_SIZE = "24";
+      XCURSOR_THEME = "Bibata-Modern-Classic";
     };
 
     layout = {
@@ -192,6 +194,10 @@ in
       "Mod+U" = { action = focus-workspace-down; };
       "Mod+I" = { action = focus-workspace-up; };
 
+      # change focus -- monitor
+      "Mod+Alt+H" = { action = focus-monitor-left; };
+      "Mod+Alt+L" = { action = focus-monitor-right; };
+
       # move windows
       "Mod+Ctrl+H" = { action = move-column-left; };
       "Mod+Ctrl+J" = { action = move-window-down; };
@@ -205,6 +211,8 @@ in
       # move workspaces
       "Mod+Shift+U" = { action = move-workspace-down; };
       "Mod+Shift+I" = { action = move-workspace-up; };
+      "Mod+Shift+H" = { action = move-workspace-to-monitor-left; };
+      "Mod+Shift+L" = { action = move-workspace-to-monitor-right; };
 
 
       "Mod+R" = { action = switch-preset-column-width; };
