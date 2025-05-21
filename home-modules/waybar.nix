@@ -67,6 +67,40 @@
       enable = true;
       target = "niri.service";
     };
+
+    # Override default stylix styling for waybar
+    style =
+      # css
+      ''
+        .modules-left {
+          padding-left: 8px;
+        }
+        .modules-right {
+          padding-right: 8px;
+        }
+        
+        /* Use stylix colors but override specific element styles */
+        #workspaces button {
+          border-radius: 0;
+          padding: 2px 8px;
+        }
+      
+        #workspaces button.focused {
+          border-radius: 0;
+        }
+      
+        #workspaces button.active {
+          border-radius: 0;
+        }
+      
+        #workspaces button.urgent {
+          border-radius: 0;
+        }
+      
+        #workspaces button:hover {
+          border-radius: 0;
+        }
+      '';
   };
 }
 
