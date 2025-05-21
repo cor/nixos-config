@@ -27,6 +27,7 @@
       ])
       ++ (with inputs.self.packages.${machine.system}; [
         theme-switch
+        keyboard-brightness
       ])
       ++ [
         inputs.open-project.packages.${machine.system}.default

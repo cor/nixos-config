@@ -195,6 +195,109 @@
               fi
             '';
           };
+          
+          keyboard-brightness = pkgs-unstable.writeShellApplication {
+            name = "keyboard-brightness";
+            runtimeInputs = [ pkgs-unstable.sudo ];
+            text = ''
+              #!/usr/bin/env bash
+
+              KB_BACKLIGHT="/sys/class/leds/chromeos::kbd_backlight/brightness"
+              MAX_BRIGHTNESS=100
+
+              usage() {
+                echo "Usage: keyboard-brightness [get|set VALUE|up|down|max|off]"
+                echo ""
+                echo "Controls keyboard backlight brightness"
+                echo ""
+                echo "Commands:"
+                echo "  get       - Display current brightness (0-$MAX_BRIGHTNESS)"
+                echo "  set VALUE - Set brightness to VALUE (0-$MAX_BRIGHTNESS)"
+                echo "  up        - Increase brightness by 10"
+                echo "  down      - Decrease brightness by 10"
+                echo "  max       - Set brightness to maximum"
+                echo "  off       - Turn off keyboard backlight"
+                exit 1
+              }
+
+              # Check if the kbd backlight sysfs path exists
+              if [ ! -f "$KB_BACKLIGHT" ]; then
+                echo "Error: Keyboard backlight control not available at $KB_BACKLIGHT"
+                exit 1
+              fi
+
+              # Check if we have sudo access for writing
+              check_sudo() {
+                if [ "$EUID" -ne 0 ]; then
+                  echo "This operation requires sudo access"
+                  exit 1
+                fi
+              }
+
+              get_brightness() {
+                cat "$KB_BACKLIGHT"
+              }
+
+              set_brightness() {
+                local value=$1
+                
+                # Ensure the value is within range
+                if [ "$value" -lt 0 ]; then
+                  value=0
+                elif [ "$value" -gt "$MAX_BRIGHTNESS" ]; then
+                  value="$MAX_BRIGHTNESS"
+                fi
+                
+                # Write the new value
+                echo "$value" | sudo tee "$KB_BACKLIGHT" > /dev/null
+                echo "Keyboard brightness set to $value"
+              }
+
+              # Process command line arguments
+              if [ $# -eq 0 ]; then
+                usage
+              fi
+
+              case "$1" in
+                get)
+                  get_brightness
+                  ;;
+                set)
+                  if [ $# -ne 2 ] || ! [[ "$2" =~ ^[0-9]+$ ]]; then
+                    echo "Error: 'set' requires a numeric brightness value (0-$MAX_BRIGHTNESS)"
+                    usage
+                  fi
+                  check_sudo
+                  set_brightness "$2"
+                  ;;
+                up)
+                  current=$(get_brightness)
+                  new=$((current + 10))
+                  check_sudo
+                  set_brightness "$new"
+                  ;;
+                down)
+                  current=$(get_brightness)
+                  new=$((current - 10))
+                  check_sudo
+                  set_brightness "$new"
+                  ;;
+                max)
+                  check_sudo
+                  set_brightness "$MAX_BRIGHTNESS"
+                  ;;
+                off)
+                  check_sudo
+                  set_brightness 0
+                  ;;
+                *)
+                  usage
+                  ;;
+              esac
+
+              exit 0
+            '';
+          };
         };
       in
       {
