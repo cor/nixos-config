@@ -82,7 +82,8 @@
         /* Use stylix colors but override specific element styles */
         #workspaces button {
           border-radius: 0;
-          padding: 2px 8px;
+          padding: 1px 9px;
+          font-weight: 600;
         }
       
         #workspaces button.focused {
@@ -102,7 +103,7 @@
         }
 
         #clock {
-          font-weight: bold;
+          font-weight: 600;
         }
       '';
   };
