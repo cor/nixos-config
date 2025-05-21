@@ -11,17 +11,17 @@
         layer = "top";
         modules-left = [ "niri/workspaces" ];
         modules-right = [ "network" "power-profiles-daemon" "battery" "backlight" "wireplumber" "clock" ];
-        battery = {
-          format = "{capacity}%";
-        };
+        battery.format = "{capacity}";
+        backlight.format = "{percent}";
+        wireplumber.format = "{volume}";
         clock = {
           format-alt = "{:%a, %d. %b  %H:%M}";
         };
         network = {
           "format" = "{ifname}";
           "format-wifi" = "{icon} ";
-          "format-ethernet" = "󰌘";
-          "format-disconnected" = "󰌙";
+          "format-ethernet" = "󰌘 ";
+          "format-disconnected" = "󰌙 ";
           "tooltip-format" = "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}";
           "format-linked" = "󰈁 {ifname} (No IP)";
           "tooltip-format-wifi" = "{essid} {icon} {signalStrength}%";
@@ -99,6 +99,10 @@
       
         #workspaces button:hover {
           border-radius: 0;
+        }
+
+        #clock {
+          font-weight: bold;
         }
       '';
   };
