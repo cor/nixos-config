@@ -20,7 +20,7 @@
       nixbuild-shell = "ssh eu.nixbuild.net shell";
       s = "kitty +kitten ssh -A";
     };
-    initExtra =
+    initContent =
       let
         darwinInit = ''
           # Check if SSH_AUTH_SOCK is set and points to the default macOS agent

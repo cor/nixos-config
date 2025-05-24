@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by cor";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     open-project.url = "github:cor/open-project";
     gh-permalink.url = "github:cor/gh-permalink";
@@ -28,11 +28,11 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix/release-24.11";
+    stylix.url = "github:danth/stylix/release-25.05";
   };
 
   outputs = { self, union-tools, darwin, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, flake-utils, raspberry-pi-nix, ... }@inputs:
