@@ -178,6 +178,7 @@ in
     outputs."eDP-1".scale = 2.0;
 
     switch-events.lid-close.action.spawn = "swaylock";
+    screenshot-path = "~/Pictures/Screenshots/screenshot-%Y-%m-%dT%H:%M:%S.png";
 
     binds = with config.lib.niri.actions; {
       "Mod+T" = { action = toggle-column-tabbed-display; };
@@ -230,8 +231,8 @@ in
 
       "Mod+C" = { action = center-column; };
 
-      # "Mod+Shift+3" = { action = screenshot-screen; };
-      "Mod+Shift+4" = { action.spawn = "cor-screenshot"; };
+      "Mod+Shift+4" = { action = screenshot; };
+      # "Mod+Shift+4" = { action.spawn = "cor-screenshot"; };
 
 
       # volume control
