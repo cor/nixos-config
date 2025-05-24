@@ -5,6 +5,7 @@
     settings = {
       # color = "080808";
       show-failed-attempts = true;
+      ignore-empty-password = false;
     };
   };
 }

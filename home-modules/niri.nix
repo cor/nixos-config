@@ -177,6 +177,8 @@ in
 
     outputs."eDP-1".scale = 2.0;
 
+    switch-events.lid-close.action.spawn = "swaylock";
+
     binds = with config.lib.niri.actions; {
       "Mod+T" = { action = toggle-column-tabbed-display; };
       "Mod+Return" = { action.spawn = "ghostty"; };
