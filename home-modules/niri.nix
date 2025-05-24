@@ -159,8 +159,6 @@ in
     environment = {
       DISPLAY = ":0";
       NIXOS_OZONE_WL = "1";
-      XCURSOR_SIZE = "24";
-      XCURSOR_THEME = "Bibata-Modern-Classic";
     };
 
     layout = {
@@ -180,7 +178,8 @@ in
     outputs."eDP-1".scale = 2.0;
 
     binds = with config.lib.niri.actions; {
-      "Mod+T" = { action.spawn = "ghostty"; };
+      "Mod+T" = { action = toggle-column-tabbed-display; };
+      "Mod+Return" = { action.spawn = "ghostty"; };
       "Mod+Space" = { action.spawn = "fuzzel"; };
       "Mod+Tab" = { action = toggle-overview; };
 
