@@ -2,15 +2,28 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, machine, ... }:
-
+{ config, pkgs, lib, machine, inputs, ... }:
+# let
+#   pkgs-kernel = import inputs.nixpkgs-unstable { system = machine.system; config.allowUnfree = true; };
+# in
 {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # use newer kernel for framework 13 drivers
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # not needed anymore after 25.05. now do NOT go to latest or hibernate wont work
+  # override to pin, as per docs: https://nixos.wiki/wiki/Linux_kernel
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_14.override {
+    argsOverride = rec {
+      src = pkgs.fetchurl {
+        url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+        sha256 = "sha256-IYF/GZjiIw+B9+T2Bfpv3LBA4U+ifZnCfdsWznSXl6k=";
+      };
+      version = "6.14.6";
+      modDirVersion = "6.14.6";
+    };
+  });
 
 
   # Enable fingerprint reader support
@@ -25,7 +38,19 @@
     package = pkgs.usbmuxd2;
   };
 
-  boot.initrd.luks.devices."luks-2369b304-611c-4725-9626-c8d57dac9611".device = "/dev/disk/by-uuid/2369b304-611c-4725-9626-c8d57dac9611";
+  boot.initrd.luks.devices = {
+    "luks-2369b304-611c-4725-9626-c8d57dac9611" = {
+      device = "/dev/disk/by-uuid/2369b304-611c-4725-9626-c8d57dac9611";
+      preLVM = true;
+    };
+  };
+
+  # configure resume from hibernation
+  boot.resumeDevice = "/dev/mapper/luks-2369b304-611c-4725-9626-c8d57dac9611";
+  boot.kernelParams = [ "resume=/dev/mapper/luks-2369b304-611c-4725-9626-c8d57dac9611" ];
+
+
+
   networking.hostName = machine.name; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
