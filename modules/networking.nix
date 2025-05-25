@@ -9,7 +9,10 @@
     # Fix for iPhone hotspot
     # https://discourse.nixos.org/t/networking-problem-in-new-nixos-install/12041
     # use `ip link` to confirm.
-    interfaces.eth0.mtu = 1400;
+    # 
+    # interfaces.eth0.mtu = 1400;
+    # 
+    # commented out because it made startup slow if eth0 is not connected.
 
     # block trackers, annoyances, AI-generated content, and distractions.
     extraHosts =

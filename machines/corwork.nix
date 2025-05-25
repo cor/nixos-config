@@ -26,6 +26,17 @@
   });
 
 
+  # suspend-then-hibernate
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=60min
+  '';
+
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchDocked = "ignore";
+  };
+
+
   # Enable fingerprint reader support
   services.fprintd.enable = true;
 
@@ -171,5 +182,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
+
+
 
 }
