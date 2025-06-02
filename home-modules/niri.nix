@@ -138,6 +138,13 @@ in
           y = 0;
         };
       };
+      "Nreal XREAL One Pro Unknown" = {
+        scale = 1.5;
+        position = {
+          x = -560;
+          y = -354;
+        };
+      };
       # Framework built in display
       "BOE NE135A1M-NY1 Unknown" = {
         position = {
