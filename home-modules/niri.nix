@@ -139,7 +139,7 @@ in
         };
       };
       "Nreal XREAL One Pro Unknown" = {
-        scale = 1.5;
+        scale = 1.25;
         position = {
           x = -560;
           y = -354;
@@ -221,6 +221,8 @@ in
       "Mod+Shift+U" = { action = move-workspace-down; };
       "Mod+Shift+I" = { action = move-workspace-up; };
       "Mod+Shift+H" = { action = move-workspace-to-monitor-left; };
+      "Mod+Shift+J" = { action = move-workspace-to-monitor-down; };
+      "Mod+Shift+K" = { action = move-workspace-to-monitor-up; };
       "Mod+Shift+L" = { action = move-workspace-to-monitor-right; };
 
 
